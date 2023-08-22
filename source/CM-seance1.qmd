@@ -436,6 +436,10 @@ rapidement et parfaitement par imagination ...car l'imagination des figures aide
 Source : [https://commons.wikimedia.org/wiki/File:Tableau_Pol%C3%A9ometrique,_1782.jpg](https://commons.wikimedia.org/wiki/File:Tableau_Pol%C3%A9ometrique,_1782.jpg)
 ](./img/Tableau_Poléometrique_1782.jpg){.img20}
 
+:::{.notes}
+Chaque ville est représentée par un carré dont la superficie est proportionnelle à la zone géographique occupée par la ville (et pour les plus petites villes, par un demi-carré seulement, divisé par la ligne diagonale). Une fois superposés, les carrés sont classés automatiquement. Il en résulte des regroupements visuels, qui amènent l'auteur à proposer une classification urbaine
+:::
+
 ## Histoire de la visualisation de données
 
 ### Les pionniers - **Joseph Priestlet** (1733-1804)
@@ -464,6 +468,16 @@ Source : [https://commons.wikimedia.org/wiki/File:A_New_Chart_of_History_color.j
   - diagrammes à secteurs (camemberts / *pie charts*)
 
 > "[...] quand il s'agit de reconnaitre la proportion qui existe entre diverses quantités, ou diverses grandeurs, l'oeil a une supériorité étonnante pour la saisir."
+
+:::{.notes}
+Ingénieur et économiste écossais..
+
+Playfair a introduit trois grands types de diagramme :
+en 1786 la série chronologique et l'histogramme de données économiques,
+puis en 1801 le diagramme circulaire montrant les proportions relatives des parties au tout.
+
+
+:::
 
 ## Histoire de la visualisation de données
 
@@ -554,9 +568,9 @@ Source : [https://commons.wikimedia.org/wiki/File:Nightingale-mortality.jpg](htt
 
 <br>
 
-- Publie l'ouvrage *"Sémiologie graphique"* (1967)
+- Publie l'ouvrage *"Sémiologie graphique. Les diagrammes, les réseaux, les cartes"* (1967)
   - explique comment mobiliser le système de signes propre à la visualisation de données statistiques
-  - "variables rétiniennes" (variable visuelles)
+  - "variables rétiniennes" (variable visuelles : taille, valeur, grain, couleur, orientation, forme)
 
 - Concepts très utilisés en cartographie
 
@@ -586,7 +600,9 @@ Source : [https://commons.wikimedia.org/wiki/File:Nightingale-mortality.jpg](htt
 
 - Propose les *treemap* (1992)
 
-![](./img/US_Presidential_Elections_2012.png){.fragment .img70}
+![
+Source: [https://commons.wikimedia.org/wiki/File:US_Presidential_Elections_2012.png?uselang=fr](https://commons.wikimedia.org/wiki/File:US_Presidential_Elections_2012.png)
+](./img/US_Presidential_Elections_2012.png){.fragment .img70}
 :::
 
 ## Les principaux types de visualisation (1)
@@ -721,12 +737,12 @@ Ou plus complexes...
 
 En JavaScript :
 
-- D3.js
-- Vega et Vega-Lite
-- Chart.js
-- Highcharts
-- ECharts
-- Observable Plot
+- [D3.js](https://d3js.org/)
+- [Vega](https://vega.github.io/vega/) et [Vega-Lite](https://vega.github.io/vega-lite/)
+- [Chart.js](https://www.chartjs.org/)
+- [Highcharts](https://www.highcharts.com/)
+- [ECharts](https://echarts.apache.org/en/index.html)
+- [Observable Plot](https://observablehq.com/plot)
 
 
 ## Les outils de visualisation (3)
@@ -735,9 +751,9 @@ En JavaScript :
 
 En R :
 
-- Ggplot2
-- Plotly
-- ...
+- [Ggplot2](https://ggplot2.tidyverse.org/)
+- [Plotly](https://plotly.com/r/)
+
 
 ## Les outils de visualisation (4)
 
@@ -745,9 +761,9 @@ En R :
 
 En Python :
 
-- Matplotlib
-- Seaborn
-- Plotly
+- [Matplotlib](https://matplotlib.org/)
+- [Seaborn](https://seaborn.pydata.org/)
+- [Plotly](https://plotly.com/python/)
 - ...
 
 ## Les outils de visualisation (5)
