@@ -1,0 +1,809 @@
+---
+title: "Introduction à la visualisation de données"
+subtitle: "Cours 1 - 2023-2024"
+format: clean-revealjs
+author:
+  - name: "Matthieu Viry"
+    orcid: 0000-0002-0693-8556
+    email: matthieu.viry@cnrs.fr
+    affiliations: CNRS / <a href="https://riate.cnrs.fr" target="_blank">UAR 2414 RIATE</a>
+date: 09/11/2023
+css: style.css
+---
+
+## Introduction
+
+
+- `.button` class provides a Beamer-like button, e.g.
+[[Summary]{.button}](#sec-summary)
+
+
+## Pourquoi visualiser ?
+
+- `.alert` class for default emphasis, e.g. [important note]{.alert}.
+- `.fg` class for custom colour, e.g. [important note]{.fg style="--col: #e64173"}.
+- `.bg` class for custom background, e.g. [important note]{.bg style="--col: #e64173"}.
+
+- first item
+    - A sub item
+
+## Introduction
+
+
+## Qu'est-ce que la visualisation de données ?
+
+### Une définition générale...
+
+<br>
+
+> **"La représentation visuelle et la présentation des données pour en faciliter la compréhension"** (Kirk, 2019)
+
+## Qu'est-ce que la visualisation de données ?
+
+*"La représentation visuelle et la présentation des données pour en faciliter la compréhension"*
+
+## Qu'est-ce que la visualisation de données ?
+
+*"La représentation visuelle et la présentation des **données** pour en faciliter la compréhension"*
+
+_**données**_ : les données sont des noms, des quantités, des descriptions, des catégories, des mesures, des dates, des lieux, etc. qui sont collectés, enregistrés et stockés dans un format qui peut être traité par un ordinateur.
+
+
+## Qu'est-ce que la visualisation de données ?
+
+*"La **représentation visuelle** et la présentation des données pour en faciliter la compréhension"*
+
+_**représentation visuelle**_ : les décisions sur la manière dont vous allez représenter vos données visuellement afin que la compréhension du sujet qu'elles offrent puisse être rendue accessible à votre public (il s'agit de graphiques et de la sélection du bon graphique pour montrer les caractéristiques de vos données que vous jugez les plus pertinentes. Les éléments constitutifs de tout graphique sont les marques et les attributs - les marques peuvent être des points, des lignes ou des formes et sont utilisées pour représenter des éléments de données)
+
+
+## Qu'est-ce que la visualisation de données ?
+
+*"La représentation visuelle et la **présentation** des données pour en faciliter la compréhension"*
+
+_**présentation**_ : les autres décisions de conception qui constituent l'anatomie complète de toute visualisation de données ( la manière dont nous choisissons d'"emballer" un travail de visualisation pour le transmettre à un public, quel que soit le support ou la méthode de diffusion).
+
+
+## Qu'est-ce que la visualisation de données ?
+
+*"La représentation visuelle et la présentation des données pour en **faciliter la compréhension**"*
+
+_**faciliter la compréhesion**_ : qu'est-ce qu'on voit ? que cela signifie-t-il, au regard du sujet traité ?
+
+## Qu'est-ce que la visualisation de données ?
+
+<br>
+
+![
+Les trois phases de la compréhension (Kirk, 2019, figure 1.4)
+](./img/Kirk-1.4.ProcessofUnderstanding.png "Les trois phases de la compréhension (Kirk, 2019)"){.img80}
+
+
+## Qu'est-ce que la visualisation de données ?
+
+### En d'autres termes...
+
+<br>
+
+- une **pratique** qui consiste à **concevoir et à créer des représentations graphiques**
+  faciles à communiquer et à comprendre à partir de données statistiques,
+
+- un **ensemble de méthodes** permettant de **résumer de manière graphique** ces données statistiques (quantitatives ou qualitatives),
+  à l'aide d'élément visuels statiques, dynamiques ou interactifs.
+
+
+::: {.notes}
+En d'autres termes, la visualisation de données est un moyen de **communiquer l'information** clairement
+et efficacement à travers des représentations graphiques, des diagrammes et des graphiques.
+La visualisation de données est importante car elle permet aux décideurs d'analyser les données
+visuellement et de tirer des conclusions rapides et efficaces.
+Grâce à la visualisation de données, les décideurs peuvent saisir les concepts difficiles ou identifier de nouveaux modèles.
+La visualisation de données peut également : identifier les zones qui nécessitent une attention ou une amélioration,
+expliquer les raisons d'un résultat ou d'un événement,
+prévoir les résultats futurs,
+établir des relations entre les mesures et les indicateurs,
+comprendre les facteurs qui influencent les les résultats, établir des liens entre les différentes zones de l'entreprise, etc.
+:::
+
+## Qu'est-ce que la visualisation de données ?
+
+### En réalité, plusieurs types d'usages...
+
+Des différences dans le but à atteindre et même dans le choix des graphiques à mettre en oeuvre :
+
+- **Explorer et analyser** : *explorer un jeu de données, avoir une vue d'ensemble, découvrir des tendances, des corrélations, des anomalies, etc.*
+
+- **Expliquer** : *aider les autres à comprendre les données et les relations entre les variables ou les individus, etc.*
+
+- **Présenter** : *accompagner votre public dans une argumentation, l'aider à prendre une décision, etc.*
+
+## Qu'est-ce que la visualisation de données ?
+
+### En réalité, plusieurs types d'usages...
+
+- **Explorer et analyser** : au début, il y a beaucoup de choses à explorer, beaucoup de graphiques réalisable, ne pas passer beaucoup de temps sur chacun d'entre eux, utiliser des graphiques génériques, ne pas les personnaliser ni se préoccuper des couleurs, etc.
+
+- **Expliquer** : en utiliser le moins possible, en les choisissant avec soin, les ordonner de façon à ce qu'ils soient faciles à comprendre, ajouter de l'interaction pour aider les gens à mieux comprendre
+
+- **Présenter** : se concentrer sur l'amélioration des graphiques : couleurs, légendes, titres, etc., mise en évidence des éléments clés (ce qui peut être considéré comme un biais dans l'exploration), utilisation éventuelle de graphiques inhabituels pour faciliter la mémorisation
+
+
+## Qu'est-ce que la visualisation de données ?
+
+### Distinctions et disciplines associées - Visualisation de données vs. ...
+
+::::{.columns}
+
+:::{.column width=50%}
+**Infographie** ([exemple](https://visme.co/blog/wp-content/uploads/2017/05/building-the-future.png))
+
+**Visualisation d'informations**
+
+**Visualisation scientifique** ([exemple](https://www.nsf.gov/news/mmg/media/images/visualization2_h1.jpg))
+
+**Data journalisme** ([exemple](https://www.theguardian.com/world/ng-interactive/2022/oct/31/mapping-irans-unrest-how-mahsa-aminis-death-led-to-nationwide-protests))
+:::
+
+:::{.column width=50%}
+**Science des données**
+
+**Data art** ([exemple](https://www.nathaliemiebach.com/work/new-portfolio-item-2))
+
+**Dashboarding** ([exemple](https://www.covid19.admin.ch/en/epidemiologic/hosp))
+
+**Storytelling** ([exemple](https://didoesdigital.com/snakes/))
+:::
+::::
+
+:::{.notes}
+Infographies : La distinction classique entre les infographies et la visualisation de données concerne le format et le contenu.
+Les infographies sont traditionnellement créées pour être imprimées, dans des journaux ou des magazines, par exemple.
+Les meilleures infographies expliquent les choses graphiquement - systèmes, événements, histoires - et peuvent souvent être généralisées en tant que
+graphiques d'explication. Les infographies contiennent des graphiques (éléments de visualisation), mais aussi des illustrations, des images photographiques,
+des diagrammes et du texte. De nos jours, l'art de l'infographie continue d'être produit pour une sortie statique - par opposition à une sortie interactive -
+indépendamment de la manière et de l'endroit où le travail est publié. Au début de cette décennie, on a assisté à une explosion des différentes formes d'infographies.
+D'un point de vue puriste, cette vague de travaux était généralement considérée comme une forme inférieure de conception infographique.
+Ces travaux étaient principalement motivés par le désir marketing d'obtenir des "clics", plutôt que par une réelle volonté de faciliter la compréhension.
+Si votre objectif est d'attirer les foules, je pense qu'il s'agit d'une entreprise différente de l'infographie pure et je remettrais en question la légitimité
+d'associer le terme "infographie" à ces créations ; peut-être pourrait-on plutôt parler d'info-affiches ou de graphiques de tour (ils existent généralement
+avec une largeur fixe et une longueur importante afin d'être intégrés dans des sites web et sur des plateformes de médias sociaux).
+
+Visualisation de l'information : Des personnes utilisent les termes de visualisation de données et de visualisation d'informations de manière interchangeable,
+sans se préoccuper outre mesure des différences pertinentes.
+La distinction générale tend à être façonnée par l'accent mis sur le matériel d'entrée (données) ou la nature de la forme de sortie (information).
+Il est courant que la visualisation de l'information soit utilisée comme terme pour définir le travail qui consiste principalement à visualiser des
+structures de données abstraites telles que des arbres ou des graphiques (réseaux) ainsi que d'autres données qualitatives (en se concentrant donc davantage sur les relations que sur les quantités).
+
+Visualisation scientifique : Il s'agit d'une autre forme d'un terme utilisé par de nombreuses personnes pour différentes applications.
+Certains qualifient l'analyse exploratoire des données de visualisation scientifique (en s'inspirant des méthodes scientifiques d'analyse et de raisonnement
+sur les données). D'autres l'associent à l'utilisation de la visualisation pour concevoir des ensembles de données très complexes et multivariés concernant
+spécifiquement des questions à caractère scientifique (telles que la modélisation des fonctions du cerveau ou des structures moléculaires).
+
+Journalisme de données : Également connu sous le nom de journalisme axé sur les données (JAD),
+il s'agit de l'importance de plus en plus reconnue des compétences numériques, informatiques et en matière de données dans le domaine du journalisme.
+Dans un sens, il s'agit d'une adaptation de la visualisation des données, mais avec des racines incontestablement plus profondes dans les responsabilités
+du reporter/journaliste.
+
+La science des données : En tant que domaine, la science des données est difficile à définir.
+Il est donc plus facile de l'examiner sous l'angle des fonctions d'un scientifique des données.
+Les scientifiques des données sont quelque peu semblables à des licornes en ce sens qu'ils possèdent - ou sont censés posséder - un répertoire presque
+grotesque de capacités couvrant l'ensemble des exigences liées à la collecte, au traitement, à l'analyse et à la présentation des données.
+En règle générale, le scientifique des données travaille avec des données de grande taille et d'une grande complexité.
+Les scientifiques des données possèdent de solides compétences en mathématiques, en statistiques et en informatique, ainsi qu'une expérience commerciale approfondie.
+On attend également d'eux qu'ils possèdent des aptitudes dites "plus douces", telles que la résolution de problèmes, la communication et la présentation.
+
+L'art des données : Hormis les disputes sur les mérites de certains travaux infographiques, le data art est sans doute l'autre discipline liée à la visualisation
+qui a historiquement suscité le plus de débats. Encore une fois, il est peut-être raisonnable de suggérer que le bruit s'est calmé ces jours-ci,
+mais sa simple existence parvient encore à agiter certaines sections de l'illuminati de la visualisation de données.
+Les artistes des données travaillent avec une matière première similaire sous la forme de données, mais leur objectif n'est pas de faciliter
+le type de compréhension qu'une visualisation de données chercherait à obtenir.
+L'art des données consiste plutôt à rechercher une forme d'expression personnelle ou d'exposition esthétique en utilisant les données comme peinture et
+les algorithmes comme pinceau. En tant que spectateur, le sens que vous tirez des expositions de data art dépend entièrement
+de l'interprétation personnelle qu'elles invitent à faire.
+
+Tableau de bord : Il s'agit de méthodes populaires pour afficher des visualisations multiples et des informations statistiques.
+Les tableaux de bord prennent souvent la forme d'un instrument organisationnel qui offre à la fois des vues d'ensemble et des vues détaillées
+de nombreuses dimensions analytiques et d'information différentes.
+Les tableaux de bord ne constituent pas un type de graphique unique en soi, mais doivent plutôt être considérés comme des compositions comprenant plusieurs types de
+graphiques.
+
+Storytelling : Il s'agit d'un terme de plus en plus courant qui est souvent mal utilisé et mal compris, ce qui est tout à fait compréhensible.
+Les histoires sont généralement construites sur une certaine notion de mouvement, de mouvement, de changement ou de narration.
+Les graphiques montrant des tendances ou des activités sur un plan temporel ou les cartes décrivant des relations spatiales offrent
+des affichages qui correspondent le mieux à l'idée d'une histoire. relations spatiales offrent des représentations qui sont
+les plus cohérentes avec l'idée d'une histoire.
+Un diagramme à barres ne représente pas à lui seul une histoire, au sens où la plupart des gens l'entendent,
+mais si vous montrez une paire de diagrammes en bâtons pour représenter une situation avant-après, vous pouvez utiliser un
+diagramme en bâtons pour représenter une situation après-après. pour représenter une comparaison avant-après, vous avez créé une dynamique de changement.
+:::
+
+## Pourquoi visualiser ?
+
+::::{.columns}
+
+:::{.column width=70%}
+
+![
+[Proportion de ventes par type au cours du temps (Kirk, 2019, figure 1.2)]{.small9}
+](./img/Kirk-1.2.TableSales.png){.img55}
+
+:::
+
+:::{.column width=30%}
+
+:::{.fragment .small}
+S'il est possible, à la lecture du tableau, de répondre à des questions simples comme __"quel est le pourcentage de ventes réalisées *online* par le vendeur en Avril 2016 ?"__ (c'est 84),
+<br><br>...il est difficile de mener des réflexions plus générale comme __"quelle est l'évolution de chaque canal de vente au cours du temps ?"__.
+:::
+
+:::
+::::
+
+## Pourquoi visualiser ?
+
+![
+Proportion de ventes par type au cours du temps (Kirk, 2019, figure 1.3)
+](./img/Kirk-1.3.SalesLineChart.png){.img70}
+
+## Pourquoi visualiser ?
+
+:::{.small8}
+Dans un article de 1973, Francis Anscombe a publié quatre petits ensembles de données, aujourd'hui connus sous le nom de "quartet d'Anscombe",
+afin de montrer les limites des statistiques sommaires.
+:::
+
+:::{.fragment .small8 fragment-index=1}
+Les quatre ensembles de données du quartet partagent plusieurs propriétés statistiques : leurs valeurs moyennes, leurs variances et leurs coefficients de corrélation.
+:::
+
+::::{.columns}
+:::{.column width=50%}
+[ <img class="img80" src="./img/anscombe.jpg" data-lazy-loaded=""> ]{}
+:::
+
+:::{.column .small7 .mt4 .fragment fragment-index=1}
+
+| | Mean X | Mean Y | Variance X | Variance Y | Correlation |
+| --- | --- | --- | --- | --- | --- |
+| **I** | 9.0 | 7.5 | 11.0 | 4.125 | 0.816 |
+| **II** | 9.0 | 7.5 | 11.0 | 4.125 | 0.816 |
+| **III** | 9.0 | 7.5 | 11.0 | 4.125 | 0.816 |
+| **IV** | 9.0 | 7.5 | 11.0 | 4.125 | 0.816 |
+
+:::
+::::
+
+
+:::{.small .fragment fragment-index=2}
+Sur le papier, ils semblent donc assez semblables les uns aux autres, mais lorsque nous les visualisons, ils sont clairement différents.
+:::
+
+## Pourquoi visualiser ?
+
+:::{.small7}
+<br>
+
+| | Mean X | Mean Y | Variance X | Variance Y | Correlation |
+| --- | --- | --- | --- | --- | --- |
+| **I** | 9.0 | 7.5 | 11.0 | 4.125 | 0.816 |
+| **II** | 9.0 | 7.5 | 11.0 | 4.125 | 0.816 |
+| **III** | 9.0 | 7.5 | 11.0 | 4.125 | 0.816 |
+| **IV** | 9.0 | 7.5 | 11.0 | 4.125 | 0.816 |
+:::
+
+```{ojs}
+anscombe = [{"group":"I","x":10,"y":8.04},{"group":"I","x":8,"y":6.95},{"group":"I","x":13,"y":7.58},{"group":"I","x":9,"y":8.81},{"group":"I","x":11,"y":8.33},{"group":"I","x":14,"y":9.96},{"group":"I","x":6,"y":7.24},{"group":"I","x":4,"y":4.26},{"group":"I","x":12,"y":10.84},{"group":"I","x":7,"y":4.82},{"group":"I","x":5,"y":5.68},{"group":"II","x":10,"y":9.14},{"group":"II","x":8,"y":8.14},{"group":"II","x":13,"y":8.74},{"group":"II","x":9,"y":8.77},{"group":"II","x":11,"y":9.26},{"group":"II","x":14,"y":8.1},{"group":"II","x":6,"y":6.13},{"group":"II","x":4,"y":3.1},{"group":"II","x":12,"y":9.13},{"group":"II","x":7,"y":7.26},{"group":"II","x":5,"y":4.74},{"group":"III","x":10,"y":7.46},{"group":"III","x":8,"y":6.77},{"group":"III","x":13,"y":12.74},{"group":"III","x":9,"y":7.11},{"group":"III","x":11,"y":7.81},{"group":"III","x":14,"y":8.84},{"group":"III","x":6,"y":6.08},{"group":"III","x":4,"y":5.39},{"group":"III","x":12,"y":8.15},{"group":"III","x":7,"y":6.42},{"group":"III","x":5,"y":5.73},{"group":"IV","x":8,"y":6.58},{"group":"IV","x":8,"y":5.76},{"group":"IV","x":8,"y":7.71},{"group":"IV","x":8,"y":8.84},{"group":"IV","x":8,"y":8.47},{"group":"IV","x":8,"y":7.04},{"group":"IV","x":8,"y":5.25},{"group":"IV","x":19,"y":12.5},{"group":"IV","x":8,"y":5.56},{"group":"IV","x":8,"y":7.91},{"group":"IV","x":8,"y":6.89}]
+Plot.plot({
+  grid: true,
+  inset: 10,
+  width: 928,
+  height: 240,
+  facet: {
+    data: anscombe,
+    x: "group"
+  },
+  marks: [
+    Plot.frame(),
+    Plot.dot(anscombe, {x: "x", y: "y"}),
+    Plot.linearRegressionY(anscombe, {x: "x", y: "y", stroke: "steelblue", ci: 0})
+  ],
+})
+```
+
+:::{.fragment .fade-in-then-out .absolute}
+> “…make both calculations and graphs. Both sorts of output should be studied; each will contribute to understanding.”
+  — F.J. Anscombe
+:::
+
+:::{.fragment .fade-in .absolute}
+> “The greatest value of a picture is when it forces us to notice what we never expected to see.”
+  — John Tukey
+:::
+
+
+## Pourquoi visualiser ?
+
+:::{.small}
+Plus récemment, Alberto Cairo a conçu le [*DataSaurus*](http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html) pour faire le même constat : il faut visualiser les données pour voir le dino.
+:::
+
+:::{.fragment .fade-in-then-out .absolute top=30 right=-60}
+![](./img/AllDinos-2.png)
+:::
+
+```{ojs}
+datasaurus = [{"A":55.3846,"B":97.1795},{"A":51.5385,"B":96.0256},{"A":46.1538,"B":94.4872},{"A":42.8205,"B":91.4103},{"A":40.7692,"B":88.3333},{"A":38.7179,"B":84.8718},{"A":35.641,"B":79.8718},{"A":33.0769,"B":77.5641},{"A":28.9744,"B":74.4872},{"A":26.1538,"B":71.4103},{"A":23.0769,"B":66.4103},{"A":22.3077,"B":61.7949},{"A":22.3077,"B":57.1795},{"A":23.3333,"B":52.9487},{"A":25.8974,"B":51.0256},{"A":29.4872,"B":51.0256},{"A":32.8205,"B":51.0256},{"A":35.3846,"B":51.4103},{"A":40.2564,"B":51.4103},{"A":44.1026,"B":52.9487},{"A":46.6667,"B":54.1026},{"A":50,"B":55.2564},{"A":53.0769,"B":55.641},{"A":56.6667,"B":56.0256},{"A":59.2308,"B":57.9487},{"A":61.2821,"B":62.1795},{"A":61.5385,"B":66.4103},{"A":61.7949,"B":69.1026},{"A":57.4359,"B":55.2564},{"A":54.8718,"B":49.8718},{"A":52.5641,"B":46.0256},{"A":48.2051,"B":38.3333},{"A":49.4872,"B":42.1795},{"A":51.0256,"B":44.1026},{"A":45.3846,"B":36.4103},{"A":42.8205,"B":32.5641},{"A":38.7179,"B":31.4103},{"A":35.1282,"B":30.2564},{"A":32.5641,"B":32.1795},{"A":30,"B":36.7949},{"A":33.5897,"B":41.4103},{"A":36.6667,"B":45.641},{"A":38.2051,"B":49.1026},{"A":29.7436,"B":36.0256},{"A":29.7436,"B":32.1795},{"A":30,"B":29.1026},{"A":32.0513,"B":26.7949},{"A":35.8974,"B":25.2564},{"A":41.0256,"B":25.2564},{"A":44.1026,"B":25.641},{"A":47.1795,"B":28.718},{"A":49.4872,"B":31.4103},{"A":51.5385,"B":34.8718},{"A":53.5897,"B":37.5641},{"A":55.1282,"B":40.641},{"A":56.6667,"B":42.1795},{"A":59.2308,"B":44.4872},{"A":62.3077,"B":46.0256},{"A":64.8718,"B":46.7949},{"A":67.9487,"B":47.9487},{"A":70.5128,"B":53.718},{"A":71.5385,"B":60.641},{"A":71.5385,"B":64.4872},{"A":69.4872,"B":69.4872},{"A":46.9231,"B":79.8718},{"A":48.2051,"B":84.1026},{"A":50,"B":85.2564},{"A":53.0769,"B":85.2564},{"A":55.3846,"B":86.0256},{"A":56.6667,"B":86.0256},{"A":56.1538,"B":82.9487},{"A":53.8462,"B":80.641},{"A":51.2821,"B":78.718},{"A":50,"B":78.718},{"A":47.9487,"B":77.5641},{"A":29.7436,"B":59.8718},{"A":29.7436,"B":62.1795},{"A":31.2821,"B":62.5641},{"A":57.9487,"B":99.4872},{"A":61.7949,"B":99.1026},{"A":64.8718,"B":97.5641},{"A":68.4615,"B":94.1026},{"A":70.7692,"B":91.0256},{"A":72.0513,"B":86.4103},{"A":73.8462,"B":83.3333},{"A":75.1282,"B":79.1026},{"A":76.6667,"B":75.2564},{"A":77.6923,"B":71.4103},{"A":79.7436,"B":66.7949},{"A":81.7949,"B":60.2564},{"A":83.3333,"B":55.2564},{"A":85.1282,"B":51.4103},{"A":86.4103,"B":47.5641},{"A":87.9487,"B":46.0256},{"A":89.4872,"B":42.5641},{"A":93.3333,"B":39.8718},{"A":95.3846,"B":36.7949},{"A":98.2051,"B":33.718},{"A":56.6667,"B":40.641},{"A":59.2308,"B":38.3333},{"A":60.7692,"B":33.718},{"A":63.0769,"B":29.1026},{"A":64.1026,"B":25.2564},{"A":64.359,"B":24.1026},{"A":74.359,"B":22.9487},{"A":71.2821,"B":22.9487},{"A":67.9487,"B":22.1795},{"A":65.8974,"B":20.2564},{"A":63.0769,"B":19.1026},{"A":61.2821,"B":19.1026},{"A":58.7179,"B":18.3333},{"A":55.1282,"B":18.3333},{"A":52.3077,"B":18.3333},{"A":49.7436,"B":17.5641},{"A":47.4359,"B":16.0256},{"A":44.8718,"B":13.718},{"A":48.7179,"B":14.8718},{"A":51.2821,"B":14.8718},{"A":54.1026,"B":14.8718},{"A":56.1538,"B":14.1026},{"A":52.0513,"B":12.5641},{"A":48.7179,"B":11.0256},{"A":47.1795,"B":9.8718},{"A":46.1538,"B":6.0256},{"A":50.5128,"B":9.4872},{"A":53.8462,"B":10.2564},{"A":57.4359,"B":10.2564},{"A":60,"B":10.641},{"A":64.1026,"B":10.641},{"A":66.9231,"B":10.641},{"A":71.2821,"B":10.641},{"A":74.359,"B":10.641},{"A":78.2051,"B":10.641},{"A":67.9487,"B":8.718},{"A":68.4615,"B":5.2564},{"A":68.2051,"B":2.9487},{"A":37.6923,"B":25.7692},{"A":39.4872,"B":25.3846},{"A":91.2821,"B":41.5385},{"A":50,"B":95.7692},{"A":47.9487,"B":95},{"A":44.1026,"B":92.6923}]
+
+Plot.plot({
+  marks: [
+    Plot.dot(datasaurus, {x: "A", y: "B", fill: "steelblue"})
+  ],
+  height: 400,
+  width: 400
+})
+```
+
+:::{.small .fragment}
+Des chercheurs d'AutoDesk ont mis au point un système astucieux pour créer des ensembles de données
+de formes différentes qui partagent des statistiques sommaires : [https://www.research.autodesk.com/publications/same-stats-different-graphs/](https://www.research.autodesk.com/publications/same-stats-different-graphs/).
+:::
+
+## Pourquoi visualiser ?
+
+<br>
+
+**⇒ Parce que notre perception visuelle est incroyablement puissante pour reconnaître les motifs et identifier les structures dans les données.**
+
+:::{.small9}
+Ce n'est pas une coïncidence si, lorsque nous comprenons quelque chose, nous disons "je vois"...
+:::
+
+
+## Histoire de la visualisation de données
+
+### Les prémices ?
+
+Contrairement à ce que l'on croit généralement, la visualisation des données n'est pas un développement moderne.
+
+Dès la préhistoire, des données stellaires ou des informations telles que l'emplacement des étoiles ont été visualisées
+sur les parois des grottes (comme celles de la grotte de Lascaux dans le sud de la France) depuis l'ère du Pléistocène.
+
+Des artefacts physiques tels que les jetons d'argile mésopotamiens (5500 av. J.-C.),
+les quipus incas (2600 av. J.-C.) et les diagrammes à bâtons des Îles Marshall (n.d.)
+peuvent également être considérés comme visualisant des informations quantitatives.
+
+## Histoire de la visualisation de données
+
+### Les prémices ?
+
+![
+Mouvement des planètes au cours du temps, par Macrobius, 10ème siècle (Source: [https://commons.wikimedia.org/wiki/File:Mouvement_des_plan%C3%A8tes_au_cours_du_temps.png](https://commons.wikimedia.org/wiki/File:Mouvement_des_plan%C3%A8tes_au_cours_du_temps.png))
+](./img/Mouvement_des_planètes_au_cours_du_temps.png "Mouvement des planètes au cours du temps"){.img70}
+
+
+## Histoire de la visualisation de données
+
+### Les prémices ?
+
+Des représentations graphiques en forme d'arbres ont été utilisées pour visualiser les relations familiales au moyen-âge (et probablement bien avant)
+
+![
+Arbre de Lulle, 15ème siècle (Source: [https://fr.m.wikipedia.org/wiki/Fichier:ArborLulle.jpg](https://fr.m.wikipedia.org/wiki/Fichier:ArborLulle.jpg))
+](./img/ArborLulle.jpg "Arbre de Lulle")
+
+
+## Histoire de la visualisation de données
+
+### Les prémices ?
+
+![
+Arbre généalogique de la famille Magia, 1578 (Source: [https://gallica.bnf.fr/ark:/12148/btv1b8496581k/f28.item](https://gallica.bnf.fr/ark:/12148/btv1b8496581k/f28.item))
+](./img/Les_voyages_de_Charles_Magius_btv1b8496581k.jpeg)
+
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **Nicolas Oresme** (1322-1382)
+
+
+- Méthode de représentation graphique des variations d'une grandeur (qu'il appelle *qualité*)
+en fonction d'une autre grandeur.
+
+![
+(Source: [L'œuvre scientifique de Nicole Oresme, Alain Costé, 1997](https://www.lmno.cnrs.fr/archives/oresme/Oresme.html))
+](./img/Oresme_Image1.png)
+
+
+:::{.notes}
+Il considère par exemple un corps dont la chaleur n'est pas homogène mais varie suivant l'endroit où on la mesure.
+Afin de représenter les variations de la chaleur, il imagine une droite tracée dans ce corps.
+Il appelle *longitudino* la longueur qui sépare un point courant de la droite à un point origine arbitrairement fixé.
+En chaque point de cette droite il élève une perpendiculaire dont la hauteur, *latitudino*, est proportionnelle à l'intensité
+de la chaleur au point correspondant du corps.
+Il obtient ainsi une figure géométrique dont l'examen rend plus aisé l'étude des variations de la chaleur.
+
+«Les propriétés de cette qualité, écrit-il, en seront examinées plus clairement et plus facilement dès lors que quelquechose
+qui lui est semblable est dessiné en une figure plane, et que cette chose, rendue claire par exemple visible, est saisie
+rapidement et parfaitement par imagination ...car l'imagination des figures aide grandement à la connaissance des choses même»
+:::
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **Charles-René de Fourcroy** (1715-1791)
+
+- Il est le premier à utiliser des diagrammes pour représenter des données statistiques.
+
+![
+Source : [https://commons.wikimedia.org/wiki/File:Tableau_Pol%C3%A9ometrique,_1782.jpg](https://commons.wikimedia.org/wiki/File:Tableau_Pol%C3%A9ometrique,_1782.jpg)
+](./img/Tableau_Poléometrique_1782.jpg){.img20}
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **Joseph Priestlet** (1733-1804)
+
+- Inventeur de la *timeline* moderne
+
+<!-- ![
+Source : [https://commons.wikimedia.org/wiki/File:PriestleyChart.gif](https://commons.wikimedia.org/wiki/File:PriestleyChart.gif)
+](./img/PriestleyChart.gif){.img30} -->
+
+![
+Source : [https://commons.wikimedia.org/wiki/File:A_New_Chart_of_History_color.jpg](https://commons.wikimedia.org/wiki/File:A_New_Chart_of_History_color.jpg)
+](./img/A_New_Chart_of_History_color.jpg){.img50}
+
+
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **William Playfair** (1759-1823)
+
+<br>
+
+- Il est le premier à représenter des données statistiques en utilisant :
+  - diagrammes à barres
+  - diagrammes linéaires (série statistique chronologique)
+  - diagrammes à secteurs (camemberts / *pie charts*)
+
+> "[...] quand il s'agit de reconnaitre la proportion qui existe entre diverses quantités, ou diverses grandeurs, l'oeil a une supériorité étonnante pour la saisir."
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **William Playfair** (1759-1823)
+
+<br>
+
+![
+Source : [https://commons.wikimedia.org/wiki/File:Playfair_Barchart.gif](https://commons.wikimedia.org/wiki/File:Playfair_Barchart.gif)
+](./img/Playfair_Barchart.gif){.img65}
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **William Playfair** (1759-1823)
+
+<br>
+
+![
+Source : [https://commons.wikimedia.org/wiki/File:Playfair_piecharts.jpg](https://commons.wikimedia.org/wiki/File:Playfair_piecharts.jpg)
+](./img/Playfair_piecharts.jpg){.img50}
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **William Playfair** (1759-1823)
+
+<br>
+
+![
+Source : [https://commons.wikimedia.org/wiki/File:Playfair_interest_national_debt.png](https://commons.wikimedia.org/wiki/File:Playfair_interest_national_debt.png)
+](./img/Playfair_interest_national_debt.png){.img50}
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **William Playfair** (1759-1823)
+
+![
+Source : [https://commons.wikimedia.org/wiki/File:Playfair_TimeSeries.png](https://commons.wikimedia.org/wiki/File:Playfair_TimeSeries.png)
+](./img/Playfair_TimeSeries.png){.img60}
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **William Playfair** (1759-1823)
+
+<br>
+
+![
+Source : [https://commons.wikimedia.org/wiki/File:Chart_Showing_at_One_View_the_Price_of_the_Quarter_of_Wheat,_and_Wages_of_Labour_by_the_Week,_from_1565_to_1821.png](https://commons.wikimedia.org/wiki/File:Chart_Showing_at_One_View_the_Price_of_the_Quarter_of_Wheat,_and_Wages_of_Labour_by_the_Week,_from_1565_to_1821.png)
+](./img/Chart_Showing_at_One_View_the_Price_of_the_Quarter_of_Wheat,_and_Wages_of_Labour_by_the_Week,_from_1565_to_1821.png){.img60}
+
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **Charles Joseph Minard** (1781-1870)
+
+- Pionnier de la visualisation de données géographiques et des représentations de type diagramme de flux.
+
+![
+Source : [https://en.wikipedia.org/wiki/File:Minard.png](https://en.wikipedia.org/wiki/File:Minard.png)
+](./img/Minard.png){.img60}
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **Florence Nightingale** (1820-1910)
+
+- Pionnière de la visualisation de données en santé publique et des représentations de type diagramme circulaire.
+
+![
+Source : [https://commons.wikimedia.org/wiki/File:Nightingale-mortality.jpg](https://commons.wikimedia.org/wiki/File:Nightingale-mortality.jpg)
+](./img/Nightingale-mortality.jpg){.img50}
+
+
+## Histoire de la visualisation de données
+
+### Au XXème siècle - **John Tukey** (1915-2000)
+
+<br>
+
+- Contribution majeure au développement de l'analyse exploratoire des données (*exploratory data analysis*) dans les années 1960
+
+- Met en avant le rôle de la visualisation dans le processus d'analyse des données
+
+- Développe des méthodes de visualisation statistique comme les diagrammes de boîtes (*boxplots*)
+  et les matrices de nuages de points (*scatterplot matrices*)
+
+## Histoire de la visualisation de données
+
+### Au XXème siècle - **Jacques Bertin** (1918-2010)
+
+<br>
+
+- Publie l'ouvrage *"Sémiologie graphique"* (1967)
+  - explique comment mobiliser le système de signes propre à la visualisation de données statistiques
+  - "variables rétiniennes" (variable visuelles)
+
+- Concepts très utilisés en cartographie
+
+## Histoire de la visualisation de données
+
+### Au XXème siècle - **Edward Tufte** (1942-*)
+
+- Publie l'ouvrage *"The Visual Display of Quantitative Information*" (1983), qui devient rapidement une référence dans le domaine de la visualisation de données
+  - décrit de nombreux principes de conception de visualisation de données
+  - présente de nombreux exemples de visualisation de données
+  - *"lie factor"*, *"data-ink ratio"*, *"chartjunk"*, etc.
+
+- Popularise des représentation comme les mini-graphes (sparklines).
+
+
+## Histoire de la visualisation de données
+
+### Au XXème siècle - **Ben Shneiderman** (1947-*)
+
+<br>
+
+::: {.r-stack}
+
+- Plutôt dans ce qu'on pourrait qualifier d'*information visualisation* que de *data visualisation*
+
+- Propose le modèle de visualisation *overview first, zoom and filter, then details on demand* (1996)
+
+- Propose les *treemap* (1992)
+
+![](./img/US_Presidential_Elections_2012.png){.fragment .img70}
+:::
+
+## Les principaux types de visualisation (1)
+
+### Visualiser des quantités
+
+![](./img/type/amounts-1.png){.img60} ![](./img/type/amounts_multi-1.png){.img60}
+
+[Source: [Fundamentals of Data Visualization, <br> Claus O. Wilke, 2019 (Licence CC BY-NC-ND 4.0)](https://clauswilke.com/dataviz/directory-of-visualizations.html)]{.source-vertical}
+
+:::{.notes}
+L'approche la plus classique pour visualiser des quantités (des valeurs numériques disponibles pour un ensemble d'individus ou de catégories)
+consiste à utiliser des graphiques à barres ou des graphiques à colonnes.
+Toutefois, plutôt que d'utiliser des barres ou des colonnes, il est également possible d'utiliser des formes géométriques ponctuelles (comme des cercles ou des carrés).
+:::
+
+## Les principaux types de visualisation (2)
+
+### Visualiser des distributions
+
+![](./img/type/single-distributions-1.png){.img60} ![](./img/type/multiple-distributions-1.png){.img60}
+
+[Source: [Fundamentals of Data Visualization, <br> Claus O. Wilke, 2019 (Licence CC BY-NC-ND 4.0)](https://clauswilke.com/dataviz/directory-of-visualizations.html)]{.source-vertical}
+
+:::{.notes}
+S'il y a 2 ou plusieurs ensemble de catégories ou d'individus pour lesquels on veut représenter des quantités, il est possible de grouper ou d'empiler les barres ou les colonnes.
+Il est aussi possible de faire correspondre les catégories à des coordonnées sur les axes x et y et de représenter les quantités par des couleurs via une *heatmap*.
+:::
+
+## Les principaux types de visualisation (3)
+
+### Visualiser des proportions
+
+![](./img/type/proportions-1.png){.img60} ![](./img/type/proportions-multi-1.png){.img60}
+
+[Source: [Fundamentals of Data Visualization, <br> Claus O. Wilke, 2019 (Licence CC BY-NC-ND 4.0)](https://clauswilke.com/dataviz/directory-of-visualizations.html)]{.source-vertical}
+
+:::{.notes}
+Les histogrammes et les graphiques de densité fournissent la visualisation la plus intuitive d'une distribution de valeurs mais elles requièrent un certain nombre de décisions de conception.
+Des représentation de densités cumulées ou de type "quantile-quantile" représentent la distribution sans avoir à faire ces choix, mais peuvent être plus difficile à interpréter.
+
+Boxplot, violin charts, etc. sont utiles pour visualiser plusieurs distributions à la fois et/ou si on veut comparer des distributions.
+:::
+
+## Les principaux types de visualisation (4)
+
+### Visualiser des proportions et les comparer
+
+![](./img/type/proportions-comp-1.png){.img60}
+
+[Source: [Fundamentals of Data Visualization, <br> Claus O. Wilke, 2019 (Licence CC BY-NC-ND 4.0)](https://clauswilke.com/dataviz/directory-of-visualizations.html)]{.source-vertical}
+
+:::{.notes}
+Les proportions peuvent être visualisées à l'aide de camemberts (pie chart), de diagrammes en barres ou de barres empilées (comme pour visualiser des quantités, c'est à dire dans le sens vertical ou horizontal).
+
+:::
+
+## Les principaux types de visualisation (5)
+
+### Relations x-y / entre deux variables
+
+Des représentations simples...
+
+![](./img/type/basic-scatter-1.png){.img60}
+
+[Source: [Fundamentals of Data Visualization, <br> Claus O. Wilke, 2019 (Licence CC BY-NC-ND 4.0)](https://clauswilke.com/dataviz/directory-of-visualizations.html)]{.source-vertical}
+
+## Les principaux types de visualisation (6)
+
+### Relations x-y / entre deux variables
+
+Ou plus complexes...
+
+![](./img/type/xy-binning-1.png){.img60} ![](./img/type/xy-lines-1.png){.img60}
+
+[Source: [Fundamentals of Data Visualization, <br> Claus O. Wilke, 2019 (Licence CC BY-NC-ND 4.0)](https://clauswilke.com/dataviz/directory-of-visualizations.html)]{.source-vertical}
+
+## Les principaux types de visualisation (7)
+
+### Visualiser des données spatiales
+
+![](./img/type/geospatial-1.png){.img60}
+
+[Source: [Fundamentals of Data Visualization, <br> Claus O. Wilke, 2019 (Licence CC BY-NC-ND 4.0)](https://clauswilke.com/dataviz/directory-of-visualizations.html)]{.source-vertical}
+
+## Les principaux types de visualisation (8)
+
+### Visualiser des séries temporelles, des tendances, etc.
+
+[Source: [Fundamentals of Data Visualization, <br> Claus O. Wilke, 2019 (Licence CC BY-NC-ND 4.0)](https://clauswilke.com/dataviz/directory-of-visualizations.html)]{.source-vertical}
+
+
+## Données et représentation
+
+- Pour créer une visualisation, nous faisons correspondre des **valeurs** de données à des **propriétés visuelles**.
+
+- Dans de nombreuses visualisations, chaque point de données (ligne d'un tableau) est associé à une *marque* (un objet visuel, tel qu'un point, une barre, etc.). Les propriétés des données (colonnes) que nous choisissons sont ensuite associées à des variables visuelles (ou rétiniennes) telles que la position, la couleur, la taille, etc.
+
+<!-- - Reprenons notre nuage de points. Remarquez que nous spécifions dans le code que les marques sont des points et que les propriétés/colonnes de données relatives à la puissance et à l'économie sont respectivement associées à x et y. -->
+
+## Les outils de visualisation (1)
+
+### Outils clés en main et outils type BI
+
+::::{.columns}
+
+:::{.column width="50%"}
+
+<br>
+
+- [Flourish](https://flourish.studio/)
+- [Datawrapper](https://www.datawrapper.de/)
+- [RAWGraphs](https://rawgraphs.io/)
+- [DataVizProject](https://datavizproject.com/)
+
+:::
+
+:::{.column width="50%"}
+
+<br>
+
+- [Tableau](https://www.tableau.com/)
+- [Power BI](https://powerbi.microsoft.com/)
+- [Qlik](https://www.qlik.com/)
+- ...
+:::
+::::
+
+## Les outils de visualisation (2)
+
+### Bibliothèques de visualisation
+
+En JavaScript :
+
+- D3.js
+- Vega et Vega-Lite
+- Chart.js
+- Highcharts
+- ECharts
+- Observable Plot
+
+
+## Les outils de visualisation (3)
+
+### Bibliothèques de visualisation
+
+En R :
+
+- Ggplot2
+- Plotly
+- ...
+
+## Les outils de visualisation (4)
+
+### Bibliothèques de visualisation
+
+En Python :
+
+- Matplotlib
+- Seaborn
+- Plotly
+- ...
+
+## Les outils de visualisation (5)
+
+Que ce soit en JavaScript, en R ou en Python, il existe de nombreuses bibliothèques de visualisation de données.
+
+De manière générale, on rencontre deux types d'approches :
+
+- des bibliothèques proposant des visualisations "prêtes à l'emploi" (comme Chart.js, Highcharts, Plotly, etc.)
+- des bibliothèques permettant de créer des visualisations personnalisées, que ce soit en implémentant la grammaire des graphiques (comme `ggplot2` ou `Observable Plot`) ou en utilisant des primitives graphiques (comme D3.js).
+
+## La grammaire des graphiques (*Grammar of graphics*)
+
+Il s'agit d'un concept introduit par Leland Wilkinson dans son ouvrage [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447) (2005) et rafiné par Hadley Wickham dans son ouvrage [A layered grammar of graphics](https://vita.had.co.nz/papers/layered-grammar.html) (2010).
+
+L'idée principale est de concevoir un graphique comme une succession de couches. Chaque couche définit une correspondance entre certaines variables ou leur transformation statistique et les attributs esthétiques (position dans l'espace, couleur, épaisseur, etc) de formes géométriques définies (points, barres, lignes, tuiles, etc).
+
+Cette approche permet de définir des graphiques très variés et de les combiner facilement (outrepassant les limites offertes par les bibliothèques de visualisation "prêtes à l'emploi" qui disposeraient d'une recette pour faire un "bar chart", pour faire un "scatter plot", etc.).
+
+## Dans le cadre de ce cours...
+
+### Observable Plot
+
+- [Observable Plot](https://observablehq.com/@observablehq/plot) est une bibliothèque de visualisation développée notamment par Mike Bostock (le créateur de D3.js) et Philippe Rivière (un des principaux contributeurs de D3.js et auteur du site [visioscarto.net](https://visioscarto.net)).
+
+- Elle permet de créer rapidement des visualisations en utilisant la grammaire des graphiques, en utilisant la puissance de D3.js mais sans nécessiter d'être un développeur JavaScript confirmé.
+
+<div style="text-align: center;">
+  <img class="img50" src="img/plot-logo-text.png" />
+</div>
+
+## Dans le cadre de ce cours...
+
+### D3.js
+
+<div style="text-align: center;">
+  <img class="img20" src="img/d3-logo.svg" />
+</div>
+
+## Dans le cadre de ce cours...
+
+### La plateforme Observable
+
+<br>
+
+- [Observable](https://observablehq.com/) est une plateforme de création et de partage de visualisations interactives (sous forme de *notebooks*).
+
+- Elle également développée par Mike Bostock et son équipe.
+
+## &nbsp;
+
+<br>
+
+<div style="text-align: center;">
+<span style="display: inline-block; position: relative">
+<h1>À vous de jouer !</h1>
+<svg width="240" height="11" viewBox="0 0 240 11" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="color: crimson; position: absolute; z-index: -1; top: 3em; left: 0.2em; width: calc(100% - 0.7em); height: auto;"><path d="M20.766 10.187c.939-.024.386-.885.552-1.401 1.105-.301.553.626.962 1.061.685-.263 1.171-1.1 1.696-1.085.044.144.15.191.044.378.697-.736 2.21-.134 2.995-1.052a.55.55 0 0 1 .127.215 3.35 3.35 0 0 1-.204-1.204c.42-.034.751-.593.94 0-.255 0-.266.23-.377.416l.426-.273c.448.813-.586.316-.553.927.84-.306 1.802-1.037 2.476-.831.182.803-1.525.339-.608 1.023l-1.033-.268c.85 1.248-.625-.057.171 1.276 1.348.177 1.47-.478 2.818-.3.276-.479-.132-.66.144-1.124 1.857-.885 1.602 1.984 2.94.846.337-.555.42-1.582 1.442-1.08l-.276.889c1.298.038.668-1.348 2.06-.784-.226.368-1.005.344-.8.444.917.689.59-.545 1.27-.569l.16.827c1.371-.181 2.863-.827 4.388-1.037-.072.249-.326.512.044.746 1.912-.478 4.123-.058 6.007.368l.68-.727c.05.015.095.04.132.074a.275.275 0 0 1 .077.118c.014.044.015.091.004.136a.27.27 0 0 1-.07.122c.74.243 0-.445.354-.732.414-.062.552.383.315.603 1.248-.636 3.586-1.401 4.973-.694l-.254.22c1.06.249 1.105-1.477 2.127-.855l-.182.129c2.293.23 4.785-.478 6.564.52.293-1.017 2.272.393 2.365-1.022 1.327.664.967.927 2.813 1.348.492.052.702-.899 1.299-1.061l.044.731.79-.794.47.87.552-.205a.66.66 0 0 1-.332-.2.517.517 0 0 1-.132-.33c.873-.354 2.177.477 2.21.831l2.078-.679c-.039.301-.387.411-.657.607 1.105-.779.226.77 1.232.053-.144-.163.06-.44.077-.588.553.435 1.691.416 2.547.205l-.149.512c1.558.1 3.271-.31 5.018-.335-.636-.224-.514-1.109 0-1.204l.226.774c.32-.478-.552-.282.122-.884.652.076.464.875.094 1.138l.784-.287c.056.23-.127.358-.165.655.309-.478 1.387.75 1.834-.096l.05.23c1.746-.03 2.53-.316 3.95-.383 0-.674.553-.535.984-1.085 1.05.196 2.21.707 3.482.63.878-.343.243-.568.635-.955.077.612 1.332.535.69.985a15.353 15.353 0 0 0 3.83-.68c-.21-.243-.447-.353-.331-.563a.738.738 0 0 1 .275.01c.09.02.173.058.245.11a.58.58 0 0 1 .169.188c.04.072.061.151.062.232l-.088.067c2.127-.956 4.973 1.706 6.669.41l-.099.068 1.763-.684c.817.1-.481.478.127.842 1.9-1.043 3.022.12 4.586-.574 1.243 1.793 4.327-.167 5.979.956l-.1-.42c.426-.421.52.234.835.33-.05-.33-.464-.378-.205-.613 3.598-.545 7.438.598 11.129.956 1.348.11.757-2.203 2.465-1.195l-.481.794c2.719-.956 5.564 0 8.233-.77-.154.182-.16.416-.425.416.552.574 2.083.034 2.094-.435.42.053.1.425.354.665.552.339 1.42-.732 1.718-.158.05.09-.16.186-.265.23.37-.278 1.719.076 1.365-.589 1 .32 1.917-.287 2.713.105.553-.736 1.713.364 1.884-.683-.077 1.08 1.752.875 2.387.377-.215.326.553.345.299.794.718 0 1.381-.206 1.265-.76 1.315 1.305 2.686-1.018 3.415.645a45.888 45.888 0 0 1 6.078-1.17c-.082 1.075-2.138.09-2.066 1.218 1.834-.425 2.906-1.343 4.719-1.066.47.153-.276.478-.437.65 1.835-.43 3.537.148 5.172-.42 0 .1-.182.21-.348.291.321-.033.741.167.713-.325l-.315.13c-.497-.718 1.304-1.468 1.365-1.841-.553 1.396 1.602.377.707 2.137a.73.73 0 0 0 .337-.263.58.58 0 0 0 .1-.383c.315.1.409.297.083.665 1.155-.254.757-.78 1.801-.75 0 .233-.221.324-.337.601.553-.478 1.078-.908 1.951-.697-.056.143.044.33-.216.325 1.509-.048 2.603-1.195 4.249-.722-.513 1.023.553.349.625 1.243l.895-.254-.348-.44c.785.034 1.492-.602 2.155-.296l-.591.354 1.47-.139-.824-.354c.807-.444-.055-1.132.978-.86-.21.086.785.029 1.177.56.398-.278.801-.57 1.376-.335.138.291-.149.984-.055 1.176.398-.736 1.834-.168 2.337-.956-.143.227-.192.49-.138.745l.337-.597c.359.2.409.296.337.669 1.105.134-.309-1.138.967-.626-.105.048-.055.138-.27.23 1.287.277 2.519-.335 3.702 0 .326.903-1.05.195-.669.955 1.724-.129 3.592-.999 5.25-.74l-.31-.106c.277-1.262 1.221.66 2.083.086-.21.086-.298.693-.237.555 1.105.234 2.343-.249 4.083-.603l-.226.32c.657.311 1.763.216 2.481.383.226-.315.641-.253.403-.731 2.166 1.912 4.305-.89 6.228.726-.238 0-.553.268-.387.273l1.702-.244c-.111-.554-.21-.34-.553-.784.124-.163.292-.298.489-.392.198-.094.419-.145.644-.148-.774.34-.028.884.287 1.205-.049-.173.072-.354.05-.526.846 1.008.199-1.11 1.376-.407l-.077.287c.458-.134.889-.478 1.37-.401.177.645-.492.282-.552.803.685 0 1.403-1.162 1.994-.507-.298.167-.718.158-1.016.325.641.77.729.583 1.221.717h-.044l1.138.378-.282-.21c.928-1.635 1.752-.25 2.951-1.3-1.166.994-.21.592-.332 1.309.288.21.724.454.586.65.553-.564.89.478 1.696-.34 0 .235.581.044.431.627.713-.163-.149-.411-.077-.703 1.133-.76 2.514 1.061 4.139.029 1.376-.397 1.658-1.171 2.94-1.515.403.392-.393.836-.393.836.267.161.581.255.906.27a1.97 1.97 0 0 0 .934-.184c-.138.196 0 .373.172.64.519-.038.386-.831 1.05-.477a3.24 3.24 0 0 1-.553.918c.619-.192 1.243-.603 1.884-.79.149.412-.409.603-.646.856.718-.153 1.851-.296 2.105-.927l-.442-.248c.26 0 .105.559-.094.669-.63.478-.862-.258-.884-.478l.459-.134c-.387-1.382-1.818.148-2.719.033l.431-.956-.973.784c-.182-.263-.287-.822.166-.956-.624-.516-.591.33-1.105-.239-.055-.086-.028-.134.033-.172l-.646.273c.132-.201-.072-.703.309-.545-1.105-.617-1.873.674-2.26-.096l.099-.057c-1.596.272-.193.721-1.414 1.534l-.713-1.83-.188.721c-.16-.033-.481-.1-.409-.387-.63.478.089.32-.287.78-.752-.699-2.172.229-2.293-.957-.31.545.729.478-.127.813-.183-1.258-.978.181-1.658-.416.254-.636.917-.273.226-.875-.486 1.076-1.386-.282-2-.096-.066.87-1.332.32-2.354.579.078-.292-1.89-.54-2.818-.885l.033-.148c-.221.87-1.182.674-1.901.832a.906.906 0 0 1 .132-.55c.102-.169.258-.31.449-.406h-.669a.979.979 0 0 1-.34.327 1.167 1.167 0 0 1-.478.151l.194-.65c-.885 0-1.813.712-2.94.244-.083.607.84 1.725-.381 2.103-.034-.335-.056-.899.27-1.028-.105.043-.381.263-.585.12l.502-.545c-.508-.258-.287.478-.701.397 0-.478-.293-.35-.221-.722.11-.038.359.205.525 0a1.931 1.931 0 0 1-.691-.264 1.649 1.649 0 0 1-.503-.487c.028.268-.028.636-.37.684-.89 0-.282-.574-.79-.832-.227.325-.78-.033-.824.674-.259 0-.293-.34-.387-.535-.469.3-2.149.033-1.657.793l.116.053s-.05 0-.078.033c-1.525.66-3.105-.478-4.608-.224V3.34c-.895.244-1.984.106-2.636.593a.711.711 0 0 1-.402-.28.553.553 0 0 1-.084-.442c-.691.158-.774.416-1.746 0 .701-.396-.221-.373.713-.287-.879-.224-1.067-.607-2.039 0 .342-.597-.641-.774-1.067-.602l.608.445c-.436.053-.88.039-1.31-.043l.254-.794c-1.784-1.004-3.315 1.578-4.647-.067-.497.545.973.411.553 1.052-.829-.124-1.658-1.286-1.929-1.29-1.132-.479-1.105 1.137-2.282.812a.818.818 0 0 1 .031.774.938.938 0 0 1-.264.323 1.11 1.11 0 0 1-.397.198c-.829-.124-.994-1.214-.464-1.434.205 0 .299.072.288.168.27-.096.629-.21.303-.526l-.116.282c-.403-.297-1.552-.292-1.271-.75-.635.257-.281.477.183.616-1.061-.435-1.658-.053-2.763-.344.171.162.326.478.155.478-1.608-.378-.724.526-1.824.636-.608-.445.249-1.033-.862-.684-.668-.306-.127-.755.149-.985-1.016.536-1.867-.387-2.442-.478l.553-.22a1.892 1.892 0 0 1-.846.12l.293.573c-.309-.105-.553-.11-.553-.348-.326.368.227.956-.42 1.434-.403-.297-1.265.286-1.392-.478 1.298.272-.127-.76.978-.866a1.102 1.102 0 0 1-.851.024c-.044-.086.044-.157.133-.2-1.233-.689-.592.846-1.879.807.171-.42-.287-.808-.497-.721.519 0 .237.712-.249 1.027-.823-.34-.906.235-1.337.187l.491.162c-.176.426-.585.364-1.165.478-.045-.33.524-.22.326-.368-.652.736-1.437-.793-2.338-.306-.409-.291-.027-.798-.387-.999-1.011.54-1.077-.588-2.133-.148.293.574.349.435-.403.985l1.735-.387-1.105.822c.525 0 1.105-.35 1.42-.249-.553.478-.481.316-.238.794-.701-.86-1.425.478-2.21-.1l.044-1.41c-1.232-.641-2.21.702-3.823.334l.513.248c-.221.56-.994.072-1.519.292.055-.478-.271-.645-.492-.956.028.349-1.177-.043-1.337.899l-.707-.627c-1.305-.267-1.503 1.33-2.763 1.157.381-.507-.183-.846.657-1.21-.414 0-.79-.095-.801.23-.276-.263-1.199.646-1.575.215-.182.206-.243.698-.713.655a.337.337 0 0 1 0-.234c0 .234-.735.31-.331.837-1.271-1.478-3.592.095-4.708-1.172-.936.165-1.883.277-2.835.335.05-.139 0-.234.16-.186-1.143-.44-.707 1.352-2.005.86-.664-.765.69-.411.276-.703-.171-1.553-1.564.21-2.437-.702l.21-.091c-.663-.555-1.608.564-2.713.454a.326.326 0 0 0 0-.234c-.746.784-2.155 1.051-3.205 1.271.326-.607.475-.32.276-.956-.47.091.138.99-.801 1.167-.304-.33-.984-.622-1.078-1.282l.89-.019c-.459-.85-1.149.034-1.613-.114l.055-.368c-1.36.124-1.376 1.06-2.835.999l.155.282c-.796.956-.674-.521-1.465.172l-.248-.956c-.871.453-1.797.82-2.763 1.094.552-.698 1.658-1.06 2.315-1.477-.519 0-1.774.072-2.044.54.21-.09.475-.325.685-.181a2.832 2.832 0 0 1-1.094.83 3.298 3.298 0 0 1-1.42.27c.171-1.832-2.713-.455-3.482-1.865-1.834.693-3.652-.258-5.796-.13.774 1.435-.625.049-.481 1.507-.497.1-.685.076-.729 0l-1.525-.86c-.365-.421.469-.326.42-.65-1.106-.106-.465-.618-1.194-1 .155.521-.37.75-1 .56l.901.659c-1.52.793-1.338-1.214-2.868-.43l.48-.478c-.79.277-2.917 0-3.674 1.204-.144-.167-.332-.564 0-.674-1.89-.148-4.183 1.31-5.664.612l.138-.358c-.348.105-.602.678-1.05.325 0-.148.138-.359 0-.378-.182.124-.923.64-1.392.44l.386-.411c-1.85-.44-2.807 1.023-4.343 1.29 0-1.051-1.475-1.376-2.21-1.53V.685c-2.15-.086-3.625.956-5.598 1.4-1.265-1.118-4.188-.392-6.194-.99.31.182 0 .818-.37.957-.475-.206-1.266.755-1.221-.21h.165c-.375-.957-1.326-.67-2.072-.675l-.083 1.267c-2.006-1.778-5.106.813-6.227-.803-.459.33-1.045.34-1.498.67v-.68a12.396 12.396 0 0 0-3.575 0l.31-.478c-.912 0-1.072 1.98-1.912 2.042l-.288-1c-1.591.053-3.232-.774-4.763.192 0-.148.055-.445.31-.478-.746 0-2.918-.588-2.587.788-.06-.903-1.657-.038-2.48.388l.104-.689c-.685.875-.701 1.11-1.696 1.377-.243-.076-.238-.526.088-.368-.812-.32-.59.655-1.574.33l.342-.435c-.823-.029-.746.2-1.177.707-.503.287-1.564-.114-1.713-.712-.094.368-.52.875-1.011.717a.38.38 0 0 1 .013-.245.442.442 0 0 1 .164-.2c-1.393-.406-2 .851-2.973.235a.553.553 0 0 0-.182-.392 9.431 9.431 0 0 1 1.89.028c0-.616-.912-.688-.255-1.563-.685.478-1.845 1.54-2.713 1.286a.84.84 0 0 1-.1-.215l.061-.072a.668.668 0 0 0-.295 0 .61.61 0 0 0-.257.125 1.992 1.992 0 0 0-.718-.158c-.128-.507-1.023-.234-1.465-.244.072.67-.508.583.06 1.119-.07-.048.078-.086.366-.125a.528.528 0 0 0 .188-.076l-.028.062c.287-.033.663-.062 1.105-.09-.332.358-.68.654-1.183.3-.204.445-.43.894-.552 1.11-.647-.914-1.83-1.377-2.022-1.946-1.321.43-3.145.368-3.918 1.663-.376.177-.459-.344-.614-.535.216-.139.476-.13.586-.316-.74.354-2.249.216-2.381 1.105-.984-.364.491-.837-.818-.636l.166-.277c-2.675-1.291-4.09 2.433-7.068.755.204.105.304.148.354.296-3.316-.645-6.709 1.038-10.018-.062-.94-.205-1 .359-1.531.818l-.249-.713-.906.88c-1.315.679-2.47-1.65-4.117-.411l.254.478c-.624-.058-1.939.387-1.873-.177-.055.09-.166.516-.425.272l-.044-.372-1.487.712c-1.199-.215.078-1.506-1.658-1.492C.895 5.105-.22 6.114.04 6.362c.178.01.347.073.478.179a.645.645 0 0 1 .24.4l-.558.225C.17 8.279-.194 9.44 1.304 10.144l.917-.732.36.521-.818.1c.513.479.784 0 1.105-.305.07.225.233.42.458.55l.907-1.114c.149.43-.376.884.292 1.094.426-.516-.502-.956.233-1.314.513.478.403.898.933.44a.447.447 0 0 1 .012.336.525.525 0 0 1-.233.27c.476-.367 1.304-.214 1.525-.817.553.598 1.658-.248 1.691.808.29-.433.74-.77 1.277-.956-.752 1.3 1.724 0 1.591 1.348.553-1.162 2.21-.617 3.255-1.3-.055.095-.16.282-.265.23.624.061.823.391 1.237.592 0-.956.967-1.195 1.448-1.797.812.87-.392 1.118-.1 1.974-.082-.755 1.272-.813.973-1.434.614.53.514.248.862 1.008.028-1.17.553-.22.962-.956.873.54.282 1.086 1.182.689.453.354-.342.808-.342.808Zm21.793-2.93-.447.057.447-.058Zm1.818-.091a7.552 7.552 0 0 0-.801 0c-.072-.23 0-.478.171-.478-.083.186.348.305.63.478Zm-4.128-4.49c.288-.109.393 0 .442.159-.172.02-.343.053-.508.1v.081a.973.973 0 0 1 .066-.34Z"></path></svg>
+</span>
+</div>

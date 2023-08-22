@@ -1,0 +1,90 @@
+---
+title: "Règles et conseils pour la conception de visualisation de données"
+subtitle: "Cours X - 2023-2024"
+format: clean-revealjs
+author:
+  - name: "Matthieu Viry"
+    orcid: 0000-0002-0693-8556
+    email: matthieu.viry@cnrs.fr
+    affiliations: CNRS / <a href="https://riate.cnrs.fr" target="_blank">UAR 2414 RIATE</a>
+date: 09/12/2023
+css: style.css
+---
+
+## Introduction
+
+## La simplicité
+
+De manière générale, il faudra essayer de choisir la manière la plus simple de
+transmettre l'information.
+
+## Transmettre un message précis
+
+Déterminez les relations entre les données et ce que vous voulez montrer en présence de vos données.
+
+Concentrez-vous sur ce que vous voulez illustrer et sur le message à transmettre à l'aide de votre visualisation de données.
+
+## Vérifier les données
+
+- Valeurs aberrantes
+- Pics
+- Anomalies
+
+... et les corriger si nécessaire (suppression de valeurs aberrantes, etc.).
+
+## Choisir une forme de graphique adapté
+
+Cf. le cours d'introduction.
+
+::::{.columns}
+:::{.column width="60%"}
+Différentes ressources peuvent aider à choisir le bon type de graphique :
+
+- [From Data to Viz](https://www.data-to-viz.com/)
+- [The Data Visualisation Catalogue](https://datavizcatalogue.com/)
+- [Chart Chooser](https://www.juiceanalytics.com/chartchooser)
+- [The Data Viz Project](https://datavizproject.com/)
+:::
+
+:::{.column width="40%"}
+![](img/from-data-to-viz.png)
+:::
+::::
+
+## ... et éviter les erreurs classiques
+
+Une partie des erreurs classiques sont résumées dans ce cours.
+D'autres peuvent être consultées aux URLs suivantes :
+
+- [Dataviz caveats](https://www.data-to-viz.com/caveats.html)
+
+
+## Titre, description, source, légende, axes, etc.
+
+ Il est nécessaire :
+
+- d'expliquer l'encodage des données (via des légendes ou des annotations) et d'inclure les unités de mesure
+- d'étiqueter les axes
+- d'expliquer le contexte de la visualisation (via un titre, une description, etc.)
+- de citer la source des données (pour permettre de reproduire la visualisation, pour permettre aux lecteurs de vérifier les informations, etc.)
+
+![](img/advices-encoding.png)
+
+## Le principe de la proportionnalité
+
+## Gestion de la superposition
+
+## Maximisation du "data-ink ratio"
+
+## Éviter les effets spéciaux inutiles (3D, etc.)
+
+
+
+## Hiérarchiser l'information
+
+## Trouver des modèles inspirants
+
+## Processus itératif
+
+Prenez le temps nécessaire à configurer, modifier, tester, corriger, etc. votre
+visualisation de données.

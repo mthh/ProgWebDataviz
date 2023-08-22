@@ -1,0 +1,141 @@
+.img20 {
+    width: 20% !important;
+    height: auto !important;
+}
+
+.img30 {
+    width: 30% !important;
+    height: auto !important;
+}
+
+.img40 {
+    width: 40% !important;
+    height: auto !important;
+}
+
+.img50 {
+    width: 50% !important;
+    height: auto !important;
+}
+
+.img55 {
+    width: 55% !important;
+    height: auto !important;
+}
+
+.img60 {
+    width: 60% !important;
+    height: auto !important;
+}
+
+.img65 {
+    width: 65% !important;
+    height: auto !important;
+}
+
+.img70 {
+    width: 70% !important;
+    height: auto !important;
+}
+
+.img75 {
+    width: 75% !important;
+    height: auto !important;
+}
+
+.img80 {
+    width: 80% !important;
+    height: auto !important;
+}
+
+.img85 {
+    width: 85% !important;
+    height: auto !important;
+}
+
+.img90 {
+    width: 90% !important;
+    height: auto !important;
+}
+
+.img95 {
+    width: 95% !important;
+    height: auto !important;
+}
+
+.img100 {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.img110 {
+    width: 110% !important;
+    height: auto !important;
+}
+
+.img120 {
+    width: 120% !important;
+    height: auto !important;
+}
+
+p.caption {
+    font-size: 12px;
+    font-style: italic;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/*
+div.slides {
+    width: 1200px !important;
+}
+
+body {
+    --slide-width: 1200px;
+}
+*/
+
+.small, .small > *, .small8, .small8 > * {
+    font-size: 0.8em !important;
+}
+
+.small9, .small9 > * {
+    font-size: 0.9em !important;
+}
+
+.small7, .small7 > * {
+    font-size: 0.7em !important;
+}
+
+.mt2 {
+    margin-top: 2em !important;
+}
+
+.mb2 {
+    margin-bottom: 2em !important;
+}
+
+.mt4 {
+    margin-top: 4em !important;
+}
+
+.mb4 {
+    margin-bottom: 4em !important;
+}
+
+.source-vertical {
+    transform: rotate(90deg);
+    position: absolute;
+    top: 50%;
+    right: -20%;
+    font-size: 0.8em !important;
+}
+
+svg[class*="plot-"] {
+    margin: auto !important;
+}
+
+.reveal .r-stack > ul {
+    margin: 12px 36px !important;
+}

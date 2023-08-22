@@ -1,0 +1,75 @@
+---
+title: "Programmation Web pour la visualisation de données"
+subtitle: "BUT Science des données - 3ème année - Université Grenoble Alpes"
+format:
+  html:
+    code-fold: true
+author:
+  - name: "Matthieu Viry"
+    email: "matthieu.viry@cnrs.fr"
+---
+
+## Objectif du cours
+
+Ce cours est une introduction à la visualisation interactive de données. Il couvre :
+
+- les principes de base de la visualisation de données (perception visuelle, encodage des données, interaction, etc.),
+- la typologie des graphiques pour les principaux types de données,
+- la réalisation de visualisations Web interactives en utilisant les bibliothèques Plot et/ou d3.js ainsi que des données réelles.
+
+
+## Planning du cours
+
+| Date          | Heure   | Contenu               | Ressources |
+|---------------|---------|-----------------------|------------|
+| 11/09/2023    | 10h-13h | CM - Cours d'introduction  (histoire de la data visualisation, principes de bases, etc.) + TP - Introduction à Observable + Rappels JS / Markdown | [Slides](./CM-seance1.html) |
+| 11/09/2023    | 14h-17h | TP - Manipulation de données + Premiers graphiques avec Plot dans Observable | [TP]() |
+| 12/09/2023    | 09h-12h | TP - Graphiques avec Plot dans Observable          | [TP]() |
+| 12/09/2023    | 13h-16h | TP - Graphiques avec Plot dans Observable          | [TP]() |
+| 13/09/2023    | 09h-12h | CM/TP - D3.js  | Ressources |
+| 13/09/2023    | 13h-16h | CM/TP - Visualisations avancées et interactions | Ressources |
+| 06/11/2023    | 10h-13h | CM - Présentation Quarto / TP - R ou Python et création d'un rapport Web avec Quarto | Ressources |
+| 06/11/2023    | 14h-17h | TP - R ou Python et création d'un rapport Web avec Quarto | Ressources |
+| 07/11/2023    | 09h-12h | Thème                 | Ressources |
+| 07/11/2023    | 13h-16h | Thème                 | Ressources |
+
+## Évaluation
+
+Ce cours est en contrôle continu intégral.
+La note sera constituée de :
+
+- une note de projet (50%) - ce projet sera réalisé en binôme et rendu le 25/10/2023
+- un TP noté (50%) - ce TP sera réalisé le 06/11/2023
+
+## Ressources utiles
+
+### Visualisation de données en général
+
+- [From Data to Viz](https://www.data-to-viz.com/) (typologie des graphiques)
+- [The Data Visualisation Catalogue](https://datavizcatalogue.com/) (typologie des graphiques)
+
+- [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/), Claus O. Wilke, 2019 (livre en ligne)
+- Data Visualisation - A Handbook for Data Driven Design, 2nd Edition, Andy Kirk, 2019 (livre)
+
+- [FlowingData](https://flowingdata.com/) (blog - ressources variées)
+- [Visualization design resources](https://www.cs.ubc.ca/group/infovis/resources.shtml) (ressources variées)
+- [Visual Cinnamon](https://www.visualcinnamon.com/) (blog - ressources variées - visualisation de données et *data art*)
+
+### Environnement Observable
+
+- [Plateforme Observable](https://observablehq.com/)
+- [Documentation des notebooks Observable](https://observablehq.com/@observablehq/documentation)
+
+### Bibliothèques et outils utilisés
+
+- [Bibliothèque Plot](https://observablehq.com/plot/) et [galerie](https://observablehq.com/@observablehq/plot-gallery)
+- [Bibliothèque d3.js](https://d3js.org/) et [galerie](https://observablehq.com/collection/@d3/gallery)
+- [Quarto](https://quarto.org/)
+- [R](https://www.r-project.org/)
+
+### Autres bibliothèques
+
+- Bibliothèques [Vega](https://vega.github.io/vega/) et [Vega-Lite](https://vega.github.io/vega-lite/)
+- [Bibliothèque Plotly](https://plotly.com/javascript/)
+- [Bibliothèque ECharts](https://echarts.apache.org/en/index.html)
+- [Bibliothèque Highcharts](https://www.highcharts.com/)
