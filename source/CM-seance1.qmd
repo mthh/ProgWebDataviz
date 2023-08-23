@@ -67,7 +67,7 @@ _**présentation**_ : les autres décisions de conception qui constituent l'anat
 
 *"La représentation visuelle et la présentation des données pour en **faciliter la compréhension**"*
 
-_**faciliter la compréhesion**_ : qu'est-ce qu'on voit ? que cela signifie-t-il, au regard du sujet traité ?
+_**faciliter la compréhension**_ : qu'est-ce qu'on voit ? que cela signifie-t-il, au regard du sujet traité ?
 
 ## Qu'est-ce que la visualisation de données ?
 
@@ -240,9 +240,11 @@ S'il est possible, à la lecture du tableau, de répondre à des questions simpl
 
 ## Pourquoi visualiser ?
 
+<br>
+
 ![
 Proportion de ventes par type au cours du temps (Kirk, 2019, figure 1.3)
-](./img/Kirk-1.3.SalesLineChart.png){.img70}
+](./img/Kirk-1.3.SalesLineChart.png){.img75}
 
 ## Pourquoi visualiser ?
 
@@ -311,7 +313,7 @@ Plot.plot({
 
 :::{.fragment .fade-in-then-out .absolute}
 > “…make both calculations and graphs. Both sorts of output should be studied; each will contribute to understanding.”
-  — F.J. Anscombe
+  — Francis John Anscombe
 :::
 
 :::{.fragment .fade-in .absolute}
@@ -434,7 +436,7 @@ rapidement et parfaitement par imagination ...car l'imagination des figures aide
 
 ![
 Source : [https://commons.wikimedia.org/wiki/File:Tableau_Pol%C3%A9ometrique,_1782.jpg](https://commons.wikimedia.org/wiki/File:Tableau_Pol%C3%A9ometrique,_1782.jpg)
-](./img/Tableau_Poléometrique_1782.jpg){.img20}
+](./img/Tableau_Poléometrique_1782.jpg){.img30}
 
 :::{.notes}
 Chaque ville est représentée par un carré dont la superficie est proportionnelle à la zone géographique occupée par la ville (et pour les plus petites villes, par un demi-carré seulement, divisé par la ligne diagonale). Une fois superposés, les carrés sont classés automatiquement. Il en résulte des regroupements visuels, qui amènent l'auteur à proposer une classification urbaine
@@ -497,7 +499,7 @@ Source : [https://commons.wikimedia.org/wiki/File:Playfair_Barchart.gif](https:/
 
 ![
 Source : [https://commons.wikimedia.org/wiki/File:Playfair_piecharts.jpg](https://commons.wikimedia.org/wiki/File:Playfair_piecharts.jpg)
-](./img/Playfair_piecharts.jpg){.img50}
+](./img/Playfair_piecharts.jpg){.img60}
 
 ## Histoire de la visualisation de données
 
@@ -537,6 +539,38 @@ Source : [https://commons.wikimedia.org/wiki/File:Chart_Showing_at_One_View_the_
 ![
 Source : [https://en.wikipedia.org/wiki/File:Minard.png](https://en.wikipedia.org/wiki/File:Minard.png)
 ](./img/Minard.png){.img60}
+
+## Histoire de la visualisation de données
+
+### Les pionniers - **Charles Dupin** (1784-1873)
+
+::::{.columns}
+
+:::{.column width=45%}
+
+<br>
+
+- Pionnier de la cartographie thématique (cartes statistiques / cartes choroplèthes)
+
+
+[Source : [https://commons.wikimedia.org/wiki/<br>File:Carte_figurative_de_l%27instruction_populaire_de_la_France.jpg](https://commons.wikimedia.org/wiki/File:Carte_figurative_de_l%27instruction_populaire_de_la_France.jpg)]{.small7}
+
+:::
+
+:::{.column width=55%}
+![](./img/Carte_figurative_de_linstruction_populaire_de_la_France.jpg)
+:::
+::::
+
+:::{.notes}
+Les variables visuelles de la carte sont constituées d'un nuancier de hachures de couleur noire, sans aplat blanc (même la mer est représentée avec un figuré hachuré concentrique léger), allant d'une saturation faible au noir complet. Les figurés linéaires utilisés sont les contours simplifiés des départements français et les frontières de la France sous leur forme de 1826a. La Corse (à l'époque département unique) n'est pas représentée.
+Il n'y a pas de légende et les valeurs sont exprimées directement dans les départements. Il s'agit donc à la fois d'une carte à lire et d'une carte à voir.
+
+La légende est la suivante :
+
+« Parallèle statistique relatif à l'enseignement populaire, à l'instruction supérieure, à l'industrie, à la richesse privée, aux revenus publics, entre la France du Nord, la France du Sud et la totalité de la France.
+Dans notre carte, la noirceur des teintes correspond à la grandeur des nombres placés au-dessous du nom de chaque Département. Cette teinte et ce nombre indiquent combien il faut de personnes pour fournir un enfant mâle aux écoles. Ainsi le département de la Moselle compte un élève par dix habitants, et celui de la Haute-Loire un par 268 habitants. Les Départements les plus éclairés sur la carte, sont par conséquent ceux qui possèdent l'instruction primaire la plus étendue. J'appelle France du Nord les 32 départements séparés par une ligne presque droite, menée de Saint-Malo jusqu'à Genève. Les 54 autres départements forment la France du Sud. »
+:::
 
 ## Histoire de la visualisation de données
 
@@ -583,8 +617,11 @@ Source : [https://commons.wikimedia.org/wiki/File:Nightingale-mortality.jpg](htt
   - présente de nombreux exemples de visualisation de données
   - *"lie factor"*, *"data-ink ratio"*, *"chartjunk"*, etc.
 
-- Popularise des représentation comme les mini-graphes (sparklines).
+- Popularise des représentation comme les mini-graphes (*sparklines*).
 
+![
+Source: [https://fr.wikipedia.org/wiki/Visualisation_de_donn%C3%A9es](https://fr.wikipedia.org/wiki/Visualisation_de_donn%C3%A9es)
+](./img/sparklines-wikipedia){.img20 .mt0}
 
 ## Histoire de la visualisation de données
 
@@ -761,6 +798,7 @@ En R :
 
 En Python :
 
+
 - [Matplotlib](https://matplotlib.org/)
 - [Seaborn](https://seaborn.pydata.org/)
 - [Plotly](https://plotly.com/python/)
@@ -777,17 +815,22 @@ De manière générale, on rencontre deux types d'approches :
 
 ## La grammaire des graphiques (*Grammar of graphics*)
 
+:::{.small9}
+
 Il s'agit d'un concept introduit par Leland Wilkinson dans son ouvrage [The Grammar of Graphics](https://www.springer.com/gp/book/9780387245447) (2005) et rafiné par Hadley Wickham dans son ouvrage [A layered grammar of graphics](https://vita.had.co.nz/papers/layered-grammar.html) (2010).
 
-L'idée principale est de concevoir un graphique comme une succession de couches. Chaque couche définit une correspondance entre certaines variables ou leur transformation statistique et les attributs esthétiques (position dans l'espace, couleur, épaisseur, etc) de formes géométriques définies (points, barres, lignes, tuiles, etc).
+L'idée principale est de concevoir un graphique comme une succession de couches.
+Chaque couche définit une **correspondance entre certaines variables ou leur transformation statistique et les attributs esthétiques** (position dans l'espace, couleur, épaisseur, etc) **de formes géométriques définies** (points, barres, lignes, tuiles, etc).
 
 Cette approche permet de définir des graphiques très variés et de les combiner facilement (outrepassant les limites offertes par les bibliothèques de visualisation "prêtes à l'emploi" qui disposeraient d'une recette pour faire un "bar chart", pour faire un "scatter plot", etc.).
+
+:::
 
 ## Dans le cadre de ce cours...
 
 ### Observable Plot
 
-- [Observable Plot](https://observablehq.com/@observablehq/plot) est une bibliothèque de visualisation développée notamment par Mike Bostock (le créateur de D3.js) et Philippe Rivière (un des principaux contributeurs de D3.js et auteur du site [visioscarto.net](https://visioscarto.net)).
+- [Observable Plot](https://observablehq.com/plot/) est une bibliothèque open source de visualisation développée notamment par Mike Bostock (le créateur de D3.js) et Philippe Rivière (un des principaux contributeurs de D3.js et auteur du site [visioscarto.net](https://visioscarto.net)).
 
 - Elle permet de créer rapidement des visualisations en utilisant la grammaire des graphiques, en utilisant la puissance de D3.js mais sans nécessiter d'être un développeur JavaScript confirmé.
 
@@ -798,6 +841,12 @@ Cette approche permet de définir des graphiques très variés et de les combine
 ## Dans le cadre de ce cours...
 
 ### D3.js
+
+- **Data-Driven Documents** (lier sélectivement les données d'entrée à des éléments de HTML, en appliquant des transformations dynamiques pour générer et modifier le contenu)
+
+- Il s'agit d'une puissante bibliothèque open source de visualisation de données développée également Mike Bostock (et d'autres contributeurs).
+
+- Plutôt *low-level* (permettant un contrôle très fin des visualisations créées, aux dépens de la complexité du code)
 
 <div style="text-align: center;">
   <img class="img20" src="img/d3-logo.svg" />

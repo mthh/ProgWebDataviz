@@ -55,6 +55,8 @@ La note sera constituée de :
 - [Visualization design resources](https://www.cs.ubc.ca/group/infovis/resources.shtml) (ressources variées)
 - [Visual Cinnamon](https://www.visualcinnamon.com/) (blog - ressources variées - visualisation de données et *data art*)
 
+- [Exposition "Data Visualization and the Modern Imagination"](https://exhibits.stanford.edu/dataviz) (exposition en ligne sur l'histoire de la visualisation de données)
+
 ### Environnement Observable
 
 - [Plateforme Observable](https://observablehq.com/)
