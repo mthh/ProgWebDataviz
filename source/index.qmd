@@ -22,16 +22,27 @@ Ce cours est une introduction à la visualisation interactive de données. Il co
 
 | Date          | Heure   | Contenu               | Ressources |
 |---------------|---------|-----------------------|------------|
-| 11/09/2023    | 10h-13h | CM - Cours d'introduction  (histoire de la data visualisation, principes de bases, etc.) + TP - Introduction à Observable + Rappels JS / Markdown | [Slides](./CM-seance1.html) |
-| 11/09/2023    | 14h-17h | TP - Manipulation de données + Premiers graphiques avec Plot dans Observable | [TP]() |
-| 12/09/2023    | 09h-12h | TP - Graphiques avec Plot dans Observable          | [TP]() |
-| 12/09/2023    | 13h-16h | TP - Graphiques avec Plot dans Observable          | [TP]() |
-| 13/09/2023    | 09h-12h | CM/TP - D3.js  | Ressources |
-| 13/09/2023    | 13h-16h | CM/TP - Visualisations avancées et interactions | Ressources |
-| 06/11/2023    | 10h-13h | CM - Présentation Quarto / TP - R ou Python et création d'un rapport Web avec Quarto | Ressources |
-| 06/11/2023    | 14h-17h | TP - R ou Python et création d'un rapport Web avec Quarto | Ressources |
-| 07/11/2023    | 09h-12h | Thème                 | Ressources |
-| 07/11/2023    | 13h-16h | Thème                 | Ressources |
+| 11/09/2023    | 10h-13h | CM - Cours d'introduction  (histoire de la data visualisation, principes de bases, etc.) + TP sur Observable | [Slides](./CM-seance1.html) |
+| 11/09/2023    | 14h-17h | TP sur Observable | Voir URLs des TP ci-dessous |
+| 12/09/2023    | 09h-12h | CM - Règles et conseils pour la conception de visualisation de données + TP sur Observable | [Slides]() |
+| 12/09/2023    | 13h-16h | TP sur Observable | Voir URLs des TP ci-dessous |
+| 13/09/2023    | 09h-12h | CM - Visualisations avancées, interactions et d3.js + TP sur Observable  | [Slides]() |
+| 13/09/2023    | 13h-16h | TP sur Observable | Voir URLs des TP ci-dessous |
+| 06/11/2023    | 10h-13h | TP - Visualisation de données avec Plot et d3.js hors Observable | [Fiche TP]() |
+| 06/11/2023    | 14h-17h | TP - Visualisation de données avec Plot et d3.js hors Observable | [Fiche TP]() |
+| 07/11/2023    | 09h-12h | TP noté |  |
+| 07/11/2023    | 13h-16h | CM - Présentation Quarto / TP - Création d'un rapport Web avec R et Quarto  | [Slides]() / [Fiche TP]() |
+
+## URL des TPs
+
+- [Premiers pas dans Observable](https://observablehq.com/@sd-progwebdataviz/premiers-pas-dans-observable)
+- [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices)
+- [Rappels Markdown](https://observablehq.com/@sd-progwebdataviz/rappels-markdown)
+- [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices)
+- [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot) - [Exercices]()
+- [Bibliothèque Plot (partie 2)]() - [Exercices]()
+- [Graphiques avec d3.js (partie 1)]() - [Exercices]()
+- [Graphiques avec d3.js (partie 2)]() - [Exercices]()
 
 ## Évaluation
 
@@ -39,7 +50,7 @@ Ce cours est en contrôle continu intégral.
 La note sera constituée de :
 
 - une note de projet (50%) - ce projet sera réalisé en binôme et rendu le 25/10/2023
-- un TP noté (50%) - ce TP sera réalisé le 06/11/2023
+- un TP noté (50%) - ce TP sera réalisé le 07/11/2023
 
 ## Ressources utiles
 
