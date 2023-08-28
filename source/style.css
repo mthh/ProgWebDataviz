@@ -1,3 +1,8 @@
+.img15 {
+    width: 15% !important;
+    height: auto !important;
+}
+
 .img20 {
     width: 20% !important;
     height: auto !important;
@@ -142,4 +147,56 @@ svg[class*="plot-"] {
 
 .reveal .r-stack > ul {
     margin: 12px 36px !important;
+}
+
+.pre-att-img {
+    font-size: 100px !important;
+    text-align: center;
+    color: lightgray;
+    font-weight: 800 !important;
+}
+
+.pre-att-img p {
+    margin-top: unset !important;
+    font-weight: 800 !important;
+}
+
+.highlight-0 {
+    color: darkgreen !important;
+}
+
+.highlight-3 {
+    color: brown !important;
+}
+
+.highlight-4 {
+    color: darkcyan !important;
+}
+
+.highlight-5 {
+    color: chartreuse !important;
+}
+
+.highlight-6 {
+    color: black !important;
+}
+
+.highlight-7 {
+    color: purple !important;
+}
+
+.highlight-8 {
+    color: red !important;
+}
+
+.highlight-9 {
+    color: yellow !important;
+}
+
+.relative {
+    position: relative !important;
+}
+
+.text-center {
+    text-align: center !important;
 }
