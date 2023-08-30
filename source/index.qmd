@@ -20,18 +20,18 @@ Ce cours est une introduction à la visualisation interactive de données. Il co
 
 ## Planning du cours
 
-| Date          | Heure   | Contenu               | Ressources |
-|---------------|---------|-----------------------|------------|
+| Date          | Heure   | Contenu               | Ressources                  |
+|---------------|---------|-----------------------|-----------------------------|
 | 11/09/2023    | 10h-13h | CM - Cours d'introduction  (histoire de la data visualisation, principes de bases, etc.) + TP sur Observable | [Slides](./CM-seance1.html) |
 | 11/09/2023    | 14h-17h | TP sur Observable | Voir URLs des TP ci-dessous |
-| 12/09/2023    | 09h-12h | CM - Règles et conseils pour la conception de visualisation de données + TP sur Observable | [Slides]() |
+| 12/09/2023    | 09h-12h | CM - Règles et conseils pour la conception de visualisation de données + TP sur Observable | [Slides](./CM-seance2.html) |
 | 12/09/2023    | 13h-16h | TP sur Observable | Voir URLs des TP ci-dessous |
-| 13/09/2023    | 09h-12h | CM - Visualisations avancées, interactions et d3.js + TP sur Observable  | [Slides]() |
+| 13/09/2023    | 09h-12h | CM - Visualisations avancées, interactions et d3.js + TP sur Observable  | [Slides]()                  |
 | 13/09/2023    | 13h-16h | TP sur Observable | Voir URLs des TP ci-dessous |
-| 06/11/2023    | 10h-13h | TP - Visualisation de données avec Plot et d3.js hors Observable | [Fiche TP]() |
-| 06/11/2023    | 14h-17h | TP - Visualisation de données avec Plot et d3.js hors Observable | [Fiche TP]() |
-| 07/11/2023    | 09h-12h | TP noté |  |
-| 07/11/2023    | 13h-16h | CM - Présentation Quarto / TP - Création d'un rapport Web avec R et Quarto  | [Slides]() / [Fiche TP]() |
+| 06/11/2023    | 10h-13h | TP - Visualisation de données avec Plot et d3.js hors Observable | [Fiche TP]()                |
+| 06/11/2023    | 14h-17h | TP - Visualisation de données avec Plot et d3.js hors Observable | [Fiche TP]()                |
+| 07/11/2023    | 09h-12h | TP noté |                             |
+| 07/11/2023    | 13h-16h | CM - Présentation Quarto / TP - Création d'un rapport Web avec R et Quarto  | [Slides]() / [Fiche TP]()   |
 
 ## URL des TPs
 
