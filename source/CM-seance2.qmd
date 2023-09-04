@@ -752,7 +752,12 @@ Source : [https://towardsdatascience.com/is-your-color-palette-stopping-you-from
 
 :::
 
-:::
+::::
+
+## Palettes de couleurs
+
+- Utilisez de manière préférentielle des palettes existantes (celles fournis par D3.js, etc.) pour éviter ...
+
 ## Contraste et lisibilité
 
 - Assurez-vous que les couleurs utilisées offrent un **contraste suffisant** pour permettre une lecture facile,
@@ -791,6 +796,7 @@ correlations = d3.cross(fields, fields).map(([a, b]) => ({
 Plot.plot({
   marginLeft: 100,
   label: null,
+  height: 370,  
   color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation" },
   marks: [
     Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
@@ -815,6 +821,7 @@ Plot.plot({
 Plot.plot({
   marginLeft: 90,
   label: null,
+  height: 370,
   color: { scheme: "rdylbu", pivot: 0, legend: true, label: "correlation" },
   marks: [
     Plot.cell(correlations, { x: "a", y: "b", fill: "correlation" }),
@@ -833,6 +840,47 @@ Plot.plot({
 
 ::::
 
+## Contraste et lisibilité
+
+- Assurez-vous que les couleurs utilisées offrent un **contraste suffisant** pour permettre une lecture facile,
+  même pour les personnes ayant des difficultés visuelles.
+
+::::{.columns}
+
+:::{.column width="50%"}
+
+<p class="text-center">❌</p>
+
+```{ojs}
+Plot.plot({
+  height: 300,
+  inset: 10,
+  marks: [
+    Plot.dot(dd, { fill: 'yellow', r: 5 }),
+    Plot.frame()
+  ]
+})
+```
+
+:::
+
+:::{.column .fragment width="50%"}
+
+<p class="text-center">✅</p>
+
+```{ojs}
+Plot.plot({
+  height: 300,
+  inset: 10,
+  marks: [
+    Plot.dot(dd, { fill: 'steelblue', r: 5 }),
+    Plot.frame()
+  ]
+})
+```
+
+:::
+::::
 
 ## Processus itératif
 
@@ -853,6 +901,11 @@ Source : [https://www.e-education.psu.edu/geog586/node/808](https://www.e-educat
 <img src="./img/Git-Icon-1788C.svg" style="position: absolute;bottom: 60px; right: 100px;" class="img20">
 
 ## Trouver des modèles inspirants
+
+<br>
+
+- Pour réaliser des visualisations de données efficaces, il est important de s'inspirer de modèles existants.
+
 
 ## ... et éviter les erreurs classiques
 

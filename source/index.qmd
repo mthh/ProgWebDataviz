@@ -36,12 +36,15 @@ Ce cours est une introduction à la visualisation interactive de données. Il co
 ## URL des TPs
 
 - [Premiers pas dans Observable](https://observablehq.com/@sd-progwebdataviz/premiers-pas-dans-observable)
-- [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices)
 - [Rappels Markdown](https://observablehq.com/@sd-progwebdataviz/rappels-markdown)
+- [Rappels SVG](https://observablehq.com/@sd-progwebdataviz/rappels-svg)
+- [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices)
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices)
-- [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot) - [Exercices]()
+- [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
+- [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants)
+- [TP - Global ice extent](https://observablehq.com/@sd-progwebdataviz/tp-sea-ice-extent)
 - [Bibliothèque Plot (partie 2)]() - [Exercices]()
-- [Graphiques avec d3.js (partie 1)]() - [Exercices]()
+- [Graphiques avec d3.js (partie 1)](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js) - [Exercices]()
 - [Graphiques avec d3.js (partie 2)]() - [Exercices]()
 
 ## Évaluation
