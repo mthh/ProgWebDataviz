@@ -1,5 +1,5 @@
 ---
-title: "Programmation Web pour la visualisation de données"
+title: "Programmation Web pour la visualisation"
 subtitle: "BUT Science des données - 3ème année - Université Grenoble Alpes"
 format:
   html:
@@ -11,29 +11,32 @@ author:
 
 ## Objectif du cours
 
-Ce cours est une introduction à la visualisation interactive de données. Il couvre :
+Ce cours est une introduction à la programmation Web pour la visualisation interactive de données. Il couvre :
 
-- les principes de base de la visualisation de données (perception visuelle, encodage des données, interaction, etc.),
-- la typologie des graphiques pour les principaux types de données,
-- la réalisation de visualisations Web interactives en utilisant les bibliothèques Plot et/ou d3.js ainsi que des données réelles.
+- rappels des principes de base de la visualisation de données (perception visuelle, encodage des données, interaction, etc.) et des principaux types de graphiques,
+- aperçu des principales bibliothèques pour la visualisation de données,
+- HTML, CSS et JavaScript,
+- réalisation de reporting / visualisations Web interactives avec les bibliothèques Plot et d3.js ainsi que des données réelles,
+- création de rapports Web avec R et Quarto.
 
 
 ## Planning du cours
 
-| Date          | Heure   | Contenu               | Ressources                  |
-|---------------|---------|-----------------------|-----------------------------|
-| 11/09/2023    | 10h-13h | CM - Cours d'introduction  (histoire de la data visualisation, principes de bases, etc.) + TP sur Observable | [Slides](./CM-seance1.html) |
-| 11/09/2023    | 14h-17h | TP sur Observable | Voir URLs des TP ci-dessous |
-| 12/09/2023    | 09h-12h | CM - Règles et conseils pour la conception de visualisation de données + TP sur Observable | [Slides](./CM-seance2.html) |
-| 12/09/2023    | 13h-16h | TP sur Observable | Voir URLs des TP ci-dessous |
-| 13/09/2023    | 09h-12h | CM - Visualisations avancées, interactions et d3.js + TP sur Observable  | [Slides]()                  |
-| 13/09/2023    | 13h-16h | TP sur Observable | Voir URLs des TP ci-dessous |
-| 06/11/2023    | 10h-13h | TP - Visualisation de données avec Plot et d3.js hors Observable | [Fiche TP]()                |
-| 06/11/2023    | 14h-17h | TP - Visualisation de données avec Plot et d3.js hors Observable | [Fiche TP]()                |
-| 07/11/2023    | 09h-12h | TP noté |                             |
-| 07/11/2023    | 13h-16h | CM - Présentation Quarto / TP - Création d'un rapport Web avec R et Quarto  | [Slides]() / [Fiche TP]()   |
+| Date          | Heure   | Contenu                                                                                                           | Ressources                  |
+|---------------|---------|-------------------------------------------------------------------------------------------------------------------|-----------------------------|
+| 11/09/2023    | 10h-13h | CM - Cours d'introduction  (histoire de la data visualisation, principes de bases, etc.) + CM / TP sur Observable | [Slides](./CM-seance1.html) |
+| 11/09/2023    | 14h-17h | TP sur Observable                                                                                                 | Voir URLs des TP ci-dessous |
+| 12/09/2023    | 09h-12h | CM - Règles et conseils pour la conception de visualisation de données + TP sur Observable                        | [Slides](./CM-seance2.html) |
+| 12/09/2023    | 13h-16h | TP sur Observable                                                                                                 | Voir URLs des TP ci-dessous |
+| 13/09/2023    | 09h-12h | CM / TP D3.js sur Observable                                                                                      | [Slides]()                  |
+| 13/09/2023    | 13h-16h | TP sur Observable                                                                                                 | Voir URLs des TP ci-dessous |
+| 06/11/2023    | 10h-13h | TP - Dashboard avec Plot et d3.js                                                                                 | [Fiche TP]()                |
+| 06/11/2023    | 14h-17h | TP - Dashboard avec Plot et d3.js                                                                                 | [Fiche TP]()                |
+| 07/11/2023    | 09h-12h | TP noté                                                                                                           |                             |
+| 07/11/2023    | 13h-16h | TP - Création d'un rapport Web avec R et Quarto                                                                   | [Slides]() / [Fiche TP]()   |
 
-## URL des TPs
+## URL des TPs sur Observable
+
 
 - [Premiers pas dans Observable](https://observablehq.com/@sd-progwebdataviz/premiers-pas-dans-observable)
 - [Rappels Markdown](https://observablehq.com/@sd-progwebdataviz/rappels-markdown)
@@ -42,7 +45,7 @@ Ce cours est une introduction à la visualisation interactive de données. Il co
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices)
 - [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
 - [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants)
-- [TP - Global ice extent](https://observablehq.com/@sd-progwebdataviz/tp-sea-ice-extent)
+- [TP - Sea ice extent](https://observablehq.com/@sd-progwebdataviz/tp-sea-ice-extent)
 - [Bibliothèque Plot (partie 2)]() - [Exercices]()
 - [Graphiques avec d3.js (partie 1)](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js) - [Exercices]()
 - [Graphiques avec d3.js (partie 2)]() - [Exercices]()
