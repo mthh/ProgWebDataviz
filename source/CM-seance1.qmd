@@ -877,8 +877,10 @@ dataset = [{name: 'January', value: 65},{name: 'February', value :59}, {name: 'M
 //| code-fold: true
 
 Plot.plot({
+  grid: true,
+  x: { label: null },
   marks: [
-    Plot.barY(dataset, {x: 'name', y: 'value', fill: 'name', fillOpacity: 0.5, stroke: 'name'}),
+    Plot.barY(dataset, {x: 'name', y: 'value', fill: 'name', fillOpacity: 0.5, stroke: 'name', sort: { x: null }}),
   ]
 })
 ```
@@ -893,46 +895,84 @@ Plot.plot({
 d3 = require('d3@7')
 ```
 
+:::{.small8}
+
 ```{ojs}
 //| echo: true
 //| code-fold: true
-
 {
-  const width = 300;
-  const height = 200;
+  const svgWidth = 640;
+  const svgHeight = 400;
 
-  const nbBar = dataset.length; // Le nombre de barre
-  const spaceBetweenBar = 5; // L'espace entre les barres
-  const widthBar = width / nbBar; // La largeur de chaque barre
-
-  // Création d'un élément SVG
+  // On créé l'élément SVG
   const svg = d3.create('svg')
-    .attr("width", width)
-    .attr("height", height);
+    .attr('width', svgWidth)
+    .attr('height', svgHeight);
 
-  // Création d'un groupe ('g') pour contenir les barres
-  const bars = svg.append('g')
-  			.attr('class', 'bars');
+  const marginBottom = 30;
+  const marginLeft = svgWidth / 20;
+  const marginTop = marginBottom;
+  const w =  svgWidth - marginLeft;
+  const h = svgHeight - marginBottom - marginBottom;
+
+  const barWidth = w / dataset.length // Largeur de chaque barre
+  const margin = 5; // Espace entre les barres
   
-  // Lier les données au graphique a créer
-  bars.selectAll('rect')
-  	.data(dataset)
-    .enter()
-    .append('rect')
-    .attr('x', (d, i) => i * widthBar) // Position sur l'axe horizontal
-    .attr('y', (d) => height - d) // Position sur l'axe vertical
-    .attr('width', widthBar - spaceBetweenBar) // Largeur de la barre
-    .attr('height', (d) => d); // Hauteur de la barre
+  // Une échelle linéaire permettant de mapper les valeur d'entrée
+  // vers une position (hauteur) sur l'axe 'y'
+  const yScale = d3.scaleLinear()
+    .domain([0, Math.ceil(d3.max(dataset, d => d.value) / 10) * 10])
+    .range([h, 0])
 
-  return svg.node();
+  // Création du groupe SVG qui va acceuillir les barres.
+  const bars = svg.append('g')
+      // La valeur y est calculée depuis le haut, nous avons donc besoin de marginLeft et marginTop
+     .attr('transform', `translate(${marginLeft}, ${marginTop})`);
+  
+  bars.selectAll('rect')
+    .data(dataset)
+    .join('rect')
+    .attr('x', (d, i) =>  i * barWidth)
+    .attr('width', barWidth - margin)
+    .attr('y', d => yScale(d.value))
+    .attr('height', d => h - yScale(d.value))
+    .attr('fill', (d, i) => d3.schemePastel1[i])
+
+  // On ajoute les étiquettes de l'axe 'x' :
+  const cityNames = svg.append('g')
+    .attr('transform', `translate(${marginLeft}, ${marginTop})`);
+  
+  cityNames.selectAll('text')
+    .data(dataset)
+    .join('text')
+    .attr('x', (d, i) => i * barWidth + barWidth / 2)
+    .attr('y', h + 20)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('font-family', 'sans-serif')
+    .text(d => d.name)
+
+  const axisY = d3.axisLeft()
+    .scale(yScale)
+    .ticks(8);
+
+  svg.append('g')
+    .attr('transform', `translate(${marginLeft - 3}, ${marginTop})`)
+    .attr('font-family', 'sans-serif')
+    .attr('font-size', '12px')
+    .call(axisY);
+    
+  return svg.node()
 }
 ```
+
+:::
 
 ## Données et représentation
 
 <br>
 
-- Pour créer les deux dernières visualisation, nous avons fait correspondre des **valeurs** de données à des **propriétés visuelles**.
+- Pour créer les deux dernières visualisations, nous avons fait correspondre des **valeurs** de données à des **symboles visuels**.
 
 <br>
 

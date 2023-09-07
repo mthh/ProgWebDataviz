@@ -35,6 +35,7 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 | 07/11/2023    | 09h-12h | TP noté                                                                                                           |                             |
 | 07/11/2023    | 13h-16h | TP - Création d'un rapport Web avec R et Quarto                                                                   | [Slides]() / [Fiche TP]()   |
 
+
 ## URL des TPs sur Observable
 
 
@@ -46,9 +47,10 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 - [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
 - [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants)
 - [TP - Sea ice extent](https://observablehq.com/@sd-progwebdataviz/tp-sea-ice-extent)
-- [Bibliothèque Plot (partie 2)]() - [Exercices]()
-- [Graphiques avec d3.js (partie 1)](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js) - [Exercices]()
-- [Graphiques avec d3.js (partie 2)]() - [Exercices]()
+- [Bibliothèque Plot (partie 2) - Interactions](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
+- [Graphiques avec d3.js (partie 1)](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js)
+- [Exercices - Un *scatter plot* avec D3.js](https://observablehq.com/@sd-progwebdataviz/exercice-un-scatter-plot-avec-d3-js)
+- [Graphiques avec d3.js (partie 2)](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js-2) - [Exercices]()
 
 ## Évaluation
 

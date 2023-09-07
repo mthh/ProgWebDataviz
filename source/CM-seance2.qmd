@@ -591,8 +591,7 @@ Par ailleurs :
 
 ::::
 
-## Gestion de la superposition
-
+<!-- ## Gestion de la superposition -->
 
 ## Vérifier les données
 
