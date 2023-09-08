@@ -35,10 +35,14 @@ css: style.css
 
 ## Perception visuelle
 
+<br>
+
 - On ne peut se rappeler que de 4 à 7 éléments d'information à la fois dans notre mémoire à court terme.
 
-- On peut utiliser différents mécanismes de la perception visuelle, lors de la réalisation de visualisation de données, 
-  pour aider nos cerveaux à interpréter l'information avant que notre cerveau n’engage sa mémoire à court terme.
+<br>
+
+- **On peut utiliser différents mécanismes de la perception visuelle**, lors de la réalisation de visualisation de données, 
+  **pour aider nos cerveaux à interpréter l'information** avant que notre cerveau n’engage sa mémoire à court terme.
 
 ## Traitement visuel pré-attentif
 
@@ -217,15 +221,17 @@ La combinaison de plusieurs propriété pré-attentive, ou l'utilisation abusive
 
 ## Les principales lois de la Gestalt
 
-:::{.small}
+<br>
 
-- La loi de la bonne forme
+:::{.small9}
+
+<!-- - La loi de la bonne forme -->
 - La loi de la proximité - L’esprit imagine naturellement une relation entre 2 objet proche l’un de l’autre
 - La loi de la similarité - Lorsque 2 objets se ressemblent, l’esprit tend à les percevoir comme un groupe
 - La loi de la continuité - L'oeil suit naturellement une ligne ou une courbe
 - La loi de la cloture (ou de la fermeture) - L’esprit clôt une forme incomplète ou un espace non fermé
 - La loi de la symétrie - L’oeil associe 2 objets symétriques comme un même groupe unifié
-- La loi de la destination commune
+- La loi de la destination commune - L’oeil associe des objets qui se dirigent vers un même point
 - La loi de la figure et du fond - L’esprit sépare naturellement un objet de son fond
 
 :::
@@ -236,13 +242,27 @@ La combinaison de plusieurs propriété pré-attentive, ou l'utilisation abusive
 
 ![](img/gestalt.png)
 
+:::{.notes}
+
+- La loi de la proximité - L’esprit imagine naturellement une relation entre 2 objet proche l’un de l’autre
+- La loi de la similarité - Lorsque 2 objets se ressemblent, l’esprit tend à les percevoir comme un groupe
+- La loi de la continuité - L'oeil suit naturellement une ligne ou une courbe
+- La loi de la cloture (ou de la fermeture) - L’esprit clôt une forme incomplète ou un espace non fermé
+- La loi de la symétrie - L’oeil associe 2 objets symétriques comme un même groupe unifié
+- La loi de la destination commune - L’oeil associe des objets qui se dirigent vers un même point
+- La loi de la figure et du fond - L’esprit sépare naturellement un objet de son fond
+
+:::
+
 ## La sémiologie graphique de Jacques Bertin
 
-- Jacques Bertin (1918-2010) est un cartographe et théoricien de la sémiologie graphique.
+<br>
 
-- Il a développé une théorie de la visualisation de données dans son ouvrage "Sémiologie graphique" (1967).
+- **Jacques Bertin** (1918-2010) est un cartographe et théoricien de la sémiologie graphique.
 
-- Il a notamment défini les variables rétiniennes (ou variables visuelles) et leurs propriétés.
+- Il a développé une théorie de la visualisation de données dans son ouvrage **"Sémiologie graphique" (1967)**.
+
+- Il a notamment défini les **variables rétiniennes** (ou **variables visuelles**) et leurs propriétés.
 
 ## Les variables visuelles
 
@@ -370,6 +390,10 @@ Différentes ressources peuvent aider à choisir le bon type de graphique :
 :::
 
 ::::
+
+:::{.notes}
+- **La pertinence** concerne le compromis entre les efforts requis pour créer la représentation visuelle et les avantages qu'elle procure. Si ce compromis est équilibré, la visualisation est considérée comme **appropriée**.
+:::
 
 ## Clareté et simplicité
 
@@ -747,7 +771,7 @@ Source : [https://towardsdatascience.com/is-your-color-palette-stopping-you-from
 :::{.column .fragment width="50%"}
 
 ![
-](./img/VISACTU-MAPFAIL.jpeg){.img50}
+](./img/mapfail-jdd.png){.img120}
 
 :::
 

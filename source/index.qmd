@@ -16,7 +16,7 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 - rappels des principes de base de la visualisation de données (perception visuelle, encodage des données, interaction, etc.) et des principaux types de graphiques,
 - aperçu des principales bibliothèques pour la visualisation de données,
 - HTML, CSS et JavaScript,
-- réalisation de reporting / visualisations Web interactives avec les bibliothèques Plot et d3.js ainsi que des données réelles,
+- réalisation de reporting / visualisations Web interactives / dashboards avec les bibliothèques Plot et d3.js ainsi que des données réelles,
 - création de rapports Web avec R et Quarto.
 
 
@@ -51,6 +51,7 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 - [Graphiques avec d3.js (partie 1)](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js)
 - [Exercices - Un *scatter plot* avec D3.js](https://observablehq.com/@sd-progwebdataviz/exercice-un-scatter-plot-avec-d3-js)
 - [Graphiques avec d3.js (partie 2)](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js-2) - [Exercices]()
+- [TP - Découverte de la bibliothèque Leaflet avec les données Vélib']()
 
 ## Évaluation
 
