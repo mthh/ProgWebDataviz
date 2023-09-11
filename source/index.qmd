@@ -16,49 +16,53 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 - rappels des principes de base de la visualisation de données (perception visuelle, encodage des données, interaction, etc.) et des principaux types de graphiques,
 - aperçu des principales bibliothèques pour la visualisation de données,
 - HTML, CSS et JavaScript,
-- réalisation de reporting / visualisations Web interactives / dashboards avec les bibliothèques Plot et d3.js ainsi que des données réelles,
+- réalisation de reporting / visualisations Web interactives / dashboards avec les bibliothèques Plot et D3.js ainsi que des données réelles,
 - création de rapports Web avec R et Quarto.
 
 
 ## Planning du cours
 
-| Date          | Heure   | Contenu                                                                                                           | Ressources                  |
-|---------------|---------|-------------------------------------------------------------------------------------------------------------------|-----------------------------|
-| 11/09/2023    | 10h-13h | CM - Cours d'introduction  (histoire de la data visualisation, principes de bases, etc.) + CM / TP sur Observable | [Slides](./CM-seance1.html) |
-| 11/09/2023    | 14h-17h | TP sur Observable                                                                                                 | Voir URLs des TP ci-dessous |
-| 12/09/2023    | 09h-12h | CM - Règles et conseils pour la conception de visualisation de données + TP sur Observable                        | [Slides](./CM-seance2.html) |
-| 12/09/2023    | 13h-16h | TP sur Observable                                                                                                 | Voir URLs des TP ci-dessous |
-| 13/09/2023    | 09h-12h | CM / TP D3.js sur Observable                                                                                      | [Slides]()                  |
-| 13/09/2023    | 13h-16h | TP sur Observable                                                                                                 | Voir URLs des TP ci-dessous |
-| 06/11/2023    | 10h-13h | TP - Dashboard avec Plot et d3.js                                                                                 | [Fiche TP]()                |
-| 06/11/2023    | 14h-17h | TP - Dashboard avec Plot et d3.js                                                                                 | [Fiche TP]()                |
-| 07/11/2023    | 09h-12h | TP noté                                                                                                           |                             |
-| 07/11/2023    | 13h-16h | TP - Création d'un rapport Web avec R et Quarto                                                                   | [Slides]() / [Fiche TP]()   |
+| Date          | Heure   | Contenu                                                                                                   | Ressources                  |
+|---------------|---------|-----------------------------------------------------------------------------------------------------------|-----------------------------|
+| 11/09/2023    | 10h-13h | CM - Cours d'introduction + TP sur Observable                                                             | [Slides](./CM-seance1.html) |
+| 11/09/2023    | 14h-17h | TPs - Rappels JavaScript et manipulation de données + Bibliothèque Plot                                   | Voir URL des TP plus bas    |
+| 12/09/2023    | 09h-12h | CM - Règles et conseils pour la conception de visualisation de données + TP - Datavisualisation avec Plot | Slides                      |
+| 12/09/2023    | 13h-16h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas    |
+| 13/09/2023    | 09h-12h | TP - Leaflet                                                                                              | Voir URL des TP plus bas    |
+| 13/09/2023    | 13h-16h | CM/TP D3.js                                                                                               | Voir URL des TP plus bas    |
+| 06/11/2023    | 10h-13h | TP - Dashboard avec Plot et d3.js                                                                         |                             |
+| 06/11/2023    | 14h-17h | TP - Dashboard avec Plot et d3.js                                                                         |                             |
+| 07/11/2023    | 09h-12h | TP noté                                                                                                   |                             |
+| 07/11/2023    | 13h-16h | TP - Datavisualisation pour le Web avec R et Quarto                                                       |                             |
 
 
 ## URL des TPs sur Observable
 
+L'ensemble des notebooks disponibles peut-être retrouvé ici : [https://observablehq.com/@sd-progwebdataviz?tab=collections](https://observablehq.com/@sd-progwebdataviz?tab=collections)
+
+En détails (les liens seront mis à jour au fur et à mesure de la progression du cours) :
 
 - [Premiers pas dans Observable](https://observablehq.com/@sd-progwebdataviz/premiers-pas-dans-observable)
 - [Rappels Markdown](https://observablehq.com/@sd-progwebdataviz/rappels-markdown)
-- [Rappels SVG](https://observablehq.com/@sd-progwebdataviz/rappels-svg)
 - [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices)
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices)
-- [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
-- [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants)
-- [TP - Sea ice extent](https://observablehq.com/@sd-progwebdataviz/tp-sea-ice-extent)
-- [Bibliothèque Plot (partie 2) - Interactions](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
-- [Graphiques avec d3.js (partie 1)](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js)
-- [Exercices - Un *scatter plot* avec D3.js](https://observablehq.com/@sd-progwebdataviz/exercice-un-scatter-plot-avec-d3-js)
-- [Graphiques avec d3.js (partie 2)](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js-2) - [Exercices]()
-- [TP - Découverte de la bibliothèque Leaflet avec les données Vélib']()
+- Bibliothèque Plot (partie 1)
+- TP - Prix des carburants
+- TP - Sea ice extent
+- Bibliothèque Plot (partie 2) - Interactions
+- TP - Leaflet
+- [Rappels SVG](https://observablehq.com/@sd-progwebdataviz/rappels-svg)
+- Graphiques avec d3.js (partie 1)
+- Exercices - Un *scatter plot* avec D3.js
+- Graphiques avec d3.js (partie 2)
+
 
 ## Évaluation
 
 Ce cours est en contrôle continu intégral.
 La note sera constituée de :
 
-- une note de projet (50%) - ce projet sera réalisé en binôme et rendu le 25/10/2023
+- une note de projet (50%) - ce projet sera réalisé en binôme et rendu avant le 25/10/2023
 - un TP noté (50%) - ce TP sera réalisé le 07/11/2023
 
 ## Ressources utiles
@@ -67,13 +71,16 @@ La note sera constituée de :
 
 - [From Data to Viz](https://www.data-to-viz.com/) (typologie des graphiques)
 - [The Data Visualisation Catalogue](https://datavizcatalogue.com/) (typologie des graphiques)
+<br><br>
 
 - [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/), Claus O. Wilke, 2019 (livre en ligne)
 - Data Visualisation - A Handbook for Data Driven Design, 2nd Edition, Andy Kirk, 2019 (livre)
+<br><br>
 
 - [FlowingData](https://flowingdata.com/) (blog - ressources variées)
 - [Visualization design resources](https://www.cs.ubc.ca/group/infovis/resources.shtml) (ressources variées)
 - [Visual Cinnamon](https://www.visualcinnamon.com/) (blog - ressources variées - visualisation de données et *data art*)
+<br><br>
 
 - [Exposition "Data Visualization and the Modern Imagination"](https://exhibits.stanford.edu/dataviz) (exposition en ligne sur l'histoire de la visualisation de données)
 
@@ -86,6 +93,7 @@ La note sera constituée de :
 
 - [Bibliothèque Plot](https://observablehq.com/plot/) et [galerie](https://observablehq.com/@observablehq/plot-gallery)
 - [Bibliothèque d3.js](https://d3js.org/) et [galerie](https://observablehq.com/collection/@d3/gallery)
+- [Bibliothèque Leaflet](https://leafletjs.com/)
 - [Quarto](https://quarto.org/)
 - [R](https://www.r-project.org/)
 
@@ -95,3 +103,5 @@ La note sera constituée de :
 - [Bibliothèque Plotly](https://plotly.com/javascript/)
 - [Bibliothèque ECharts](https://echarts.apache.org/en/index.html)
 - [Bibliothèque Highcharts](https://www.highcharts.com/)
+- [Bibliothèque Chart.js](https://www.chartjs.org/)
+- [Bibliothèque ApexCharts](https://apexcharts.com/)

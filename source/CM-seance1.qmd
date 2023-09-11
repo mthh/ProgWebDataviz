@@ -530,6 +530,15 @@ Source : [https://commons.wikimedia.org/wiki/File:Chart_Showing_at_One_View_the_
 ](./img/Chart_Showing_at_One_View_the_Price_of_the_Quarter_of_Wheat,_and_Wages_of_Labour_by_the_Week,_from_1565_to_1821.png){.img60}
 
 
+:::{.notes}
+
+On y retrouve :
+- le salaire hebdomadaire moyen d'un ouvrier
+- le prix du blé par quart
+- les rois / reines d'Angleterre
+
+:::
+
 ## Histoire de la visualisation de données
 
 ### Les pionniers - **Charles Joseph Minard** (1781-1870)
@@ -539,6 +548,22 @@ Source : [https://commons.wikimedia.org/wiki/File:Chart_Showing_at_One_View_the_
 ![
 Source : [https://en.wikipedia.org/wiki/File:Minard.png](https://en.wikipedia.org/wiki/File:Minard.png)
 ](./img/Minard.png){.img60}
+
+[Pour en savoir plus sur Minard : [https://visionscarto.net/charles-joseph-minard-cinquante-cartes](https://visionscarto.net/charles-joseph-minard-cinquante-cartes)]{.small}
+
+:::{.notes}
+Carte figurative des pertes successives en hommes de l’armée française dans la campagne de Russie 1812-1813,
+« probablement le meilleur graphique statistique jamais dessiné » d’après le statisticien sémiologue Edward Tufte.
+
+Cette carte associe aux repères géographiques, la taille de l’armée, son itinéraire, et la température ressentie par les soldats.
+
+Charles-Joseph Minard utilise des couleurs sobres qui donnent une lisibilité exceptionnelle aux données.
+
+On y découvre que l’effectif massif de l’armée à son départ (bande beige) se restreint au fil de la route, pour n’en devenir qu’une fraction à son retour (bande noire).
+
+Minard introduit également la température comme causalité partielle de l’érosion des effectifs. En présentant l’évolution des températures au fur et à mesure de la progression de l’armée il met en situation un facteur qui a eu une incidence évidente sur la mortalité des troupes.
+
+:::
 
 ## Histoire de la visualisation de données
 
@@ -824,6 +849,8 @@ En JavaScript :
 - [ECharts](https://echarts.apache.org/en/index.html)
 - [Observable Plot](https://observablehq.com/plot)
 
+<img src="./img/d3-gallery.png" style="position: absolute; right: 0; top: 22%;" class="img60">
+
 
 ## Les outils de visualisation (3)
 
@@ -833,6 +860,11 @@ En R :
 
 - [Ggplot2](https://ggplot2.tidyverse.org/)
 - [Plotly](https://plotly.com/r/)
+- [rbokeh](https://hafen.github.io/rbokeh/)
+- [Highcharter](https://jkunst.com/highcharter/)
+- Etc.
+
+<img src="./img/Rlogo.svg" style="position: absolute; right: 20px; top: 40%;width: 300px !important;" class="img40">
 
 
 ## Les outils de visualisation (4)
@@ -845,7 +877,11 @@ En Python :
 - [Matplotlib](https://matplotlib.org/)
 - [Seaborn](https://seaborn.pydata.org/)
 - [Plotly](https://plotly.com/python/)
-- ...
+- [Bokeh](https://docs.bokeh.org/en/latest/index.html)
+- [Altair](https://altair-viz.github.io/)
+- Etc.
+
+<img src="./img/Python-logo-notext.svg" style="position: absolute; right: 20px; top: 40%;" class="img40">
 
 ## Les outils de visualisation (5)
 
@@ -854,7 +890,7 @@ Que ce soit en JavaScript, en R ou en Python, il existe **de nombreuses biblioth
 De manière générale, on rencontre deux types d'approches :
 
 - des bibliothèques proposant des visualisations "prêtes à l'emploi" (comme Chart.js, Highcharts, Plotly, etc.)
-- des bibliothèques permettant de créer des visualisations personnalisées, que ce soit en implémentant la grammaire des graphiques (comme `ggplot2` ou `Observable Plot`) ou en utilisant des primitives graphiques et en les liant aux données (comme D3.js).
+- des bibliothèques permettant de créer des visualisations personnalisées, que ce soit en implémentant la grammaire des graphiques (comme `ggplot2` ou `Observable Plot`) ou en utilisant des primitives graphiques et en les liant aux données (comme `D3.js`).
 
 ## Exemple avec Chart.js
 
@@ -998,7 +1034,7 @@ Cette approche permet de définir des graphiques très variés et de les combine
 
 ### Observable Plot
 
-- [Observable Plot](https://observablehq.com/plot/) est une bibliothèque open source de visualisation développée notamment par Mike Bostock (le créateur de D3.js) et Philippe Rivière (un des principaux contributeurs de D3.js et auteur du site [visioscarto.net](https://visioscarto.net)).
+- [Observable Plot](https://observablehq.com/plot/) est une bibliothèque open source de visualisation développée notamment par Mike Bostock (le créateur de D3.js) et Philippe Rivière (un des principaux contributeurs de D3.js).
 
 - Elle permet de créer rapidement des visualisations en utilisant la grammaire des graphiques, en utilisant la puissance de D3.js mais sans nécessiter d'être un développeur JavaScript confirmé.
 
