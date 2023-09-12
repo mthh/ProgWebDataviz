@@ -282,7 +282,7 @@ La combinaison de plusieurs propriété pré-attentive, ou l'utilisation abusive
 
 - Les propriétés des variables visuelles sont les caractéristiques des variables visuelles qui permettent de les distinguer les unes des autres.
 
-- Les propriétés des variables visuelles sont au nombre de 5 :
+- Les propriétés des variables visuelles sont au nombre de 4 :
 
   - **association** - *les signaux sont perçus comme appartenant à un même groupe*
   - **sélection** - *les signaux sont perçus comme différents et forment des familles*
@@ -323,13 +323,30 @@ La combinaison de plusieurs propriété pré-attentive, ou l'utilisation abusive
 
 ![](./img/visual-variables2.png)
 
+## Les variables visuelles et leurs propriétés
+
+<br>
+
+![](./img/Zanin_Tremelo.png)
+
 ## Les successeurs de Jacques Bertin : Cleveland & McGill, Mackinlay, etc.
 
+::::{.columns}
+:::{.column width="50%"}
 <br>
 
 - Depuis les travaux de Jacques Bertin, d'autres chercheurs ont proposé des typologies de variables visuelles et de leurs propriétés.
 
-- Mettre image example classification Mackinlay 
+:::
+
+:::{.column width="50%"}
+
+![](./img/viz-accuracy.png)
+
+:::
+::::
+
+
 
 ## &nbsp;
 
@@ -545,6 +562,40 @@ Par ailleurs :
 
 ::::
 
+## Le principe de la proportionnalité et la coupure de l'axe Y (ou X !)
+
+::::{.columns}
+
+:::{.column .small7 width="34%"}
+![](./img/E-Hb_TnX0AEiWL0.jpeg)
+
+Source : https://twitter.com/Motorsport/status/1432668101905195013/photo/1
+:::
+
+:::{.column .small7 .fragment width="28%"}
+
+<br><br><br>
+
+![](./img/E-JEbNjXIAEztde.png)
+
+Source : https://observablehq.com/@kenklin/shortest-f1-races-by-distance
+
+:::
+
+:::{.column .small7 .fragment width="38%"}
+
+<br>
+
+![](./img/barchart-race.png)
+
+:::
+
+::::
+
+
+:::{.notes}
+While we see the rounded right end of the bars, the left end is left to our imagination. However, when our brains then try to rationalize where the bars start (i.e., KM = 0), we discover an inconsistency in the bars, as annotated in red and green above. The linear distances of the differences between 2021 Belgium / 1991 Australia (approx 46 KM) and 1991 Australia / 1984 Monaco (approx 50 KM) is clearly incorrect.
+:::
 
 ## Le principe de la proportionnalité et la coupure de l'axe Y
 
@@ -614,6 +665,12 @@ Par ailleurs :
 :::
 
 ::::
+
+:::{.notes}
+
+https://www.data-to-viz.com/caveat/pie.html
+
+:::
 
 <!-- ## Gestion de la superposition -->
 
@@ -757,14 +814,14 @@ Source : [https://towardsdatascience.com/is-your-color-palette-stopping-you-from
 
 ## Palettes de couleurs
 
-- Évitez les palettes de couleurs qui pourraient être confuses...
+- Évitez les palettes de couleurs qui pourraient être confuses... <br>(+ évitez les différents autres problèmes de la carte de droite !)
 
 ::::{.columns}
 
 :::{.column .fragment width="50%"}
 
 ![
-](./img/VISACTU-MAPFAIL.jpeg){.img100}
+](./img/VISACTU-MAPFAIL.jpeg){.img90}
 
 :::
 
@@ -779,7 +836,15 @@ Source : [https://towardsdatascience.com/is-your-color-palette-stopping-you-from
 
 ## Palettes de couleurs
 
-- Utilisez de manière préférentielle des palettes existantes (celles fournis par D3.js, etc.) pour éviter ...
+- Utilisez de manière préférentielle des palettes existantes (celles fournis par D3.js, etc.) pour éviter les erreurs.
+
+- En JavaScript :
+  - Module [d3-scale-chromatic](https://d3js.org/d3-scale-chromatic#d3-scale-chromatic) de D3.js
+  - Bibliothèque [dicopal](https://observablehq.com/@mthh/hello-dicopal)
+
+- Pour manipuler les couleurs en JavaScript :
+  - Bibliothèque [chroma-js](https://gka.github.io/chroma.js/)
+  - Bibliothèque [mixbox](https://scrtwpns.com/mixbox/)
 
 ## Contraste et lisibilité
 
@@ -929,6 +994,7 @@ Source : [https://www.e-education.psu.edu/geog586/node/808](https://www.e-educat
 
 - Pour réaliser des visualisations de données efficaces, il est important de s'inspirer de modèles existants.
 
+![](./img/d3-gallery.png)
 
 ## ... et éviter les erreurs classiques
 
@@ -940,7 +1006,7 @@ D'autres peuvent être consultées sur la page suivante :
 
 - [Dataviz caveats](https://www.data-to-viz.com/caveats.html)
 
-Si vous voulez vous faire peur, vous pouvez aussi consulter la page suivante dédiés aux visualisation de données ratées :
+Si vous voulez vous faire peur, vous pouvez aussi consulter la page suivante dédiée aux visualisation de données ratées :
 
 - [WTF Visualizations](https://viz.wtf/)
 

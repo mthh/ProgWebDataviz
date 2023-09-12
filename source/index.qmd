@@ -25,8 +25,8 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 | Date          | Heure   | Contenu                                                                                                   | Ressources                  |
 |---------------|---------|-----------------------------------------------------------------------------------------------------------|-----------------------------|
 | 11/09/2023    | 10h-13h | CM - Cours d'introduction + TP sur Observable                                                             | [Slides](./CM-seance1.html) |
-| 11/09/2023    | 14h-17h | TPs - Rappels JavaScript et manipulation de données + Bibliothèque Plot                                   | Voir URL des TP plus bas    |
-| 12/09/2023    | 09h-12h | CM - Règles et conseils pour la conception de visualisation de données + TP - Datavisualisation avec Plot | Slides                      |
+| 11/09/2023    | 14h-17h | TPs - Rappels JavaScript et manipulation de données                                                       | Voir URL des TP plus bas    |
+| 12/09/2023    | 09h-12h | CM - Règles et conseils pour la conception de visualisation de données + TP - Datavisualisation avec Plot | [Slides](./CM-seance2.html) |
 | 12/09/2023    | 13h-16h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas    |
 | 13/09/2023    | 09h-12h | TP - Leaflet                                                                                              | Voir URL des TP plus bas    |
 | 13/09/2023    | 13h-16h | CM/TP D3.js                                                                                               | Voir URL des TP plus bas    |
@@ -46,8 +46,8 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 - [Rappels Markdown](https://observablehq.com/@sd-progwebdataviz/rappels-markdown)
 - [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices)
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices)
-- Bibliothèque Plot (partie 1)
-- TP - Prix des carburants
+- [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
+- [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants)
 - TP - Sea ice extent
 - Bibliothèque Plot (partie 2) - Interactions
 - TP - Leaflet
