@@ -998,13 +998,18 @@ Source : [https://www.e-education.psu.edu/geog586/node/808](https://www.e-educat
 
 ## ... et éviter les erreurs classiques
 
+<br>
 
-::::{.columns}
+::::{.columns .small}
 :::{.column width="70%"}
 Une partie des erreurs classiques sont résumées dans ce cours.
 D'autres peuvent être consultées sur la page suivante :
 
 - [Dataviz caveats](https://www.data-to-viz.com/caveats.html)
+
+Une autre tentative de résumer des règles de base (et de quand il est OK de passer outre) est disponible sur la page suivante :
+
+- [99 rules project](https://www.addtwodigital.com/add-two-blog/2021/2/1/99-rules-project)
 
 Si vous voulez vous faire peur, vous pouvez aussi consulter la page suivante dédiée aux visualisation de données ratées :
 
