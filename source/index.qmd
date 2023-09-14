@@ -24,12 +24,12 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 
 | Date          | Heure   | Contenu                                                                                                   | Ressources                  |
 |---------------|---------|-----------------------------------------------------------------------------------------------------------|-----------------------------|
-| 11/09/2023    | 10h-13h | CM - Cours d'introduction + TP sur Observable                                                             | [Slides](./CM-seance1.html) |
+| 11/09/2023    | 10h-13h | CM - Cours d'introduction + Intro JavaScript                                                              | [Slides](./CM-seance1.html) |
 | 11/09/2023    | 14h-17h | TPs - Rappels JavaScript et manipulation de données                                                       | Voir URL des TP plus bas    |
-| 12/09/2023    | 09h-12h | CM - Règles et conseils pour la conception de visualisation de données + TP - Datavisualisation avec Plot | [Slides](./CM-seance2.html) |
-| 12/09/2023    | 13h-16h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas    |
-| 13/09/2023    | 09h-12h | TP - Leaflet                                                                                              | Voir URL des TP plus bas    |
-| 13/09/2023    | 13h-16h | CM/TP D3.js                                                                                               | Voir URL des TP plus bas    |
+| 12/09/2023    | 09h-12h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas    |
+| 12/09/2023    | 13h-16h | CM - Règles et conseils pour la conception de visualisation de données + TP - Datavisualisation avec Plot | [Slides](./CM-seance2.html) |
+| 13/09/2023    | 09h-12h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas    |
+| 13/09/2023    | 13h-16h | TP - Leaflet                                                                                              | Voir URL des TP plus bas    |
 | 06/11/2023    | 10h-13h | TP - Dashboard avec Plot et d3.js                                                                         |                             |
 | 06/11/2023    | 14h-17h | TP - Dashboard avec Plot et d3.js                                                                         |                             |
 | 07/11/2023    | 09h-12h | TP noté                                                                                                   |                             |
@@ -47,11 +47,11 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 - [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices)
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices)
 - [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
-- [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants)
-- TP - Sea ice extent
-- Bibliothèque Plot (partie 2) - Interactions
-- TP - Leaflet
+- [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants) - [Correction](https://observablehq.com/@sd-progwebdataviz/solutions-prix-des-carburants)
+- [TP - Sea ice extent](https://observablehq.com/@sd-progwebdataviz/tp-sea-ice-extent)
+- [Bibliothèque Plot (partie 2) - Interactions](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
 - [Rappels SVG](https://observablehq.com/@sd-progwebdataviz/rappels-svg)
+- TP - Leaflet
 - Graphiques avec d3.js (partie 1)
 - Exercices - Un *scatter plot* avec D3.js
 - Graphiques avec d3.js (partie 2)
