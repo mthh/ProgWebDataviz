@@ -30,9 +30,9 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 | 12/09/2023    | 13h-16h | CM - Règles et conseils pour la conception de visualisation de données + TP - Datavisualisation avec Plot | [Slides](./CM-seance2.html) |
 | 13/09/2023    | 09h-12h | TP - Datavisualisation avec Plot  (Prix des carburants)                                                   | Voir URL des TP plus bas    |
 | 13/09/2023    | 13h-16h | TP - Datavisualisation avec Plot  (Sea ice extent)                                                        | Voir URL des TP plus bas    |
-| 06/11/2023    | 10h-13h | TP - Dashboard avec Plot et d3.js                                                                         |                             |
-| 06/11/2023    | 14h-17h | TP - Dashboard avec Plot et d3.js                                                                         |                             |
-| 07/11/2023    | 09h-12h | TP noté                                                                                                   |                             |
+| 06/11/2023    | 10h-13h | TP - Visualisation de données géospatiales avec Leaflet                                                   |                             |
+| 06/11/2023    | 14h-17h | CM / TP - Vues synchronisées (Plot / Leaflet / D3.js)                                                     |                             |
+| 07/11/2023    | 09h-12h | TP noté - Dashboard avec Plot et Leaflet                                                                  |                             |
 | 07/11/2023    | 13h-16h | TP - Datavisualisation pour le Web avec R et Quarto                                                       |                             |
 
 
@@ -48,7 +48,7 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices) - [Correction](https://observablehq.com/d/2e1e0290ca512d85) 
 - [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot) 
 - [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants) - [Correction](https://observablehq.com/@sd-progwebdataviz/solutions-prix-des-carburants)
-- [TP - Sea ice extent](https://observablehq.com/@sd-progwebdataviz/tp-sea-ice-extent)
+- [TP - Sea ice extent](https://observablehq.com/@sd-progwebdataviz/tp-sea-ice-extent) - [Correction 1](https://observablehq.com/@mthh/sea-ice-extent-1978-today) - [Correction 2](https://observablehq.com/@mthh/antarctic-sea-ice-extent-anomaly)
 - [Bibliothèque Plot (partie 2) - Interactions](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
 - [Rappels SVG](https://observablehq.com/@sd-progwebdataviz/rappels-svg)
 - TP - Leaflet
@@ -62,7 +62,7 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 Ce cours est en contrôle continu intégral.
 La note sera constituée de :
 
-- une note de projet (50%) - ce projet sera réalisé en binôme et rendu avant le 25/10/2023
+- une note de projet (50%) - [ce projet](https://observablehq.com/@sd-progwebdataviz/tp-note-deputes-actifs) sera réalisé en binôme et rendu avant le 14/11/2023
 - un TP noté (50%) - ce TP sera réalisé le 07/11/2023
 
 ## Ressources utiles
