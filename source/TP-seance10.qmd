@@ -1,0 +1,152 @@
+---
+title: "TP Séance 10 - Évaluation"
+subtitle: "BUT Science des données - 3ème année - Université Grenoble Alpes"
+format:
+  html:
+    code-fold: true
+    include-in-header:
+      - text: |
+          <link rel="stylesheet" href="./css/tps.css">
+---
+
+
+## Modalités
+
+- Il s'agit d'un **travail individuel** d'une durée de **2h30** (**3h20** pour les étudiants concernés par un tiers-temps).
+  Vous devez rendre votre travail sur [l'espace dédié au cours "BUT3 SD R5.VCOD.07 : Programmation web pour la visualisation" sur Chamilo](https://chamilo.iut2.univ-grenoble-alpes.fr/courses/BUT3SDVCOD507/)
+  dans la rubrique "Travaux" (votre rendu doit être un fichier ZIP contenant votre page HTML ainsi que l'ensemble des fichiers nécessaires à l'affichage de votre page).
+
+- Vous avez le droit d'utiliser tous les documents que vous souhaitez (cours, notes, etc.)
+  ainsi que de faire des recherches sur le Web.
+
+- Les **outils permettant de communiquer, ou de partager des documents, entre vous ou avec des tiers (mail, chat, *signal*, *telegram*, *dropbox*, etc.)**
+  ainsi que les **IA génératives (ChatGPT, Bard, etc.) ne sont pas autorisés**.
+
+
+## Consignes
+
+Vous allez devoir construire une page HTML présentant l'état actuel de la disponibilité des vélos en libre-service du service
+[*Vélib' Métropole*](https://www.velib-metropole.fr/) (disponible à Paris et dans 60 autres communes d'Île-de-France).
+
+**Cette page doit contenir les éléments suivants** :
+
+- **un titre**
+
+- un pied de page avec **la date de réalisation de la page, la date de mise à jour des données et le nom de l'auteur**
+  (la date de réalisation de la page est donc écrite "en dure" alors que la date de mise à jour des données est générée avec du code JavaScript),
+
+- **une carte Leaflet** (avec le fond de carte de votre choix) affichant les différentes stations présentes dans le jeu de données ;
+  **le marqueur doit être d'une couleur différente selon que le remplissage
+  soit inférieur à 33% (vert), entre 33% et 66% (orange) ou supérieur à 66% (rouge)**,
+
+- un 1er **graphique**, réalisé avec Plot **permettant de visualiser la répartition
+  (à l'échelle de l'ensemble du réseau) entre places libres, vélos électriques disponibles et vélos mécaniques disponibles** - vous devez ajouter les
+  textes "électrique" et "mécanique" pour distinguer le type de vélo, comme dans l'exemple fourni (voir Figure 1 ci-dessous),
+
+- un 2nd **graphique** réalisé avec Plot, **permettant de visualiser la capacité totale cumulée par ville**, pour les 25 villes ayant la plus forte capacité - vous devez réaliser un *bar chart* en utilisant
+  une échelle logarithmique et en affichant la valeur précise pour chaque ville au bout de chaque barre, comme dans l'exemple fourni (voir Figure 2 ci-dessous).
+
+Puisqu'il s'agit d'un jeu de données en temps réel, et parce que la carte ainsi que le premier graphique représentent des informations qui varient fortement au cours de la journée,
+il est nécessaire de mettre à jour les données, et donc les graphiques et la carte, à intervalles réguliers (par exemple toutes les 5 minutes).
+Optons pour la solution la plus simple : un rechargement total de la page.
+**Vous devez écrire le code JavaScript permettant de recharger la page automatiquement toutes les 5 minutes.**
+
+![Figure 1 : Exemple pour le graphique 1](./img/tp9-graphique1.png)
+
+![Figure 2 : Exemple pour le graphique 2](./img/tp9-graphique2.png)
+
+
+Pour rappel, votre page HTML doit importer les éléments suivants :
+
+- le fichier CSS de leaflet :
+```html
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+```
+
+- le fichier JS de leaflet :
+
+```html
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""></script>
+```
+
+- le fichier JS de D3.js :
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+```
+
+- le fichier JS de Plot :
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
+```
+
+- par ailleurs, vous aurez besoin d'inclure le fichier JS qui contiendra votre code JavaScript (que vous pouvez nommer comme vous le souhaitez) :
+
+```html
+<script src="index.js"></script>
+```
+
+### Autres éléments à prendre en compte
+
+- Lors de l'ouverture de la page, la carte doit être centrée et zoomée pour afficher l'ensemble des entrées du jeu de données.
+- Lors d'un clic sur un marqueur de la carte, un popup doit s'ouvrir et afficher les informations suivantes :
+  numéro de la station, nom de la station, nombre de vélos électriques disponibles, nombre de vélos mécaniques disponibles, nombre de docks vides (cf. Figure 3 ci-dessous).
+- Vous devez choisir les couleurs des graphiques pour ne pas utiliser les valeurs par défaut de Plot.
+- Vous chercherez à agencer votre page de manière à faire tenir l'ensemble des éléments dans la page (sans scroll vertical ni horizontal - cf. Figure 4).
+
+![Figure 3 : Exemple de popup](./img/tp9-popup.png)
+
+![Figure 4 : Exemple de mise en page](./img/tp9-page-totale.png)
+
+
+### Jeu de données
+
+La description du jeu de données peut être trouvée [ici](https://opendata.paris.fr/explore/dataset/velib-disponibilite-en-temps-reel/information/).
+
+Pour récupérer les données, vous pouvez utiliser l'URL suivante : [https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=5000](https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&rows=5000).
+
+Il ne s'agit pas d'un jeu de données au format GeoJSON (comme vu lundi 06/11) mais d'un jeu de données au format JSON (formaté de manière différente).
+L'objet que vous récupérer est un objet JSON contenant trois clés : `nhits`, `parameters` et `records`.
+Les entrées qui correspondent à chaque station sont dans le tableau `records` (qui contient environ 1470 entrées).
+
+Pour chaque entrée du tableau `records`, vous trouverez une clé `fields` qui contient un objet décrivant la station
+et une clé `geometry` qui contient un objet décrivant la géométrie de la station.
+
+Pour calculer la capacité totale d'une station, vous devez utiliser la formule suivante :
+
+```
+capacité totale = nombre de docks vides + nombre de vélos disponibles
+```
+
+Pour calculer le pourcentage de remplissage d'une station, vous devez utiliser la formule suivante :
+
+```
+taux de remplissage = nombre de vélos disponibles / capacité totale
+```
+
+### Question bonus
+
+Vous devez gérer le cas ou le chargement des données échoue (par exemple si le serveur est indisponible, si l'utilisateur n'est pas connecté à Internet, etc.).
+
+Si le chargement échoue, la page doit afficher un message d'erreur (cf. Figure 5 ci-dessous).
+
+![Figure 5 : Exemple page lorsque le chargement des données a échoué](./img/tp9-error.png)
+
+
+### Barème indicatif :
+
+- Chargement des données : 1 point
+- Titre : 0.5 point
+- Pied de page : 1.5 point
+- Structure du document HTML / mise en page : 2.5 point
+- Carte, markers et popups : 4.5 points
+- Graphique 1 : 4 points
+- Graphique 2 : 4.5 points
+- Rechargement automatique de la page : 1.5 points
+
+- Question bonus : 1.5 point
