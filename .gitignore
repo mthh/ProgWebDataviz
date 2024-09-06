@@ -2,3 +2,4 @@ source/dist/
 source/*_files/
 source/.quarto/
 .idea/
+build.sh
