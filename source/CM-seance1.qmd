@@ -1,13 +1,13 @@
 ---
 title: "Introduction à la visualisation de données"
-subtitle: "Cours 1 - 2023-2024"
+subtitle: "Cours 1 - 2024-2025"
 format: clean-revealjs
 author:
   - name: "Matthieu Viry"
     orcid: 0000-0002-0693-8556
     email: matthieu.viry@cnrs.fr
     affiliations: CNRS / <a href="https://riate.cnrs.fr" target="_blank">UAR 2414 RIATE</a>
-date: 09/11/2023
+date: 09/09/2024
 css: style.css
 ---
 

@@ -17,23 +17,23 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 - aperçu des principales bibliothèques pour la visualisation de données,
 - HTML, CSS et JavaScript,
 - réalisation de reporting / visualisations Web interactives / dashboards avec les bibliothèques Plot et D3.js ainsi que des données réelles,
-- création de rapports Web avec R et Quarto.
+- création de rapports Web avec R et Quarto (en fonction du temps restant).
 
 
 ## Planning du cours
 
-| Date       | Heure   | Contenu                                                                                                   | Ressources                          |
-|------------|---------|-----------------------------------------------------------------------------------------------------------|-------------------------------------|
-| 11/09/2023 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                                                              | [Slides](./CM-seance1.html)         |
-| 11/09/2023 | 14h-17h | TPs - Rappels JavaScript et manipulation de données                                                       | Voir URL des TP plus bas            |
-| 12/09/2023 | 09h-12h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas            |
-| 12/09/2023 | 13h-16h | CM - Règles et conseils pour la conception de visualisation de données + TP - Datavisualisation avec Plot | [Slides](./CM-seance2.html)         |
-| 13/09/2023 | 09h-12h | TP - Datavisualisation avec Plot  (Prix des carburants)                                                   | Voir URL des TP plus bas            |
-| 13/09/2023 | 13h-16h | TP - Datavisualisation avec Plot  (Sea ice extent)                                                        | Voir URL des TP plus bas            |
-| 06/11/2023 | 10h-13h | CM / TP - Visualisation de données géospatiales avec Leaflet                                              | [Support](TP-seance7.html)          |
-| 06/11/2023 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)                                   | [Support](TP-seance8.html)          |
-| 07/11/2023 | 09h-12h | TP - Datavisualisation pour le Web avec R et Quarto                                                       | [Support](TP-seance9.html)          |
-| 07/11/2023 | 14h-17h | TP noté - Graphiques et carte avec Plot et Leaflet                                                        | [Sujet du devoir](TP-seance10.html) |
+| Date       | Heure   | Contenu                                                                                                   | Ressources                  |
+|------------|---------|-----------------------------------------------------------------------------------------------------------|-----------------------------|
+| 09/09/2024 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                                                              | [Slides](./CM-seance1.html) |
+| 09/09/2024 | 14h-17h | TPs - Rappels JavaScript et manipulation de données                                                       | Voir URL des TP plus bas    |
+| 10/09/2024 | 09h-12h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas    |
+| 10/09/2024 | 13h-16h | CM - Règles et conseils pour la conception de visualisation de données + TP - Datavisualisation avec Plot | [Slides](./CM-seance2.html) |
+| 11/09/2024 | 09h-12h | TP - Datavisualisation avec Plot  (Prix des carburants)                                                   | Voir URL des TP plus bas    |
+| 11/09/2024 | 13h-16h | TP - Datavisualisation avec Plot  (Sea ice extent)                                                        | Voir URL des TP plus bas    |
+| xx/11/2024 | 10h-13h | CM / TP - Visualisation de données géospatiales avec Leaflet                                              |                             |
+| xx/11/2024 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)                                   |                             |
+| xx/11/2024 | 09h-12h | TP - Datavisualisation pour le Web avec R et Quarto                                                       |                             |
+| xx/11/2024 | 14h-17h | TP noté - Graphiques et carte avec Plot et Leaflet                                                        |                             |
 
 
 ## URL des TPs sur Observable
@@ -44,18 +44,14 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 
 - [Premiers pas dans Observable](https://observablehq.com/@sd-progwebdataviz/premiers-pas-dans-observable)
 - [Rappels Markdown](https://observablehq.com/@sd-progwebdataviz/rappels-markdown)
-- [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices) - [Correction](https://observablehq.com/d/1016380d2dbf3ab6)
-- [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices) - [Correction](https://observablehq.com/d/2e1e0290ca512d85) 
+- [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices) - Correction
+- [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices) - Correction 
 - [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot) 
-- [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants) - [Correction](https://observablehq.com/@sd-progwebdataviz/solutions-prix-des-carburants)
-- [TP - Sea ice extent](https://observablehq.com/@sd-progwebdataviz/tp-sea-ice-extent) - [Correction 1](https://observablehq.com/@mthh/sea-ice-extent-1978-today) - [Correction 2](https://observablehq.com/@mthh/antarctic-sea-ice-extent-anomaly)
-- [Bibliothèque Plot (partie 2) - Interactions](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
-- [Rappels SVG](https://observablehq.com/@sd-progwebdataviz/rappels-svg)
 
 Pour aller plus loin :
 
-- [Faire des graphiques avec D3.js - Une introduction](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js)
-- [Exercice - Un *scatter plot* avec D3.js](https://observablehq.com/@sd-progwebdataviz/exercice-un-scatter-plot-avec-d3-js)
+- [Faire des graphiques avec D3.js - Une introduction]()
+- [Exercice - Un *scatter plot* avec D3.js]()
 
 
 ## Évaluation
@@ -63,8 +59,8 @@ Pour aller plus loin :
 Ce cours est en contrôle continu intégral.
 La note sera constituée de :
 
-- une note de projet (50%) - [ce projet](https://observablehq.com/@sd-progwebdataviz/tp-note-deputes-actifs) sera réalisé en binôme et rendu avant le 14/11/2023
-- un TP noté (50%) - ce TP sera réalisé le 07/11/2023
+- une note de projet (50%) - ce projet sera réalisé en binôme et rendu avant le 02/11/2024
+- un TP noté (50%) - ce TP individual sera réalisé en salle en novembre 2024 
 
 ## Ressources utiles
 
