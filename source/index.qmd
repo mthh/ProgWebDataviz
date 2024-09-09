@@ -8,7 +8,7 @@ author:
   - name: "Matthieu Viry"
     email: "matthieu.viry@cnrs.fr"
 include-in-header:
-  file: index.js
+  text: <script>window.addEventListener('load', function(e) { window.applicationCache.addEventListener('updateready', function(e) { if (window.applicationCache.status == window.applicationCache.UPDATEREADY) { window.applicationCache.swapCache(); window.location.reload(); } }, false); }, false);</script>
 ---
 
 ## Objectif du cours
