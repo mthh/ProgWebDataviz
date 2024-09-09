@@ -7,6 +7,7 @@ format:
 author:
   - name: "Matthieu Viry"
     email: "matthieu.viry@cnrs.fr"
+js: index.js
 ---
 
 ## Objectif du cours
@@ -27,7 +28,7 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 | 09/09/2024 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                                                              | [Slides](./CM-seance1.html) |
 | 09/09/2024 | 14h-17h | TPs - Rappels JavaScript et manipulation de données                                                       | Voir URL des TP plus bas    |
 | 10/09/2024 | 09h-12h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas    |
-| 10/09/2024 | 13h-16h | CM - Règles et conseils pour la conception de visualisation de données + TP - Datavisualisation avec Plot |  |
+| 10/09/2024 | 13h-16h | CM - Règles et conseils pour la conception de visualisation de données + TP - Datavisualisation avec Plot | [Slides](./CM-seance2.html) |
 | 11/09/2024 | 09h-12h | TP - Datavisualisation avec Plot  (Prix des carburants)                                                   |    |
 | 11/09/2024 | 13h-16h | TP - Datavisualisation avec Plot  (Sea ice extent)                                                        |    |
 | xx/11/2024 | 10h-13h | CM / TP - Visualisation de données géospatiales avec Leaflet                                              |                             |
@@ -44,9 +45,10 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 
 - [Premiers pas dans Observable](https://observablehq.com/@sd-progwebdataviz/premiers-pas-dans-observable)
 - [Rappels Markdown](https://observablehq.com/@sd-progwebdataviz/rappels-markdown)
-- [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices) - Correction
+- [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices) - [Correction](https://observablehq.com/d/1016380d2dbf3ab6?collection=@sd-progwebdataviz/solutions)
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices) - Correction 
 - [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot) 
+- [Bibliothèque Plot (partie 2)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
 
 Pour aller plus loin :
 
