@@ -7,7 +7,8 @@ format:
 author:
   - name: "Matthieu Viry"
     email: "matthieu.viry@cnrs.fr"
-js: index.js
+include-in-header:
+  file: index.js
 ---
 
 ## Objectif du cours
