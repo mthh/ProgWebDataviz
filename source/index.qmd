@@ -46,7 +46,8 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 - [Rappels Markdown](https://observablehq.com/@sd-progwebdataviz/rappels-markdown)
 - [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices) - [Correction](https://observablehq.com/d/1016380d2dbf3ab6?collection=@sd-progwebdataviz/solutions)
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices) - Correction 
-- [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot) 
+- [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
+- [TP - Exercice de mise en pratique avec Plot](https://observablehq.com/@sd-progwebdataviz/tp-exercice-de-mise-en-pratique-avec-plot)
 - [Bibliothèque Plot (partie 2)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
 
 Pour aller plus loin :
