@@ -765,7 +765,7 @@ src="https://observablehq.com/embed/@mthh/lollipop-chart-connected-dots@217?cell
 
 
 ```{ojs}
-dicopal = import("http://cdn.skypack.dev/dicopal@0.4.0")
+dicopal = import("http://cdn.skypack.dev/dicopal@0.8.1")
 
 function makePalette(colors) {
   return `<div style="display: grid; height: 4rem; padding: 0.5rem; gap: 1px;  
