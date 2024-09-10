@@ -7,8 +7,6 @@ format:
 author:
   - name: "Matthieu Viry"
     email: "matthieu.viry@cnrs.fr"
-include-in-header:
-  text: <script>window.addEventListener('load', function(e) { window.applicationCache.addEventListener('updateready', function(e) { if (window.applicationCache.status == window.applicationCache.UPDATEREADY) { window.applicationCache.swapCache(); window.location.reload(); } }, false); }, false);</script>
 ---
 
 ## Objectif du cours
@@ -24,18 +22,18 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 
 ## Planning du cours
 
-| Date       | Heure   | Contenu                                                                                                   | Ressources                  |
-|------------|---------|-----------------------------------------------------------------------------------------------------------|-----------------------------|
-| 09/09/2024 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                                                              | [Slides](./CM-seance1.html) |
-| 09/09/2024 | 14h-17h | TPs - Rappels JavaScript et manipulation de données                                                       | Voir URL des TP plus bas    |
-| 10/09/2024 | 09h-12h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas    |
-| 10/09/2024 | 13h-16h | CM - Règles et conseils pour la conception de visualisation de données + TP - Datavisualisation avec Plot | [Slides](./CM-seance2.html) |
-| 11/09/2024 | 09h-12h | TP - Datavisualisation avec Plot  (Prix des carburants)                                                   |    |
-| 11/09/2024 | 13h-16h | TP - Datavisualisation avec Plot  (Sea ice extent)                                                        |    |
-| xx/11/2024 | 10h-13h | CM / TP - Visualisation de données géospatiales avec Leaflet                                              |                             |
-| xx/11/2024 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)                                   |                             |
-| xx/11/2024 | 09h-12h | TP - Datavisualisation pour le Web avec R et Quarto                                                       |                             |
-| xx/11/2024 | 14h-17h | TP noté - Graphiques et carte avec Plot et Leaflet                                                        |                             |
+| Date       | Heure   | Contenu                                                                 | Ressources                 |
+|------------|---------|-------------------------------------------------------------------------|----------------------------|
+| 09/09/2024 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                            | [Slides](./CM-seance1.html) |
+| 09/09/2024 | 14h-17h | TPs - Rappels JavaScript et manipulation de données                     | Voir URL des TP plus bas   |
+| 10/09/2024 | 09h-12h | TP - Datavisualisation avec Plot                                        | Voir URL des TP plus bas   |
+| 10/09/2024 | 13h-16h | TP - Datavisualisation avec Plot + CM - Règles et conseils pour la conception de visualisation de données | [Slides](./CM-seance2.html) |
+| 11/09/2024 | 09h-12h | TP - Datavisualisation avec Plot  (Prix des carburants)                 |                            |
+| 11/09/2024 | 13h-16h | TP - Datavisualisation avec Plot  (Sea ice extent)                      |                            |
+| xx/11/2024 | 10h-13h | CM / TP - Visualisation de données géospatiales avec Leaflet            |                            |
+| xx/11/2024 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js) |                            |
+| xx/11/2024 | 09h-12h | TP - Datavisualisation pour le Web avec R et Quarto                     |                            |
+| xx/11/2024 | 14h-17h | TP noté - Graphiques et carte avec Plot et Leaflet                      |                            |
 
 
 ## URL des TPs sur Observable
