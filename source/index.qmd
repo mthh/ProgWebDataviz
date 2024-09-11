@@ -22,18 +22,18 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 
 ## Planning du cours
 
-| Date       | Heure   | Contenu                                                                 | Ressources                 |
-|------------|---------|-------------------------------------------------------------------------|----------------------------|
-| 09/09/2024 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                            | [Slides](./CM-seance1.html) |
-| 09/09/2024 | 14h-17h | TPs - Rappels JavaScript et manipulation de données                     | Voir URL des TP plus bas   |
-| 10/09/2024 | 09h-12h | TP - Datavisualisation avec Plot                                        | Voir URL des TP plus bas   |
+| Date       | Heure   | Contenu                                                                   | Ressources                 |
+|------------|---------|---------------------------------------------------------------------------|----------------------------|
+| 09/09/2024 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                              | [Slides](./CM-seance1.html) |
+| 09/09/2024 | 14h-17h | TP - Rappels JavaScript et manipulation de données                        | Voir URL des TP plus bas   |
+| 10/09/2024 | 09h-12h | TP - Datavisualisation avec Plot                                          | Voir URL des TP plus bas   |
 | 10/09/2024 | 13h-16h | TP - Datavisualisation avec Plot + CM - Règles et conseils pour la conception de visualisation de données | [Slides](./CM-seance2.html) |
-| 11/09/2024 | 09h-12h | TP - Datavisualisation avec Plot  (Prix des carburants)                 |                            |
-| 11/09/2024 | 13h-16h | TP - Datavisualisation avec Plot  (Sea ice extent)                      |                            |
-| xx/11/2024 | 10h-13h | CM / TP - Visualisation de données géospatiales avec Leaflet            |                            |
-| xx/11/2024 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js) |                            |
-| xx/11/2024 | 09h-12h | TP - Datavisualisation pour le Web avec R et Quarto                     |                            |
-| xx/11/2024 | 14h-17h | TP noté - Graphiques et carte avec Plot et Leaflet                      |                            |
+| 11/09/2024 | 09h-12h | TP - Datavisualisation avec Plot                                          |                        Voir URL des TP plus bas    |
+| 11/09/2024 | 13h-16h | TP - Datavisualisation avec Plot               |  Voir URL des TP plus bas                          |
+| xx/11/2024 | 10h-13h | CM / TP - Visualisation de données géospatiales avec Leaflet              |                            |
+| xx/11/2024 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)   |                            |
+| xx/11/2024 | 09h-12h | TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)        |                            |
+| xx/11/2024 | 14h-17h | TP noté - Graphiques et carte avec Plot et Leaflet                        |                            |
 
 
 ## URL des TPs sur Observable
@@ -47,8 +47,9 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 - [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices) - [Correction](https://observablehq.com/d/1016380d2dbf3ab6?collection=@sd-progwebdataviz/solutions)
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices) - [Correction](https://observablehq.com/d/2e1e0290ca512d85)
 - [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
-- [TP - Exercice de mise en pratique avec Plot](https://observablehq.com/@sd-progwebdataviz/tp-exercice-de-mise-en-pratique-avec-plot)
+- [TP - Exercice de mise en pratique avec Plot](https://observablehq.com/@sd-progwebdataviz/tp-exercice-de-mise-en-pratique-avec-plot) - [Correction](https://observablehq.com/@sd-progwebdataviz/solution-exercice-de-mise-en-pratique-avec-plot)
 - [Bibliothèque Plot (partie 2)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
+- [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants)
 
 Pour aller plus loin :
 
