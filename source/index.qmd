@@ -63,7 +63,7 @@ Ce cours est en contrôle continu intégral.
 La note sera constituée de :
 
 - une note de projet (50%) - ce [projet](https://observablehq.com/@sd-progwebdataviz/tp-note-temps-de-parole-des-hommes-et-des-femmes-a) sera réalisé en binôme et rendu avant le 01/11/2024
-- un TP noté (50%) - ce TP individuel sera réalisé en salle en novembre 2024 
+- un TP noté (50%) - ce TP individuel sera réalisé en salle courant novembre 2024 
 
 ## Ressources utiles
 
