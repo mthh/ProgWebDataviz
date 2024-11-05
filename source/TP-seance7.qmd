@@ -718,6 +718,9 @@ const points = [
 
 ![Résultat final](./img/tp7-ex1-2.png)
 
+::: {.callout-note}
+Correction : [TP7-exercice1.zip](./data/TP7-exercice1.zip)
+:::
 
 ## Exercice 2 : Chargement de données vectorielles et clustering
 
@@ -762,4 +765,6 @@ Comme dans l'exercice précédent :
 
 1. Ajoutez un fond de carte tuilé plus adapté à la visualisation des données, par exemple un fond de carte en noir et blanc - vous pouvez aller sur la page https://leaflet-extras.github.io/leaflet-providers/preview/ pour en choisir un qui vous plait - faites attention à ne pas en choisir un qui nécessite un clé (API key) pour fonctionner.
 
-
+::: {.callout-note}
+Correction : [TP7-exercice2.zip](./data/TP7-exercice2.zip)
+:::
