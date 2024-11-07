@@ -310,6 +310,7 @@ D'autres exemples traitant de ce sujet :
 - [https://dev.to/dawnind/3-ways-to-display-two-divs-side-by-side-3d8b](https://dev.to/dawnind/3-ways-to-display-two-divs-side-by-side-3d8b).
 
 
+
 ### Pour info : Création / remplacement des graphiques vs. mise à jour des graphiques
 
 Dans les exemples précédents, nous avons vu comment créer des graphiques avec Plot et comment remplacer les graphiques existants par de nouveaux graphiques.
@@ -340,3 +341,7 @@ Voir le notebook [Faire des graphiques avec D3.js](https://observablehq.com/@sd-
 
 En fonction du temps restant, essayez d'intégrer un graphique réaliser avec D3.js dans la page HTML que vous avez créée pour cet exercice (par exemple un
 diagramme circulaire).
+
+::: {.callout-note}
+Correction : [TP8.zip](./data/TP8.zip)
+:::
