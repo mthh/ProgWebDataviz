@@ -6,9 +6,8 @@
 <script src="CM-seance2_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="CM-seance2_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="CM-seance2_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="CM-seance2_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="CM-seance2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+<link href="CM-seance2_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.39">
 
   <meta name="author" content="Matthieu Viry">
   <meta name="dcterms.date" content="2024-09-10">
@@ -32,7 +31,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -43,7 +42,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -71,7 +70,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -85,7 +84,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -96,209 +95,12 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="CM-seance2_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="CM-seance2_files/libs/revealjs/dist/theme/quarto-24c08413a59024718728e6805c096ea2.css">
   <link rel="stylesheet" href="style.css">
   <link href="CM-seance2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="CM-seance2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="CM-seance2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="CM-seance2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
-
-  .callout {
-    margin-top: 1em;
-    margin-bottom: 1em;  
-    border-radius: .25rem;
-  }
-
-  .callout.callout-style-simple { 
-    padding: 0em 0.5em;
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-    display: flex;
-  }
-
-  .callout.callout-style-default {
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-  }
-
-  .callout .callout-body-container {
-    flex-grow: 1;
-  }
-
-  .callout.callout-style-simple .callout-body {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-style-default .callout-body {
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-titled.callout-style-simple .callout-body {
-    margin-top: 0.2em;
-  }
-
-  .callout:not(.callout-titled) .callout-body {
-      display: flex;
-  }
-
-  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
-    padding-left: 1.6em;
-  }
-
-  .callout.callout-titled .callout-header {
-    padding-top: 0.2em;
-    margin-bottom: -0.2em;
-  }
-
-  .callout.callout-titled .callout-title  p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-    
-  .callout.callout-titled.callout-style-simple .callout-content  p {
-    margin-top: 0;
-  }
-
-  .callout.callout-titled.callout-style-default .callout-content  p {
-    margin-top: 0.7em;
-  }
-
-  .callout.callout-style-simple div.callout-title {
-    border-bottom: none;
-    font-size: .9rem;
-    font-weight: 600;
-    opacity: 75%;
-  }
-
-  .callout.callout-style-default  div.callout-title {
-    border-bottom: none;
-    font-weight: 600;
-    opacity: 85%;
-    font-size: 0.9rem;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-default div.callout-content {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-simple .callout-icon::before {
-    height: 1rem;
-    width: 1rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-  }
-
-  .callout.callout-style-default .callout-icon::before {
-    height: 0.9rem;
-    width: 0.9rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 0.9rem 0.9rem;
-  }
-
-  .callout-title {
-    display: flex
-  }
-    
-  .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  .callout.no-icon::before {
-    display: none !important;
-  }
-
-  .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
-  }
-
-  .callout.callout-titled .callout-icon::before {
-    margin-top: .5rem;
-    padding-right: .5rem;
-  }
-
-  .callout:not(.callout-titled) .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  /* Callout Types */
-
-  div.callout-note {
-    border-left-color: #4582ec !important;
-  }
-
-  div.callout-note .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
-  }
-
-  div.callout-note.callout-style-default .callout-title {
-    background-color: #dae6fb
-  }
-
-  div.callout-important {
-    border-left-color: #d9534f !important;
-  }
-
-  div.callout-important .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-important.callout-style-default .callout-title {
-    background-color: #f7dddc
-  }
-
-  div.callout-warning {
-    border-left-color: #f0ad4e !important;
-  }
-
-  div.callout-warning .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-warning.callout-style-default .callout-title {
-    background-color: #fcefdc
-  }
-
-  div.callout-tip {
-    border-left-color: #02b875 !important;
-  }
-
-  div.callout-tip .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-tip.callout-style-default .callout-title {
-    background-color: #ccf1e3
-  }
-
-  div.callout-caution {
-    border-left-color: #fd7e14 !important;
-  }
-
-  div.callout-caution .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
-  }
-
-  div.callout-caution.callout-style-default .callout-title {
-    background-color: #ffe5d0
-  }
-
-  </style>
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -425,8 +227,7 @@ Matthieu Viry <a href="https://orcid.org/0000-0002-0693-8556" class="quarto-titl
 <div class="columns">
 <div class="column" style="width:70%;">
 <p><img data-src="./img/perception_visuelle.jpg" class="img30"> <br> <span class="source-small">Source : <a href="https://www.flickr.com/photos/carloszgz/17248418448/in/photolist-rksaEK-q2VmR6-wccwEF-p3FDVE-q3PJ8M-pTvn69-pckv2J-rTTX1G-q7i3ys-pK3bg2-pR2jPk-pRqmFy-pLKxfW-stY35k-wtc2b8-shbDSY-r9jDh2-pH8AYo-qEUoGo-qhAK7F-phE4hu-p4WfQp-pb4Y6F-p3Fqt9-sh6HcF-pPN398-pZAXH1-q8Md8Q-pXd9Y1-q3pwpV-reFUig-r1Wo4Y-pckuky-qqBZe8-qRUKah-pEEZz4-qhPUSJ-tAgkrb-pVFK7v-pSweU8-qeEkNY-qcuPLy-poyGi9-pY77FF-p3FyXU-pbZhih-pH5zv7-pjXpPq-pZcSLW-s1xNCt">Four color theorem</a>, Carlos ZGZ, public domain licence.</span></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="perception-visuelle" class="slide level2">
 <h2>Perception visuelle</h2>
@@ -453,7 +254,7 @@ Matthieu Viry <a href="https://orcid.org/0000-0002-0693-8556" class="quarto-titl
 <p><em>Par exemple dans le cadre d’un rapport présentant les données d’exportation de la France, par rapport à ses voisins, en 2019 :</em></p>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="66" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 65;"><span id="cb1-66"><a href="#cb1-66"></a>dataset <span class="op">=</span> [{<span class="dt">name</span><span class="op">:</span> <span class="st">'Allemagne'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">65</span>}<span class="op">,</span>{<span class="dt">name</span><span class="op">:</span> <span class="st">'Albanie'</span><span class="op">,</span> <span class="dt">value</span> <span class="op">:</span><span class="dv">59</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'Italie'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">80</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'France'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">81</span>}<span class="op">,</span> { <span class="dt">name</span><span class="op">:</span> <span class="st">'Gabon'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">56</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'Maroc'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">55</span>}<span class="op">,</span>{<span class="dt">name</span><span class="op">:</span> <span class="st">'Égypte'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">40</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb1" data-startfrom="66" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 65;"><span id="cb1-66"><a href=""></a>dataset <span class="op">=</span> [{<span class="dt">name</span><span class="op">:</span> <span class="st">'Allemagne'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">65</span>}<span class="op">,</span>{<span class="dt">name</span><span class="op">:</span> <span class="st">'Albanie'</span><span class="op">,</span> <span class="dt">value</span> <span class="op">:</span><span class="dv">59</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'Italie'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">80</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'France'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">81</span>}<span class="op">,</span> { <span class="dt">name</span><span class="op">:</span> <span class="st">'Gabon'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">56</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'Maroc'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">55</span>}<span class="op">,</span>{<span class="dt">name</span><span class="op">:</span> <span class="st">'Égypte'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">40</span>}]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-1" data-nodetype="declaration">
 
@@ -463,12 +264,12 @@ Matthieu Viry <a href="https://orcid.org/0000-0002-0693-8556" class="quarto-titl
 <div class="columns">
 <div class="column fragment" style="width:42%;">
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="73" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 72;"><span id="cb2-73"><a href="#cb2-73"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb2-74"><a href="#cb2-74"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
-<span id="cb2-75"><a href="#cb2-75"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb2-76"><a href="#cb2-76"></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dataset<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">'value'</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">'blue'</span>})<span class="op">,</span></span>
-<span id="cb2-77"><a href="#cb2-77"></a>  ]</span>
-<span id="cb2-78"><a href="#cb2-78"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb2" data-startfrom="73" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 72;"><span id="cb2-73"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb2-74"><a href=""></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
+<span id="cb2-75"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb2-76"><a href=""></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dataset<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">'value'</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">'blue'</span>})<span class="op">,</span></span>
+<span id="cb2-77"><a href=""></a>  ]</span>
+<span id="cb2-78"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-2" data-nodetype="expression">
 
@@ -479,20 +280,19 @@ Matthieu Viry <a href="https://orcid.org/0000-0002-0693-8556" class="quarto-titl
 <p><strong>vs.</strong></p>
 </div><div class="column fragment" style="width:42%;">
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="90" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 89;"><span id="cb3-90"><a href="#cb3-90"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb3-91"><a href="#cb3-91"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
-<span id="cb3-92"><a href="#cb3-92"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb3-93"><a href="#cb3-93"></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dataset<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">'value'</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">name</span> <span class="op">===</span> <span class="st">'France'</span> <span class="op">?</span> <span class="st">'red'</span> <span class="op">:</span> <span class="st">'blue'</span>})<span class="op">,</span></span>
-<span id="cb3-94"><a href="#cb3-94"></a>  ]</span>
-<span id="cb3-95"><a href="#cb3-95"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb3" data-startfrom="90" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 89;"><span id="cb3-90"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb3-91"><a href=""></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
+<span id="cb3-92"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb3-93"><a href=""></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dataset<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">'value'</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">name</span> <span class="op">===</span> <span class="st">'France'</span> <span class="op">?</span> <span class="st">'red'</span> <span class="op">:</span> <span class="st">'blue'</span>})<span class="op">,</span></span>
+<span id="cb3-94"><a href=""></a>  ]</span>
+<span id="cb3-95"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-3" data-nodetype="expression">
 
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="traitement-visuel-pré-attentif-2" class="slide level2">
 <h2>Traitement visuel pré-attentif</h2>
@@ -500,13 +300,13 @@ Matthieu Viry <a href="https://orcid.org/0000-0002-0693-8556" class="quarto-titl
 <div class="column" style="width:50%;">
 <p><strong>pré-attentif</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="110" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 109;"><span id="cb4-110"><a href="#cb4-110"></a>dd <span class="op">=</span> [[<span class="dv">12</span><span class="op">,</span> <span class="dv">30</span>]<span class="op">,</span> [<span class="dv">20</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">,</span> [<span class="dv">3</span><span class="op">,</span> <span class="dv">12</span>]<span class="op">,</span> [<span class="dv">12</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">,</span> [<span class="dv">10</span><span class="op">,</span> <span class="dv">20</span>]<span class="op">,</span> [<span class="dv">5</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">,</span> [<span class="dv">2</span><span class="op">,</span> <span class="dv">9</span>]<span class="op">,</span> [<span class="dv">9</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">,</span> [<span class="dv">6</span><span class="op">,</span> <span class="dv">20</span>]<span class="op">,</span> [<span class="dv">14</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span>[<span class="dv">16</span><span class="op">,</span> <span class="dv">20</span>]]<span class="op">;</span></span>
-<span id="cb4-111"><a href="#cb4-111"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb4-112"><a href="#cb4-112"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
-<span id="cb4-113"><a href="#cb4-113"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb4-114"><a href="#cb4-114"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(dd<span class="op">,</span> { <span class="dt">fill</span><span class="op">:</span> (d<span class="op">,</span> i) <span class="kw">=&gt;</span> i <span class="op">===</span> <span class="dv">4</span> <span class="op">?</span> <span class="st">'red'</span> <span class="op">:</span> <span class="st">'blue'</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">5</span> })<span class="op">,</span></span>
-<span id="cb4-115"><a href="#cb4-115"></a>  ]</span>
-<span id="cb4-116"><a href="#cb4-116"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb4" data-startfrom="110" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 109;"><span id="cb4-110"><a href=""></a>dd <span class="op">=</span> [[<span class="dv">12</span><span class="op">,</span> <span class="dv">30</span>]<span class="op">,</span> [<span class="dv">20</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">,</span> [<span class="dv">3</span><span class="op">,</span> <span class="dv">12</span>]<span class="op">,</span> [<span class="dv">12</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">,</span> [<span class="dv">10</span><span class="op">,</span> <span class="dv">20</span>]<span class="op">,</span> [<span class="dv">5</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">,</span> [<span class="dv">2</span><span class="op">,</span> <span class="dv">9</span>]<span class="op">,</span> [<span class="dv">9</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">,</span> [<span class="dv">6</span><span class="op">,</span> <span class="dv">20</span>]<span class="op">,</span> [<span class="dv">14</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span>[<span class="dv">16</span><span class="op">,</span> <span class="dv">20</span>]]<span class="op">;</span></span>
+<span id="cb4-111"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb4-112"><a href=""></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
+<span id="cb4-113"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb4-114"><a href=""></a>    Plot<span class="op">.</span><span class="fu">dot</span>(dd<span class="op">,</span> { <span class="dt">fill</span><span class="op">:</span> (d<span class="op">,</span> i) <span class="kw">=&gt;</span> i <span class="op">===</span> <span class="dv">4</span> <span class="op">?</span> <span class="st">'red'</span> <span class="op">:</span> <span class="st">'blue'</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">5</span> })<span class="op">,</span></span>
+<span id="cb4-115"><a href=""></a>  ]</span>
+<span id="cb4-116"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-4-1" data-nodetype="declaration">
@@ -525,20 +325,19 @@ Matthieu Viry <a href="https://orcid.org/0000-0002-0693-8556" class="quarto-titl
 </div><div class="column" style="width:50%;">
 <p><strong>attentif</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="125" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 124;"><span id="cb5-125"><a href="#cb5-125"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb5-126"><a href="#cb5-126"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
-<span id="cb5-127"><a href="#cb5-127"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb5-128"><a href="#cb5-128"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(dd<span class="op">,</span> { <span class="dt">fill</span><span class="op">:</span> <span class="st">'red'</span><span class="op">,</span> <span class="dt">symbol</span><span class="op">:</span> (d<span class="op">,</span> i) <span class="kw">=&gt;</span> i <span class="op">===</span> <span class="dv">4</span> <span class="op">?</span> <span class="st">'square'</span> <span class="op">:</span> <span class="st">'circle'</span> })<span class="op">,</span></span>
-<span id="cb5-129"><a href="#cb5-129"></a>  ]</span>
-<span id="cb5-130"><a href="#cb5-130"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb5" data-startfrom="125" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 124;"><span id="cb5-125"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb5-126"><a href=""></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
+<span id="cb5-127"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb5-128"><a href=""></a>    Plot<span class="op">.</span><span class="fu">dot</span>(dd<span class="op">,</span> { <span class="dt">fill</span><span class="op">:</span> <span class="st">'red'</span><span class="op">,</span> <span class="dt">symbol</span><span class="op">:</span> (d<span class="op">,</span> i) <span class="kw">=&gt;</span> i <span class="op">===</span> <span class="dv">4</span> <span class="op">?</span> <span class="st">'square'</span> <span class="op">:</span> <span class="st">'circle'</span> })<span class="op">,</span></span>
+<span id="cb5-129"><a href=""></a>  ]</span>
+<span id="cb5-130"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-5" data-nodetype="expression">
 
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="traitement-visuel-pré-attentif-3" class="slide level2">
 <h2>Traitement visuel pré-attentif</h2>
@@ -806,8 +605,7 @@ Matthieu Viry <a href="https://orcid.org/0000-0002-0693-8556" class="quarto-titl
 </ul>
 </div><div class="column" style="width:50%;">
 <p><img data-src="./img/viz-accuracy.png"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="section" class="slide level2">
 <h2>&nbsp;</h2>
@@ -835,8 +633,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </ul>
 </div><div class="column" style="width:44%;">
 <p><img data-src="img/from-data-to-viz.png"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="expressivité-efficacité-et-pertinence" class="slide level2">
 <h2>Expressivité, efficacité et pertinence</h2>
@@ -895,8 +692,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </div>
 </div><div class="column" style="width:44%;">
 <p><img class="img85" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIsAAAKECAYAAACHCbqBAAABfGlDQ1BJQ0MgUHJvZmlsZQAAKJFjYGAqSSwoyGFhYGDIzSspCnJ3UoiIjFJgv8PAzcDDIMRgxSCemFxc4BgQ4MOAE3y7xsAIoi/rgsxK8/x506a1fP4WNq+ZclYlOrj1gQF3SmpxMgMDIweQnZxSnJwLZOcA2TrJBUUlQPYMIFu3vKQAxD4BZIsUAR0IZN8BsdMh7A8gdhKYzcQCVhMS5AxkSwDZAkkQtgaInQ5hW4DYyRmJKUC2B8guiBvAgNPDRcHcwFLXkYC7SQa5OaUwO0ChxZOaFxoMcgcQyzB4MLgwKDCYMxgwWDLoMjiWpFaUgBQ65xdUFmWmZ5QoOAJDNlXBOT+3oLQktUhHwTMvWU9HwcjA0ACkDhRnEKM/B4FNZxQ7jxDLX8jAYKnMwMDcgxBLmsbAsH0PA4PEKYSYyjwGBn5rBoZt5woSixLhDmf8xkKIX5xmbARh8zgxMLDe+///sxoDA/skBoa/E////73o//+/i4H2A+PsQA4AJHdp4IxrEg8AAAGeaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA1LjQuMCI+CiAgIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjExNjM8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+NjQ0PC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+ClzAJ30AAEAASURBVHgB7N19cBTXnfD7IQaBENggvDGObUbSgOSNHZE48cbeDbE3BrSVJa69u9GTqnv3VjZA7KpdvLmhyvXUE1dR2aoNd7fWVanHOCnbAeJUXpzUs671TfKwEWIdbNnBiV9ihDEGLGkknATZIPEioVfQdZ/W78yZnp5Wz0vPdM98/Qf96/PW53xaoPHM7/TMm3n/vxj/IYAAAggggAACCCCAAAIIIIAAAggg8L7AB1BAAAEEEEAAAQQQQAABBBBAAAEEEEBABHizSCQ4IoAAAggggAACCCCAAAIIIIAAAgiQWcTPAAIIIIAAAggggAACCCCAAAIIIIBASoDMopQFEQIIIIAAAggggAACCCCAAAIIIFD1ArxZVPU/AgAggAACCCCAAAIIIIAAAggggAACKQHeLEpZECGAAAIIIIAAAggggAACCCCAAAJVL8CbRVX/IwAAAggggAACCCCAAAIIIIAAAgggkBLgzaKUBRECCCCAAAIIIIAAAggggAACCCBQ9QK8WVT1PwIAIIAAAggggAACCCCAAAIIIIAAAikB3ixKWRAhgAACCCCAAAIIIIAAAggggAACVS/Am0VV/yMAAAIIIIAAAggggAACCCCAAAIIIJAS4M2ilAURAggggAACCCCAAAIIIIAAAgggUPUCvFlU9T8CACCAAAIIIIAAAggggAACCCCAAAIpAd4sSlkQIYAAAggggAACCCCAAAIIIIAAAlUvwJtFVf8jAAACCCCAAAIIIIAAAggggAACCCCQEuDNopQFEQIIIIAAAggggAACCCCAAAIIIFD1ArxZVPU/AgAggAACCCCAAAIIIIAAAggggAACKQHeLEpZECGAAAIIIIAAAggggAACCCCAAAJVL8CbRVX/IwAAAggggAACCCCAAAIIIIAAAgggkBLgzaKUBRECCCCAAAIIIIAAAggggAACCCBQ9QK8WVT1PwIAIIAAAggggAACCCCAAAIIIIAAAikB3ixKWRAhgAACCCCAAAIIIIAAAggggAACVS/Am0VV/yMAAAIIIIAAAggggAACCCCAAAIIIJAS4M2ilAURAggggAACCCCAAAIIIIAAAgggUPUCvFlU9T8CACCAAAIIIIAAAggggAACCCCAAAIpAd4sSlkQIYAAAggggAACCCCAAAIIIIAAAlUvwJtFVf8jAAACCCCAAAIIIIAAAggggAACCCCQEuDNopQFEQIIIIAAAggggAACCCCAAAIIIFD1ArxZVPU/AgAggAACCCCAAAIIIIAAAggggAACKQHeLEpZECGAAAIIIIAAAggggAACCCCAAAJVL8CbRVX/IwAAAggggAACCCCAAAIIIIAAAgggkBLgzaKUBRECCCCAAAIIIIAAAggggAACCCBQ9QK8WVT1PwIAIIAAAggggAACCCCAAAIIIIAAAikB3ixKWRAhgAACCCCAAAIIIIAAAggggAACVS/Am0VV/yMAAAIIIIAAAggggAACCCCAAAIIIJAS4M2ilAURAggggAACCCCAAAIIIIAAAgggUPUC86teAAAEyiTQ29urr3zgwAEVNzY26jI/QSKRyNqsqakpax0VCCCAAAIIIIAAAggggAACCGQTILMomwzlCCCAAAIIIIAAAggggAACCCCAQBUKkFlUhTedJZdOwC17KN+r9/X1ZXR1K+vv789o56cgHo9nbZZLxpNXtpN5ATKfTA1iBBBAAAEEEEAAAQQQQCA8AmQWhedeMBMEEEAAAQQQQAABBBBAAAEEEECg7ALzZt7/r+yzYAIIRFjALXtIsnvcsnXWr1+vVlvOzBpzztnoe3p6slW5lrtlOUlD8ZBzv0c3P2ffXLKerL5emU/lvCfOdXGOAAIIIIAAAggggAACCJRLgMyicslzXQQQQAABBBBAAAEEEEAAAQQQQCCEArxZFMKbwpQQQAABBBBAAAEEEEAAAQQQQACBcgmwDa1c8lw3UgLmti35mnvZWuW2VSoMW80iBeyYrOntqIoVc3ucjC33Us79Ht3uvfQt5vY4GZNtciLBEQEEEEAAAQQQQAABBIIUILMoSF3GRgABBBBAAAEEEEAAAQQQQAABBCImQGZRxG4Y0w1OwMxmIXsoOOeojmz+fHitwU/mk9fDwGXsILKdZGzrWMzMJzKeTFliBBBAAAEEEEAAAQSiL0BmUfTvIStAAAEEEEAAAQQQQAABBBBAAAEEiiZAZlHRKBkoCgJmdgjZQ1G4Y8xxLgHzZzpbWz/ZTmZfr8ynfDOeZHye8yQSHBFAAAEEEEAAAQQQCK8AmUXhvTfMDAEEEEAAAQQQQAABBBBAAAEEECi5AG8WlZycCyKAAAIIIIAAAggggAACCCCAAALhFWAbWnjvDTPLU8DclsNWszwR6YZAkQTMv4/OIXPZHue1Nc4cN99tcl7b42R8HgouEhwRQAABBBBAAAEEKl2AzKJKv8OsDwEEEEAAAQQQQAABBBBAAAEEEMhBgMyiHLBoGh4BM1uB7KHw3BdmgkAUBMx/P7LNN5esJ2sMr8ynfLOdzLl5ZT7lkvGUSCTMYbPGTU1NWeuoQAABBBBAAAEEEKh8ATKLKv8es0IEEEAAAQQQQAABBBBAAAEEEEDAtwCZRb6paFhqAfPTf7KHSq3P9RBAoFwC5r99zjkUM+NJxs4388kr20nGziXryepD5pPIcUQAAQQQQAABBMorQGZRef25OgIIIIAAAggggAACCCCAAAIIIBAqAd4sCtXtYDIIIIAAAggggAACCCCAAAIIIIBAeQXYhlZe/6q/urndgq1mVf/jAAACCIRUwPy32muKxdwml+/2OJlfMbfJ+dkex0PBRZ4jAggggAACCFSCAJlFlXAXWQMCCCCAAAIIIIAAAggggAACCCBQJAEyi4oEyTDZBcxPpMkeyu5EDQIIIIBAfgLm7xnnCMXMdpKx88168pPtZF0jiAeDk/kkd48jAggggAACCPgRILPIjxJtEEAAAQQQQAABBBBAAAEEEEAAgSoRILOoSm500MuUT3Ulc8i6nnzy6vZJ6vr169WU+KQz6DvD+AgggAAC5RKQ341e1/eT+dTX1+c1hK6T37u6IMfA7fe12xB+Mp94zpObHGUIIIAAAghER4DMoujcK2aKAAIIIIAAAggggAACCCCAAAIIBC7Am0WBE3MBBBBAAAEEEEAAAQQQQAABBBBAIDoCbEOLzr0q+0wlnZ6tZmW/FUwAAQQQQACBvATkd/lcnf1sj5MxvLbJFbo1zrqGn+1xfrbGyXytI9vkTA1iBBBAAAEEMgXILMo0oQQBBBBAAAEEEEAAAQQQQAABBBCoWgEyi6r21rsvXD5xJHvI3YdSBBBAAAEEEAhOQF6HuF0hl2wnq79XxpOMH8XMJ74cRO4eRwQQQACBIAXILApSl7ERQAABBBBAAAEEEEAAAQQQQACBiAmQWRSxG1aM6cqndmQPFUOTMRBAAAEEEECg0gXktZPXOouZ+VSMjCdrrl7PewriOU/WNcl8shT4DwEEEIi+AJlF0b+HrAABBBBAAAEEEEAAAQQQQAABBBAomgBvFhWNkoEQQAABBBBAAAEEEEAAAQQQQACB6AuwDS3699B1BZIuzVYzVx4KEUAAAQQQQACBihCQ13xuiynm1jhz/EK3yXltj5PrFHObHFvjRJUjAggg4F+AzCL/VrREAAEEEEAAAQQQQAABBBBAAAEEKl6AzKII32L5JInsoQjfRKaOAAIIIIAAAghUoIC8TvVaWjEznwrNdjLn6ZX5VMyMJ7kmmU8iwREBBMIkQGZRmO4Gc0EAAQQQQAABBBBAAAEEEEAAAQTKLFD0zKK9e/eqJW3ZskUdOzs79RLXr1+v42xBW1ubqtq/f39GkxtvvFGVnThxQtfV1taq2Hld3cAIdj2yS59te2CbjsMcyKcyZA+F+S4VPje5z34/YUskElkvyqdTWWmoQAABBBBAAIEqFpDXW3MR+H09Zo3T19c313CqvtDMJ69sJ3MCuWQ+8XrSlCNGAAGnAJlFThHOEUAAAQQQQAABBBBAAAEEEEAAgSoW4M2iKr75LB0BBBBAAAEEEEAAAQQQQAABBBBwCsx3FuRzLlvHrL6S+rhx48achpIxpP/MzIyv/qdPn1btduzYoY7Hjx/X/Zqbm1Xc1dWlju3t7bpuY5s9P2mjK8oQSEqs11Yzty18bDcqw80q4JLO+2ymI0tqsfz8m5dxS292lpljmX2zxXI9t3q3Obi1kzJSmEWCIwIIIIAAAgiEWcDva2e/7Yq9VnmtONe4frbJOV8ruo158OBBt+K8ykr12lImV657JNfniEA1CJBZVA13mTUigAACCCCAAAIIIIAAAggggAACPgWKklnU0dGRcTnJFMqoMAokK8gqkne/n3nmGaPF3OG+fftUo02bNqmjW6bQunXrVN3atWv1gPs77Adou7XXjYoYyCcFZA8VETWEQ8l9lqmZ91vK5CgPgbfOS/XpiHN+MhfrmO+nVPJ3V8Yiy0kkOCKAAAIIIIAAAv4F/L4e9NvO/5W9W3q9fpSefl5HSlvr6Hz9aNb5yXhqaGjQXb785S/rmAABBIonQGZR8SwZCQEEEEAAAQQQQAABBBBAAAEEEIi8QFEyi/JVOHnypO569dVXq3j58uXqODExoeskuP/++1X42GOPSVHs2LFjOp4raG1tnatJQfW7d+9W/ZPJZNZxli1bpusks6TUnw7oCRAUJCCfspjZQ5JVI/u2zWdNheE+e83Bq64gqCydxc+t2s+nU26fSLmVyT1xu46zTO6bs9w651lObiqUlUvgePKVjEu3NHwio4wCBBBAAAEEChXw8xrRT5tC50F/BBAorQCZRaX15moIIIAAAggggAACCCCAAAIIIIBAqAV4syjUt4fJIYAAAggggAACCCCAAAIIIIAAAqUVKOs2NHOpQ0ND6nR4eFgda2trdbU8CLulpUWVff7zn9d1YQq2bt2adTrf+c53VJ35MDbSNbNyhaZCtkpFaatZaPDmmIjXz79X3RzD5lUt99mtc6Fb4nLZBmdeny1xpgaxbDvb99wehdEz8EZeKIlVt2btt2bVR7PWuVWsafy4Kmb7m5sOZQgggAACCCCAQLQFyCyK9v1j9ggggAACCCCAAAIIIIAAAggggEBRBUKTWeS1qpUrV6rqO+64w6vZnHXd3d26TXxVXMcE1S0gWSV+s4dEq9TZL3Jd6+jMMsg3I8AcU+JqzBLwupdedWJWjKP8HHqNVa4sJ2tOxcp0SiQSWZdYKuusEwhJhfPvtzWtfDOJnEvyGserzhxneuqyOh37uf2lDp+9+2919Rc+9xUdEyCAAAIIIIAAAghEV4DMoujeO2aOAAIIIIAAAggggAACCCCAAAIIFF2grJlFt33sNr2guro6Fb/44ovqaH7leFdXlyo7fPiwOq5atUodrT/uvfdeFbe3t6vj9u3b1dH6o7m5WcXO/lbhrl27VB1/VIeAW9aGZBLJM2XMzIktW7YomHJlOkhmgTUJP88o8ZsRIHf7Fy/8QMK8jqtW/rHu99lPf0nFt7bcqcsIchfw87Pmp03uV87s4fb3xdnKT5aT1aevry+tq3kuf/fSGvg4Mf+uOps3NjY6i7KehyHL6dQZ+/eaNclfvvp9NdcjR1/NmHNtXfqv67HR6Yw2QRToLKLRKT381GxmkS4gQAABBBBAAAEEEKg4ATKLKu6WsiAEEEAAAQQQQAABBBBAAAEEEEAgfwHeLMrfjp4IIIAAAggggAACCCCAAAIIIIBAxQmk57Xnuby2tjbdc//+/Tq2AvO8vr5e1R06dEgdZZuYdfLtb39blW3YsEEdJyYm1NH8o7OzU52a/STeuXOnqmtpaTG7pMXS3yqUfmkNOKkIAXMLjddWM9nqWKqtPV64su3Mz5Yzr3GKWSfbT6wxx2a3oMj2k6H3XtGXiq+8RcVsQ9MkkQ/8/J3w06YYEObf52zjRXlL3JnpX+tlnZvuUfFNa5bpskKD0ZHU9jHnWGMedf1vDanm8nfe2ZdzBBBAAAEEEEAAgcoWILOosu8vq0MAAQQQQAABBBBAAAEEEEAAAQRyEihKZlFHR0dOF3VrvG7dOlU8Pj7uVj1n2ebNm1UbOc7ZoUwNkslkma5cWZc1sw2KlT3U/+uXMpD6X7YzaOK3fyKjTgrin7xDwpyOh46nHjL98omnVd+r7OS72A0113iO5ZUR4Ow4dnHSWaTPzYfkSiaRM4tIN84SvNXz2yw1FFergGTKWes/2Zf5sGZxWdP4cQmzHluasv/dk05hyHLym90kc5YHfZ+ZHpCi2JKbdFi0oG7JgqxjedW9feS9rP2oQAABBBBAAAEEEKh8ATKLKv8es0IEEEAAAQQQQAABBBBAAAEEEEDAt0BRMot8X62KGzY0NKjVk1nk/4fALXvIrbd8VXauzyCSTKLnn3hCDftOd7fb8Krsxe89mbXOb8WNra1Zm05ecz697splfV53z2y6kS6JxbwyAoxmdrhycUaRFJwfSmXyHXt1UIo5IpCTgGQS5frMrV+8kMquy+mCjsaJVbc6SlKn8es/ok/+euPf6zifwCuDyavO61qHjqf+fkqGoVf7MNY999wLelrdL72r4ng8rsucgfyb7SzPdp5IJLJVxfJ1zzogFQgggAACCCCAAAJKgMwifhAQQAABBBBAAAEEEEAAAQQQQAABBLQAbxZpCgIEEEAAAQQQQAABBBBAAAEEEEAAAbah8TNQVgFzq5lMxPnAaqtctjQEudVMrh/U0bnNbWrmir7U6GT611ubdW7b0HRHAgRKLPDzXz6urlisLWTFmH7PwBt6mLFL9gPdpyftv18vv5r6avpCt6HpixCkCdx116f0+e23fE7HVpDvg7/NQeRh4P39/Wax71h+f7h1YEucmwplCCCAAAIIIIBALEZmET8FCCCAAAIIIIAAAggggAACCCCAAAJagMwiTUFQCgHJJCpm9pBz3v+17R900anuwzq2gutrF6WdWycj0+lZPWaDi1OpB02b5fnEki0kWURyns9Y9EGg1AL/71Ob0i5Z7/Hg9LSGsydjF+2MH9e60Wm34jnLJItobDT73+E5B6FBUQWcD5x2nhf1YlkGk98zbtW5ZDpJRpM5jpSR5WSqECOAAAIIIIBAJQqQWVSJd5U1IYAAAggggAACCCCAAAIIIIAAAnkK8GZRnnB0QwABBBBAAAEEEEAAAQQQQAABBCpRgG1olXhXy7gmM/0/yK1mXku8fPK4rv6Qy7YzXamDzK1pusojuOixfe3tC6Oq5+D4mMcIVCEQHYG6JQvSJus8T6t0O8lx25pziNGR1FazI4d+76zmHAEt4LX1zatOD1DEwPyd6By2WFvirHHLvS0ukUg4l6fPS22uL0yAAAIIIIAAAgUJkFlUEB+dEUAAAQQQQAABBBBAAAEEEEAAgcoSILOoRPezqbFJXSmZTJboisFdxvykVLKHvK62ZcsWXV1JnzAunZ+eaaEX+X6wdMFV6nRw3CwlRgCBfAVyzmTK90Il7nfDio/oK74ce1rHBJUh4PU7z6suiNWbv7ud4+eS5WT1lQd9yzjmeZiznKz5ltpdjDgigAACCCAQNQEyi6J2x5gvAggggAACCCCAAAIIIIAAAgggEKAAmUUB4roNHZXMIrdPICWLyPzUMB6Pq2WuX79eHfnEzr7r9TULZ2//yOyRAwIIIIAAAuUT8Pr97FUXxIzdXmPIdSopy8laE89zkjvLEQEEEEAgagJkFkXtjjFfBBBAAAEEEEAAAQQQQAABBBBAIEAB3iwKEJehEUAAAQQQQAABBBBAAAEEEEAAgagJsA0tancsoPlKSjhbzQICLmDYsZOXVO/aNYsLGMW96zX1i9wrKEUAAQQQQCAgAa9tb151QUxHXv+4je13S5z5gG/nOFJnbuF3tvE6l+3+bm0aGxvdirOWsSUuKw0VCCCAAAIuAmQWuaBQhAACCCCAAAIIIIAAAggggAACCFSrAJlFVXTn5dMzP9lDJkupP+Uzr51PXP/hW3S3oTeP6pgAAQQQQAABBBAwBbxe43jVmWMUK5bXaW7jkeXkpkIZAggggECQAmQWBanL2AgggAACCCCAAAIIIIAAAggggEDEBMgsitgNm2u68qmUZA+Z7WW/vOx/37Jli64u9adn+sIECCCAAAIIIIAAAjGv12JedUHRyWtKt/H9ZDrJ85rc+kudvDZ1a+NVJq9l3drwLCc3FcoQQACB3AXILMrdjB4IIIAAAggggAACCCCAAAIIIIBAxQrwZlHF3loWhgACCCCAAAIIIIAAAggggAACCOQuwDa03M1C00PSg80tZ5LOK+m569ev1/MtRwqzvjhBxQoc7+1Wa5OfR3Oh/MyZGsQIIIAAAghER8Drd7hXXRArdHuNIdcpdEvcwYMHZai8jvKaO1vnXLbFJRKJbMN4blPM2okKBBBAoAABMosKwKMrAggggAACCCCAAAIIIIAAAgggUGkCgWUW7d27V1mZD1Hu7OxUZWa2ix/QBx98UDV7+OGH1VHGsU6cY8l1rTrz2ta5+d+uR3ap020PbDOLA4sTqzM/Keh5u0ddz61OJiKfpEQxe+g3R5JqGS+/2S/L8Tze/uF41vo/+UhD1joqwiEgP6OS3TbXrLw+iSv0U7hSf+I511qpRwABBBBAAIH8Bbx+r3vV5X/F9J7yejy9NPOs3FlO1oyCfH0lKy6FuVyLIwIIlE+AzKLy2XNlBBBAAAEEEEAAAQQQQAABBBBAIHQCRc8samtrU4uUzICNGzfmteiuri7d780331TxPffco8ucwenTp1XRjh07dNXx48dV3NzcrI7mmO3t7apsY5s9P2mjO5cwkE8rJDPDurRkZ8inA+Jp1Uk2VRje1Zfsocf//XlrarHu46fUMZ8/nvyPF/Lppvu0ttyk4vOnFuiy2NKPqjg+/q46Nk6f03XNM5d0HLXg9OASNeXDRz6UMfUP/tFIRpmz4PqVF5xFsbGpFaqsdsHZjDo/Bffdd9+czeRn3a2hn0/jrH7ydbsyhnkuf2+kbq6j/P1ya2f+nXOrt8p4tkA2GcoRQAABBBCoHAG/r7n9titUxuv1lIzt53WV+RpK+smx0Gc5WeMU+jpL5mIdna+5SmVtzoEYgWoTILOo2u4460UAAQQQQAABBBBAAAEEEEAAAQQ8BHizyAOHKgQQQAABBBBAAAEEEEAAAQQQQKDaBIq+Da2joyPNULalpRV6nIyOjKrar33ta7rVnj17VPzAAw/oMmewb98+VbRp0yZd5dxatm7dOl23du1aFe/v2K+Ozra6YQ7B7t27VetkMpm117x583TdUz9+SsVjY2PqaKZqysO5w5Ri6dxyZk26kG1natFF/OPwm732aPPsLVrWydS4/fN0/HK9qrs/ltqGZjcO/5+D7y5Vkzzen3pI+ruDV2eduFeddHrjjczta7HYzVKd9Vi7wN7O59bgf/7AfoD9V/52g1u1KvP6efaqyzpgHhVeqdt+UratS0rathzNaeSyFc78O2+OYcV+tsFZ7Zxp2VaZ/FcqU7keRwQQQAABBBAIXsDP73c/bYoxU6/XVTJ+rq+vpJ95lG1x8trJz+MPzP7ECCCQuwCZRbmb0QMBBBBAAAEEEEAAAQQQQAABBBCoWIGiZxYVKvX1f/q6GuIL/+0Leig/WT/Hjh3T7f0Era2tfprl1Gbr1q1ztn/ooYd0m09+8pMq3rAheyaGblzi4PH/71V9xR/se13HVjA9cVGfz19Up2NVN5vJk1YYwMnM5Sk9qmQPXZlOlenKMgX1C2tyuvK5xdeq9gMftH8uz9etTPVPpsJyR5fGl6spXDasp2fv+e4f/m9V55VZVO75W9f3+qTNq66Yc/f6FM7Pp29mRpMZW3PMJbPJai+f0Fmx8z+/2U3OfpwjgAACCCCAQHUI+Hnt5KdNdWixSgSiJUBmUbTuF7NFAAEEEEAAAQQQQAABBBBAAAEEAhUITWaRfK39008/rRZ89OjRQBcehsGbGpvCMA3XORz7QypLZ9Gy6x1tnOeOah+n0+OZX+8+PZ7KWHIOMX7eflbO5OiQqgpTFpFzrn7Pf3fj7brp71elnqdlFS7SNemZXFIs2TxyHsQx3+ytX712Qk/nT29r1jFBSsDrEzavutQI+UWFZjTld1V6IYAAAggggAACCCCAQNQEyCyK2h1jvggggAACCCCAAAIIIIAAAggggECAArxZFCAuQyOAAAIIIIAAAggggAACCCCAAAJREwjNNrSTJ08qO3lY6+LFi7Na7t9vf9291WDXI7uytvOq6O7uVtXxVXGvZkWva2hoKPqYURxw/qLU19vL/N3KpO7S0DsqrITtZ7KmiQ99VMJY5lY/XfV+kN+2P7etfjKq15a/C79/SzWrJGtZd7Ufvba4edVZbud/9azi+/1Z++cjipbmFwxY8y/Gw70TiURWirlMs3akoqwCx5OvqOvve26PnseaVal/r3WhI1jT+HFHSeq0peETqRMiBBBAAAEEEEAgAgJkFkXgJjFFBBBAAAEEEEAAAQQQQAABBBBAoFQCocks2rx5s1qzHN0A2traVPGDDz6oq9evX69ieUB2e3u7rtu+fbuKm5vth+xKG6vw8OHDqm7Xrvwyk1TnAv/o7etVIyRWZ/9kusBL0N0hcDJWp0uaY5d0XImBV6aWW93k6FnFQEZRJf40sCZL4Bvf+IaCKPRB35IBaw1mxmrw9//o7++XcM7jmtZrU22yJ9Sm2hAFJvDzXz6uxv7FCz/IuEbPwBsZZc4Ct37ONl7niVW3Zq2OX/8RXffXG/9exwQIFCIgWXTWGCf7Xp1zKLLn5iSiAQIIIFBRAmQWVdTtZDEIIIAAAggggAACCCCAAAIIIIBAYQJFzyyS7B/zuUIyRSmrr69XRYcOHZKqmGT/6IIcg3Xr7K8e37lzp+7Z0tKiY2fQ2dmpigq9rnPcSjlvbbTvkbWeo33219WXc201dcvV5SdHhss5Da6NAAIVIOD1LCGvumIs3ZnVdOqMneVqjX148PliXKLkYySTA/qazvUF7akvnGMgGRXmc4n8ZA/leJmcmrtd/+K5cTXGy6/+Wo9FZpGmIMhTwCuLzmvIQrPnrLG9MuiczwZb3XCbns7NjbfrmAABBBBAoDQCZBaVxpmrIIAAAggggAACCCCAAAIIIIAAApEQ4M2iSNwmJokAAggggAACCCCAAAIIIIAAAgiURqDo29A6OjoCm7mfsc0HZJtxYJNiYAQQQAABBHwKOLdlzb/6ou55eFCH0QpmZvR89+xJfd28LvQI4vF41trGxsasdc6KRCL7F0WY5v/16ndV1+de+7FziFj9SvsJ42MXJzPqpGBsdFrCoh/HLqWuOzY6VfTxGbA6BWTLpbV62XbptuWxVDpe1z7eY2/LlZ//B+97pFTT4joIIIAAAi4CZBa5oFCEAAIIIIAAAggggAACCCCAAAIIVKtA0TOLqhWSdSOAAAIIIFCNAg2NqeygL/zjV+YkcD4E2+zQ09NjnmaN+/r60urM8/7+/rQ682T5HyfV6bWzWURmnY696nSjzGB0JHs20JhHXf9b9pdITE1dzhyUEgQKFPhh50N6BMmaq63LfPkfZNacnoBLMG383F+YfaC7SzOKEEAAAQTKIEBmURnQuSQCCCCAAAIIIIAAAggggAACCCAQVoHMjxbCOlPmhUAEBZYvrNGzHp5IPY9CFxIggAACVSZgPkPIuXSvOmfbfM7//Vf/Q3X7/dm38unu2aduyYKs9V51bx95L2s/t4rOzs6MYr/PbMroSEHFCgycsZ//k5ZFN5s1N89t1a6F6Q1HL3pkz3k+Zys1+KXZZ4INvTuqBpfnE6VfiTMEEEAAgTAIkFkUhrvAHBBAAAEEEEAAAQQQQAABBBBAAIGQCPBmUUhuBNNAAAEEEEAAAQQQQAABBBBAAAEEwiDANrQS34WGhgZ9xWQyqWMCBBBAAAEEEEBgLgHzYd7SVsq8Hu4tbd2O8XjqIeXO+sbGRmdRxjnb4DJIKrKgbqnHVkuPulgstQ0tNrsV7uLsw6zZhlaRPyosCgEEKkSAzKIKuZEsAwEEEEAAAQQQQAABBBBAAAEEECiGAJlFxVCswDE+2lSvV/XUszqMfNATW2KsIbeHihodixLWnX1bjzN6bbOOCRBAAAEEEMgmcN9992Wr8lXe29ubtV1PT0/WOrNCMpmkzDwvVnaTn4wmub51JLvJ1IjFfnf2SHpBBM9ubbkzgrNmyggggEDlCJBZVDn3kpUggAACCCCAAAIIIIAAAggggAACBQuQWVQwIQOUQqBmyXL7MoOluBrXQAABBBBAoDIFmpqasi7Mqy5rpzwqCs1uMjOZ5PJSlmtmU6HPa7KuT1aT3AWOCCCAAAKVJEBmUSXdTdaCAAIIIIAAAggggAACCCCAAAIIFCjAm0UFAtIdAQQQQAABBBBAAAEEEEAAAQQQqCQBtqFV0t0swlokNfzZZ182RltqxIQIeAu8dPikbvCnt/Hgbo1BgAACCCCgBLy2u3nVFYNPXue4jeXnAd+y3c3sL2W5boGTMQrdCue1DU6uwREBBBBAAIFcBcgsylWM9ggggAACCCCAAAIIIIAAAggggEAFC5BZVME3d66lmZ+uHThwQDWXT8WWr2qdqzv1FSZQU7eiwlbEchBAAAEEEEgX8Mpc8qpLHyX/M/O1l3MUP5lNVh/JZJL+5rm8jqu74T1VveQmacURAQQQQACB3ATILMrNi9YIIIAAAggggAACCCCAAAIIIIBARQuQWVTi29vU2KSvmEwmdRxUYH6C5cweMvfIr1+/Xk1BPlV77eQZPaWO3t/omACBuQQG+pO6ifz8yc+VriBAoACBq5cvVL0vDE8UMApdEUAAgdILeP0+9KrLdaaHjv9AdXn5xNO5dg2g/Ywx5jwVXxgeN8rcwyeeeEJXNDY26jhb4PXspmLaZrs+5QgggEClCZBZVGl3lPUggAACCCCAAAIIIIAAAggggAACBQjwZlEBeHRFAAEEEEAAAQQQQAABBBBAAAEEKk2AbWhlvKNBbEOTbT/OLWfWMmXb2ZYtW9SqSckt482v4EvPxK7o1bn9HOpKRyA/n45ideqVfu6Vdm515ufcTbQ6y944fkgt/NaWO6sTgFVHVqCliS+diOzNC+HEZVOYvSFsdoKuheWdvNvvfvNh3s7ZHTx40Fnk6zzf1x8yOK9DRIIjAghUmgCZRZV2R1kPAggggAACCCCAAAIIIIAAAgggUIAAmUUF4JWrq5/sIecDq3Od621rrs21C+1dBFbU1OjS4YlJHVdyEI+nHuJ+35f+cs6lys+zW0M/XyMs2Utmf/nqYLPMK3b7VNHtE03nGF6fJpLR5NTiHAEEEEDAr0D/r19STftffsVvF9Uufvsn1PHy0NwPkM5p4DI03rBhQ9GvWuhrDmtCzuwm8zzX1x+yQLfXIVLH6xGR4IgAAqUWILOo1OJcDwEEEEAAAQQQQAABBBBAAAEEEAixQOCZRXv37tXLl2fldHZ2qjLJftENjMCtn1Sb/fbt26eKFyxYINX6KGPIdXWFEex6ZJc62/bANqM0PKF8AmJmT8inFvIphLk+shm8713/vLpUA9mfnyopabRkqFdf710dVV/g9TPrVVcMKfn7JWP5yWSy2sqniHKU/tZR/n6aZc5Y/u46y61zPkF0U6EMgcoTOF8BmR+Vd1fKu6LnH31UT+DF7z2p41yCfPtdddPCrJf5QEP2uoWfuSZrvzBWeL2u8Kor5lqcrz3MsXN9HSJ9zdcjfl6HSD/zyGsTU4MYAQQsATKL+DlAAAEEEEAAAQQQQAABBBBAAAEEENACvFmkKQgQQAABBBBAAAEEEEAAAQQQQAABBALbhtbW1qZ0zS0VGzdunFP89OnTqs1Pf/pT3XZy0n4w8OTsA4LvuPMOXff4Y4+rWLaRSX+rcMeOHaru+PHj6tjc3KyO1h9dXV0qbm9vV8eNbam5me1UZcB/SDqq11Yzc+tdqdJkA152TsPX1K3IqT2NEfAj4Py75Dz3M0YubeTvulsfP6nnkmYuR3McP2nnhaSYJwcH1OVqorXjwCQiRgABBEIp8P0tm9W83unuLtv8Lp+ayHptqZuauaLbnJuw2zcGsA2tpalVX6cSA6/XGl51xbAo9HWIzMHtdcjBgwelOu+jn9cpQTz4PO8J0xGBChcgs6jCbzDLQwABBBBAAAEEEEAAAQQQQAABBHIRCCyzqKOjI2Mekm2UUWEUrFy5Up0988wzRqkdykOs/+Iv/iKjTgrkgdfW+aZNm1SxW6bQunXrVN3atWvVcX/HfnW0/nBrryt9BLt379atksmkjp3BvHnzVNGePXvU0Xw3XR5aHfQnDM45cY4AAsEJeP199qordEbF+iSx0HnQHwEEEKh2geHfvqYJfj77QOtyZhTpyXgEl6anVe3o9JRHK6qiIOD1WsOrrlhr83o9Yl3DT5Z1sebCOAggMLcAmUVzG9ECAQQQQAABBBBAAAEEEEAAAQQQqBqBwDKLghAcHRlVw/7iF7/Qw3/zm9/UsRUcO3Ys7Xyuk9bW4u+L3rp161yXVfUPPfSQOm7+kr1XPbE64asfjRBAAIFcBLw+LfSqM69x/lfPqtPfn33LLI5U/F/P/lLN9w8DI3POO5HI/u+xX7M5L0IDBBCoOoGh13+r13zdOwMqvq5+mS5zBhc9snkuTl12Ns84HymgPxlFGZwUFCgw1+/PueoLvDzdEUAgRwEyi3IEozkCCCCAAAIIIIAAAggggAACCCBQyQK8WVTJd5e1IYAAAggggAACCCCAAAIIIIAAAjkKRGob2tf/6etqeX/2Z3+ml2l+pbwuJEAAgbwFapYsV30nR4bzGuPVo2/n1Y9OCIRBQL4OWI7WnPr7+3OamvllBc6OjY2NaUW/G3ojdb44FRIhgAAClsDS+QuyQnjVpTotSoU+oqGJSd3qN2fP6pgAAQQQQKD6BMgsqr57zooRQAABBBBAAAEEEEAAAQQQQACBrAKRyCx68MEH1QJef/11ddy3b1/WBeVa0d3drbrEV8Vz7Vo17W9prFdrPdo3VDVrZqEIIJAucMOKW1RBlB9wfc9n/lyt4daWO9MXV4Qzr68D9voq4JkiXJshEEAAAQQQQAABBBAotgCZRcUWZTwEEEAAAQQQQAABBBBAAAEEEEAgwgKhzSxqa2vTrPKMh87OTl2WLbj33nt1VXt7u4q3b9+ujs3Nzbquq6tLxYcPH1bHXbt26ToCBIolUF+z0Bhq7q/rNhoTIoBAhAS8vu7Xq27gzAf1Kp859LyOoxQ899wLerrn/1CrYvm9rSuyBIlEIktNLObllrUTFQggUBKBRfH8HrJ2fmisJPPjIggggAAChQuQWVS4ISMggAACCCCAAAIIIIAAAggggAACFSPAm0UVcytZCAIIIIAAAggggAACCCCAAAIIIFC4QGDb0GQb2f79+zNmKWX19faDk60Ghw4dUu0GBwfV8bnnnlNH6w9p//jjj+syCW688UYVnjhxQh3XrVsnVbGdO3equKWlRZc5A9naZm5Rc7bhPDwChX6tu7mSE/PsFOrmmUtmMTECCCCAQA4Cd931Kd26flGjjrMFfX19ukri/v5+XeYniMezfymF1xa45OCAGr7mGj9XoQ0CCCCAAAIIIFC9AmQWVe+9Z+UIIIAAAggggAACCCCAAAIIIIBAhkBgmUUdHR0ZF/NTIBk+4+Pjfpp7ttm8ebOql6Nn4zJUNjQ0lOGqXDIsAnXDuX2SHpZ5Mw8EEEAgm8CGDRuyVRVc3tvbm3WMnp6erHWSvaQa5PdM3qxjU4FApQkMTU6UfUk3Jz5W9jkwAQQQQACBWIzMIn4KEEAAAQQQQAABBBBAAAEEEEAAAQS0AG8WaQoCBBBAAAEEEEAAAQQQQAABBBBAAIHAtqFB61+gt89OrU+sTvjvREsEEEAAAQSqSKCpqSnrar3qzE6P/Ow/zdPIxP39p/Rcn3jiCRV7PchbN34/SCSyv7bw62aOR4wAAggggAAC1SFAZlF13GdWiQACCCCAAAIIIIAAAggggAACCPgSILPIFxONEEAAAQQQQACB8gjE4zfpC/vJKDIf6i1xf39uX6oQj8f1NZ2BnzmQ0eRU4xwBBBBAAIFoCZBZFK37xWwRQAABBBBAAAEEEEAAAQQQQACBQAXILAqUl8ERQAABBBBAAIHiCWzYsKF4gzlG6u21n6FoFvf09JinrrFkL5mVUhaGjKYwPZtpuLvbZCJGAAEEEEAgtAJkFoX21jAxBBBAAAEEEEAAAQQQQAABBBBAoPQCvFlUenOuiAACCCCAAAIIIIAAAggggAACCIRWgG1oob014ZlYa2O9mszRvqHwTIqZIIAAAggggEBRBdy2a7mVFeuibtveZGw/29+strLdTfqZ56XaAsfDvEWfIwIIIIBAJQmQWVRJd5O1IIAAAggggAACCCCAAAIIIIAAAgUKkFlUIGAh3RsaGlT3ZDJZyDCB9DU/7Uv2ZT7wMpCLMigCCCCAAAIIVI2AV9aSV10xgMzXOc7x/GQ1mRlMEvvJZFp7akBfbpmOqie4MDRePYtlpQgggEDEBcgsivgNZPoIIIAAAggggAACCCCAAAIIIIBAMQXILCqmZoTHkk/YDhw4kLGKgf4rs2WrMupKXVBTt1xdcnJkuNSXzut69Qtr8upXzk6FGncf7dPT7+zs1LEV8FyHNA5OEEAAAQTKJOCVueRVV+h0X/nqV/QQQ28e1XHUgkWNtVGbMvNFAAEEEMhRgMyiHMFojgACCCCAAAIIIIAAAggggAACCFSyAG8WVfLdZW0IIIAAAggggAACCCCAAAIIIIBAjgJsQ8sRLMrNZauZPLjx4MGDejnxeFzF69evV0czBXt+xwlV9tSzb+v2lRCcjNWpZTTHLlXCciKxBrdtjn4eCCo/n+YiGxsbzdOsMVvfstJQgQACCCCAQOgEkkn7IeDOrezWRN1+p5uvWUO3GCaEAAIIRFiAzKII3zymjgACCCCAAAIIIIAAAggggAACCBRbgMyiYouGZDzJIjIzOSSDQ7I0tmzZomfLpzKaoixB3Rk7e2v02uayXD+oi27YsKGgoeXn2G0QyZBzq5OvMbbqzNg6l78HVuz1n/w9kTb5ZjLxd0sEOSKQm0D/r19SHfpffiVrx/jtn8he98k7stZRgQACIRaYmVGTc/7+tgrNrPhcVuD8nW719fN73S2TSa7L73eR4IgAApUqQGZRpd5Z1oUAAggggAACCCCAAAIIIIAAAgjkIUBmUR5oYetiZl9IJpFkT9x99916um7PI9KVHsFHm+pV7VPPejSiCoEABLw+tfOqy3cq5t8lGcMrg0namJ9+mrFVL38XpW22o/NTTz+feFpjOT/1DMIl25wpR6DYAt/fslkP+U53t46zBS9+78lsVZ7lH7hpYdb6qxrmrruqcVHW/lQggEBhAn/Z1q4GuLXlzrwGKsbvcrmw/E73+7tc+jl/p0u5dcz397s5Br/rTQ1iBBAISoDMoqBkGRcBBBBAAAEEEEAAAQQQQAABBBCIoABvFkXwpjFlBBBAAAEEEEAAAQQQQAABBBBAICiBkm5D27t3r1qHPFjZ/EpM2SLltlBnP7c2ux7ZpYq3PbAtozqX/lZntzEyBi1CQVNjkxolmUzOOZqZUivbYuQhf2aqqziSnjonKQ0QyBBw+3vjVpbRMc8C8++1DCF/v+Xc7Shp8VadxH5S5M1/K5zjzpUWf2Y66ezCOQIFC8hDrH+0LfN3d8GDewxw5dRE1lq3uqmZK6r9uU67X8POyvoygqwYVFSdwNnJyciv2e33tltZsRbq9rvcHDvX3+vSN5ff79LHOhbyu97q79zebpUF6WeNz38IIBBOATKLwnlfmBUCCCCAAAIIIIAAAggggAACCCBQFoHAM4va2tr0wuST640bN+qybMHp06d11Y4dO1R8/PhxdWxuTn2i19XVpcra2+2H4W1sS4199dVXqzpnf6tQxnD2t+pkDGljlQX5n1tmkXxK4XxgtTUP+cRAMrR4tz/Iu8PYCAQn4PZ3162sWDOQf1fM8fx84mm17+sbUN2W3GT2JkYgd4FcH2Kd+xWK0+PS9LQeaHR6SscECCCAgCkw1+/tuerNsXKN3X6vyxh+fr9L9pL0sY6yc8Es8xPL/5+YbeX//cwyZ+yWySRtgrSTa3BEAIHsAmQWZbehBgEEEEAAAQQQQAABBBBAAAEEEKg6gcAzizo6OjJQzWyjjMrZgn379umqTZs2qdgt02fdunWqbu3ateq4v2O/7re4brGKc+lvdZAx3K6nB/cZ7N69W7V0yx6SIebNm6fCJ554Qor0123Lu/SSRWQ1qOZ32WuWLLeNBjUVAQII+BRw+7fDrcxtuCWr7L90L5942q06EmV9fUk1zz8MjGTMl082M0iKXtDz3T1qzOvesbPUrJPFV9elXefi1OW082wnIx6ZPn7HcI4tzyUanbSziOTc2a4c5zcnPlaOy3JNBBAIuYDX73CvukKX5ZbRlG8mk5nd5PX8xc1f2qymnVidKHT69EcAAZ8CZBb5hKIZAggggAACCCCAAAIIIIAAAgggUA0CvFlUDXeZNSKAAAIIIIAAAggggAACCCCAAAI+BQLfhuZzHhnNjh07llHmVdDa2ppRncsYbv0zBsyjYOvWrVl79bzdo+r2fnevOsrX3lsnQaaOqovxR6wntmRW4b2SaCxfWKOuMzwR/a+lLQkYF0GgyAK9fX1qxA+vvlYdzdR3M7YqvVLhVefZP2SrsFmWywM9T53pNbtWXbx0/oK0NTvP0yrTThalnfk9uejYvvb2hVHd9dzEhI4JEAhKYOjNo0ENzbgIlEzA7f9T3MpKNiEuhAACgQiQWRQIK4MigAACCCCAAAIIIIAAAggggAAC0RQIbWZRNDkLmzXvyBfmR+/iCPAQ8eI4Mkr4BO75zJ+rSd3acmdBk8v3wZ7WRSWDSY6/H35Tz6X+wzokCEjAmbm0dMFV+kqD4zokQACBgAQuDPMXLSBahkUAAQSKLkBmUdFJGRABBBBAAAEEEEAAAQQQQAABBBCIrkDFZBZ1d3eruxBfFc/rbkh/q3O+Y+R14Qh0um2N/XyPCEyVKYZM4FevnVAz+tPbmkM2M6aTq8ANKz6iurwcezrXrkVvf/Vy+3k1F4bL84wZtyxQtzI/Cx84c1g3e+bQ13UcpSCZHNDT7ezsVHEiwVcbaxQCBCpQYFFTbQWuiiUhgAACCJgCZBaZGsQIIIAAAggggAACCCCAAAIIIIBAlQvwZlGV/wCwfAQQQAABBBBAAAEEEEAAAQQQQMAUCO02tHvvvVfPs729XcXbt29Xx+bm1JaWrq4uVXb4sJ3Kv2vXLt1vcHBQxc7+VqGM4exv1ZljWOdB/ZdYnZ6m3/N2j76Us05XEFSkQN3Zt9W6Rq9N/WxX5EJZFAIIVJ7AzIxekzy4W479/f26Lv77d1TcoEuqO7jIg36r+weA1WcVKPRLCLIOTAUCCCCAQE4CZBblxEVjBBBAAAEEEEAAAQQQQAABBBBAoLIFAs8samtr04L79+/XsRWY5/X19aru0KFD6rhu3Tp1tP7YuXOniltaWnSZM5CHakrGkFUvcS79zX7Oa3COAAIIIIAAAukCDY2pL5b4wufuS680znq+u0ed9fz4KaOUEAEEEEAAAQQQQCCMAmQWhfGuMCcEEEAAAQQQQAABBBBAAAEEEECgTAKBZxZ1dHQUvLTNmzerMeSY64DST4659qc9AggggAACCCBQLoFkckBfure3V8VNTU26jACBYgkMT0wWayjGQQABBBCIuACZRRG/gUwfAQQQQAABBBBAAAEEEEAAAQQQKKYAbxYVU5OxEEAAAQQQQAABBBBAAAEEEEAAgYgLBL4NLeI+TD9kAjV1K0I2I6aDAAIIIIBAsAL9/altaHv22A8K97piPJ566Li0a2xslDDrMZFIZNSx3S2DhAIEEEAAAQSqQoDMoqq4zSwSAQQQQAABBBBAAAEEEEAAAQQQ8CdAZpE/J1pVoED/vDp7VTMVuDiWhAACCCBQdIFFqxYXfUw/A95116d0sy987is6lkAeei3n5rGnp8c8dY37+vpUuRytk/7+fte2boVkMrmpUIYAAggggEC0Bcgsivb9Y/YIIIAAAggggAACCCCAAAIIIIBAUQXILCoqZ36DNTQ05NexxL1uaaxXVzzaN1TiK1fG5VbU1KiF8LW0lXE/WUX0BI6e+I2a9K0td0Zv8swYAQ8Br+cKedV5DOlZlW8mk5m5ZF3APPeTyeSWwSQT9fNMJqut87lMQfjInDiWVuA3R5JZL/gnH2nIWkcFAggggIC7AJlF7i6UIoAAAggggAACCCCAAAIIIIAAAlUpwJtFVXnbWTQCCCCAAAIIIIAAAggggAACCCDgLsA2NHeXspT29vXq6yZWZ359ra4kQAABBBBAAAEEyiTgtXXLqy7f6Tq3vfl5aLd1LXObm1xbyoLc9ubc6ibX5hiLXRieKDrDt37ynBrzyf94Ia+xW1tuyuh324fjGWXOgts92rDtzanFOQIIRFGAzKIo3jXmjAACCCCAAAIIIIAAAggggAACCAQkQGZRQLCVNGxnZ6dazkDyzOyyrqmk5YViLUuG7Kyyd0Mwm5q6FUWbxZNP7lVjvfFKU8aYfh5G6vbpbBCfWmdMjgIEEEAAgdAIOP/dd54Xe6LOTCZrfD/ZTJK1JEernzOD6S6rsAL+q12zuKyrkGwiaxL5ZhTJArqPn5JQH93KdOVskOt1Zy5PqZ6P/I//Uw/1p7c165gAAQQQCJsAmUVhuyPMBwEEEEAAAQQQQAABBBBAAAEEECijAJlFZcQP06XlU7QDBw6oaZmfhMlX1a5qaFV1R/uGwjR15hJigb/7u81qdiuXZf5T4/UprXwqK0dziebPplluxfKz6iy3zr0ymchgchOjDAEEEKhOAbfMJbeyXHSGXntVNX/llV/n0q2q2rY02a8zvRYtGUW5ZvV4jRl0nWQUTYycC/pSjI8AAggUVYDMoqJyMhgCCCCAAAIIIIAAAggggAACCCAQbQHeLIr2/WP2CCCAAAIIIIAAAggggAACCCCAQFEFMveGFHV4BgujgHPLmTVH2doj23i2bNmipy6p1//PYy/psnIHNUuW6ylMjgzrmCBcAi8dPqkmtP1Lf5kxMfm5yqgooEB+ts0hctnuduJ39tfvWv3H5w+oYeZfyXyge+Kmj5iXSItXxz+Wdm6etDR+wjyNBWGQdgFOEEAAAQQQiJiAfLGKOe3eS/XqNErbz2T+zu1nPNRaZDgigEDYBcgsCvsdYn4IIIAAAggggAACCCCAAAIIIIBACQXILCohdjkuZWZaOB9efffdd+sp3XfffTomQCCqAm6ZOm5lsr7jyVdUuOv7X7WLXP5FnP7AeWmuj8d/94KOnYFX3f/+lbN16lwymKamLqvC5hvW6craq67VsRXwsO40Dk4QQAABBCpAoL/f/gr76xf3Zazm33vsr51f5pG9Oz0+ktFvevxiRpmzYHois830+KizWU7nk6M8zDonMBojgEAoBcgsCuVtYVIIIIAAAggggAACCCCAAAIIIIBAeQRcPkcvz0Sq+aoNDQ1q+clksmAGySRyZhFZA0smUb5ZRK2N9n7xo31DBc8zTAOcmLdYTad55lKYpsVciiwgWUT7ntujR+4ZeEPH5Q4ujr+npjA2an96uvKTdXpKt9+yXsW5PH9Jd34/kGeSmWUSy3PK5Nw8mhlMvxuatbL/upjNiBFAAAEEIi4wNDFZ9hXE4zepObi9Tv1f/33fnPObv2hJRhu3soxGseszi3yUuGUyjQz2qJ5Xpu3f5W7DmM9kSiQSbk1UmVdmdNZOVCDN+dF2AABAAElEQVSAAAJFFCCzqIiYDIUAAggggAACCCCAAAIIIIAAAghEXYA3i6J+B5k/AggggAACCCCAAAIIIIAAAgggUESBSG1D27t3r1q6+bXuTotdj+zSRdse2KZjK5D+VuxnDGd/q1+Y/nNuOTPntn69vW2FFFZTpbxxfc3C2QlkPoCxvDOr7Ks//vQ/qgW+3X9EHcdGp8u+4OnZh1hfODfuay7y91iOvjr5bCT/jpjN3ba7NTY2qCaHB59XR/5AAAEEEECgmgXctrhduTz3dr6+vtQDvCX22i7uZux3C7mzL9venCKcI4CAlwCZRV461CGAAAIIIIAAAggggAACCCCAAAJVJhCJzKLTp0+r27Jjxw51PH78uL5Nzc3NKu7q6lLHL37xi7puy9YtKj5/3v7qa+lvFcoYzv5WXXt7u3WIbWzbqI7SRp2U6Q/z0395eLVMRbKIrPMgMg/kOhwRiIrAwJnDeqoTNfZX8d60ZpkuyxaMjmQ+kHLMpczZf+xi5ieJksEkWURWH3l49dRsZpFznHKcu/2b4VYmpocHyzHL4lwzmRxQA5kPF5WR+bRVJDgigAACCAQp4PYAb6/rmf8P4GznlgksbSRrSc6to5QVmslkfgGGOb4z5nerU4RzBKIlQGZRtO4Xs0UAAQQQQAABBBBAAAEEEEAAAQQCFYhEZlGhAvv22V+3uWnTJj2UM1to3bp1um7t2rUq3t+xXx2dbXXDAAP55PvgwYPqKubeZMkkcvv0P8ApMTQCFS9Qt2RBxhrdyjIarcz+ffIvdfZnNKegTAIzM2kXlk9YrUIzts79fupq/tts9bP+8/rE1fkp66kzvXYn/kQAAQQqVOD8kL/n8zmX/9rJM86iqjz3er3vVZcvVpgyme75zD16GYnVCR0TIIBAaQTILCqNM1dBAAEEEEAAAQQQQAABBBBAAAEEIiHAm0WRuE1MEgEEEEAAAQQQQAABBBBAAAEEECiNQCS2oa1cuVJpPPXUU+rY2tqqdSYmJlR84403quOJEyd0XW1trYqPHTumy/wE5vh+2vtps3v3btUsmUz6aR6bmd0usWWL/ZDuINJMfU2ERiURqBsO31almiXL9donR4Z1TIBAVAUaGuNq6hs2bChoCW4p+n4fMuq13e26OwqaFp0rUGBsakUFroolIeAucHPiY+4VESqthNdLXv/P4VWX721y+50qYwVxPRmbIwIIzC1AZtHcRrRAAAEEEEAAAQQQQAABBBBAAAEEqkYgEplFcjd++tOfqvCP/uiPpCi2Z88eFd97773q+NWvflXXPfbYYzoud7B169asU+h5u0fVPfvLZ3WbL3/5yzomyBSoqSPrJVOFkjAKXL18oZ7WhWE7E1IXEERSwO2TTreyXBf3yM/+j1y7hKJ9Mjmg5yGfELt5DHd363YE3gLvDNtfujE29UHV8OEfjugOD//wGzqWoLXlJgnV8bYP21l0aYUuJ7c72v3JRxpcWlGEgC2wKJ79yxwwmlug9ZbGuRtVYQu33xdVyMCSEQilAJlFobwtTAoBBBBAAAEEEEAAAQQQQAABBBAojwBvFpXHnasigAACCCCAAAIIIIAAAggggAACoRSIxDa0vXv3KrzXX39dHSXN3TpZsGCBKjt75qw63nFn6gmhBw4cUGW5/tE9myofX+UvjTvX8bO19/vw62z9gy7/aFO9usRTqd1yQV+S8SMu8OrRtyO+AqYvAquuXSshRwTSBWa/kMEqlK3h6Q3ss7Wn7O1qy9wqq7hMHmJ9duTDWkG2n+mCOYLu46fSWjjP0yqNkyf/4wXjzDs0t7pdnp5SjZ/8hv0lHN49qa0YgZmKWQkLQQABBBDwIUBmkQ8kmiCAAAIIIIAAAggggAACCCCAAALVIhCJzCI/N+PiyEXVbGDA/uTS7CMPv25vb9fF27dvV3Fzc7M6dnV16brDhw+reNeuXbqMoHIFTsbq1OKaY5cqd5FVtjKyYKrshrPcsgo0NKaycL/wj1/JOpdXvmrXDb15NGubaqo4M/rHarnvDN8QiWW/1n1cz3N6fFTHBP4Ehg/b2fH+WtMKAQQQQACB8guQWVT+e8AMEEAAAQQQQAABBBBAAAEEEEAAgdAIRCKzaPPmzQrsJz/5iTrW1NRkBdz1SCobaP369Wntdu7cqc9bWlp07Aw6OztVkWQdOes5RwABBBBAAAEEchV4vft63eXIkWhkFE1P2Fm3ZBPpW0eAAAIIIIBAVQiQWVQVt5lFIoAAAggggAACCCCAAAIIIIAAAv4EeLPInxOtEEAAAQQQQAABBBBAAAEEEEAAgaoQiMQ2NLkTHR0dEuZ1lO1sVmczzmswOiGQo0D9wuzbJ3MciuYIZAg8/+ijquzF7z2ZUScFN7a2SqiP8Y/dpmOvIH77J1T15b5xdbyqcZFXc+oQQMAQOHN+pTo7dWGTLl1y3YiOncH0uP2lHc5y63x6IrMuiC1ik6Pn1OWvTE+5TYOyChMYmpyosBWxHAQQQACBQgXILCpUkP4IIIAAAggggAACCCCAAAIIIIBABQlEKrOogtzTlpJYnUg75wQBBBDwEuj/9Uu6+kfbtul4ruCd7u6MJm5lGY3eL/DKWHK2v3zjAl20YN3VKq5ds1iXESCAQCw2f9GSrAxedbFY6iHZWQcwKqbH/WcwnRs4YvScO5QvBEkkMl/HNDU1zT0ALRDwEHi9d8ijlioEEEAAgaAFyCwKWpjxEUAAAQQQQAABBBBAAAEEEEAAgQgJkFkU0pvV83aPmhlZR+43qGbJ8lTFYCokQqBSBN7q+a1eimQSPf/EE6rMbzaQHqBEwaXpaXWl0bfH9BWvucHOMiKzSJMQIFBSAa8sJambHD2b15z6+vpUPzlaJ/39/XOOFY/HM9o0NjZmlDkLyGByipTxfGb22vPmnsOFIftZd3O3jGYLv39/pl8+qBb4/KNXZV2oPB/QrUH8k3e4FVOGQEUKbPzv+wpa1/5//ayv/l1dXardF7/4RXU8evSo7ldbW6vjag3ILKrWO8+6EUAAAQQQQAABBBBAAAEEEEAAARcB3ixyQaEIAQQQQAABBBBAAAEEEEAAAQQQqFYBtqFV653PY923rbk2j150yUWg7swJ1Xz02uZcuoW+baU9BPX0oP1g2j+cth/ebN6A61deME/zjqdePKb7/uiH/h9irTsFHEzNXNFXGJ20v1rbLNOVBAggULEC9913X05r6+3tTWvf02NvuU8rnD0xt7ZJvZT52epm9WG7m8hxDJOA1xdGeNW5reH2v/2/VPH6r3zVrZoyBBBAoCABMosK4qMzAggggAACCCCAAAIIIIAAAgggUFkCZBZV1v1kNXkI9MTk64vfy6M3XbwETukHnX5YNTtw4EBGc69PiIv5qXDGhX0WSBbR4SMf0j3eHczMKJLKN95ItbPLbpaqjGPtgnczy2rsshumFuu6iRvssGnqvC6T4OKUndWTuHxOFV2cuixVGceRabutWeHV3mwnWUNhyCJaunzR7NQyPcw5EyMQFoGz51aGZSplnUdTU1Pa9Z3naZV5njizl6xhSp3B5Paw7plkMs8VhafbosZgH/Z6S/OfhGexIZ+JfKHE5OVUlm/Ip8z0EIicwOnTp9WcW1pa1PHChczdA/X19aru0KFDen3NzfYOEen/6U9/Wtdt3LhRxd/61rd0mQSyE2P9+vVSVPYjmUVlvwVMAAEEEEAAAQQQQAABBBBAAAEEEAiPAJlF4bkXoZ2JfEqXygq5MbRzZWLFE6ipW64HmxwZ1nEuwU2zX4+8YcOGXLrptvKzpwveD/x8QizPtVD9rjd7e8eSRWS1kkwirywi79Hmrh2b+mBGIyk7KMkzRgspm7mcyhCaGh9VLf5t8rfquHS+/VX1RjcjdBnUqHWGF41MpBffPeOs5hwBBBAInYBbtpJbWaETz/X3U3JgQF2yodAL079qBSSbyAIYNX4/Vy0IC0cgYIGVK+2s4PPns2ey7927V83iH/7hH/Rs9u3bp2MrGBwc1OfT09MqnpmZUUfpb5186UtfUmUnTtjPsK2tDTabU11sjj/ILJoDiGoEEEAAAQQQQAABBBBAAAEEEECgmgR4s6ia7jZrRQABBBBAAAEEEEAAAQQQQAABBOYQYBvaHEClrG5oaCjl5VyvJWnVqS1nqWbysK3/1fNWqpAIgQAF3LYOuJV5TeGRn/2nV7Wqe73b3qt25Mjsk6Tn7FGeBtMTl9SFp2e3ngU9C+8tbUFfnfERQACB8Aq4/S5yK5MV9Lxjb0Pr+fFTUsQRAV8Csv3MbevZ6jvu8DUGjRBAIH+BBx98UHV++OGHsw4i/5/s1uC6667Txd/85jd1bAWf/exn9fm//Mu/6DgsAZlFYbkTzAMBBBBAAAEEEEAAAQQQQAABBBAIgQCZRSG4CeWagmQRWdd3ZhKZ745mflJGZlEh92z5whrVfXhispBhItG3+2hf6OZ59MRqPac3T9ys4umJi+o433j+c6myd/RkHIHbQ6yveDzQ8sS8xWqE5hk7+8gxHKcIIOAicHay8v8ddll2wUWttzQWPAYDIOAU6OtLqqI/DIyoY7LvsrNJpM9X1tovMj6+aFnGOswvlJDKoXH7yyyOjY9JEUcEECihQFdXl7ra008/rY6XLqVeY8vDp6VNGLOCikFFZlExFBkDAQQQQAABBBBAAAEEEEAAAQQQqBABMotCeiN7+3rVzBKrE0WboWQSObOIrAtIJlFmFlHRLs9ACIRCYP7CJXoei5bZzyqKxeSoqzyD6XH7U09pND1uZybJuXmUrKW0MpdnDkkm0dRsnVcWkTkWMQIIIIAAApUg0NtnZyN/ePW1ajkD/UljWauMOFzh5MhwwRNye0bg1AL7q7W9Bj/Z/1tVPfOhhbpZS8MndEyAAAL5C5w8eVJ1TiTs/x+fPz/zrZN//ud/Vm2uXLmS/4VC3JPMohDfHKaGAAIIIIAAAggggAACCCCAAAIIlFqAN4tKLc71EEAAAQQQQAABBBBAAAEEEEAAgRALZOZShXiyTM2/QJBbzm5prNcTOdo3pONSBjV1K0p5Oa4VYYEPrbAfYv37s/aD2VcsO51azalUmEs0f1FqK5vVz3mePpa/LW5DvS+rbmw/S9fjDAEEEKgEgeHu7lAvIwwPe7/nM3+ujG5tuVMdT12Ja7Onnn1bx1EN1sRGiz71jhd/oMb8z7d/4mvsxKpb09qtWfVRfb664TYV39x4uy4jQKBcAvv/NfWV8sWaw+nT9v8DtLS06CEvXLig4l2P7FJHeXC1dbJ582ZV9pOf2H+/amrsLylShbN//NVf/ZWKZmbm3jZq9otKTGZRVO4U80QAAQQQQAABBBBAAAEEEEAAAQRKIBDJzKK2tjZNs3//fh1bwY033qjPT5w4oWJ5h3Dv3r26bsuWLTp2BvLO4rYHtjmrQnkuWUTW5JwPr5YHV1t1PLzaUuC/sAj0//olNZX+l1/JOqX47ZkPaYx/8o6s7alAwEvguedeUNXn/1Crjo2N2b/+Wx5maI7Hv6GmBjECCCDgT+DC8Li/ho5W3WXKXndMo6JOewbeSFvPG2+9ps+/+netOiZAoBIFVq5cqZZ1/vz5nJbX0dGRU3tpLNeT9ySk3DxKG6vMq53Zp5QxmUWl1OZaCCCAAAIIIIAAAggggAACCCCAQMgFIpVZJBlF5qfBfvYHyv7EHTt26Ntx/PhxFTc3N6tjV1eXrmtvb1fxxraNaW10gzIHkknkzCKypiWZRHwCXuablOfl687ae/JHr7V/LvMcJnTdJIvo+See0HN7x8fzG1783pO6vZ/gxtbMT8UGr0mmdZ06vyh1bn87b+qcKKvA8oX2Pu3hicmsbcJecdddn1JTrF+UPaOob/arm+Vodejv759zafF46tka0tj8XSVlcnTLXJI6jggggEA1Csiziqpx7aVe89gl+3f52OiUvvR3v/ukiluajugyZ5Dr7zX+f8QpyDkC0RIgsyha94vZIoAAAggggAACCCCAAAIIIIAAAoEK8GZRoLwMjgACCCCAAAIIIIAAAggggAACCERLIBLb0GQbmWwLeOaZZ3JS3rdvn2q/adMm3U+2n0nBunXrJIytXbtWxfs79qujs61uWOSgoaFBj5hMJlXMljNNEljQP6/OHrsyv/EwMLdcBv7RttI8LN7P1rbLy65JTZ1taCmLKoo2bNhQtNXKv9HmgD09Peapa+y2jTh2vWtTChFAAIHwCshrp3nhnWIlz+zKdQvyWp65/UwGuPvuu1R4S7P9RSJev8vk/8mkr3WUMj9bt632btu3rXLrv3s+c486JlYn1JE/EECgPAJkFpXHnasigAACCCCAAAIIIIAAAggggAACoRSIRGbRyZMnFd7VV1+tjsuXL9eYExMTOraC+++/X58/9thjKj527Jgu8xO0ujwk108/P212796tm0n2kC5wCeTTZ3lwtdWEh8W5QFFUdIGaJam/Z7HBog9f8gEvTU+ra553/JtR8olwwYoScPv32K3Mz6If+dl/+mkWujbJ5EDo5sSEEECg+AILm2qLPygjZhUYmkz/fxy3hjesNrKlZxuMjaQeWu3s0//WkLNIn8vDq+V3mBx1gyIEfrNx532AVLUicDMEAgULkFlUMCEDIIAAAggggAACCCCAAAIIIIAAApUjEInMIuEeGrLfDR8eHpaiWG2t/SmHPNeopaVF133+85/XcViCrVu3Zp1KZ2enrpOsoy9/+cu6jACBqAosXXBVxtQvTl3OKCtWwdTMFT3U6KT9CZtZpisJEECgYIH+/lRm0UMPPZR1vLWn7HbLsragolwCkyOp11WlmMPx5CvqMru+/9WMyyVW3ZpRtmbVRzPKnAVrGj/uLIq1NHwio4wCBCpJoG5J5jOL3MpkzW8feU/CshzdspXcysoyOS6KAAIZAmQWZZBQgAACCCCAAAIIIIAAAggggAACCFSvAG8WVe+9Z+UIIIAAAggggAACCCCAAAIIIIBAhkCktqFlzN4oWLlypTq74w776x6N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"> <span class="source">Source: <a href="https://www.data-to-viz.com/caveat/3d.html">https://www.data-to-viz.com/</a></span></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="transmettre-un-message-précis" class="slide level2">
 <h2>Transmettre un message précis</h2>
@@ -929,15 +725,15 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="474" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 473;"><span id="cb6-474"><a href="#cb6-474"></a>dataset2 <span class="op">=</span> [{<span class="dt">name</span><span class="op">:</span> <span class="st">'January'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">65</span>}<span class="op">,</span>{<span class="dt">name</span><span class="op">:</span> <span class="st">'February'</span><span class="op">,</span> <span class="dt">value</span> <span class="op">:</span><span class="dv">59</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'March'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">80</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'April'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">81</span>}<span class="op">,</span> { <span class="dt">name</span><span class="op">:</span> <span class="st">'May'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">56</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'June'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">55</span>}<span class="op">,</span>{<span class="dt">name</span><span class="op">:</span> <span class="st">'July'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">40</span>}]</span>
-<span id="cb6-475"><a href="#cb6-475"></a></span>
-<span id="cb6-476"><a href="#cb6-476"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb6-477"><a href="#cb6-477"></a>  <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb6-478"><a href="#cb6-478"></a>  <span class="dt">x</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span> }<span class="op">,</span></span>
-<span id="cb6-479"><a href="#cb6-479"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb6-480"><a href="#cb6-480"></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dataset2<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">'value'</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">'black'</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.7</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">'black'</span><span class="op">,</span> <span class="dt">sort</span><span class="op">:</span> {<span class="st">"x"</span><span class="op">:</span> <span class="kw">null</span>} })<span class="op">,</span></span>
-<span id="cb6-481"><a href="#cb6-481"></a>  ]</span>
-<span id="cb6-482"><a href="#cb6-482"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb6" data-startfrom="474" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 473;"><span id="cb6-474"><a href=""></a>dataset2 <span class="op">=</span> [{<span class="dt">name</span><span class="op">:</span> <span class="st">'January'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">65</span>}<span class="op">,</span>{<span class="dt">name</span><span class="op">:</span> <span class="st">'February'</span><span class="op">,</span> <span class="dt">value</span> <span class="op">:</span><span class="dv">59</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'March'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">80</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'April'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">81</span>}<span class="op">,</span> { <span class="dt">name</span><span class="op">:</span> <span class="st">'May'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">56</span>}<span class="op">,</span> {<span class="dt">name</span><span class="op">:</span> <span class="st">'June'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">55</span>}<span class="op">,</span>{<span class="dt">name</span><span class="op">:</span> <span class="st">'July'</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">40</span>}]</span>
+<span id="cb6-475"><a href=""></a></span>
+<span id="cb6-476"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb6-477"><a href=""></a>  <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb6-478"><a href=""></a>  <span class="dt">x</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span> }<span class="op">,</span></span>
+<span id="cb6-479"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb6-480"><a href=""></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dataset2<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">'value'</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">'black'</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.7</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">'black'</span><span class="op">,</span> <span class="dt">sort</span><span class="op">:</span> {<span class="st">"x"</span><span class="op">:</span> <span class="kw">null</span>} })<span class="op">,</span></span>
+<span id="cb6-481"><a href=""></a>  ]</span>
+<span id="cb6-482"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-6-1" data-nodetype="declaration">
@@ -955,26 +751,26 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="490" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 489;"><span id="cb7-490"><a href="#cb7-490"></a>Plot <span class="op">=</span> <span class="pp">require</span>(<span class="st">'@observablehq/plot'</span>)</span>
-<span id="cb7-491"><a href="#cb7-491"></a></span>
-<span id="cb7-492"><a href="#cb7-492"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb7-493"><a href="#cb7-493"></a>  <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb7-494"><a href="#cb7-494"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
-<span id="cb7-495"><a href="#cb7-495"></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">85</span>]</span>
-<span id="cb7-496"><a href="#cb7-496"></a>  }<span class="op">,</span></span>
-<span id="cb7-497"><a href="#cb7-497"></a>  <span class="dt">x</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span> }<span class="op">,</span></span>
-<span id="cb7-498"><a href="#cb7-498"></a>  <span class="dt">style</span><span class="op">:</span> {</span>
-<span id="cb7-499"><a href="#cb7-499"></a>    <span class="dt">fontFamily</span><span class="op">:</span> <span class="st">"Inconsolata,monospace"</span><span class="op">,</span></span>
-<span id="cb7-500"><a href="#cb7-500"></a>    <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"17px"</span></span>
-<span id="cb7-501"><a href="#cb7-501"></a>  }<span class="op">,</span></span>
-<span id="cb7-502"><a href="#cb7-502"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb7-503"><a href="#cb7-503"></a>    Plot<span class="op">.</span><span class="fu">frame</span>({ <span class="dt">fill</span><span class="op">:</span> <span class="st">'brown'</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.65</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">'black'</span> })<span class="op">,</span></span>
-<span id="cb7-504"><a href="#cb7-504"></a>    Plot<span class="op">.</span><span class="fu">gridX</span>({ <span class="dt">interval</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span> <span class="dt">strokeOpacity</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">2.5</span> })<span class="op">,</span></span>
-<span id="cb7-505"><a href="#cb7-505"></a>    Plot<span class="op">.</span><span class="fu">gridY</span>({ <span class="dt">interval</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span> <span class="dt">strokeOpacity</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">2.5</span> })<span class="op">,</span></span>
-<span id="cb7-506"><a href="#cb7-506"></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dataset2<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">value</span> <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">'black'</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">'black'</span><span class="op">,</span> <span class="dt">dx</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">sort</span><span class="op">:</span> {<span class="st">"x"</span><span class="op">:</span> <span class="kw">null</span>} })<span class="op">,</span></span>
-<span id="cb7-507"><a href="#cb7-507"></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dataset2<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">'value'</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">'name'</span> })<span class="op">,</span></span>
-<span id="cb7-508"><a href="#cb7-508"></a>  ]</span>
-<span id="cb7-509"><a href="#cb7-509"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb7" data-startfrom="490" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 489;"><span id="cb7-490"><a href=""></a>Plot <span class="op">=</span> <span class="pp">require</span>(<span class="st">'@observablehq/plot'</span>)</span>
+<span id="cb7-491"><a href=""></a></span>
+<span id="cb7-492"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb7-493"><a href=""></a>  <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb7-494"><a href=""></a>  <span class="dt">y</span><span class="op">:</span> {</span>
+<span id="cb7-495"><a href=""></a>    <span class="dt">domain</span><span class="op">:</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">85</span>]</span>
+<span id="cb7-496"><a href=""></a>  }<span class="op">,</span></span>
+<span id="cb7-497"><a href=""></a>  <span class="dt">x</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span> }<span class="op">,</span></span>
+<span id="cb7-498"><a href=""></a>  <span class="dt">style</span><span class="op">:</span> {</span>
+<span id="cb7-499"><a href=""></a>    <span class="dt">fontFamily</span><span class="op">:</span> <span class="st">"Inconsolata,monospace"</span><span class="op">,</span></span>
+<span id="cb7-500"><a href=""></a>    <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"17px"</span></span>
+<span id="cb7-501"><a href=""></a>  }<span class="op">,</span></span>
+<span id="cb7-502"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb7-503"><a href=""></a>    Plot<span class="op">.</span><span class="fu">frame</span>({ <span class="dt">fill</span><span class="op">:</span> <span class="st">'brown'</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.65</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">'black'</span> })<span class="op">,</span></span>
+<span id="cb7-504"><a href=""></a>    Plot<span class="op">.</span><span class="fu">gridX</span>({ <span class="dt">interval</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span> <span class="dt">strokeOpacity</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">2.5</span> })<span class="op">,</span></span>
+<span id="cb7-505"><a href=""></a>    Plot<span class="op">.</span><span class="fu">gridY</span>({ <span class="dt">interval</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span> <span class="dt">strokeOpacity</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">2.5</span> })<span class="op">,</span></span>
+<span id="cb7-506"><a href=""></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dataset2<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">value</span> <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">'black'</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">'black'</span><span class="op">,</span> <span class="dt">dx</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">sort</span><span class="op">:</span> {<span class="st">"x"</span><span class="op">:</span> <span class="kw">null</span>} })<span class="op">,</span></span>
+<span id="cb7-507"><a href=""></a>    Plot<span class="op">.</span><span class="fu">barY</span>(dataset2<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">'value'</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">'name'</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">'name'</span> })<span class="op">,</span></span>
+<span id="cb7-508"><a href=""></a>  ]</span>
+<span id="cb7-509"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-7-1" data-nodetype="declaration">
@@ -990,8 +786,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 <ul>
 <li>D’autres auteurs parlent de “maximiser le rapport signal/bruit”, le signal étant l’information que nous voulons communiquer.</li>
 </ul>
@@ -1035,8 +830,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <p><img data-src="./img/hawaii-income-bars-bad-1.png"></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="./img/hawaii-income-bars-good-1.png"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="le-principe-de-la-proportionnalité-et-la-coupure-de-laxe-y-ou-x" class="slide level2">
 <h2>Le principe de la proportionnalité et la coupure de l’axe Y (ou X !)</h2>
@@ -1051,8 +845,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </div><div class="column small7 fragment" style="width:38%;">
 <p><br></p>
 <p><img data-src="./img/barchart-race.png"></p>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <p>While we see the rounded right end of the bars, the left end is left to our imagination. However, when our brains then try to rationalize where the bars start (i.e., KM = 0), we discover an inconsistency in the bars, as annotated in red and green above. The linear distances of the differences between 2021 Belgium / 1991 Australia (approx 46 KM) and 1991 Australia / 1984 Monaco (approx 50 KM) is clearly incorrect.</p>
 <style type="text/css">
@@ -1090,8 +883,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </div><div class="column fragment" style="width:33%;">
 <p><strong>Alternative :</strong></p>
 <p><img data-src="./img/fb-stock-drop-inverse-1.png"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="le-principe-de-la-proportionnalité" class="slide level2">
 <h2>Le principe de la proportionnalité</h2>
@@ -1110,8 +902,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <p><img data-src="./img/RI-pop-pie-1.png"></p>
 </div><div class="column fragment" style="width:33%;">
 <p><img data-src="./img/RI-pop-treemap-1.png"></p>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <p>https://www.data-to-viz.com/caveat/pie.html</p>
 <style type="text/css">
@@ -1146,8 +937,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <p><img data-src="./img/lollipop1.png"></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="./img/lollipop2.png"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="tri-des-données-1" class="slide level2">
 <h2>Tri des données</h2>
@@ -1155,12 +945,12 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb8" data-startfrom="713" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 712;"><span id="cb8-713"><a href="#cb8-713"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb8-714"><a href="#cb8-714"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb8-715"><a href="#cb8-715"></a>    Plot<span class="op">.</span><span class="fu">barY</span>(alphabet<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"letter"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"frequency"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"darkblue"</span>})<span class="op">,</span> <span class="co">// Sans trier sur l'axe X, même couleur pour tous les individus</span></span>
-<span id="cb8-716"><a href="#cb8-716"></a>    Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>]) <span class="co">// On ajoute manuelle une ligne horizontale, à la valeur 0</span></span>
-<span id="cb8-717"><a href="#cb8-717"></a>  ]</span>
-<span id="cb8-718"><a href="#cb8-718"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb8" data-startfrom="713" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 712;"><span id="cb8-713"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb8-714"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb8-715"><a href=""></a>    Plot<span class="op">.</span><span class="fu">barY</span>(alphabet<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"letter"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"frequency"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"darkblue"</span>})<span class="op">,</span> <span class="co">// Sans trier sur l'axe X, même couleur pour tous les individus</span></span>
+<span id="cb8-716"><a href=""></a>    Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>]) <span class="co">// On ajoute manuelle une ligne horizontale, à la valeur 0</span></span>
+<span id="cb8-717"><a href=""></a>  ]</span>
+<span id="cb8-718"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-8" data-nodetype="expression">
 
@@ -1169,20 +959,19 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb9" data-startfrom="726" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 725;"><span id="cb9-726"><a href="#cb9-726"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb9-727"><a href="#cb9-727"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb9-728"><a href="#cb9-728"></a>    Plot<span class="op">.</span><span class="fu">barY</span>(alphabet<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"letter"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"frequency"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"darkblue"</span><span class="op">,</span> <span class="dt">sort</span><span class="op">:</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span> <span class="dt">reverse</span><span class="op">:</span> <span class="kw">true</span>}})<span class="op">,</span> <span class="co">// On trie sur l'axe X</span></span>
-<span id="cb9-729"><a href="#cb9-729"></a>    Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>])</span>
-<span id="cb9-730"><a href="#cb9-730"></a>  ]</span>
-<span id="cb9-731"><a href="#cb9-731"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb9" data-startfrom="726" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 725;"><span id="cb9-726"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb9-727"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb9-728"><a href=""></a>    Plot<span class="op">.</span><span class="fu">barY</span>(alphabet<span class="op">,</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"letter"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"frequency"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"darkblue"</span><span class="op">,</span> <span class="dt">sort</span><span class="op">:</span> {<span class="dt">x</span><span class="op">:</span> <span class="st">"y"</span><span class="op">,</span> <span class="dt">reverse</span><span class="op">:</span> <span class="kw">true</span>}})<span class="op">,</span> <span class="co">// On trie sur l'axe X</span></span>
+<span id="cb9-729"><a href=""></a>    Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>])</span>
+<span id="cb9-730"><a href=""></a>  ]</span>
+<span id="cb9-731"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-9" data-nodetype="expression">
 
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="tri-des-données-2" class="slide level2">
 <h2>Tri des données</h2>
@@ -1214,14 +1003,14 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <section id="palettes-de-couleurs" class="slide level2">
 <h2>Palettes de couleurs</h2>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb10" data-startfrom="768" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 767;"><span id="cb10-768"><a href="#cb10-768"></a>dicopal <span class="op">=</span> <span class="im">import</span>(<span class="st">"https://cdn.skypack.dev/dicopal@0.8.1"</span>)</span>
-<span id="cb10-769"><a href="#cb10-769"></a></span>
-<span id="cb10-770"><a href="#cb10-770"></a><span class="kw">function</span> <span class="fu">makePalette</span>(colors) {</span>
-<span id="cb10-771"><a href="#cb10-771"></a>  <span class="cf">return</span> <span class="vs">`&lt;div style="display: grid; height: 4rem; padding: 0.5rem; gap: 1px;  </span></span>
-<span id="cb10-772"><a href="#cb10-772"></a><span class="vs">    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));"&gt;</span><span class="sc">${</span>colors</span>
-<span id="cb10-773"><a href="#cb10-773"></a>      <span class="op">.</span><span class="fu">map</span>((t) <span class="kw">=&gt;</span> <span class="vs">`&lt;span style="background:</span><span class="sc">${</span>t<span class="sc">}</span><span class="vs">;"&gt;&amp;nbsp;&lt;/span&gt;`</span>)</span>
-<span id="cb10-774"><a href="#cb10-774"></a>      <span class="op">.</span><span class="fu">join</span>(<span class="st">""</span>)<span class="sc">}</span><span class="vs">&lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb10-775"><a href="#cb10-775"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb10" data-startfrom="768" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 767;"><span id="cb10-768"><a href=""></a>dicopal <span class="op">=</span> <span class="im">import</span>(<span class="st">"https://cdn.skypack.dev/dicopal@0.8.1"</span>)</span>
+<span id="cb10-769"><a href=""></a></span>
+<span id="cb10-770"><a href=""></a><span class="kw">function</span> <span class="fu">makePalette</span>(colors) {</span>
+<span id="cb10-771"><a href=""></a>  <span class="cf">return</span> <span class="vs">`&lt;div style="display: grid; height: 4rem; padding: 0.5rem; gap: 1px;  </span></span>
+<span id="cb10-772"><a href=""></a><span class="vs">    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));"&gt;</span><span class="sc">${</span>colors</span>
+<span id="cb10-773"><a href=""></a>      <span class="op">.</span><span class="fu">map</span>((t) <span class="kw">=&gt;</span> <span class="vs">`&lt;span style="background:</span><span class="sc">${</span>t<span class="sc">}</span><span class="vs">;"&gt;&amp;nbsp;&lt;/span&gt;`</span>)</span>
+<span id="cb10-774"><a href=""></a>      <span class="op">.</span><span class="fu">join</span>(<span class="st">""</span>)<span class="sc">}</span><span class="vs">&lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb10-775"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-10-1" data-nodetype="declaration">
@@ -1241,7 +1030,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <li>Catégorielle (<em>categorical</em>)</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb11" data-startfrom="780" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 779;"><span id="cb11-780"><a href="#cb11-780"></a><span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">makePalette</span>(dicopal<span class="op">.</span><span class="fu">getPaletteById</span>(<span class="st">'Okabe_Ito_Categorigal_8'</span>)<span class="op">.</span><span class="at">colors</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb11" data-startfrom="780" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 779;"><span id="cb11-780"><a href=""></a><span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">makePalette</span>(dicopal<span class="op">.</span><span class="fu">getPaletteById</span>(<span class="st">'Okabe_Ito_Categorigal_8'</span>)<span class="op">.</span><span class="at">colors</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-11" data-nodetype="expression">
 
@@ -1252,7 +1041,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <li>Séquentielle (<em>sequential</em>)</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb12" data-startfrom="787" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 786;"><span id="cb12-787"><a href="#cb12-787"></a><span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">makePalette</span>(dicopal<span class="op">.</span><span class="fu">getPaletteById</span>(<span class="st">'Amp_6'</span>)<span class="op">.</span><span class="at">colors</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb12" data-startfrom="787" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 786;"><span id="cb12-787"><a href=""></a><span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">makePalette</span>(dicopal<span class="op">.</span><span class="fu">getPaletteById</span>(<span class="st">'Amp_6'</span>)<span class="op">.</span><span class="at">colors</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-12" data-nodetype="expression">
 
@@ -1260,7 +1049,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb13" data-startfrom="791" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 790;"><span id="cb13-791"><a href="#cb13-791"></a><span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">makePalette</span>(dicopal<span class="op">.</span><span class="fu">getPaletteById</span>(<span class="st">'YlOrRd_6'</span>)<span class="op">.</span><span class="at">colors</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb13" data-startfrom="791" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 790;"><span id="cb13-791"><a href=""></a><span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">makePalette</span>(dicopal<span class="op">.</span><span class="fu">getPaletteById</span>(<span class="st">'YlOrRd_6'</span>)<span class="op">.</span><span class="at">colors</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-13" data-nodetype="expression">
 
@@ -1271,7 +1060,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <li>Divergente (<em>diverging</em>)</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb14" data-startfrom="798" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 797;"><span id="cb14-798"><a href="#cb14-798"></a><span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">makePalette</span>(dicopal<span class="op">.</span><span class="fu">getPaletteById</span>(<span class="st">'PRGn_7'</span>)<span class="op">.</span><span class="at">colors</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb14" data-startfrom="798" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 797;"><span id="cb14-798"><a href=""></a><span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">makePalette</span>(dicopal<span class="op">.</span><span class="fu">getPaletteById</span>(<span class="st">'PRGn_7'</span>)<span class="op">.</span><span class="at">colors</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-14" data-nodetype="expression">
 
@@ -1279,7 +1068,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb15" data-startfrom="802" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 801;"><span id="cb15-802"><a href="#cb15-802"></a><span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">makePalette</span>(dicopal<span class="op">.</span><span class="fu">getPaletteById</span>(<span class="st">'RdBu_7'</span>)<span class="op">.</span><span class="at">colors</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb15" data-startfrom="802" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 801;"><span id="cb15-802"><a href=""></a><span class="fu">html</span><span class="vs">`</span><span class="sc">${</span><span class="fu">makePalette</span>(dicopal<span class="op">.</span><span class="fu">getPaletteById</span>(<span class="st">'RdBu_7'</span>)<span class="op">.</span><span class="at">colors</span>)<span class="sc">}</span><span class="vs">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-15" data-nodetype="expression">
 
@@ -1302,8 +1091,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <p><img data-src="./img/VISACTU-MAPFAIL.jpeg" class="img90"></p>
 </div><div class="column fragment" style="width:50%;">
 <p><img data-src="./img/mapfail-jdd.png" class="img120"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="palettes-de-couleurs-3" class="slide level2">
 <h2>Palettes de couleurs</h2>
@@ -1327,25 +1115,25 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <li>Assurez-vous que les couleurs utilisées offrent un <strong>contraste suffisant</strong> pour permettre une lecture facile, même pour les personnes ayant des difficultés visuelles.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb16" data-startfrom="856" data-source-offset="-76"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 855;"><span id="cb16-856"><a href="#cb16-856"></a><span class="kw">function</span> <span class="fu">corr</span>(x<span class="op">,</span> y) {</span>
-<span id="cb16-857"><a href="#cb16-857"></a>  <span class="kw">const</span> n <span class="op">=</span> x<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
-<span id="cb16-858"><a href="#cb16-858"></a>  <span class="cf">if</span> (y<span class="op">.</span><span class="at">length</span> <span class="op">!==</span> n)</span>
-<span id="cb16-859"><a href="#cb16-859"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">"The two columns must have the same length."</span>)<span class="op">;</span></span>
-<span id="cb16-860"><a href="#cb16-860"></a>  <span class="kw">const</span> x_ <span class="op">=</span> d3<span class="op">.</span><span class="fu">mean</span>(x)<span class="op">;</span></span>
-<span id="cb16-861"><a href="#cb16-861"></a>  <span class="kw">const</span> y_ <span class="op">=</span> d3<span class="op">.</span><span class="fu">mean</span>(y)<span class="op">;</span></span>
-<span id="cb16-862"><a href="#cb16-862"></a>  <span class="kw">const</span> XY <span class="op">=</span> d3<span class="op">.</span><span class="fu">sum</span>(x<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> (x[i] <span class="op">-</span> x_) <span class="op">*</span> (y[i] <span class="op">-</span> y_))<span class="op">;</span></span>
-<span id="cb16-863"><a href="#cb16-863"></a>  <span class="kw">const</span> XX <span class="op">=</span> d3<span class="op">.</span><span class="fu">sum</span>(x<span class="op">,</span> (d) <span class="kw">=&gt;</span> (d <span class="op">-</span> x_) <span class="op">**</span> <span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb16-864"><a href="#cb16-864"></a>  <span class="kw">const</span> YY <span class="op">=</span> d3<span class="op">.</span><span class="fu">sum</span>(y<span class="op">,</span> (d) <span class="kw">=&gt;</span> (d <span class="op">-</span> y_) <span class="op">**</span> <span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb16-865"><a href="#cb16-865"></a>  <span class="cf">return</span> XY <span class="op">/</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(XX <span class="op">*</span> YY)<span class="op">;</span></span>
-<span id="cb16-866"><a href="#cb16-866"></a>}</span>
-<span id="cb16-867"><a href="#cb16-867"></a></span>
-<span id="cb16-868"><a href="#cb16-868"></a>fields <span class="op">=</span> [<span class="st">"economy (mpg)"</span><span class="op">,</span> <span class="st">"cylinders"</span><span class="op">,</span> <span class="st">"displacement (cc)"</span><span class="op">,</span> <span class="st">"power (hp)"</span><span class="op">,</span> <span class="st">"weight (lb)"</span><span class="op">,</span> <span class="st">"0-60 mph (s)"</span><span class="op">,</span> <span class="st">"year"</span>]</span>
-<span id="cb16-869"><a href="#cb16-869"></a></span>
-<span id="cb16-870"><a href="#cb16-870"></a>correlations <span class="op">=</span> d3<span class="op">.</span><span class="fu">cross</span>(fields<span class="op">,</span> fields)<span class="op">.</span><span class="fu">map</span>(([a<span class="op">,</span> b]) <span class="kw">=&gt;</span> ({</span>
-<span id="cb16-871"><a href="#cb16-871"></a>  a<span class="op">,</span></span>
-<span id="cb16-872"><a href="#cb16-872"></a>  b<span class="op">,</span></span>
-<span id="cb16-873"><a href="#cb16-873"></a>  <span class="dt">correlation</span><span class="op">:</span> <span class="fu">corr</span>(Plot<span class="op">.</span><span class="fu">valueof</span>(cars<span class="op">,</span> a)<span class="op">,</span> Plot<span class="op">.</span><span class="fu">valueof</span>(cars<span class="op">,</span> b))</span>
-<span id="cb16-874"><a href="#cb16-874"></a>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb16" data-startfrom="856" data-source-offset="-76"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 855;"><span id="cb16-856"><a href=""></a><span class="kw">function</span> <span class="fu">corr</span>(x<span class="op">,</span> y) {</span>
+<span id="cb16-857"><a href=""></a>  <span class="kw">const</span> n <span class="op">=</span> x<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
+<span id="cb16-858"><a href=""></a>  <span class="cf">if</span> (y<span class="op">.</span><span class="at">length</span> <span class="op">!==</span> n)</span>
+<span id="cb16-859"><a href=""></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">"The two columns must have the same length."</span>)<span class="op">;</span></span>
+<span id="cb16-860"><a href=""></a>  <span class="kw">const</span> x_ <span class="op">=</span> d3<span class="op">.</span><span class="fu">mean</span>(x)<span class="op">;</span></span>
+<span id="cb16-861"><a href=""></a>  <span class="kw">const</span> y_ <span class="op">=</span> d3<span class="op">.</span><span class="fu">mean</span>(y)<span class="op">;</span></span>
+<span id="cb16-862"><a href=""></a>  <span class="kw">const</span> XY <span class="op">=</span> d3<span class="op">.</span><span class="fu">sum</span>(x<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> (x[i] <span class="op">-</span> x_) <span class="op">*</span> (y[i] <span class="op">-</span> y_))<span class="op">;</span></span>
+<span id="cb16-863"><a href=""></a>  <span class="kw">const</span> XX <span class="op">=</span> d3<span class="op">.</span><span class="fu">sum</span>(x<span class="op">,</span> (d) <span class="kw">=&gt;</span> (d <span class="op">-</span> x_) <span class="op">**</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb16-864"><a href=""></a>  <span class="kw">const</span> YY <span class="op">=</span> d3<span class="op">.</span><span class="fu">sum</span>(y<span class="op">,</span> (d) <span class="kw">=&gt;</span> (d <span class="op">-</span> y_) <span class="op">**</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb16-865"><a href=""></a>  <span class="cf">return</span> XY <span class="op">/</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">sqrt</span>(XX <span class="op">*</span> YY)<span class="op">;</span></span>
+<span id="cb16-866"><a href=""></a>}</span>
+<span id="cb16-867"><a href=""></a></span>
+<span id="cb16-868"><a href=""></a>fields <span class="op">=</span> [<span class="st">"economy (mpg)"</span><span class="op">,</span> <span class="st">"cylinders"</span><span class="op">,</span> <span class="st">"displacement (cc)"</span><span class="op">,</span> <span class="st">"power (hp)"</span><span class="op">,</span> <span class="st">"weight (lb)"</span><span class="op">,</span> <span class="st">"0-60 mph (s)"</span><span class="op">,</span> <span class="st">"year"</span>]</span>
+<span id="cb16-869"><a href=""></a></span>
+<span id="cb16-870"><a href=""></a>correlations <span class="op">=</span> d3<span class="op">.</span><span class="fu">cross</span>(fields<span class="op">,</span> fields)<span class="op">.</span><span class="fu">map</span>(([a<span class="op">,</span> b]) <span class="kw">=&gt;</span> ({</span>
+<span id="cb16-871"><a href=""></a>  a<span class="op">,</span></span>
+<span id="cb16-872"><a href=""></a>  b<span class="op">,</span></span>
+<span id="cb16-873"><a href=""></a>  <span class="dt">correlation</span><span class="op">:</span> <span class="fu">corr</span>(Plot<span class="op">.</span><span class="fu">valueof</span>(cars<span class="op">,</span> a)<span class="op">,</span> Plot<span class="op">.</span><span class="fu">valueof</span>(cars<span class="op">,</span> b))</span>
+<span id="cb16-874"><a href=""></a>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-16-1" data-nodetype="declaration">
@@ -1372,22 +1160,22 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 <div class="column" style="width:50%;">
 <p><span class="small"><strong>Difficile de lire les valeurs…</strong></span></p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb17" data-startfrom="883" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 882;"><span id="cb17-883"><a href="#cb17-883"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb17-884"><a href="#cb17-884"></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span></span>
-<span id="cb17-885"><a href="#cb17-885"></a>  <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
-<span id="cb17-886"><a href="#cb17-886"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">370</span><span class="op">,</span>  </span>
-<span id="cb17-887"><a href="#cb17-887"></a>  <span class="dt">color</span><span class="op">:</span> { <span class="dt">scheme</span><span class="op">:</span> <span class="st">"rdylbu"</span><span class="op">,</span> <span class="dt">pivot</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"correlation"</span> }<span class="op">,</span></span>
-<span id="cb17-888"><a href="#cb17-888"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb17-889"><a href="#cb17-889"></a>    Plot<span class="op">.</span><span class="fu">cell</span>(correlations<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"a"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"b"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"correlation"</span> })<span class="op">,</span></span>
-<span id="cb17-890"><a href="#cb17-890"></a></span>
-<span id="cb17-891"><a href="#cb17-891"></a>    Plot<span class="op">.</span><span class="fu">text</span>(correlations<span class="op">,</span> {</span>
-<span id="cb17-892"><a href="#cb17-892"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"a"</span><span class="op">,</span></span>
-<span id="cb17-893"><a href="#cb17-893"></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"b"</span><span class="op">,</span></span>
-<span id="cb17-894"><a href="#cb17-894"></a>      <span class="dt">text</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">correlation</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="op">,</span></span>
-<span id="cb17-895"><a href="#cb17-895"></a>      <span class="dt">fill</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> <span class="st">'black'</span></span>
-<span id="cb17-896"><a href="#cb17-896"></a>    })</span>
-<span id="cb17-897"><a href="#cb17-897"></a>  ]</span>
-<span id="cb17-898"><a href="#cb17-898"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb17" data-startfrom="883" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 882;"><span id="cb17-883"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb17-884"><a href=""></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span></span>
+<span id="cb17-885"><a href=""></a>  <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
+<span id="cb17-886"><a href=""></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">370</span><span class="op">,</span>  </span>
+<span id="cb17-887"><a href=""></a>  <span class="dt">color</span><span class="op">:</span> { <span class="dt">scheme</span><span class="op">:</span> <span class="st">"rdylbu"</span><span class="op">,</span> <span class="dt">pivot</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"correlation"</span> }<span class="op">,</span></span>
+<span id="cb17-888"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb17-889"><a href=""></a>    Plot<span class="op">.</span><span class="fu">cell</span>(correlations<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"a"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"b"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"correlation"</span> })<span class="op">,</span></span>
+<span id="cb17-890"><a href=""></a></span>
+<span id="cb17-891"><a href=""></a>    Plot<span class="op">.</span><span class="fu">text</span>(correlations<span class="op">,</span> {</span>
+<span id="cb17-892"><a href=""></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"a"</span><span class="op">,</span></span>
+<span id="cb17-893"><a href=""></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"b"</span><span class="op">,</span></span>
+<span id="cb17-894"><a href=""></a>      <span class="dt">text</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">correlation</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="op">,</span></span>
+<span id="cb17-895"><a href=""></a>      <span class="dt">fill</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> <span class="st">'black'</span></span>
+<span id="cb17-896"><a href=""></a>    })</span>
+<span id="cb17-897"><a href=""></a>  ]</span>
+<span id="cb17-898"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-17" data-nodetype="expression">
 
@@ -1397,30 +1185,29 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </div><div class="column fragment" style="width:50%;">
 <p><span class="small"><strong>Meilleure lisibilité :</strong></span></p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb18" data-startfrom="908" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 907;"><span id="cb18-908"><a href="#cb18-908"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb18-909"><a href="#cb18-909"></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">90</span><span class="op">,</span></span>
-<span id="cb18-910"><a href="#cb18-910"></a>  <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
-<span id="cb18-911"><a href="#cb18-911"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">370</span><span class="op">,</span></span>
-<span id="cb18-912"><a href="#cb18-912"></a>  <span class="dt">color</span><span class="op">:</span> { <span class="dt">scheme</span><span class="op">:</span> <span class="st">"rdylbu"</span><span class="op">,</span> <span class="dt">pivot</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"correlation"</span> }<span class="op">,</span></span>
-<span id="cb18-913"><a href="#cb18-913"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb18-914"><a href="#cb18-914"></a>    Plot<span class="op">.</span><span class="fu">cell</span>(correlations<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"a"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"b"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"correlation"</span> })<span class="op">,</span></span>
-<span id="cb18-915"><a href="#cb18-915"></a></span>
-<span id="cb18-916"><a href="#cb18-916"></a>    Plot<span class="op">.</span><span class="fu">text</span>(correlations<span class="op">,</span> {</span>
-<span id="cb18-917"><a href="#cb18-917"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"a"</span><span class="op">,</span></span>
-<span id="cb18-918"><a href="#cb18-918"></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"b"</span><span class="op">,</span></span>
-<span id="cb18-919"><a href="#cb18-919"></a>      <span class="dt">text</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">correlation</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="op">,</span></span>
-<span id="cb18-920"><a href="#cb18-920"></a>      <span class="dt">fill</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> (<span class="bu">Math</span><span class="op">.</span><span class="fu">abs</span>(d<span class="op">.</span><span class="at">correlation</span>) <span class="op">&gt;</span> <span class="fl">0.6</span> <span class="op">?</span> <span class="st">"white"</span> <span class="op">:</span> <span class="st">"black"</span>)</span>
-<span id="cb18-921"><a href="#cb18-921"></a>    })</span>
-<span id="cb18-922"><a href="#cb18-922"></a>  ]</span>
-<span id="cb18-923"><a href="#cb18-923"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb18" data-startfrom="908" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 907;"><span id="cb18-908"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb18-909"><a href=""></a>  <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">90</span><span class="op">,</span></span>
+<span id="cb18-910"><a href=""></a>  <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
+<span id="cb18-911"><a href=""></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">370</span><span class="op">,</span></span>
+<span id="cb18-912"><a href=""></a>  <span class="dt">color</span><span class="op">:</span> { <span class="dt">scheme</span><span class="op">:</span> <span class="st">"rdylbu"</span><span class="op">,</span> <span class="dt">pivot</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">legend</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"correlation"</span> }<span class="op">,</span></span>
+<span id="cb18-913"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb18-914"><a href=""></a>    Plot<span class="op">.</span><span class="fu">cell</span>(correlations<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"a"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"b"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"correlation"</span> })<span class="op">,</span></span>
+<span id="cb18-915"><a href=""></a></span>
+<span id="cb18-916"><a href=""></a>    Plot<span class="op">.</span><span class="fu">text</span>(correlations<span class="op">,</span> {</span>
+<span id="cb18-917"><a href=""></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"a"</span><span class="op">,</span></span>
+<span id="cb18-918"><a href=""></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"b"</span><span class="op">,</span></span>
+<span id="cb18-919"><a href=""></a>      <span class="dt">text</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">correlation</span><span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">2</span>)<span class="op">,</span></span>
+<span id="cb18-920"><a href=""></a>      <span class="dt">fill</span><span class="op">:</span> (d) <span class="kw">=&gt;</span> (<span class="bu">Math</span><span class="op">.</span><span class="fu">abs</span>(d<span class="op">.</span><span class="at">correlation</span>) <span class="op">&gt;</span> <span class="fl">0.6</span> <span class="op">?</span> <span class="st">"white"</span> <span class="op">:</span> <span class="st">"black"</span>)</span>
+<span id="cb18-921"><a href=""></a>    })</span>
+<span id="cb18-922"><a href=""></a>  ]</span>
+<span id="cb18-923"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-18" data-nodetype="expression">
 
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="contraste-et-lisibilité-1" class="slide level2">
 <h2>Contraste et lisibilité</h2>
@@ -1433,14 +1220,14 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 ❌
 </p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb19" data-startfrom="942" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 941;"><span id="cb19-942"><a href="#cb19-942"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb19-943"><a href="#cb19-943"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
-<span id="cb19-944"><a href="#cb19-944"></a>  <span class="dt">inset</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span></span>
-<span id="cb19-945"><a href="#cb19-945"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb19-946"><a href="#cb19-946"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(dd<span class="op">,</span> { <span class="dt">fill</span><span class="op">:</span> <span class="st">'yellow'</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">5</span> })<span class="op">,</span></span>
-<span id="cb19-947"><a href="#cb19-947"></a>    Plot<span class="op">.</span><span class="fu">frame</span>()</span>
-<span id="cb19-948"><a href="#cb19-948"></a>  ]</span>
-<span id="cb19-949"><a href="#cb19-949"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb19" data-startfrom="942" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 941;"><span id="cb19-942"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb19-943"><a href=""></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
+<span id="cb19-944"><a href=""></a>  <span class="dt">inset</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span></span>
+<span id="cb19-945"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb19-946"><a href=""></a>    Plot<span class="op">.</span><span class="fu">dot</span>(dd<span class="op">,</span> { <span class="dt">fill</span><span class="op">:</span> <span class="st">'yellow'</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">5</span> })<span class="op">,</span></span>
+<span id="cb19-947"><a href=""></a>    Plot<span class="op">.</span><span class="fu">frame</span>()</span>
+<span id="cb19-948"><a href=""></a>  ]</span>
+<span id="cb19-949"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-19" data-nodetype="expression">
 
@@ -1452,22 +1239,21 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 ✅
 </p>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb20" data-startfrom="959" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 958;"><span id="cb20-959"><a href="#cb20-959"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb20-960"><a href="#cb20-960"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
-<span id="cb20-961"><a href="#cb20-961"></a>  <span class="dt">inset</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span></span>
-<span id="cb20-962"><a href="#cb20-962"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb20-963"><a href="#cb20-963"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(dd<span class="op">,</span> { <span class="dt">fill</span><span class="op">:</span> <span class="st">'steelblue'</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">5</span> })<span class="op">,</span></span>
-<span id="cb20-964"><a href="#cb20-964"></a>    Plot<span class="op">.</span><span class="fu">frame</span>()</span>
-<span id="cb20-965"><a href="#cb20-965"></a>  ]</span>
-<span id="cb20-966"><a href="#cb20-966"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code hidden" id="cb20" data-startfrom="959" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 958;"><span id="cb20-959"><a href=""></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb20-960"><a href=""></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">300</span><span class="op">,</span></span>
+<span id="cb20-961"><a href=""></a>  <span class="dt">inset</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span></span>
+<span id="cb20-962"><a href=""></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb20-963"><a href=""></a>    Plot<span class="op">.</span><span class="fu">dot</span>(dd<span class="op">,</span> { <span class="dt">fill</span><span class="op">:</span> <span class="st">'steelblue'</span><span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">5</span> })<span class="op">,</span></span>
+<span id="cb20-964"><a href=""></a>    Plot<span class="op">.</span><span class="fu">frame</span>()</span>
+<span id="cb20-965"><a href=""></a>  ]</span>
+<span id="cb20-966"><a href=""></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-20" data-nodetype="expression">
 
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="processus-itératif" class="slide level2">
 <h2>Processus itératif</h2>
@@ -1512,8 +1298,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </ul>
 </div><div class="column" style="width:30%;">
 <p><img class="img120" src="https://64.media.tumblr.com/751c0f5f57d631df5daf692e5b88001a/tumblr_qqfe5kmQze1sgh0voo1_1280.jpg"></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="section-1" class="slide level2">
 <h2>&nbsp;</h2>
@@ -1528,12 +1313,14 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
 </svg>
 <p></p>
 </span></div>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
 
 </div>
-</section>
-    </div>
-  </div>
+</div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="CM-seance2_files/libs/revealjs/dist/reveal.js"></script>
@@ -1558,12 +1345,12 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -1717,7 +1504,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1744,7 +1531,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
       });
     </script>
     <script type="ojs-module-contents">
-    {"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"dataset = [{name: 'Allemagne', value: 65},{name: 'Albanie', value :59}, {name: 'Italie', value: 80}, {name: 'France', value: 81}, { name: 'Gabon', value: 56}, {name: 'Maroc', value: 55},{name: 'Égypte', value: 40}]\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"Plot.plot({\n  height: 300,\n  marks: [\n    Plot.barY(dataset, {x: 'name', y: 'value', fill: 'blue'}),\n  ]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"Plot.plot({\n  height: 300,\n  marks: [\n    Plot.barY(dataset, {x: 'name', y: 'value', fill: (d) => d.name === 'France' ? 'red' : 'blue'}),\n  ]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"dd = [[12, 30], [20, 10], [1, 4], [3, 12], [12, 4], [10, 20], [5, 1], [2, 9], [9, 4], [6, 20], [14, 10],[16, 20]];\nPlot.plot({\n  height: 300,\n  marks: [\n    Plot.dot(dd, { fill: (d, i) => i === 4 ? 'red' : 'blue', r: 5 }),\n  ]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"Plot.plot({\n  height: 300,\n  marks: [\n    Plot.dot(dd, { fill: 'red', symbol: (d, i) => i === 4 ? 'square' : 'circle' }),\n  ]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"dataset2 = [{name: 'January', value: 65},{name: 'February', value :59}, {name: 'March', value: 80}, {name: 'April', value: 81}, { name: 'May', value: 56}, {name: 'June', value: 55},{name: 'July', value: 40}]\n\nPlot.plot({\n  grid: true,\n  x: { label: null },\n  marks: [\n    Plot.barY(dataset2, {x: 'name', y: 'value', fill: 'black', fillOpacity: 0.7, stroke: 'black', sort: {\"x\": null} }),\n  ]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"Plot = require('@observablehq/plot')\n\nPlot.plot({\n  grid: true,\n  y: {\n    domain: [0, 85]\n  },\n  x: { label: null },\n  style: {\n    fontFamily: \"Inconsolata,monospace\",\n    fontSize: \"17px\"\n  },\n  marks: [\n    Plot.frame({ fill: 'brown', fillOpacity: 0.65, stroke: 'black' }),\n    Plot.gridX({ interval: 1, stroke: \"black\", strokeOpacity: 1, strokeWidth: 2.5 }),\n    Plot.gridY({ interval: 5, stroke: \"black\", strokeOpacity: 1, strokeWidth: 2.5 }),\n    Plot.barY(dataset2, { x: 'name', y: d => d.value + 1, fill: 'black', fillOpacity: 1, stroke: 'black', dx: 5, sort: {\"x\": null} }),\n    Plot.barY(dataset2, { x: 'name', y: 'value', fill: 'name', fillOpacity: 1, stroke: 'name' }),\n  ]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"Plot.plot({\n  marks: [\n    Plot.barY(alphabet, {x: \"letter\", y: \"frequency\", fill: \"darkblue\"}), // Sans trier sur l'axe X, même couleur pour tous les individus\n    Plot.ruleY([0]) // On ajoute manuelle une ligne horizontale, à la valeur 0\n  ]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"Plot.plot({\n  marks: [\n    Plot.barY(alphabet, {x: \"letter\", y: \"frequency\", fill: \"darkblue\", sort: {x: \"y\", reverse: true}}), // On trie sur l'axe X\n    Plot.ruleY([0])\n  ]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"dicopal = import(\"https://cdn.skypack.dev/dicopal@0.8.1\")\n\nfunction makePalette(colors) {\n  return `<div style=\"display: grid; height: 4rem; padding: 0.5rem; gap: 1px;  \n    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));\">${colors\n      .map((t) => `<span style=\"background:${t};\">&nbsp;</span>`)\n      .join(\"\")}</div>`;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"html`${makePalette(dicopal.getPaletteById('Okabe_Ito_Categorigal_8').colors)}`\n"},{"methodName":"interpret","cellName":"ojs-cell-12","inline":false,"source":"html`${makePalette(dicopal.getPaletteById('Amp_6').colors)}`\n"},{"methodName":"interpret","cellName":"ojs-cell-13","inline":false,"source":"html`${makePalette(dicopal.getPaletteById('YlOrRd_6').colors)}`\n"},{"methodName":"interpret","cellName":"ojs-cell-14","inline":false,"source":"html`${makePalette(dicopal.getPaletteById('PRGn_7').colors)}`\n"},{"methodName":"interpret","cellName":"ojs-cell-15","inline":false,"source":"html`${makePalette(dicopal.getPaletteById('RdBu_7').colors)}`\n"},{"methodName":"interpret","cellName":"ojs-cell-16","inline":false,"source":"// https://en.wikipedia.org/wiki/Correlation#Sample_correlation_coefficient\nfunction corr(x, y) {\n  const n = x.length;\n  if (y.length !== n)\n    throw new Error(\"The two columns must have the same length.\");\n  const x_ = d3.mean(x);\n  const y_ = d3.mean(y);\n  const XY = d3.sum(x, (_, i) => (x[i] - x_) * (y[i] - y_));\n  const XX = d3.sum(x, (d) => (d - x_) ** 2);\n  const YY = d3.sum(y, (d) => (d - y_) ** 2);\n  return XY / Math.sqrt(XX * YY);\n}\n\nfields = [\"economy (mpg)\", \"cylinders\", \"displacement (cc)\", \"power (hp)\", \"weight (lb)\", \"0-60 mph (s)\", \"year\"]\n\ncorrelations = d3.cross(fields, fields).map(([a, b]) => ({\n  a,\n  b,\n  correlation: corr(Plot.valueof(cars, a), Plot.valueof(cars, b))\n}))\n"},{"methodName":"interpret","cellName":"ojs-cell-17","inline":false,"source":"Plot.plot({\n  marginLeft: 100,\n  label: null,\n  height: 370,  \n  color: { scheme: \"rdylbu\", pivot: 0, legend: true, label: \"correlation\" },\n  marks: [\n    Plot.cell(correlations, { x: \"a\", y: \"b\", fill: \"correlation\" }),\n\n    Plot.text(correlations, {\n      x: \"a\",\n      y: \"b\",\n      text: (d) => d.correlation.toFixed(2),\n      fill: (d) => 'black'\n    })\n  ]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-18","inline":false,"source":"Plot.plot({\n  marginLeft: 90,\n  label: null,\n  height: 370,\n  color: { scheme: \"rdylbu\", pivot: 0, legend: true, label: \"correlation\" },\n  marks: [\n    Plot.cell(correlations, { x: \"a\", y: \"b\", fill: \"correlation\" }),\n\n    Plot.text(correlations, {\n      x: \"a\",\n      y: \"b\",\n      text: (d) => d.correlation.toFixed(2),\n      fill: (d) => (Math.abs(d.correlation) > 0.6 ? \"white\" : \"black\")\n    })\n  ]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-19","inline":false,"source":"Plot.plot({\n  height: 300,\n  inset: 10,\n  marks: [\n    Plot.dot(dd, { fill: 'yellow', r: 5 }),\n    Plot.frame()\n  ]\n})\n"},{"methodName":"interpret","cellName":"ojs-cell-20","inline":false,"source":"Plot.plot({\n  height: 300,\n  inset: 10,\n  marks: [\n    Plot.dot(dd, { fill: 'steelblue', r: 5 }),\n    Plot.frame()\n  ]\n})\n"}]}
+    eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImRhdGFzZXQgPSBbe25hbWU6ICdBbGxlbWFnbmUnLCB2YWx1ZTogNjV9LHtuYW1lOiAnQWxiYW5pZScsIHZhbHVlIDo1OX0sIHtuYW1lOiAnSXRhbGllJywgdmFsdWU6IDgwfSwge25hbWU6ICdGcmFuY2UnLCB2YWx1ZTogODF9LCB7IG5hbWU6ICdHYWJvbicsIHZhbHVlOiA1Nn0sIHtuYW1lOiAnTWFyb2MnLCB2YWx1ZTogNTV9LHtuYW1lOiAnw4lneXB0ZScsIHZhbHVlOiA0MH1dXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJQbG90LnBsb3Qoe1xuICBoZWlnaHQ6IDMwMCxcbiAgbWFya3M6IFtcbiAgICBQbG90LmJhclkoZGF0YXNldCwge3g6ICduYW1lJywgeTogJ3ZhbHVlJywgZmlsbDogJ2JsdWUnfSksXG4gIF1cbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJQbG90LnBsb3Qoe1xuICBoZWlnaHQ6IDMwMCxcbiAgbWFya3M6IFtcbiAgICBQbG90LmJhclkoZGF0YXNldCwge3g6ICduYW1lJywgeTogJ3ZhbHVlJywgZmlsbDogKGQpID0+IGQubmFtZSA9PT0gJ0ZyYW5jZScgPyAncmVkJyA6ICdibHVlJ30pLFxuICBdXG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC00IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiZGQgPSBbWzEyLCAzMF0sIFsyMCwgMTBdLCBbMSwgNF0sIFszLCAxMl0sIFsxMiwgNF0sIFsxMCwgMjBdLCBbNSwgMV0sIFsyLCA5XSwgWzksIDRdLCBbNiwgMjBdLCBbMTQsIDEwXSxbMTYsIDIwXV07XG5QbG90LnBsb3Qoe1xuICBoZWlnaHQ6IDMwMCxcbiAgbWFya3M6IFtcbiAgICBQbG90LmRvdChkZCwgeyBmaWxsOiAoZCwgaSkgPT4gaSA9PT0gNCA/ICdyZWQnIDogJ2JsdWUnLCByOiA1IH0pLFxuICBdXG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC01IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiUGxvdC5wbG90KHtcbiAgaGVpZ2h0OiAzMDAsXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5kb3QoZGQsIHsgZmlsbDogJ3JlZCcsIHN5bWJvbDogKGQsIGkpID0+IGkgPT09IDQgPyAnc3F1YXJlJyA6ICdjaXJjbGUnIH0pLFxuICBdXG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC02IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiZGF0YXNldDIgPSBbe25hbWU6ICdKYW51YXJ5JywgdmFsdWU6IDY1fSx7bmFtZTogJ0ZlYnJ1YXJ5JywgdmFsdWUgOjU5fSwge25hbWU6ICdNYXJjaCcsIHZhbHVlOiA4MH0sIHtuYW1lOiAnQXByaWwnLCB2YWx1ZTogODF9LCB7IG5hbWU6ICdNYXknLCB2YWx1ZTogNTZ9LCB7bmFtZTogJ0p1bmUnLCB2YWx1ZTogNTV9LHtuYW1lOiAnSnVseScsIHZhbHVlOiA0MH1dXG5cblBsb3QucGxvdCh7XG4gIGdyaWQ6IHRydWUsXG4gIHg6IHsgbGFiZWw6IG51bGwgfSxcbiAgbWFya3M6IFtcbiAgICBQbG90LmJhclkoZGF0YXNldDIsIHt4OiAnbmFtZScsIHk6ICd2YWx1ZScsIGZpbGw6ICdibGFjaycsIGZpbGxPcGFjaXR5OiAwLjcsIHN0cm9rZTogJ2JsYWNrJywgc29ydDoge1wieFwiOiBudWxsfSB9KSxcbiAgXVxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlBsb3QgPSByZXF1aXJlKCdAb2JzZXJ2YWJsZWhxL3Bsb3QnKVxuXG5QbG90LnBsb3Qoe1xuICBncmlkOiB0cnVlLFxuICB5OiB7XG4gICAgZG9tYWluOiBbMCwgODVdXG4gIH0sXG4gIHg6IHsgbGFiZWw6IG51bGwgfSxcbiAgc3R5bGU6IHtcbiAgICBmb250RmFtaWx5OiBcIkluY29uc29sYXRhLG1vbm9zcGFjZVwiLFxuICAgIGZvbnRTaXplOiBcIjE3cHhcIlxuICB9LFxuICBtYXJrczogW1xuICAgIFBsb3QuZnJhbWUoeyBmaWxsOiAnYnJvd24nLCBmaWxsT3BhY2l0eTogMC42NSwgc3Ryb2tlOiAnYmxhY2snIH0pLFxuICAgIFBsb3QuZ3JpZFgoeyBpbnRlcnZhbDogMSwgc3Ryb2tlOiBcImJsYWNrXCIsIHN0cm9rZU9wYWNpdHk6IDEsIHN0cm9rZVdpZHRoOiAyLjUgfSksXG4gICAgUGxvdC5ncmlkWSh7IGludGVydmFsOiA1LCBzdHJva2U6IFwiYmxhY2tcIiwgc3Ryb2tlT3BhY2l0eTogMSwgc3Ryb2tlV2lkdGg6IDIuNSB9KSxcbiAgICBQbG90LmJhclkoZGF0YXNldDIsIHsgeDogJ25hbWUnLCB5OiBkID0+IGQudmFsdWUgKyAxLCBmaWxsOiAnYmxhY2snLCBmaWxsT3BhY2l0eTogMSwgc3Ryb2tlOiAnYmxhY2snLCBkeDogNSwgc29ydDoge1wieFwiOiBudWxsfSB9KSxcbiAgICBQbG90LmJhclkoZGF0YXNldDIsIHsgeDogJ25hbWUnLCB5OiAndmFsdWUnLCBmaWxsOiAnbmFtZScsIGZpbGxPcGFjaXR5OiAxLCBzdHJva2U6ICduYW1lJyB9KSxcbiAgXVxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtOCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlBsb3QucGxvdCh7XG4gIG1hcmtzOiBbXG4gICAgUGxvdC5iYXJZKGFscGhhYmV0LCB7eDogXCJsZXR0ZXJcIiwgeTogXCJmcmVxdWVuY3lcIiwgZmlsbDogXCJkYXJrYmx1ZVwifSksIC8vIFNhbnMgdHJpZXIgc3VyIGwnYXhlIFgsIG3Dqm1lIGNvdWxldXIgcG91ciB0b3VzIGxlcyBpbmRpdmlkdXNcbiAgICBQbG90LnJ1bGVZKFswXSkgLy8gT24gYWpvdXRlIG1hbnVlbGxlIHVuZSBsaWduZSBob3Jpem9udGFsZSwgw6AgbGEgdmFsZXVyIDBcbiAgXVxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtOSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlBsb3QucGxvdCh7XG4gIG1hcmtzOiBbXG4gICAgUGxvdC5iYXJZKGFscGhhYmV0LCB7eDogXCJsZXR0ZXJcIiwgeTogXCJmcmVxdWVuY3lcIiwgZmlsbDogXCJkYXJrYmx1ZVwiLCBzb3J0OiB7eDogXCJ5XCIsIHJldmVyc2U6IHRydWV9fSksIC8vIE9uIHRyaWUgc3VyIGwnYXhlIFhcbiAgICBQbG90LnJ1bGVZKFswXSlcbiAgXVxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTAiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJkaWNvcGFsID0gaW1wb3J0KFwiaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvZGljb3BhbEAwLjguMVwiKVxuXG5mdW5jdGlvbiBtYWtlUGFsZXR0ZShjb2xvcnMpIHtcbiAgcmV0dXJuIGA8ZGl2IHN0eWxlPVwiZGlzcGxheTogZ3JpZDsgaGVpZ2h0OiA0cmVtOyBwYWRkaW5nOiAwLjVyZW07IGdhcDogMXB4OyAgXG4gICAgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiByZXBlYXQoYXV0by1maXQsIG1pbm1heCgwLCAxZnIpKTtcIj4ke2NvbG9yc1xuICAgICAgLm1hcCgodCkgPT4gYDxzcGFuIHN0eWxlPVwiYmFja2dyb3VuZDoke3R9O1wiPiZuYnNwOzwvc3Bhbj5gKVxuICAgICAgLmpvaW4oXCJcIil9PC9kaXY+YDtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTEiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJodG1sYCR7bWFrZVBhbGV0dGUoZGljb3BhbC5nZXRQYWxldHRlQnlJZCgnT2thYmVfSXRvX0NhdGVnb3JpZ2FsXzgnKS5jb2xvcnMpfWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJodG1sYCR7bWFrZVBhbGV0dGUoZGljb3BhbC5nZXRQYWxldHRlQnlJZCgnQW1wXzYnKS5jb2xvcnMpfWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJodG1sYCR7bWFrZVBhbGV0dGUoZGljb3BhbC5nZXRQYWxldHRlQnlJZCgnWWxPclJkXzYnKS5jb2xvcnMpfWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTQiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJodG1sYCR7bWFrZVBhbGV0dGUoZGljb3BhbC5nZXRQYWxldHRlQnlJZCgnUFJHbl83JykuY29sb3JzKX1gXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTE1IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiaHRtbGAke21ha2VQYWxldHRlKGRpY29wYWwuZ2V0UGFsZXR0ZUJ5SWQoJ1JkQnVfNycpLmNvbG9ycyl9YFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xNiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIGh0dHBzOi8vZW4ud2lraXBlZGlhLm9yZy93aWtpL0NvcnJlbGF0aW9uI1NhbXBsZV9jb3JyZWxhdGlvbl9jb2VmZmljaWVudFxuZnVuY3Rpb24gY29ycih4LCB5KSB7XG4gIGNvbnN0IG4gPSB4Lmxlbmd0aDtcbiAgaWYgKHkubGVuZ3RoICE9PSBuKVxuICAgIHRocm93IG5ldyBFcnJvcihcIlRoZSB0d28gY29sdW1ucyBtdXN0IGhhdmUgdGhlIHNhbWUgbGVuZ3RoLlwiKTtcbiAgY29uc3QgeF8gPSBkMy5tZWFuKHgpO1xuICBjb25zdCB5XyA9IGQzLm1lYW4oeSk7XG4gIGNvbnN0IFhZID0gZDMuc3VtKHgsIChfLCBpKSA9PiAoeFtpXSAtIHhfKSAqICh5W2ldIC0geV8pKTtcbiAgY29uc3QgWFggPSBkMy5zdW0oeCwgKGQpID0+IChkIC0geF8pICoqIDIpO1xuICBjb25zdCBZWSA9IGQzLnN1bSh5LCAoZCkgPT4gKGQgLSB5XykgKiogMik7XG4gIHJldHVybiBYWSAvIE1hdGguc3FydChYWCAqIFlZKTtcbn1cblxuZmllbGRzID0gW1wiZWNvbm9teSAobXBnKVwiLCBcImN5bGluZGVyc1wiLCBcImRpc3BsYWNlbWVudCAoY2MpXCIsIFwicG93ZXIgKGhwKVwiLCBcIndlaWdodCAobGIpXCIsIFwiMC02MCBtcGggKHMpXCIsIFwieWVhclwiXVxuXG5jb3JyZWxhdGlvbnMgPSBkMy5jcm9zcyhmaWVsZHMsIGZpZWxkcykubWFwKChbYSwgYl0pID0+ICh7XG4gIGEsXG4gIGIsXG4gIGNvcnJlbGF0aW9uOiBjb3JyKFBsb3QudmFsdWVvZihjYXJzLCBhKSwgUGxvdC52YWx1ZW9mKGNhcnMsIGIpKVxufSkpXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTE3IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiUGxvdC5wbG90KHtcbiAgbWFyZ2luTGVmdDogMTAwLFxuICBsYWJlbDogbnVsbCxcbiAgaGVpZ2h0OiAzNzAsICBcbiAgY29sb3I6IHsgc2NoZW1lOiBcInJkeWxidVwiLCBwaXZvdDogMCwgbGVnZW5kOiB0cnVlLCBsYWJlbDogXCJjb3JyZWxhdGlvblwiIH0sXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5jZWxsKGNvcnJlbGF0aW9ucywgeyB4OiBcImFcIiwgeTogXCJiXCIsIGZpbGw6IFwiY29ycmVsYXRpb25cIiB9KSxcblxuICAgIFBsb3QudGV4dChjb3JyZWxhdGlvbnMsIHtcbiAgICAgIHg6IFwiYVwiLFxuICAgICAgeTogXCJiXCIsXG4gICAgICB0ZXh0OiAoZCkgPT4gZC5jb3JyZWxhdGlvbi50b0ZpeGVkKDIpLFxuICAgICAgZmlsbDogKGQpID0+ICdibGFjaydcbiAgICB9KVxuICBdXG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xOCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlBsb3QucGxvdCh7XG4gIG1hcmdpbkxlZnQ6IDkwLFxuICBsYWJlbDogbnVsbCxcbiAgaGVpZ2h0OiAzNzAsXG4gIGNvbG9yOiB7IHNjaGVtZTogXCJyZHlsYnVcIiwgcGl2b3Q6IDAsIGxlZ2VuZDogdHJ1ZSwgbGFiZWw6IFwiY29ycmVsYXRpb25cIiB9LFxuICBtYXJrczogW1xuICAgIFBsb3QuY2VsbChjb3JyZWxhdGlvbnMsIHsgeDogXCJhXCIsIHk6IFwiYlwiLCBmaWxsOiBcImNvcnJlbGF0aW9uXCIgfSksXG5cbiAgICBQbG90LnRleHQoY29ycmVsYXRpb25zLCB7XG4gICAgICB4OiBcImFcIixcbiAgICAgIHk6IFwiYlwiLFxuICAgICAgdGV4dDogKGQpID0+IGQuY29ycmVsYXRpb24udG9GaXhlZCgyKSxcbiAgICAgIGZpbGw6IChkKSA9PiAoTWF0aC5hYnMoZC5jb3JyZWxhdGlvbikgPiAwLjYgPyBcIndoaXRlXCIgOiBcImJsYWNrXCIpXG4gICAgfSlcbiAgXVxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTkiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJQbG90LnBsb3Qoe1xuICBoZWlnaHQ6IDMwMCxcbiAgaW5zZXQ6IDEwLFxuICBtYXJrczogW1xuICAgIFBsb3QuZG90KGRkLCB7IGZpbGw6ICd5ZWxsb3cnLCByOiA1IH0pLFxuICAgIFBsb3QuZnJhbWUoKVxuICBdXG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yMCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlBsb3QucGxvdCh7XG4gIGhlaWdodDogMzAwLFxuICBpbnNldDogMTAsXG4gIG1hcmtzOiBbXG4gICAgUGxvdC5kb3QoZGQsIHsgZmlsbDogJ3N0ZWVsYmx1ZScsIHI6IDUgfSksXG4gICAgUGxvdC5mcmFtZSgpXG4gIF1cbn0pXG4ifV19
     </script>
     <script type="module">
     if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
@@ -1786,18 +1573,7 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1829,11 +1605,48 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1843,8 +1656,17 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1858,7 +1680,11 @@ Conseils pratiques pour parvenir à une visualisation de données pertinente
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
