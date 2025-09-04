@@ -38,7 +38,7 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 
 ## URL des TPs sur Observable
 
-L'ensemble des notebooks disponibles peut-être retrouvé ici : [https://observablehq.com/@sd-progwebdataviz?tab=collections](https://observablehq.com/@sd-progwebdataviz?tab=collections)
+L'ensemble des notebooks disponibles peut-être retrouvé ici : [https://observablehq.com/@sd-progwebdataviz?type=collections](https://observablehq.com/@sd-progwebdataviz?type=collections)
 
 En détails (les liens seront mis à jour au fur et à mesure de la progression du cours) :
 
