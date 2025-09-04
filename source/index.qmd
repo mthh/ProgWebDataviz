@@ -16,7 +16,7 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 - rappels des principes de base de la visualisation de données (perception visuelle, encodage des données, interaction, etc.) et des principaux types de graphiques,
 - aperçu des principales bibliothèques pour la visualisation de données,
 - HTML, CSS et JavaScript,
-- réalisation de reporting / visualisations Web interactives / dashboards avec les bibliothèques Plot et D3.js ainsi que des données réelles,
+- réalisation de reporting / visualisations Web interactives / dashboards avec les bibliothèques Plot, Leaflet, D3.js ainsi que des données en Open Data,
 - création de rapports Web avec R et Quarto (en fonction du temps restant).
 
 
@@ -58,8 +58,8 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 
 Pour aller plus loin :
 
-- [Faire des graphiques avec D3.js - Une introduction]()
-- [Exercice - Un *scatter plot* avec D3.js]()
+- Faire des graphiques avec D3.js - Une introduction (lien à venir)
+- Exercice - Un *scatter plot* avec D3.js (lien à venir)
 
 
 ## Évaluation
@@ -67,7 +67,7 @@ Pour aller plus loin :
 Ce cours est en contrôle continu intégral.
 La note sera constituée de :
 
-- une note de projet (50%) - ce [projet](https://observablehq.com/@sd-progwebdataviz/tp-note-temps-de-parole-des-hommes-et-des-femmes-a) sera réalisé en binôme et rendu avant le 01/11/2025
+- une note de projet (50%) - ce projet sera réalisé en binôme et rendu avant le 01/11/2025
 - un TP noté (50%) - ce TP individuel sera réalisé en salle courant novembre 2025 
 
 ## Ressources utiles
@@ -76,15 +76,18 @@ La note sera constituée de :
 
 - [From Data to Viz](https://www.data-to-viz.com/) (typologie des graphiques)
 - [The Data Visualisation Catalogue](https://datavizcatalogue.com/) (typologie des graphiques)
+- [DataVizProject](https://datavizproject.com/) (collection de graphiques pour trouver l'inspiration et le type approprié)
 <br><br>
 
 - [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/), Claus O. Wilke, 2019 (livre en ligne)
 - Data Visualisation - A Handbook for Data Driven Design, 2nd Edition, Andy Kirk, 2019 (livre)
 <br><br>
 
-- [FlowingData](https://flowingdata.com/) (blog - ressources variées)
-- [Visualization design resources](https://www.cs.ubc.ca/group/infovis/resources.shtml) (ressources variées)
+- [Visualising data](https://visualisingdata.com/) (blog - podcast - ressources variées / Par Andy Kirk)
+- [Information is Beautiful](https://informationisbeautiful.net/) (exemples - blog - ressources variées)
+- [FlowingData](https://flowingdata.com/) (blog - ressources variées / Par Nathan Yau)
 - [Visual Cinnamon](https://www.visualcinnamon.com/) (blog - ressources variées - visualisation de données et *data art*)
+- [Visualization design resources](https://www.cs.ubc.ca/group/infovis/resources.shtml) (ressources variées)
 <br><br>
 
 - [Exposition "Data Visualization and the Modern Imagination"](https://exhibits.stanford.edu/dataviz) (exposition en ligne sur l'histoire de la visualisation de données)
@@ -92,7 +95,7 @@ La note sera constituée de :
 ### Environnement Observable
 
 - [Plateforme Observable](https://observablehq.com/)
-- [Documentation des notebooks Observable](https://observablehq.com/@observablehq/documentation)
+- [Documentation des notebooks Observable](https://observablehq.com/documentation)
 
 ### Bibliothèques et outils utilisés
 
