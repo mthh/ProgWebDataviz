@@ -68,6 +68,32 @@ _**faciliter la compréhension**_ : qu'est-ce qu'on voit ? que cela signifie-t-i
 Les trois phases de la compréhension (Kirk, 2019, figure 1.4)
 ](./img/Kirk-1.4.ProcessofUnderstanding.png "Les trois phases de la compréhension (Kirk, 2019)"){.img80}
 
+:::{.notes}
+
+L'image de Kirk montre ces trois phases sous forme d’un continuum, illustrant comment le processus de compréhension des données progresse, de la simple observation à la compréhension complète.
+
+Ce modèle est utile pour concevoir des visualisations de données efficaces, car il montre qu’une bonne visualisation ne doit pas seulement faciliter la perception, mais aussi guider l’utilisateur vers une interprétation correcte et une compréhension profonde des données.
+
+1. Perceiving (Perception) :
+
+Définition : Il s'agit de la première phase, où les individus prennent simplement connaissance de la visualisation des données. C'est un processus sensoriel : on observe les graphismes, les couleurs, les formes, les axes, les courbes, etc. On reconnaît les éléments présents, mais on ne fait pas encore d'interprétation significative.
+
+Objectif : L'objectif ici est simplement de capter les informations visuelles de base sans forcément comprendre ce qu'elles signifient.
+
+2. Interpreting (Interprétation) :
+
+Définition : Une fois les données perçues, la phase suivante consiste à interpréter ce que l'on voit. On tente de donner un sens aux éléments observés, en les plaçant dans un contexte. Cela implique de comprendre la relation entre les différents composants de la visualisation, comme les axes, les valeurs et les tendances.
+
+Objectif : C'est l'étape où l'on commence à faire des connexions et à extraire des significations potentielles des données. Cela pourrait inclure des comparaisons entre des groupes, l'identification de tendances ou d'anomalies.
+
+3. Comprehending (Compréhension) :
+
+Définition : La phase finale, celle de la compréhension, est lorsque l'on atteint une compréhension plus profonde des données. Cela va au-delà de l'interprétation et inclut la capacité à tirer des conclusions basées sur les informations visualisées, de manière claire et réfléchie.
+
+Objectif : À ce stade, on est capable d’expliquer ce que les données signifient dans un contexte plus large, d’en tirer des insights utiles et de prendre des décisions éclairées. C’est aussi à ce moment que l'on peut communiquer les résultats de manière concise et précise.
+
+:::
+
 
 ## Qu'est-ce que la visualisation de données ?
 
@@ -127,9 +153,9 @@ Des différences dans le but à atteindre et même dans le choix des graphiques 
 :::{.column width=50%}
 **Infographie** ([exemple](https://visme.co/blog/wp-content/uploads/2017/05/building-the-future.png))
 
-**Visualisation d'informations**
+**Visualisation d'informations** ([exemple](https://commons.wikimedia.org/wiki/File:Social_Red.jpg))
 
-**Visualisation scientifique** ([exemple](https://www.nsf.gov/news/mmg/media/images/visualization2_h1.jpg))
+**Visualisation scientifique** ([exemple](https://commons.wikimedia.org/wiki/File:Rayleigh-Taylor_instability.jpg))
 
 **Data journalisme** ([exemple](https://www.theguardian.com/world/ng-interactive/2022/oct/31/mapping-irans-unrest-how-mahsa-aminis-death-led-to-nationwide-protests))
 :::
@@ -137,7 +163,7 @@ Des différences dans le but à atteindre et même dans le choix des graphiques 
 :::{.column width=50%}
 **Science des données**
 
-**Data art** ([exemple](https://www.data-to-art.com/), [exemple](https://www.nathaliemiebach.com/work/new-portfolio-item-2))
+**Data art** ([exemple](https://www.data-to-art.com/))
 
 **Dashboarding** ([exemple](https://www.tableau.com/fr-fr/solutions/gallery/superstore), [exemple](https://www.covid19.admin.ch/en/epidemiologic/hosp))
 
