@@ -24,16 +24,16 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 
 | Date       | Heure   | Contenu                                                                                                  | Ressources                                                                                                           |
 |------------|---------|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
-| 08/09/2025 | 09h-12h | CM - Cours d'introduction + Intro JavaScript                                                             | [Slides](./CM-seance1.html)                                                                                          |
-| 08/09/2025 | 13h-16h | TP - Rappels JavaScript et manipulation de données                                                       | Voir URL des TP plus bas                                                                                             |
+| 08/09/2025 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                                                             | [Slides](./CM-seance1.html)                                                                                          |
+| 08/09/2025 | 14h-17h | TP - Rappels JavaScript et manipulation de données                                                       | Voir URL des TP plus bas                                                                                             |
 | 09/09/2025 | 10h-13h | TP - Datavisualisation avec Plot                                                                         | |
 | 09/09/2025 | 14h-17h | TP - Datavisualisation avec Plot + CM - Règles et conseils pour la conception de visualisation de données | |
-| 10/09/2025 | 09h-12h | TP - Datavisualisation avec Plot                                                                         | |
-| 10/09/2025 | 13h-16h | TP - Datavisualisation avec Plot                                                                         | |
-| 03/11/2025 | 09h-12h | TP - Visualisation de données géospatiales avec Leaflet                                                  | |
-| 03/11/2025 | 13h-16h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)                                  | |
-| 04/11/2025 | 09h-12h | TP - Selon avancement                                                                                    | |
-| 04/11/2025 | 13h-16h | TP - Visualisation dans un document Quarto (R / Python / JavaScript)                                     | |
+| 10/09/2025 | 10h-13h | TP - Datavisualisation avec Plot                                                                         | |
+| 10/09/2025 | 14h-17h | TP - Datavisualisation avec Plot                                                                         | |
+| 03/11/2025 | 10h-13h | TP - Visualisation de données géospatiales avec Leaflet                                                  | |
+| 03/11/2025 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)                                  | |
+| 04/11/2025 | 10h-13h | TP - Selon avancement                                                                                    | |
+| 04/11/2025 | 14h-17h | TP - Visualisation dans un document Quarto (R / Python / JavaScript)                                     | |
 
 
 ## URL des TPs sur Observable
