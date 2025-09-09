@@ -26,8 +26,8 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 |------------|---------|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
 | 08/09/2025 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                                                             | [Slides](./CM-seance1.html)                                                                                          |
 | 08/09/2025 | 14h-17h | TP - Rappels JavaScript et manipulation de données                                                       | Voir URL des TP plus bas                                                                                             |
-| 09/09/2025 | 10h-13h | TP - Datavisualisation avec Plot                                                                         | |
-| 09/09/2025 | 14h-17h | TP - Datavisualisation avec Plot + CM - Règles et conseils pour la conception de visualisation de données | |
+| 09/09/2025 | 10h-13h | TP - Datavisualisation avec Plot                                                                         | Voir URL des TP plus bas |
+| 09/09/2025 | 14h-17h | TP - Datavisualisation avec Plot + CM - Règles et conseils pour la conception de visualisation de données | [Slides](./CM-seance2.html)                                                                                          |
 | 10/09/2025 | 10h-13h | TP - Datavisualisation avec Plot                                                                         | |
 | 10/09/2025 | 14h-17h | TP - Datavisualisation avec Plot                                                                         | |
 | 03/11/2025 | 10h-13h | TP - Visualisation de données géospatiales avec Leaflet                                                  | |
