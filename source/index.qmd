@@ -28,8 +28,8 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 | 08/09/2025 | 14h-17h | TP - Rappels JavaScript et manipulation de données                                                       | Voir URL des TP plus bas                                                                                             |
 | 09/09/2025 | 10h-13h | TP - Datavisualisation avec Plot                                                                         | Voir URL des TP plus bas |
 | 09/09/2025 | 14h-17h | TP - Datavisualisation avec Plot + CM - Règles et conseils pour la conception de visualisation de données | [Slides](./CM-seance2.html)                                                                                          |
-| 10/09/2025 | 10h-13h | TP - Datavisualisation avec Plot                                                                         | |
-| 10/09/2025 | 14h-17h | TP - Datavisualisation avec Plot                                                                         | |
+| 10/09/2025 | 10h-13h | TP - Datavisualisation avec Plot                                                                         | Voir URL des TP plus bas |
+| 10/09/2025 | 14h-17h | TP - Datavisualisation avec Plot                                                                         | Voir URL des TP plus bas |
 | 03/11/2025 | 10h-13h | TP - Visualisation de données géospatiales avec Leaflet                                                  | |
 | 03/11/2025 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)                                  | |
 | 04/11/2025 | 10h-13h | TP - Selon avancement                                                                                    | |
@@ -47,10 +47,12 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 - [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices) - [Correction](https://observablehq.com/@sd-progwebdataviz/solution-des-exercices-rappels-javascript)
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices) - [Correction](https://observablehq.com/@sd-progwebdataviz/solution-preparation-et-transformation-de-donnees)
 - [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
-- [TP - Exercice de mise en pratique avec Plot](https://observablehq.com/@sd-progwebdataviz/tp-exercice-de-mise-en-pratique-avec-plot)
+- [TP - Exercice de mise en pratique avec Plot](https://observablehq.com/@sd-progwebdataviz/tp-exercice-de-mise-en-pratique-avec-plot) - [Correction](https://observablehq.com/@sd-progwebdataviz/solution-exercice-de-mise-en-pratique-avec-plot)
+- [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants)
+- [Bibliothèque Plot (partie 2)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
 
 <!--
- - [Correction](https://observablehq.com/@sd-progwebdataviz/solution-exercice-de-mise-en-pratique-avec-plot)
+ 
 - [Bibliothèque Plot (partie 2)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
 - [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants) - [Correction](https://observablehq.com/@sd-progwebdataviz/solutions-prix-des-carburants)
 - [Exercice Deck.gl : Road accidents in Japan](https://observablehq.com/@sd-progwebdataviz/exercice-deck-gl-road-accidents-in-japan)
