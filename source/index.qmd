@@ -68,7 +68,7 @@ Pour aller plus loin :
 Ce cours est en contrôle continu intégral.
 La note sera constituée de :
 
-- une note de projet (50%) - ce projet sera réalisé en binôme et rendu avant le 01/11/2025
+- une note de projet (50%) - ce projet sera réalisé en binôme (date de rendu à définir)
 - un TP noté (50%) - ce TP individuel sera réalisé en salle courant novembre 2025 
 
 ## Ressources utiles
