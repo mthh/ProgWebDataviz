@@ -5,4 +5,5 @@ project:
     - "CM*.qmd"
     - "TP*.qmd"
     - "examen.qmd"
+    - "dashboard*.qmd"
   output-dir: dist
