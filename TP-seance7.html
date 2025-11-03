@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>TP Séance 7 - Visualisation de données géospatiales avec Leaflet</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="TP-seance7_files/libs/clipboard/clipboard.min.js"></script>
+<script src="TP-seance7_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="TP-seance7_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="TP-seance7_files/libs/quarto-html/popper.min.js"></script>
+<script src="TP-seance7_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="TP-seance7_files/libs/quarto-html/anchor.min.js"></script>
+<link href="TP-seance7_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="TP-seance7_files/libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="TP-seance7_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="TP-seance7_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="TP-seance7_files/libs/bootstrap/bootstrap-65bf3300b9bb66d394cd84a94c608efc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="./css/tp-seance7.css">
+<link rel="stylesheet" href="./css/tps.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="./js/tp-seance7.js"></script>
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#objectif-du-tp" id="toc-objectif-du-tp" class="nav-link active" data-scroll-target="#objectif-du-tp">Objectif du TP</a></li>
+  <li><a href="#présentation-de-leaflet" id="toc-présentation-de-leaflet" class="nav-link" data-scroll-target="#présentation-de-leaflet">Présentation de Leaflet</a></li>
+  <li><a href="#chargement-de-la-bibliothèque" id="toc-chargement-de-la-bibliothèque" class="nav-link" data-scroll-target="#chargement-de-la-bibliothèque">Chargement de la bibliothèque</a></li>
+  <li><a href="#rappels-sur-les-balises-html" id="toc-rappels-sur-les-balises-html" class="nav-link" data-scroll-target="#rappels-sur-les-balises-html">Rappels sur les balises HTML</a></li>
+  <li><a href="#rappels-sur-les-sélecteurs-css" id="toc-rappels-sur-les-sélecteurs-css" class="nav-link" data-scroll-target="#rappels-sur-les-sélecteurs-css">Rappels sur les sélecteurs CSS</a></li>
+  <li><a href="#rappels-sur-le-javascript-dans-le-navigateur" id="toc-rappels-sur-le-javascript-dans-le-navigateur" class="nav-link" data-scroll-target="#rappels-sur-le-javascript-dans-le-navigateur">Rappels sur le JavaScript dans le navigateur</a>
+  <ul class="collapse">
+  <li><a href="#exemple-de-code-javascript" id="toc-exemple-de-code-javascript" class="nav-link" data-scroll-target="#exemple-de-code-javascript">Exemple de code JavaScript</a></li>
+  <li><a href="#sélection-et-modification-déléments-du-dom" id="toc-sélection-et-modification-déléments-du-dom" class="nav-link" data-scroll-target="#sélection-et-modification-déléments-du-dom">Sélection et modification d’éléments du DOM</a></li>
+  <li><a href="#écouteurs-dévénements" id="toc-écouteurs-dévénements" class="nav-link" data-scroll-target="#écouteurs-dévénements">Écouteurs d’événements</a></li>
+  <li><a href="#promesses" id="toc-promesses" class="nav-link" data-scroll-target="#promesses">Promesses</a></li>
+  </ul></li>
+  <li><a href="#retour-à-leaflet-création-dun-conteneur-pour-la-carte" id="toc-retour-à-leaflet-création-dun-conteneur-pour-la-carte" class="nav-link" data-scroll-target="#retour-à-leaflet-création-dun-conteneur-pour-la-carte">Retour à Leaflet : Création d’un conteneur pour la carte</a></li>
+  <li><a href="#chargement-de-données-géospatiales" id="toc-chargement-de-données-géospatiales" class="nav-link" data-scroll-target="#chargement-de-données-géospatiales">Chargement de données géospatiales</a></li>
+  <li><a href="#affichage-dépingles-et-de-popups" id="toc-affichage-dépingles-et-de-popups" class="nav-link" data-scroll-target="#affichage-dépingles-et-de-popups">Affichage d’épingles et de popups</a></li>
+  <li><a href="#différence-entre-cartographie-statique-et-interactive" id="toc-différence-entre-cartographie-statique-et-interactive" class="nav-link" data-scroll-target="#différence-entre-cartographie-statique-et-interactive">Différence entre cartographie “statique” et “interactive”</a></li>
+  <li><a href="#exercice-1-carte-interactive-avec-leaflet" id="toc-exercice-1-carte-interactive-avec-leaflet" class="nav-link" data-scroll-target="#exercice-1-carte-interactive-avec-leaflet">Exercice 1 : Carte interactive avec Leaflet</a></li>
+  <li><a href="#exercice-2-chargement-de-données-vectorielles-et-clustering" id="toc-exercice-2-chargement-de-données-vectorielles-et-clustering" class="nav-link" data-scroll-target="#exercice-2-chargement-de-données-vectorielles-et-clustering">Exercice 2 : Chargement de données vectorielles et clustering</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TP Séance 7 - Visualisation de données géospatiales avec Leaflet</h1>
+<p class="subtitle lead">BUT Science des données - 3ème année - Université Grenoble Alpes</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="objectif-du-tp" class="level2">
+<h2 class="anchored" data-anchor-id="objectif-du-tp">Objectif du TP</h2>
+<p>L’objectif de ce TP est d’apprendre à réaliser des cartes interactives avec la bibliothèque Leaflet. Contrairement aux TP précédents, réalisés dans Observable, nous allons ici construire un fichier HTML qui sera ouvert dans un navigateur.</p>
+<p>Cela nous permettra de voir comment inclure les bibliothèques JavaScript dans une page HTML, comment créer un conteneur pour la carte, comment charger des données géospatiales, etc.</p>
+<p>Vous réviserez également les notions de base de HTML et CSS.</p>
+</section>
+<section id="présentation-de-leaflet" class="level2">
+<h2 class="anchored" data-anchor-id="présentation-de-leaflet">Présentation de Leaflet</h2>
+<p><a href="https://leafletjs.com/">Leaflet</a> est une bibliothèque JavaScript permettant de créer des cartes interactives. Elle va permettre de choisir un fournisseur de fond de cartes, d’ajouter des données vectorielles (points, lignes, polygones), de gérer différents types d’interactions avec la carte (<em>pan</em>, <em>zoom</em>, survol du curseur, clic, sélection rectangulaire, etc., etc.).</p>
+<p>D’autres bibliothèques similaires sont par exemple :</p>
+<ul>
+<li><a href="https://openlayers.org/">OpenLayers</a></li>
+<li><a href="https://docs.mapbox.com/mapbox-gl-js/guides/">MapBox GL JS</a></li>
+<li><a href="https://maplibre.org/">MapLibre</a> (un fork open source de MapBox GL JS)</li>
+</ul>
+<p>Enfin, il existe des bibliothèques se destinant plus à la visualisation de grands volumes de données géospatiales avec WebGL (par exemple <a href="https://deck.gl/">Deck.gl</a>) ou se destinant à la visualisation de données géospatiales en 3D avec WebGL (par exemple <a href="https://cesium.com/cesiumjs/">Cesium</a>).</p>
+</section>
+<section id="chargement-de-la-bibliothèque" class="level2">
+<h2 class="anchored" data-anchor-id="chargement-de-la-bibliothèque">Chargement de la bibliothèque</h2>
+<p>Il existe plusieurs manières d’inclure la bibliothèque dans votre projet (en fonction de si vous utilisez <code>npm</code> ou un autre gestionnaire de package, de si vous utilisez seulement un page HTML, de si vous êtes dans un notebook, etc.).</p>
+<p>La manière la plus simple est d’inclure le fichier CSS leaflet dans la section <code>head</code> de votre document :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">"stylesheet"</span><span class="ot"> href</span><span class="op">=</span><span class="st">"https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">     integrity</span><span class="op">=</span><span class="st">"sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ot">     crossorigin</span><span class="op">=</span><span class="st">""</span><span class="dt">/&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Puis d’inclure le fichier JavaScript :</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ot">     integrity</span><span class="op">=</span><span class="st">"sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ot">     crossorigin</span><span class="op">=</span><span class="st">""</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pour rappel, une page HTML est structurée de la manière suivante :</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"fr"</span><span class="dt">&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"UTF-8"</span><span class="dt">&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Titre de la page<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!-- Inclusion des feuilles de style externes --&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">"stylesheet"</span><span class="ot"> href</span><span class="op">=</span><span class="st">"style.css"</span><span class="dt">&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!-- Par exemple pour inclure la feuille de style de la bibliothèque Leaflet --&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">"stylesheet"</span><span class="ot"> href</span><span class="op">=</span><span class="st">"https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ot">        integrity</span><span class="op">=</span><span class="st">"sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ot">        crossorigin</span><span class="op">=</span><span class="st">""</span><span class="dt">/&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!-- Inclusion des feuilles de style au sein du même document --&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">style</span><span class="dt">&gt;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>      <span class="co">/* Ici des règles en CSS */</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>      body {</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="kw">background-color</span><span class="ch">:</span> <span class="cn">lightblue</span><span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">style</span><span class="dt">&gt;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!-- Inclusion des scripts --&gt;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!-- Par exemple, pour inclure la bibliothèque Leaflet --&gt;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">"https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ot">          integrity</span><span class="op">=</span><span class="st">"sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="ot">          crossorigin</span><span class="op">=</span><span class="st">""</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>     <span class="co">&lt;!--</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">     Inclusion de scripts personnels</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">     (veillez à les inclure après les bibliothèques externes si vous les utilisez par la suite)</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">     --&gt;</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">"script.js"</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!-- Contenu de la page --&gt;</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">&lt;!-- On peut aussi inclure des scripts ici, dans body, avant ou après le contenu --&gt;</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Si vous utilisez Leaflet dans Observable, vous n’avez pas à inclure ces deux fichiers, ils ont déjà été chargés par défaut. Il est par ailleurs possible, dans Observable, de créer automatiquement une carte avec <em>Leaflet</em> ou <em>Plot</em> depuis l’interface graphique :</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/observable-leaflet1.png" class="img-fluid figure-img"></p>
+<figcaption>Création d’une carte avec Leaflet dans Observable <br> 1. Ajout d’un fichier GeoJSON puis clic sur “Create Leaflet Map”</figcaption>
+</figure>
+</div>
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/observable-leaflet2.png" class="img-fluid figure-img"></p>
+<figcaption>Création d’une carte avec Leaflet dans Observable <br> 2. Carte et code obtenus</figcaption>
+</figure>
+</div>
+</section>
+<section id="rappels-sur-les-balises-html" class="level2">
+<h2 class="anchored" data-anchor-id="rappels-sur-les-balises-html">Rappels sur les balises HTML</h2>
+<p>Comme vous le savez ou avez pu le constater juste au-dessus, une page HTML est structurée en balises imbriquées les unes dans les autres.</p>
+<p>Une balise HTML est constituée d’un nom, éventuellement d’attributs, et d’un contenu. Par exemple :</p>
+<ul>
+<li>la balise <code>div</code> (pour <em>division</em>) est une balise qui permet de créer un conteneur “en bloc” générique,</li>
+<li>la balise <code>span</code> est une balise qui permet de créer un conteneur “en ligne” générique,</li>
+</ul>
+<p>Les autres balises fréquemment rencontrées sont : <code>p</code> (paragraphe - élément en bloc), <code>a</code> (ancre, pour faire un lien hypertexte - élément en ligne), <code>i</code>, <code>em</code>, <code>b</code> et <code>strong</code> (italique pour les deux premiers, gras pour les deux seconds), <code>ul</code> et <code>ol</code> (listes non-ordonnées et ordonnées), <code>li</code> (élément de liste), <code>table</code> (tableau), <code>tr</code> (ligne de tableau), <code>td</code> (cellule de tableau), <code>th</code> (cellule d’en-tête de tableau), <code>img</code> (image), <code>br</code> (saut de ligne), <code>hr</code> (ligne horizontale), <code>input</code> (élément de saisie), <code>button</code> (bouton), <code>select</code> (liste déroulante), <code>option</code> (option d’une liste déroulante), <code>form</code> (formulaire), <code>label</code> (étiquette), <code>textarea</code> (zone de texte), <code>svg</code> (élément SVG), etc.</p>
+<p>Les balises peuvent avoir des attributs (comme <code>id</code> ou <code>class</code>) et un contenu (qui peut être du texte ou d’autres balises).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Balise vide --&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">br</span><span class="ot"> </span><span class="dt">/&gt;</span> <span class="co">&lt;!-- un saut de ligne --&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">hr</span><span class="ot"> </span><span class="dt">/&gt;</span> <span class="co">&lt;!-- une ligne horizontale --&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Balise avec un contenu --&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Un paragraphe<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Balise avec des attributs et un contenu --&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"https://www.w3.org/"</span><span class="dt">&gt;</span>Un lien vers le site du W3C<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"ma-classe"</span><span class="dt">&gt;</span>Un div avec une classe<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"mon-id"</span><span class="dt">&gt;</span>Un div avec un identifiant<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> style</span><span class="op">=</span><span class="st">"background-color: lightblue;"</span><span class="dt">&gt;</span>Une div avec un style inline<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Balises imbriquées --&gt;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Un paragraphe dans une div<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Un autre <span class="dt">&lt;</span><span class="kw">i</span><span class="dt">&gt;</span>paragraphe<span class="dt">&lt;/</span><span class="kw">i</span><span class="dt">&gt;</span> dans une div<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">ul</span><span class="dt">&gt;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Premier item de la liste<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Deuxième item de la liste<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">li</span><span class="dt">&gt;</span>Troisième item de la liste<span class="dt">&lt;/</span><span class="kw">li</span><span class="dt">&gt;</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">ul</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="rappels-sur-les-sélecteurs-css" class="level2">
+<h2 class="anchored" data-anchor-id="rappels-sur-les-sélecteurs-css">Rappels sur les sélecteurs CSS</h2>
+<p>Les sélecteurs CSS permettent de sélectionner des éléments HTML pour leur appliquer des règles de style.</p>
+<p>Par exemple, pour sélectionner tous les paragraphes (<code>p</code>) dans une page HTML, on peut utiliser le sélecteur <code>p</code> :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">red</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pour sélectionner tous les éléments ayant la classe <code>ma-classe</code>, on peut utiliser le sélecteur <code>.ma-classe</code> :</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.ma-classe</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">red</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pour sélectionner tous les éléments ayant l’identifiant <code>mon-id</code>, on peut utiliser le sélecteur <code>#mon-id</code> :</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#mon-id</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">red</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>On peut combiner ces notations, par exemple pour sélectionner toutes les paragraphes ayant la classe <code>label</code> :</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p<span class="fu">.label</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-style</span><span class="ch">:</span> <span class="dv">italic</span><span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="st">"Helvetica Neue"</span><span class="op">,</span> <span class="dv">Arial</span><span class="op">,</span> <span class="dv">Helvetica</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Enfin, il est également possible de sélectionner des éléments en fonction de leur position dans l’arbre HTML, par exemple pour sélectionner tous les paragraphes qui sont des enfants directs d’une div ayant la classe <code>container</code> :</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>div<span class="fu">.container</span> <span class="op">&gt;</span> p {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">red</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ou pour sélectionner tous les éléments span qui sont des enfants (directs ou non) d’une div ayant la classe <code>container</code> :</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>div<span class="fu">.container</span> span {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="cn">red</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>La spécification CSS permet de nombreuses autres possibilités de sélection, que nous ne détaillerons pas ici (sélection d’un premier élément ou du dernier élément d’un élément parent, sélection d’un élement sur deux, sélection d’un élément en fonction de la valeur d’un attribut, etc.).</p>
+<p>Par ailleurs les possibilités offertes par le langage CSS sont très nombreuses. Voir par exemple :</p>
+<ul>
+<li>la page <a href="http://www.csszengarden.com/">CSS Zen Garden</a> qui montre comment il est possible d’appliquer des styles complètement différents à un même contenu,</li>
+<li>la page <a href="https://css-tricks.com/">CSS Tricks</a> qui propose de nombreux tutoriels et astuces,</li>
+<li>le site <a href="https://codepen.io/">CodePen</a> qui permet de tester du code HTML, CSS et JavaScript en direct (et qui propose de nombreux exemples de code CSS complexes).</li>
+</ul>
+<p>L’exemple suivant est tiré de <a href="https://codepen.io/juliangarnier/pen/krNqZO">CodePen</a> et montre une animation en 3D réalisée uniquement avec du CSS (il y a un peu de code JavaScript mais celui-ci sert essentiellement à gérer les interactions avec les boutons situés à droite de la page).</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="CSS 3D Solar System" src="https://codepen.io/juliangarnier/embed/krNqZO?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+See the Pen <a href="https://codepen.io/juliangarnier/pen/krNqZO"> CSS 3D Solar System</a> by Julian Garnier (<a href="https://codepen.io/juliangarnier"><span class="citation" data-cites="juliangarnier">@juliangarnier</span></a>) on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+<blockquote class="blockquote">
+<p>Pour en savoir plus sur le CSS</p>
+<ul>
+<li>Sur MDN : https://developer.mozilla.org/fr/docs/Web/CSS</li>
+<li>Sur W3Schools : https://www.w3schools.com/css/default.asp</li>
+</ul>
+</blockquote>
+</section>
+<section id="rappels-sur-le-javascript-dans-le-navigateur" class="level2">
+<h2 class="anchored" data-anchor-id="rappels-sur-le-javascript-dans-le-navigateur">Rappels sur le JavaScript dans le navigateur</h2>
+<p>Le JavaScript est un langage de programmation qui permet de rendre les pages Web interactives. Il est interprété par le navigateur (Chrome, Firefox, etc.) et permet de modifier le contenu de la page, de réagir à des événements (clic, survol, etc.), de charger des données, etc.</p>
+<p>Le JavaScript est un langage de programmation à part entière, avec ses propres spécificités, mais il est également possible d’utiliser des bibliothèques qui permettent de faciliter la création d’éléments interactifs.</p>
+<p>Contrairement à Observable, le code JavaScript va devoir être écrit au sein de balises <code>&lt;script&gt;&lt;/script&gt;</code> ou dans un fichier séparé (par exemple <code>script.js</code>) qui sera chargé dans la page HTML (voir plus haut). Par ailleurs, ce code doit être écrit dans l’ordre dans lequel il sera exécuté (contrairement à Observable où l’ordre d’exécution est déterminé par les dépendances entre les cellules).</p>
+<p>Enfin, dernière différence de taille, le code n’est pas réactif :</p>
+<ul>
+<li>si vous modifiez le code, il faut recharger la page pour voir les modifications,</li>
+<li>les modifications de variables (ou d’un élément de saisi tel qu’un <code>input</code>) ne sont pas répercutées dans le code (contrairement à Observable où les cellules sont réévaluées automatiquement), il faut manuellement écouter les événements et mettre à jour les éléments de la page.</li>
+</ul>
+<p>Il existe toutefois de nombreuses bibliothèques JavaScript qui permettent de faciliter la création d’éléments réactifs et interactifs.</p>
+<section id="exemple-de-code-javascript" class="level3">
+<h3 class="anchored" data-anchor-id="exemple-de-code-javascript">Exemple de code JavaScript</h3>
+<p>En fonction de là où le code est inclus dans la page (dans le <code>head</code> ou dans le <code>body</code>), il est possible d’accéder aux éléments de la page qui ont déjà été chargés ou non. Si vous incluez le code avant les éléments de la page, il est nécessaire d’attendre que la page soit chargée pour pouvoir accéder aux éléments de la page. C’est ce que nous allons faire dans l’exemple suivant, afin de se familiariser avec les événements et les sélecteurs.</p>
+<p><strong><em>Fichier <code>index.html</code></em></strong> :</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!DOCTYPE</span> html<span class="dt">&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"fr"</span><span class="dt">&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"UTF-8"</span><span class="dt">&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>Ma page Web<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">style</span><span class="dt">&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    body {</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      <span class="kw">margin</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">background</span><span class="ch">:</span> <span class="cn">#333333</span><span class="op">;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="kw">color</span><span class="ch">:</span> <span class="cn">#eeeeee</span><span class="op">;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">style</span><span class="dt">&gt;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> src</span><span class="op">=</span><span class="st">"script.js"</span><span class="dt">&gt;&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Ma page Web<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> id</span><span class="op">=</span><span class="st">"counter"</span><span class="dt">&gt;</span>0<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span> clics sur le titre !</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong><em>Fichier <code>script.js</code></em></strong> :</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// On attend que la page soit chargée</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'DOMContentLoaded'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// On récupère l'élément h1</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> h1 <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">'h1'</span>)<span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// On ajoute un écouteur d'événement sur le clic</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  h1<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'click'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// On log un message dans la console</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">'Élement h1 cliqué !'</span>)<span class="op">;</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// On modifie le contenu de l'élément span avec l'id "counter"</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> counter <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">'#counter'</span>)<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    counter<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> <span class="pp">parseInt</span>(counter<span class="op">.</span><span class="at">textContent</span>) <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Notez qu’il est possible de spécifier que la fonction donnée en argument à <code>addEventListener</code> est asynchrone en utilisant avec le mot-clé <code>async</code>. Cela permettra par la suite d’utiliser le mot-clé <code>await</code> pour attendre la résolution d’une promesse (par exemple pour charger des données, voir plus-bas).</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">document</span><span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'DOMContentLoaded'</span><span class="op">,</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> url <span class="op">=</span> <span class="op">...</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(url)<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> result<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Do something with data...</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sélection-et-modification-déléments-du-dom" class="level3">
+<h3 class="anchored" data-anchor-id="sélection-et-modification-déléments-du-dom">Sélection et modification d’éléments du DOM</h3>
+<p>Le DOM (Document Object Model) est une interface de programmation qui permet de manipuler les éléments d’une page HTML. Il est possible de sélectionner des éléments du DOM avec la méthode <code>querySelector</code> (qui renvoie le premier élément correspondant au sélecteur) ou <code>querySelectorAll</code> (qui renvoie tous les éléments correspondant au sélecteur).</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Sélection d'un élément par son identifiant</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> element <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">'#mon-id'</span>)<span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">// ou</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> element <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">'mon-id'</span>)<span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Sélection d'un élément par sa classe</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> element <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">'.ma-classe'</span>)<span class="op">;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Sélection de tous les éléments ayant la classe "ma-classe"</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">// cette fonction retourne un tableau d'éléments</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> elements <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelectorAll</span>(<span class="st">'.ma-classe'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>L’objet retourné expose différentes méthodes et propriétés permettant d’interagir avec l’élément sélectionné (modifier son contenu, ses attributs, ses classes, ajouter des écouteurs d’événements, etc.).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">// On récupère l'élément h1</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> h1 <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">'h1'</span>)<span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">// On modifie le contenu de l'élément</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>h1<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> <span class="st">'Nouveau contenu'</span><span class="op">;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">// On ajoute une classe à l'élément</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>h1<span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">add</span>(<span class="st">'ma-classe'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Il est également possible d’ajouter des éléments HTML enfants à un élément du DOM :</p>
+<ul>
+<li>avec la méthode <code>appendChild</code>,</li>
+<li>en utilisant la propriété <code>innerHTML</code>.</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">// On récupère l'élément div avec la classe "container"</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> container <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">'div.container'</span>)<span class="op">;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">// On crée un élément p</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">// (a ce stade, l'élément n'est pas encore ajouté à la page)</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> p <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">'p'</span>)<span class="op">;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">// On modifie le contenu de l'élément p</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>p<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> <span class="st">'Nouveau paragraphe'</span><span class="op">;</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">// On ajoute l'élément p à l'élément div</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>container<span class="op">.</span><span class="fu">appendChild</span>(p)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">// On récupère l'élément div avec la classe "container"</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> container <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">'div.container'</span>)<span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">// On modifie le contenu de l'élément div</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>container<span class="op">.</span><span class="at">innerHTML</span> <span class="op">=</span> <span class="st">'&lt;p&gt;Nouveau paragraphe&lt;/p&gt;'</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="écouteurs-dévénements" class="level3">
+<h3 class="anchored" data-anchor-id="écouteurs-dévénements">Écouteurs d’événements</h3>
+<p>Il est possible d’ajouter des écouteurs d’événements sur les éléments du DOM.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">// On récupère l'élément h1</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> h1 <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">'h1'</span>)<span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">// On ajoute un écouteur d'événement sur le clic</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>h1<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">'click'</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// On log un message dans la console</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">'Élement h1 cliqué !'</span>)<span class="op">;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Il existe de nombreux événements, parmi les plus courants :</p>
+<ul>
+<li><code>click</code> : clic sur un élément,</li>
+<li><code>dblclick</code> : double-clic sur un élément,</li>
+<li><code>contextmenu</code> : clic droit sur un élément,</li>
+<li><code>mouseover</code> : survol du curseur sur un élément,</li>
+<li><code>mouseout</code> : sortie du curseur d’un élément,</li>
+<li><code>change</code> : changement de la valeur d’un élément de saisie (par exemple un <code>input</code> ou une <code>select</code>),</li>
+<li><code>keydown</code> : appui sur une touche du clavier,</li>
+<li><code>keyup</code> : relâchement d’une touche du clavier,</li>
+<li>etc.</li>
+</ul>
+</section>
+<section id="promesses" class="level3">
+<h3 class="anchored" data-anchor-id="promesses">Promesses</h3>
+<p>Une promesse est un objet JavaScript qui représente une valeur qui sera disponible dans le futur. Elle peut être dans l’un des états suivants :</p>
+<ul>
+<li><code>pending</code> : la promesse est en attente,</li>
+<li><code>fulfilled</code> : la promesse est résolue,</li>
+<li><code>rejected</code> : la promesse est rejetée.</li>
+</ul>
+<p>Vous rencontrez déjà des promesses dans les TP précédents, par exemple lorsque vous utilisez <code>fetch</code> pour charger des données. Nous ne rentrerons pas dans les détails ici, mais il est possible d’attendre la résolution d’une promesse avec le mot-clé <code>await</code> (dans une fonction asynchrone).</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">'https://example.com/data.json'</span>)<span class="op">;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Il est également possible d’ajouter des écouteurs sur les promesses, par exemple pour exécuter du code lorsque la promesse est résolue ou rejetée.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> promise <span class="op">=</span> <span class="fu">fetch</span>(<span class="st">'https://example.com/data.json'</span>)<span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>promise<span class="op">.</span><span class="fu">then</span>(response <span class="kw">=&gt;</span> {</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// La promesse est résolue</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// On peut accéder à la réponse</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(response)<span class="op">;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>})<span class="op">.</span><span class="fu">catch</span>(error <span class="kw">=&gt;</span> {</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// La promesse est rejetée</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// On peut accéder à l'erreur</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="retour-à-leaflet-création-dun-conteneur-pour-la-carte" class="level2">
+<h2 class="anchored" data-anchor-id="retour-à-leaflet-création-dun-conteneur-pour-la-carte">Retour à Leaflet : Création d’un conteneur pour la carte</h2>
+<p>Il est nécessaire de créer un conteneur pour la carte, à l’endroit que vous souhaitez dans votre page HTML. C’est généralement une <code>div</code> qui est utilisée (mais n’importe quel élément HTML <em>en bloc</em> fait l’affaire). On lui donne généralement un identifiant (ici <code>map</code>) qui nous permettra de l’identifier depuis le code JavaScript qui instanciera la carte.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"map"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Il faut également définir la taille de ce conteneur, par exemple avec du CSS :</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#map</span> {</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">width</span><span class="ch">:</span> <span class="dv">100</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">height</span><span class="ch">:</span> <span class="dv">600</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Il est ensuite nécessaire d’écrire le code JavaScript qui va instancier la carte et l’ajouter au conteneur (attention à penser à inclure ce code: 1. après le chargement de la bibliothèque Leaflet, 2. dans une fonction qui sera exécutée lorsque la page sera chargée).</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">// On crée une carte</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> map <span class="op">=</span> L<span class="op">.</span><span class="fu">map</span>(<span class="st">'map'</span>)<span class="op">;</span> <span class="co">// On passe l'identifiant du conteneur</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">// On ajoute un fond de carte</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>L<span class="op">.</span><span class="fu">tileLayer</span>(<span class="st">"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"</span><span class="op">,</span> {</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">attribution</span><span class="op">:</span> <span class="st">"© &lt;a href=https://www.openstreetmap.org/copyright&gt;OpenStreetMap&lt;/a&gt; contributors"</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>})<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">// On définit le centre de la zone à afficher et le niveau de zoom</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>map<span class="op">.</span><span class="fu">setView</span>([<span class="fl">45.1885</span><span class="op">,</span> <span class="fl">5.7245</span>]<span class="op">,</span> <span class="dv">13</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="résultat" class="level4">
+<h4 class="anchored" data-anchor-id="résultat"><em>Résultat</em></h4>
+<div id="map1" style="width: 100%; height: 600px;">
+
+</div>
+<p>Nous n’avons affiché ici que le fond de carte. En visualisation de données sur le Web il est généralement nécessaire d’ajouter des données vectorielles (points, lignes, polygones) pour représenter les données.</p>
+</section>
+</section>
+<section id="chargement-de-données-géospatiales" class="level2">
+<h2 class="anchored" data-anchor-id="chargement-de-données-géospatiales">Chargement de données géospatiales</h2>
+<p>Il existe de nombreux formats de données géospatiales. Un des plus répandus sur le Web et que vous avez déjà du manipuler est le format GeoJSON.</p>
+<p>Il est possible de charger des données GeoJSON dans Leaflet avec la méthode <code>L.geoJSON</code> :</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">// On dispose déjà d'une variable `map` qui contient la carte</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">// On charge les données</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fetch</span>(<span class="st">'https://gist.githubusercontent.com/mthh/4ad093d3b33c2177f1e6c1ea1cde5d9b/raw/b6a60fc2ee66093f009114331f8a4230665d6a30/UNIONS_DE_QUARTIER_EPSG4326.json'</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">then</span>(response <span class="kw">=&gt;</span> response<span class="op">.</span><span class="fu">json</span>())</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">then</span>(data <span class="kw">=&gt;</span> {</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// On crée une couche Leaflet à partir des données GeoJSON</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> layer <span class="op">=</span> L<span class="op">.</span><span class="fu">geoJSON</span>(data)<span class="op">;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// On ajoute la couche à la carte</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    layer<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// On ajuste le zoom pour que toutes les données soient visibles</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    map<span class="op">.</span><span class="fu">fitBounds</span>(layer<span class="op">.</span><span class="fu">getBounds</span>())<span class="op">;</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Si nous sommes dans une fonction asynchrone, nous pouvons utiliser le mot-clé <code>await</code>. Cela peut vous aider à simplifier le code si vous n’êtes pas à l’aise avec les promesses.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">// On dispose déjà d'une variable `map` qui contient la carte</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">// On charge les données</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">'https://gist.githubusercontent.com/mthh/4ad093d3b33c2177f1e6c1ea1cde5d9b/raw/b6a60fc2ee66093f009114331f8a4230665d6a30/UNIONS_DE_QUARTIER_EPSG4326.json'</span>)<span class="op">;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">// On crée une couche Leaflet à partir des données GeoJSON,</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">// ici en choisissant le style</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> layer <span class="op">=</span> L<span class="op">.</span><span class="fu">geoJSON</span>(data<span class="op">,</span> {</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">style</span><span class="op">:</span> {</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">color</span><span class="op">:</span> <span class="st">'red'</span><span class="op">,</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">opacity</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co">// On ajoute la couche à la carte</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>layer<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co">// On ajuste le zoom pour que toutes les données soient visibles</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>map<span class="op">.</span><span class="fu">fitBounds</span>(layer<span class="op">.</span><span class="fu">getBounds</span>())<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ce code est similaire à celui du snippet précédent, à l’exception de l’utilisation du mot-clé <code>await</code> qui permet d’attendre la résolution de la promesse avant de continuer l’exécution du code.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Plus d'informations sur l'utilisation de L.geoJSON">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Plus d’informations sur l’utilisation de L.geoJSON
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>On vient de voir qu’il est possible de créer une couche Leaflet à partir de données GeoJSON en utilisant la fonction <code>L.geoJSON</code>.</p>
+<p>Cette fonction accepte en second argument un objet d’options permettant de personnaliser la création de la couche. Il est par exemple possible de personnaliser le style des géométries (pour les polygones, lignes, etc.) en utilisant l’option <code>style</code>, de personnaliser la création des marqueurs (pour les points) en utilisant l’option <code>pointToLayer</code>, et d’ajouter des écouteurs d’événements sur chaque entité géographique en utilisant l’option <code>onEachFeature</code>.</p>
+<p>L’ensemble des options disponibles est documenté sur la page officielle de Leaflet : <a href="https://leafletjs.com/examples/geojson/" target="_blank">https://leafletjs.com/examples/geojson/</a>.</p>
+<p>Exemple, avec un style personnalisé pour les polygones et un écouteur d’événement sur chaque entité géographique pour afficher une popup lors du clic :</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> layer <span class="op">=</span> L<span class="op">.</span><span class="fu">geoJSON</span>(data<span class="op">,</span> {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">style</span><span class="op">:</span> {</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">color</span><span class="op">:</span> <span class="st">'blue'</span><span class="op">,</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">opacity</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">onEachFeature</span><span class="op">:</span> (feature<span class="op">,</span> layer) <span class="kw">=&gt;</span> {</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Admettons que nos entités aient une propriété "id", on affiche ici</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// une infobox affichant cette propriété</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    layer<span class="op">.</span><span class="fu">bindPopup</span>(<span class="vs">`&lt;b&gt;ID :&lt;/b&gt; </span><span class="sc">${</span>feature<span class="op">.</span><span class="at">properties</span><span class="op">.</span><span class="at">id</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<section id="résultat-1" class="level4">
+<h4 class="anchored" data-anchor-id="résultat-1"><em>Résultat</em></h4>
+<div id="map2" style="width: 100%; height: 600px;">
+
+</div>
+</section>
+</section>
+<section id="affichage-dépingles-et-de-popups" class="level2">
+<h2 class="anchored" data-anchor-id="affichage-dépingles-et-de-popups">Affichage d’épingles et de popups</h2>
+<p>Un usage très courant de Leaflet est d’afficher des épingles sur la carte pour indiquer des points d’intérêt. Il va facilement être possible d’afficher des popups au clic sur ces épingles.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">// On dispose déjà d'une variable `map` qui contient la carte</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> marker <span class="op">=</span> L<span class="op">.</span><span class="fu">marker</span>([<span class="fl">45.1885</span><span class="op">,</span> <span class="fl">5.7245</span>])<span class="op">;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>marker<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> circle <span class="op">=</span> L<span class="op">.</span><span class="fu">circle</span>([<span class="fl">45.1673</span><span class="op">,</span> <span class="fl">5.7373</span>]<span class="op">,</span> {</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> <span class="st">'green'</span><span class="op">,</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">radius</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>circle<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Ajout d'un popup</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>marker<span class="op">.</span><span class="fu">bindPopup</span>(<span class="st">'Hello, Marker!'</span>)<span class="op">;</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>circle<span class="op">.</span><span class="fu">bindPopup</span>(<span class="st">'Hello, Circle!'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Il est également possible d’afficher des popups au survol du curseur :</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">// On dispose déjà d'une variable `map` qui contient la carte</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> marker <span class="op">=</span> L<span class="op">.</span><span class="fu">marker</span>([<span class="fl">45.2031</span><span class="op">,</span> <span class="fl">5.7189</span>])<span class="op">;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>marker<span class="op">.</span><span class="fu">addTo</span>(map)<span class="op">;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Ajout d'un popup</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>marker<span class="op">.</span><span class="fu">bindPopup</span>(<span class="st">'Je m</span><span class="sc">\'</span><span class="st">ouvre au survol de la souris !'</span>)<span class="op">;</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>marker<span class="op">.</span><span class="fu">on</span>(<span class="st">'mouseover'</span><span class="op">,</span> () <span class="kw">=&gt;</span> marker<span class="op">.</span><span class="fu">openPopup</span>())<span class="op">;</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>marker<span class="op">.</span><span class="fu">on</span>(<span class="st">'mouseout'</span><span class="op">,</span> () <span class="kw">=&gt;</span> marker<span class="op">.</span><span class="fu">closePopup</span>())<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="résultat-2" class="level4">
+<h4 class="anchored" data-anchor-id="résultat-2"><em>Résultat</em></h4>
+<div id="map3" style="width: 100%; height: 600px;">
+
+</div>
+</section>
+</section>
+<section id="différence-entre-cartographie-statique-et-interactive" class="level2">
+<h2 class="anchored" data-anchor-id="différence-entre-cartographie-statique-et-interactive">Différence entre cartographie “statique” et “interactive”</h2>
+<p>Les cartes qui peuvent être produites avec <code>Plot</code> (comme vu dans le TP <a href="https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot">“Bibliothèque Plot (partie 1)</a>) sont des cartes statiques (en fonction des modes de représentation choisis on parlera aussi souvent de “cartes thématiques” ou de “cartes statistiques”). Cela signifie que l’utilisateur ne peut pas interagir avec la carte, il ne peut que la visualiser.</p>
+<p>La cartographie interactive permet de faire interagir l’utilisateur avec la carte : il va être capable de zoomer, de se déplacer (<em>pan</em> en anglais), de cliquer sur des éléments, etc. Cela peut nécessiter de nouveaux modes de représentation des données, par exemple pour représenter des données en fonction du niveau de zoom, pour agréger les données sous forme de <em>cluster</em>, pour permettre à l’utilisateur de connaître les informations associées à un élément de la carte, etc.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/leaflet-cluster-screenshot.png" class="img-fluid figure-img"></p>
+<figcaption>Source : https://leaflet.github.io/Leaflet.markercluster/example/marker-clustering-realworld.388.html</figcaption>
+</figure>
+</div>
+<p>Par ailleurs, la cartographie interactive sur le Web a souvent recours à des fonds de cartes tuilés (plus ou moins riches en détails et avec des styles variés) en provenance de fournisseurs tiers (OpenStreetMap, Google Maps, MapBox, etc.).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/tiles.png" class="img-fluid figure-img"></p>
+<figcaption>Map styles : ThunderForest Pioneer, Stadia Toner, OpenStreetMap.fr, MTBmap.cz</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/Leaflet-provider-example.png" class="img-fluid figure-img"></p>
+<figcaption>ThunderForest SpinalMap</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercice-1-carte-interactive-avec-leaflet" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-1-carte-interactive-avec-leaflet">Exercice 1 : Carte interactive avec Leaflet</h2>
+<p>L’objectif de cet exercice est de créer une carte interactive avec Leaflet.</p>
+<section id="partie-1-création-de-la-carte" class="level4">
+<h4 class="anchored" data-anchor-id="partie-1-création-de-la-carte">Partie 1 : Création de la carte</h4>
+<ol type="1">
+<li>Créez un fichier <code>exercice1.html</code> et un fichier <code>script-exercice1.js</code>.</li>
+<li>Importer leaflet (CSS et JavaScript) ainsi que le fichier <code>script-exercice1.js</code> dans le fichier HTML.</li>
+<li>Écrivez :
+<ul>
+<li>le code HTML permettant de créer un conteneur pour la carte,</li>
+<li>le code JavaScript permettant d’instancier la carte (veillez à ajouter un fond de carte tuilé dès maintenant) dans le fichier JavaScript,</li>
+<li>le code CSS permettant de définir la taille du conteneur de la carte : celui-ci doit occuper toute la largeur et toute la hauteur de la page.</li>
+</ul></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/tp7-ex1-1.png" class="img-fluid figure-img"></p>
+<figcaption>Résultat intermédiaire</figcaption>
+</figure>
+</div>
+</section>
+<section id="partie-2-création-de-markers-et-de-popups" class="level4">
+<h4 class="anchored" data-anchor-id="partie-2-création-de-markers-et-de-popups">Partie 2 : Création de markers et de popups</h4>
+<p>Ci-joint une liste de points d’intérêt à afficher sur la carte :</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> points <span class="op">=</span> [</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.00437060928802</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">3.405187984560979</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">92.23933026058458</span>}<span class="op">,</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">44.463307782881934</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">2.5867921967706105</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">78.59774966580932</span>}<span class="op">,</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">46.701360118007614</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">4.203438300412598</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">43.30792363015428</span>}<span class="op">,</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.06995454268257</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">2.9843755928045974</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">69.75382042731478</span>}<span class="op">,</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">41.73849513342013</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">0.09524315874835665</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">42.34848301924781</span>}<span class="op">,</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.5131048425846</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">1.3759605086441091</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">65.13901308010112</span>}<span class="op">,</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.27480094773302</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">1.5415705159709354</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">76.69398811189502</span>}<span class="op">,</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.04183370083771</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">2.0131437190407855</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">99.75806820665699</span>}<span class="op">,</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">45.73365334672548</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">4.509047183911503</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">49.39182573091858</span>}<span class="op">,</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">41.56944827203337</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">1.2824369841638328</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">98.8118003058305</span>}<span class="op">,</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.28025539589674</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.5204876565287906</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">33.777649042471914</span>}<span class="op">,</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.04283122112549</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">1.7658824325843097</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">22.348104425941106</span>}<span class="op">,</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.63019093091029</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">5.955827423893109</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">50.041803065894655</span>}<span class="op">,</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.809542049709066</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">1.0519506280225759</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">13.303012538593073</span>}<span class="op">,</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">44.759611774817465</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">8.241677659885802</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">52.730646258111236</span>}<span class="op">,</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">42.14041661862867</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">0.8466411995457843</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">61.63346482605998</span>}<span class="op">,</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">45.556856299199055</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">1.7522494113772655</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">16.73165840302704</span>}<span class="op">,</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.63444578836868</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">0.40224418700704234</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">6.902395475369105</span>}<span class="op">,</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">43.604840774530444</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">5.95782358092385</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">75.69673343311065</span>}<span class="op">,</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">46.002160655169575</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">9.359492147779932</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">94.2702706591928</span>}<span class="op">,</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">41.869003589884436</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">1.2802888695794739</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">95.2801673714837</span>}<span class="op">,</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">45.1080605850212</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">0.45234191130153434</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">51.73082356043059</span>}<span class="op">,</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.54857370885016</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">1.7114593757958412</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">87.32096049949669</span>}<span class="op">,</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">44.57759194158374</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">0.7839355503934682</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">99.80646228576471</span>}<span class="op">,</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">42.48443600589425</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">6.019292339960644</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">78.37483977153656</span>}<span class="op">,</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">42.60198736310705</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">8.116480723726443</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">66.25562229170268</span>}<span class="op">,</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.73466522334483</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">6.84746537289261</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">96.27957332154588</span>}<span class="op">,</span></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.83480704252232</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.745650502291979</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">50.169730353307784</span>}<span class="op">,</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">46.21512871086712</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.300736925259019</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">53.2481339356941</span>}<span class="op">,</span></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">45.02797280582468</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">7.018468421305442</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">11.149581436133339</span>}<span class="op">,</span></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.54459158166243</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">4.777331391551614</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">36.37465244653624</span>}<span class="op">,</span></span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.96646869174493</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">3.6750860883761627</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">82.54139905132811</span>}<span class="op">,</span></span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.19889401847914</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.748243099974136</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">44.54208502616732</span>}<span class="op">,</span></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.18305491665355</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">8.58129751703601</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">52.811224974824135</span>}<span class="op">,</span></span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">42.428388231599435</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">2.2081712468493713</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">39.87227700369287</span>}<span class="op">,</span></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.767901025926975</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">3.3675651108011673</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">92.36195957310247</span>}<span class="op">,</span></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.46087504501311</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">4.444836603405148</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">98.91746712178988</span>}<span class="op">,</span></span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">43.95537474837441</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">8.25719417920605</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">86.41568950094754</span>}<span class="op">,</span></span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">46.07404357424273</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">4.5995135972665055</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">32.26512855436787</span>}<span class="op">,</span></span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.679162231135216</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">3.6007153060206045</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">93.34158555286103</span>}<span class="op">,</span></span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.266094787298535</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">8.055574091658201</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">41.1033164478011</span>}<span class="op">,</span></span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">45.49807875479245</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">7.518082870711052</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">72.49838154223822</span>}<span class="op">,</span></span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.969680565487835</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">0.8713047702640733</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">33.98535164114689</span>}<span class="op">,</span></span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.431616715860365</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">4.613929658904625</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">50.64590085936243</span>}<span class="op">,</span></span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">41.514760853194815</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">2.285139281037278</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">89.68834138037607</span>}<span class="op">,</span></span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">46.56277459901562</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">1.3184048033881233</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">33.400280682161146</span>}<span class="op">,</span></span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">46.5316977344798</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">6.603077148212063</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">72.0113752609356</span>}<span class="op">,</span></span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.29954528284932</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.3863072660138696</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">64.53094764875222</span>}<span class="op">,</span></span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.91688820075097</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">1.8342393474682077</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">72.95221657545406</span>}<span class="op">,</span></span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">41.63495049806509</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">1.6269678922727104</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">60.558472875675264</span>}<span class="op">,</span></span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.71181524949577</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">5.0903550879247055</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">19.438782471998707</span>}<span class="op">,</span></span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.87744549421906</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">5.230083842017458</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">47.323728454689395</span>}<span class="op">,</span></span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">43.79607186816448</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">9.03513208547697</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">7.984347750004095</span>}<span class="op">,</span></span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.60528678874444</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">0.24209221800012326</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">85.64259358587825</span>}<span class="op">,</span></span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.01321909828898</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">0.23700944427613369</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">92.35686482899119</span>}<span class="op">,</span></span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.36372866930204</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">6.778863311345785</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">73.70427600933832</span>}<span class="op">,</span></span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">41.63022408790834</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">8.389941106538636</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">51.005368006226504</span>}<span class="op">,</span></span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">41.57650161768758</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">9.433710257487771</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">72.50846938530762</span>}<span class="op">,</span></span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">46.63836538999862</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">6.283146871291595</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">89.57409452155638</span>}<span class="op">,</span></span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.644305399960444</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">1.3723843448788715</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">30.123756037195815</span>}<span class="op">,</span></span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.49617922119971</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">1.4829072337520204</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">41.95864161331395</span>}<span class="op">,</span></span>
+<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">44.06713285045802</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.0750725846461107</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">39.03465413141449</span>}<span class="op">,</span></span>
+<span id="cb29-64"><a href="#cb29-64" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">42.004837157200875</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">2.4709605423322545</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">1.6057082848583093</span>}<span class="op">,</span></span>
+<span id="cb29-65"><a href="#cb29-65" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">44.843053335216204</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">6.155960869148214</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">83.26243524621071</span>}<span class="op">,</span></span>
+<span id="cb29-66"><a href="#cb29-66" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.59541470550611</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">6.813655963218163</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">55.47643509191145</span>}<span class="op">,</span></span>
+<span id="cb29-67"><a href="#cb29-67" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.109448920624054</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.937552742927649</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">6.694287348602335</span>}<span class="op">,</span></span>
+<span id="cb29-68"><a href="#cb29-68" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">46.46951788080611</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">3.769992632761906</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">95.11842643973142</span>}<span class="op">,</span></span>
+<span id="cb29-69"><a href="#cb29-69" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">42.85539608851279</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">7.663502275531511</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">72.81715035933401</span>}<span class="op">,</span></span>
+<span id="cb29-70"><a href="#cb29-70" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">46.64295606637092</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">3.026217599936328</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">90.53437573839017</span>}<span class="op">,</span></span>
+<span id="cb29-71"><a href="#cb29-71" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.104242123946804</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">1.4644361383473088</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">78.38285495339304</span>}<span class="op">,</span></span>
+<span id="cb29-72"><a href="#cb29-72" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">45.966573558689234</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">6.244733093756412</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">45.010766988063125</span>}<span class="op">,</span></span>
+<span id="cb29-73"><a href="#cb29-73" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.04756186923966</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">0.49753046080660557</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">40.809650976483795</span>}<span class="op">,</span></span>
+<span id="cb29-74"><a href="#cb29-74" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.1720371306031</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">3.6394494864748514</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">67.05264046083512</span>}<span class="op">,</span></span>
+<span id="cb29-75"><a href="#cb29-75" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.84275126525832</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.3233366820057477</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">36.036798691745545</span>}<span class="op">,</span></span>
+<span id="cb29-76"><a href="#cb29-76" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.430993231382885</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">4.007409918464976</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">63.13549493741286</span>}<span class="op">,</span></span>
+<span id="cb29-77"><a href="#cb29-77" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">42.297505161919844</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">1.0880004632343923</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">97.46177848824912</span>}<span class="op">,</span></span>
+<span id="cb29-78"><a href="#cb29-78" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">51.03289119651886</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">4.4007045353275815</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">85.18369801298708</span>}<span class="op">,</span></span>
+<span id="cb29-79"><a href="#cb29-79" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">43.178360461068245</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">0.009674080605641677</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">42.944371900740364</span>}<span class="op">,</span></span>
+<span id="cb29-80"><a href="#cb29-80" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.20587571878736</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">5.55464419664852</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">17.77257142847848</span>}<span class="op">,</span></span>
+<span id="cb29-81"><a href="#cb29-81" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">42.122136495152866</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">1.2355788150693159</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">78.44912528713368</span>}<span class="op">,</span></span>
+<span id="cb29-82"><a href="#cb29-82" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">44.337872682975195</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">3.7900019533661</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">62.72653881661314</span>}<span class="op">,</span></span>
+<span id="cb29-83"><a href="#cb29-83" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.28765986966627</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">4.984572140202957</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">55.454115542254634</span>}<span class="op">,</span></span>
+<span id="cb29-84"><a href="#cb29-84" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.87062696418933</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">7.415757701119513</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">56.0506289149177</span>}<span class="op">,</span></span>
+<span id="cb29-85"><a href="#cb29-85" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">41.99264374695782</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">7.391627348898672</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">33.81696479960035</span>}<span class="op">,</span></span>
+<span id="cb29-86"><a href="#cb29-86" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.52538329252816</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">8.380066077678489</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">5.265642257243974</span>}<span class="op">,</span></span>
+<span id="cb29-87"><a href="#cb29-87" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.33537921772958</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.658881052479613</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">33.13221190392888</span>}<span class="op">,</span></span>
+<span id="cb29-88"><a href="#cb29-88" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">45.23568718489072</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">8.446979452411746</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">88.76351607709296</span>}<span class="op">,</span></span>
+<span id="cb29-89"><a href="#cb29-89" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">43.14395880940174</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.781095276519064</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">15.820755735291424</span>}<span class="op">,</span></span>
+<span id="cb29-90"><a href="#cb29-90" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.635433559883246</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">3.9729266229413254</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">39.24223351995748</span>}<span class="op">,</span></span>
+<span id="cb29-91"><a href="#cb29-91" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">42.604919737160785</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">0.352301384476597</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">31.99633524706693</span>}<span class="op">,</span></span>
+<span id="cb29-92"><a href="#cb29-92" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.23421475240264</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">4.288401250312162</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">25.435119853526377</span>}<span class="op">,</span></span>
+<span id="cb29-93"><a href="#cb29-93" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.32378149019271</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">9.204959065600708</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">48.53810466010362</span>}<span class="op">,</span></span>
+<span id="cb29-94"><a href="#cb29-94" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">44.79617633536024</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">0.5052328945724387</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">78.0750273964333</span>}<span class="op">,</span></span>
+<span id="cb29-95"><a href="#cb29-95" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">47.62248657471929</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">8.964901395861006</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">9.099582137317718</span>}<span class="op">,</span></span>
+<span id="cb29-96"><a href="#cb29-96" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">44.98601257661349</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">3.011559799044299</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">8.417443213093279</span>}<span class="op">,</span></span>
+<span id="cb29-97"><a href="#cb29-97" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">46.78555138978771</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">0.9580818337470696</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">43.29107594150834</span>}<span class="op">,</span></span>
+<span id="cb29-98"><a href="#cb29-98" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">48.06471866986791</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.648041608657923</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">69.0894624195032</span>}<span class="op">,</span></span>
+<span id="cb29-99"><a href="#cb29-99" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">50.16178092012635</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">2.7209265750118803</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">4.145746145562623</span>}<span class="op">,</span></span>
+<span id="cb29-100"><a href="#cb29-100" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">49.3415677365672</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:</span><span class="fl">9.38684509906168</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">40.08902664621343</span>}<span class="op">,</span></span>
+<span id="cb29-101"><a href="#cb29-101" aria-hidden="true" tabindex="-1"></a>  {<span class="st">"latitude"</span><span class="op">:</span><span class="fl">45.93740084771017</span><span class="op">,</span><span class="st">"longitude"</span><span class="op">:-</span><span class="fl">2.2680835197324423</span><span class="op">,</span><span class="st">"value"</span><span class="op">:</span><span class="fl">85.57974779137525</span>}</span>
+<span id="cb29-102"><a href="#cb29-102" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
+<li><p>Copiez cette variable dans votre fichier <code>script-exercice1.js</code>.</p></li>
+<li><p>Affichez un marqueur pour chacun des points d’intérêt. Ce marqueur doit être d’une couleur différente en fonction de la valeur associée au point d’intérêt (inspirez-vous de l’exemple fourni <a href="https://github.com/pointhi/leaflet-color-markers">ici</a> pour créer des marqueurs colorés) :</p>
+<ul>
+<li>marqueur rouge si la valeur est inférieure à 33,</li>
+<li>marqueur orange si la valeur est comprise entre 33 et 66,</li>
+<li>marqueur vert si la valeur est supérieure à 66.</li>
+</ul></li>
+<li><p>Vous ajouterez également un popup à chaque marqueur qui affiche la valeur associée au point d’intérêt lorsque l’utilisateur clique sur le marqueur.</p></li>
+<li><p>Veillez à ce que la carte soit centrée et zoomée afin que tous les marqueurs soient visibles lors de l’ouverture de la page.</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/tp7-ex1-2.png" class="img-fluid figure-img"></p>
+<figcaption>Résultat final</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="exercice-2-chargement-de-données-vectorielles-et-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="exercice-2-chargement-de-données-vectorielles-et-clustering">Exercice 2 : Chargement de données vectorielles et clustering</h2>
+<p>L’objectif de cet exercice est de charger des données vectorielles volumineuses (plusieurs milliers de points sur une zone restreinte) et de les afficher sur une carte interactive.</p>
+<section id="partie-1-création-de-la-carte-1" class="level4">
+<h4 class="anchored" data-anchor-id="partie-1-création-de-la-carte-1">Partie 1 : Création de la carte</h4>
+<p>Comme dans l’exercice précédent :</p>
+<ol type="1">
+<li>Créez un fichier <code>exercice2.html</code> et un fichier <code>script-exercice2.js</code>.</li>
+<li>Importer leaflet (CSS et JavaScript) ainsi que le fichier <code>script-exercice2.js</code> dans le fichier HTML.</li>
+<li>Importer également les fichiers CSS <code>https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css</code> et <code>https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css</code>.</li>
+<li>Importer également le fichier JavaScript <code>https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js</code>.</li>
+<li>Écrivez :
+<ul>
+<li>le code HTML permettant de créer un conteneur pour la carte,</li>
+<li>le code JavaScript permettant d’instancier la carte (veillez à ajouter un fond de carte tuilé dès maintenant) dans le fichier JavaScript,</li>
+<li>le code CSS permettant de définir la taille du conteneur de la carte : celui-ci doit occuper toute la largeur de la page et 60% de sa hauteur.</li>
+</ul></li>
+<li>Créez un second conteneur qui viendra se placer sous la carte et qui servira à afficher des informations sur l’élément sélectionné par l’utilisateur sur la carte (voir plus bas).</li>
+</ol>
+</section>
+<section id="partie-2-chargement-et-visualisation-des-données" class="level4">
+<h4 class="anchored" data-anchor-id="partie-2-chargement-et-visualisation-des-données">Partie 2 : Chargement et visualisation des données</h4>
+<ol type="1">
+<li>Chargez le fichier <a href="https://gist.githubusercontent.com/mthh/4ad093d3b33c2177f1e6c1ea1cde5d9b/raw/b6a60fc2ee66093f009114331f8a4230665d6a30/UNIONS_DE_QUARTIER_EPSG4326.json">UNIONS_DE_QUARTIER_EPSG4326.json</a> (il s’agit d’un fichier au format GeoJSON contenant des géométries de type Polygon - <a href="https://data.metropolegrenoble.fr/ckan/dataset/les-unions-de-quartier">Source</a>)</li>
+<li>Chargez le fichier <a href="https://gist.githubusercontent.com/mthh/0e675c0b582f3cfa5af8171b8c4e9c3d/raw/54969997ebcfa403de3d0b02aadfa09df7ee8038/base_imb_38_grenoble.geojson">base_imb_38_grenoble.geojson</a> (il s’agit d’un fichier au format GeoJSON contenant des géométries de type Point - <a href="https://www.data.gouv.fr/fr/datasets/ma-connexion-internet/#/resources">Source</a>).</li>
+<li>Créez une couche Leaflet (avec <code>L.geoJSON</code>) pour le fichier <code>UNIONS_DE_QUARTIER_EPSG4326.json</code> et ajoutez-la à la carte.</li>
+<li>Créez une couche Leaflet de cluster de marker en vous aidant des instructions présentes <a href="https://github.com/Leaflet/Leaflet.markercluster#usage">ici</a>.</li>
+<li>Ajustez le zoom de la carte pour que toutes les données soient visibles lors de l’ouverture de la page.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/ex2-partie2.png" class="img-fluid figure-img"></p>
+<figcaption>Résultat à la fin de la partie 2</figcaption>
+</figure>
+</div>
+</section>
+<section id="partie-3-interaction-avec-les-données" class="level4">
+<h4 class="anchored" data-anchor-id="partie-3-interaction-avec-les-données">Partie 3 : Interaction avec les données</h4>
+<ol type="1">
+<li>Écoutez l’événement “clic” sur chacun des marqueurs de la couche de cluster. Lorsque le clic se produit, affichez les informations concernant le point dans la <code>div</code> ajoutée précédemment sous la carte (cf.&nbsp;exemple en screenshot ci-dessous) en utilisant les variables <code>imb_id</code>, <code>addr_nom_commune</code>, <code>addr_nom_voie</code>, <code>addr_numero</code> et <code>imb_nbr_logloc</code> présentes dans les données.</li>
+<li>Écoutez l’événement “clic” sur la carte. Lorsque le clic se produit, effacez le contenu de la <code>div</code> ajoutée précédemment sous la carte.</li>
+<li>Prenez le temps de vous renseigner sur la manière de personnaliser, en CSS, le style du tableau, comme dans le screenshot ci-dessous (<em>padding</em> dans les cellules, centrage du texte, etc.).</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/ex2-partie3.png" class="img-fluid figure-img"></p>
+<figcaption>Résultat à la fin de la partie 3</figcaption>
+</figure>
+</div>
+</section>
+<section id="partie-4-pour-aller-plus-loin" class="level4">
+<h4 class="anchored" data-anchor-id="partie-4-pour-aller-plus-loin">Partie 4 : Pour aller plus loin</h4>
+<ol type="1">
+<li>Ajoutez un fond de carte tuilé plus adapté à la visualisation des données, par exemple un fond de carte en noir et blanc - vous pouvez aller sur la page https://leaflet-extras.github.io/leaflet-providers/preview/ pour en choisir un qui vous plait - faites attention à ne pas en choisir un qui nécessite un clé (API key) pour fonctionner.</li>
+</ol>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
