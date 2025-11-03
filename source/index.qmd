@@ -66,7 +66,7 @@ Pour aller plus loin :
 Ce cours est en contrôle continu intégral.
 La note sera constituée de :
 
-- une note de projet (50%) - ce projet sera réalisé en binôme (date de rendu à définir)
+- [une note de projet](https://observablehq.com/@sd-progwebdataviz/tp-note-atp-tour) (50%) - ce projet sera réalisé seul ou en binôme (à rendre pour le 10/12/2025 à 20h00)
 - un TP noté (50%) - ce TP individuel sera réalisé en salle courant novembre 2025 
 
 ## Ressources utiles
