@@ -20,7 +20,7 @@ Cette séance s'inscrit dans la suite du TP n°8 et a pour objectifs de :
 - mettre à jour un composant HTML ou un graphique réalisé avec Plot en fonction d'une action de l'utilisateur (clic, survol, etc.),
 - découvrir D3.js,
 
-Nous utiliserons dans cette séance les [statistiques des bibliothèques de Grenoble](https://data.metropolegrenoble.fr/ckan/dataset/statistiques-des-bibliotheques-de-grenoble).
+Nous utiliserons dans cette séance les [statistiques des bibliothèques de Grenoble](https://data.metropolegrenoble.fr/visualisation/information/?id=statistiques-des-bibliotheques-de-grenoble).
 
 ## Vues synchronisées
 
@@ -126,7 +126,7 @@ que nous allons utiliser pour synchroniser plusieurs composants entre eux.
 
 ## Exercice - Création d'un "tableau de bord" 
 
-Nous allons maintenant créer un tableau de bord assez simple permettant de visualiser les [statistiques des bibliothèques de Grenoble](https://data.metropolegrenoble.fr/ckan/dataset/statistiques-des-bibliotheques-de-grenoble).
+Nous allons maintenant créer un tableau de bord assez simple permettant de visualiser les [statistiques des bibliothèques de Grenoble](https://data.metropolegrenoble.fr/visualisation/information/?id=statistiques-des-bibliotheques-de-grenoble).
 
 Ce jeu de données contient plusieurs statistiques :
 
