@@ -50,6 +50,7 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 - [TP - Exercice de mise en pratique avec Plot](https://observablehq.com/@sd-progwebdataviz/tp-exercice-de-mise-en-pratique-avec-plot) - [Correction](https://observablehq.com/@sd-progwebdataviz/solution-exercice-de-mise-en-pratique-avec-plot)
 - [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants) - [Correction](https://observablehq.com/@sd-progwebdataviz/solutions-prix-des-carburants)
 - [Bibliothèque Plot (partie 2)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
+- [Exercice Deck.gl: Accidents de la route au Japon](https://observablehq.com/@sd-progwebdataviz/exercice-deck-gl-road-accidents-in-japan)
 
 <!--
  
