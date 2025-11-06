@@ -342,3 +342,8 @@ Voir le notebook [Faire des graphiques avec D3.js](https://observablehq.com/@sd-
 En fonction du temps restant, essayez d'intégrer un graphique réaliser avec D3.js dans la page HTML que vous avez créée pour cet exercice (par exemple un
 diagramme circulaire).
 
+::: {.callout-tip}
+## Correction
+
+La correction de l'exercice est disponible à l'URL suivante : [./data/TP8-correction.zip](./data/TP8-correction.zip)
+:::
