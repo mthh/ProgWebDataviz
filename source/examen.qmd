@@ -1,0 +1,127 @@
+---
+title: "Évaluation - Programmation Web pour la visualisation"
+subtitle: "BUT Science des données - 3ème année - Université Grenoble Alpes"
+date: 12/10/2025
+format:
+  html:
+    code-fold: true
+    include-in-header:
+      - text: |
+          <link rel="stylesheet" href="./css/tps.css">
+---
+
+
+## Modalités
+
+- Il s'agit d'un **travail individuel** d'une durée de **2h00**.
+  Vous devez rendre votre travail sur [l'espace dédié au cours "BUT3 SD R5.VCOD.07 : Programmation web pour la visualisation" sur Chamilo](https://chamilo.iut2.univ-grenoble-alpes.fr/courses/BUT3SDVCOD507/)
+  dans la rubrique "Travaux" (votre rendu doit être un fichier ZIP contenant votre page HTML ainsi que l'ensemble des fichiers nécessaires à l'affichage de votre page).
+
+- Vous avez le droit d'utiliser tous les documents que vous souhaitez (cours, notes, correction des TP précédents, etc.)
+  ainsi que de faire des recherches sur le Web.
+
+- Les **outils permettant de communiquer, ou de partager des documents, entre vous ou avec des tiers (mail, chat, *signal*, *telegram*, *dropbox*, etc.)**
+  ainsi que les **IA génératives (ChatGPT, Gemini, etc.) ne sont pas autorisés et leur utilisation sera sanctionnée**.
+
+
+## Consignes
+
+Vous allez devoir construire une page HTML (de type "mini-dashboard") présentant la localisation des espaces verts gérés par la ville de Paris.
+Il s'agit d'un jeu de données disponible en Open Data (<a href="https://opendata.paris.fr/explore/dataset/espaces_verts/">https://opendata.paris.fr/explore/dataset/espaces_verts/</a>) et pouvant être exporté
+dans différents formats, dont le GeoJSON.
+
+**Cette page doit contenir les éléments suivants** :
+
+- **un titre**
+
+- **un pied de page** avec **la date de récupération des données, la date de réalisation de la page et le nom de l'auteur**
+  (la date de réalisation de la page est donc écrite "en dure" alors que la date de récupération est générée avec du code JavaScript),
+
+- **une carte Leaflet** (avec le fond de carte de votre choix) affichant les différents espaces verts présents dans le jeu de données, dans la couleur de votre choix ;
+  lors du clic sur un espace vert, un popup doit s'ouvrir et afficher l'ensemble des attributs de l'entité (cf. Figure 3 ci-dessous),
+
+- **une section d'indicateur clés** affichant le nombre total d'espaces verts et la surface totale couverte par ces espaces verts (en m²), calculés à partir des données (en utilisant la variable variable *"surface_totale_reelle"*),
+
+- un 1er **graphique**, réalisé avec Plot, **permettant de visualiser le nombre d'espaces verts correspondant à chaque type** (en utilisant la variable *"type_ev"*, voir Figure 1 ci-dessous),
+
+- un 2nd **graphique**, réalisé avec Plot, **permettant de visualiser l'année d'ouverture des espaces verts présents dans le jeu de données** (en utilisant la variable *"annee_ouverture"*, voir Figure 2 ci-dessous - il peut s'agir d'un autre type de graphique que celui montré en exemple tant qu'il permet bien de visualiser les années d'ouverture des espaces verts).
+
+![Figure 1 : Exemple pour le graphique 1](./img/tp-final-4-graphique1.png)
+
+![Figure 2 : Exemple pour le graphique 2](./img/tp-final-4-graphique2.png)
+
+![Figure 3 : Exemple de popup](./img/tp-final-4-popup.png)
+
+Autres éléments à prendre en compte :
+
+- lors de l'ouverture de la page, la carte doit être centrée et zoomée pour afficher l'ensemble des entrées du jeu de données,
+- vous devez agencer votre page de manière à faire tenir l'ensemble des éléments dans la page (sans scroll vertical ni horizontal - cf. Figure 4).
+
+![Figure 4 : Exemple de mise en page](./img/tp-final-4-page-totale.png)
+
+
+### Jeu de données
+
+Pour récupérer les données, vous devez utiliser l'URL suivante : [https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/espaces_verts/exports/geojson](https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/espaces_verts/exports/geojson).
+
+L'objet que vous récupérez est un objet GeoJSON. Chaque entrée du tableau `features` correspond à un espace vert.
+
+
+### Rappels
+
+Comme vu dans les TP, votre page HTML doit importer les éléments suivants :
+
+- le fichier CSS de leaflet :
+```html
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+```
+
+- le fichier JS de leaflet :
+
+```html
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""></script>
+```
+
+- le fichier JS de D3.js :
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+```
+
+- le fichier JS de Plot :
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
+```
+
+- par ailleurs, vous aurez besoin d'inclure le fichier JS qui contiendra votre code JavaScript (que vous pouvez nommer comme vous le souhaitez) :
+
+```html
+<script src="index.js"></script>
+```
+
+
+### Question bonus
+
+Vous devez gérer le cas où le chargement des données échoue (par exemple si le serveur est indisponible, si l'utilisateur n'est pas connecté à Internet, etc.).
+
+Si le chargement échoue, la page doit afficher un message d'erreur (cf. Figure 5 ci-dessous).
+
+![Figure 5 : Exemple de page lorsque le chargement des données a échoué](./img/tp-final-4-error.png)
+
+
+### Barème indicatif :
+
+- Chargement des données : 1.5 point
+- Titre : 0.5 point
+- Pied de page : 1.5 points
+- Structure du document HTML / mise en page : 3.5 points
+- Indicateurs clés : 2 point
+- Carte et popups : 5 points
+- Graphique 1 : 3.5 points
+- Graphique 2 : 2.5 points <br/><br />
+- Question bonus : 1 point
