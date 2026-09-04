@@ -1,0 +1,126 @@
+---
+title: "Programmation Web pour la visualisation"
+subtitle: "BUT Science des données - 3ème année - Université Grenoble Alpes"
+format:
+  html:
+    code-fold: true
+author:
+  - name: "Matthieu Viry"
+    email: "matthieu.viry@cnrs.fr"
+---
+
+## Objectif du cours
+
+Ce cours est une introduction à la programmation Web pour la visualisation interactive de données. Il couvre :
+
+- rappels des principes de base de la visualisation de données (perception visuelle, encodage des données, interaction, etc.) et des principaux types de graphiques,
+- aperçu des principales bibliothèques pour la visualisation de données,
+- HTML, CSS et JavaScript,
+- réalisation de reporting / visualisations Web interactives / dashboards avec les bibliothèques Plot, Leaflet, D3.js ainsi que des données en Open Data,
+- création de rapports Web avec R et Quarto (en fonction du temps restant).
+
+
+## Planning du cours
+
+| Date       | Heure   | Contenu                                                                                                   | Ressources                  |
+|------------|---------|-----------------------------------------------------------------------------------------------------------|-----------------------------|
+| 07/09/2026 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                                                              | [Slides](./CM-seance1.html) |
+| 07/09/2026 | 14h-17h | TP - Rappels JavaScript et manipulation de données                                                        | Voir URL des TP plus bas    |
+| 08/09/2026 | 10h-13h | TP - Datavisualisation avec Plot                                                                          |                             |
+| 08/09/2026 | 14h-17h | TP - Datavisualisation avec Plot + CM - Règles et conseils pour la conception de visualisation de données |                             |
+| 09/09/2026 | 10h-13h | TP - Datavisualisation avec Plot                                                                          |                             |
+| 09/09/2026 | 14h-17h | TP - Datavisualisation avec Plot                                                                          |                             |
+| 19/10/2026 | 10h-13h | TP - Visualisation de données géospatiales avec Leaflet                                                   |                             |
+| 19/10/2026 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)                                   |                             |
+| 20/10/2026 | 10h-13h | TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js), suite                                 |                             |
+| 20/10/2026 | 14h-17h | TP - Visualisation dans un document Quarto (R / Python / JavaScript)                                      |                             |
+
+
+## URL des TPs sur Observable
+
+L'ensemble des notebooks disponibles peut-être retrouvé ici : [https://observablehq.com/@sd-progwebdataviz/-/collections](https://observablehq.com/@sd-progwebdataviz/-/collections)
+
+Ils sont répartis en trois "collections" : cours, exercices et corrections.
+
+En détails (les liens seront mis à jour au fur et à mesure de la progression du cours) :
+
+- [Premiers pas dans Observable](https://observablehq.com/@sd-progwebdataviz/premiers-pas-dans-observable)
+- [Rappels Markdown](https://observablehq.com/@sd-progwebdataviz/rappels-markdown)
+- [Rappels JavaScript](https://observablehq.com/@sd-progwebdataviz/rappels-javascript) - [Exercices](https://observablehq.com/@sd-progwebdataviz/rappels-javascript-exercices) 
+- [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices)
+
+<!--
+
+
+[Correction](https://observablehq.com/@sd-progwebdataviz/solution-des-exercices-rappels-javascript)
+[Correction](https://observablehq.com/@sd-progwebdataviz/solution-preparation-et-transformation-de-donnees)
+
+- [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
+- [TP - Exercice de mise en pratique avec Plot](https://observablehq.com/@sd-progwebdataviz/tp-exercice-de-mise-en-pratique-avec-plot) - [Correction](https://observablehq.com/@sd-progwebdataviz/solution-exercice-de-mise-en-pratique-avec-plot)
+- [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants) - [Correction](https://observablehq.com/@sd-progwebdataviz/solutions-prix-des-carburants)
+- [Bibliothèque Plot (partie 2)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
+- [Exercice Deck.gl: Accidents de la route au Japon](https://observablehq.com/@sd-progwebdataviz/exercice-deck-gl-road-accidents-in-japan)
+
+
+ 
+- [Exercice Deck.gl : Road accidents in Japan](https://observablehq.com/@sd-progwebdataviz/exercice-deck-gl-road-accidents-in-japan)
+
+Pour aller plus loin :
+
+- Faire des graphiques avec D3.js - Une introduction (lien à venir)
+- Exercice - Un *scatter plot* avec D3.js (lien à venir)
+
+-->
+
+## Évaluation
+
+Ce cours est en contrôle continu intégral.
+La note sera constituée de :
+
+- [une note de projet](https://observablehq.com/@sd-progwebdataviz/tp-note-atp-tour) (50%) - ce projet sera réalisé seul ou en binôme (à rendre pour le 10/12/2026 à 20h00),
+- un TP noté (50%) - ce TP individuel sera réalisé en salle (date à définir).
+
+## Ressources utiles
+
+### Visualisation de données en général
+
+- [From Data to Viz](https://www.data-to-viz.com/) (typologie des graphiques)
+- [The Data Visualisation Catalogue](https://datavizcatalogue.com/) (typologie des graphiques)
+- [DataVizProject](https://datavizproject.com/) (collection de graphiques pour trouver l'inspiration et le type approprié)
+<br><br>
+
+- [Fundamentals of Data Visualization](https://clauswilke.com/dataviz/), Claus O. Wilke, 2019 (livre en ligne)
+- Data Visualisation - A Handbook for Data Driven Design, 2nd Edition, Andy Kirk, 2019 (livre)
+<br><br>
+
+- [Visualising data](https://visualisingdata.com/) (blog - podcast - ressources variées / Par Andy Kirk)
+- [Information is Beautiful](https://informationisbeautiful.net/) (exemples - blog - ressources variées)
+- [FlowingData](https://flowingdata.com/) (blog - ressources variées / Par Nathan Yau)
+- [Visual Cinnamon](https://www.visualcinnamon.com/) (blog - ressources variées - visualisation de données et *data art*)
+- [Visualization design resources](https://www.cs.ubc.ca/group/infovis/resources.shtml) (ressources variées)
+- [Datawrapper Blog](https://www.datawrapper.de/blog) (blog: *do's & don'ts*, *color in datavis*, etc.)
+<br><br>
+
+- [Exposition "Data Visualization and the Modern Imagination"](https://exhibits.stanford.edu/dataviz) (exposition en ligne sur l'histoire de la visualisation de données)
+
+### Environnement Observable
+
+- [Plateforme Observable](https://observablehq.com/)
+- [Documentation des notebooks Observable](https://observablehq.com/documentation)
+
+### Bibliothèques et outils utilisés
+
+- [Bibliothèque Plot](https://observablehq.com/plot/) et [galerie](https://observablehq.com/@observablehq/plot-gallery)
+- [Bibliothèque d3.js](https://d3js.org/) et [galerie](https://observablehq.com/collection/@d3/gallery)
+- [Bibliothèque Leaflet](https://leafletjs.com/)
+- [Quarto](https://quarto.org/)
+- [R](https://www.r-project.org/)
+
+### Autres bibliothèques
+
+- Bibliothèques [Vega](https://vega.github.io/vega/) et [Vega-Lite](https://vega.github.io/vega-lite/)
+- [Bibliothèque Plotly](https://plotly.com/javascript/)
+- [Bibliothèque ECharts](https://echarts.apache.org/en/index.html)
+- [Bibliothèque Highcharts](https://www.highcharts.com/)
+- [Bibliothèque Chart.js](https://www.chartjs.org/)
+- [Bibliothèque ApexCharts](https://apexcharts.com/)

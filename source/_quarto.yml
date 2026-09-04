@@ -1,0 +1,9 @@
+project:
+  type: default
+  render:
+    - index.qmd
+    - "CM*.qmd"
+    - "TP*.qmd"
+    - "examen.qmd"
+    - "dashboard*.qmd"
+  output-dir: dist
