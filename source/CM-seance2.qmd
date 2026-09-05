@@ -100,7 +100,7 @@ Plot.plot({
 ::::
 
 ## Traitement visuel pré-attentif
-
+[CM-seance2.qmd](CM-seance2.qmd)
 ::::{.columns}
 :::{.column width="50%"}
 
@@ -765,7 +765,7 @@ src="https://observablehq.com/embed/@mthh/lollipop-chart-connected-dots@217?cell
 
 
 ```{ojs}
-dicopal = import("https://cdn.skypack.dev/dicopal@0.8.1")
+dicopal = import("https://unpkg.com/dicopal/dist/index.min.esm.js")
 
 function makePalette(colors) {
   return `<div style="display: grid; height: 4rem; padding: 0.5rem; gap: 1px;  
