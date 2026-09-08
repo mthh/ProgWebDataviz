@@ -100,7 +100,7 @@ Plot.plot({
 ::::
 
 ## Traitement visuel pré-attentif
-[CM-seance2.qmd](CM-seance2.qmd)
+
 ::::{.columns}
 :::{.column width="50%"}
 
