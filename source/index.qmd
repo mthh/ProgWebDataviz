@@ -50,6 +50,7 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices) - [Correction](https://observablehq.com/@sd-progwebdataviz/solution-preparation-et-transformation-de-donnees)
 - [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
 - [TP - Exercice de mise en pratique avec Plot](https://observablehq.com/@sd-progwebdataviz/tp-exercice-de-mise-en-pratique-avec-plot) - [Correction](https://observablehq.com/@sd-progwebdataviz/solution-exercice-de-mise-en-pratique-avec-plot)
+- [Bibliothèque Plot (partie 2)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
 - [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants)
 
 
@@ -64,8 +65,6 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 - [Bibliothèque Plot (partie 2)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot-2-interactions)
 - [Exercice Deck.gl: Accidents de la route au Japon](https://observablehq.com/@sd-progwebdataviz/exercice-deck-gl-road-accidents-in-japan)
 
-
- 
 - [Exercice Deck.gl : Road accidents in Japan](https://observablehq.com/@sd-progwebdataviz/exercice-deck-gl-road-accidents-in-japan)
 
 Pour aller plus loin :
