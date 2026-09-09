@@ -29,7 +29,7 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 | 08/09/2026 | 10h-13h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas    |
 | 08/09/2026 | 14h-17h | TP - Datavisualisation avec Plot + CM - Règles et conseils pour la conception de visualisation de données | [Slides](./CM-seance2.html) |
 | 09/09/2026 | 10h-13h | TP - Datavisualisation avec Plot                                                                          |                             |
-| 09/09/2026 | 14h-17h | TP - Datavisualisation avec Plot                                                                          |                             |
+| 09/09/2026 | 14h-17h | TP - Datavisualisation avec Plot / TP - Géovisualisation avec Deck.gl                                     |                             |
 | 19/10/2026 | 10h-13h | TP - Visualisation de données géospatiales avec Leaflet                                                   |                             |
 | 19/10/2026 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)                                   |                             |
 | 20/10/2026 | 10h-13h | TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js), suite                                 |                             |
@@ -50,6 +50,8 @@ En détails (les liens seront mis à jour au fur et à mesure de la progression 
 - [Rappels manipulation de données](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees) - [Exercices](https://observablehq.com/@sd-progwebdataviz/preparation-et-transformation-de-donnees-exercices) - [Correction](https://observablehq.com/@sd-progwebdataviz/solution-preparation-et-transformation-de-donnees)
 - [Bibliothèque Plot (partie 1)](https://observablehq.com/@sd-progwebdataviz/bibliotheque-plot)
 - [TP - Exercice de mise en pratique avec Plot](https://observablehq.com/@sd-progwebdataviz/tp-exercice-de-mise-en-pratique-avec-plot) - [Correction](https://observablehq.com/@sd-progwebdataviz/solution-exercice-de-mise-en-pratique-avec-plot)
+- [TP - Prix des carburants](https://observablehq.com/@sd-progwebdataviz/tp-prix-des-carburants)
+
 
 <!--
 
