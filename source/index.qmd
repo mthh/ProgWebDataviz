@@ -22,18 +22,18 @@ Ce cours est une introduction à la programmation Web pour la visualisation inte
 
 ## Planning du cours
 
-| Date       | Heure   | Contenu                                                                                                   | Ressources                  |
-|------------|---------|-----------------------------------------------------------------------------------------------------------|-----------------------------|
-| 07/09/2026 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                                                              | [Slides](./CM-seance1.html) |
-| 07/09/2026 | 14h-17h | TP - Rappels JavaScript et manipulation de données                                                        | Voir URL des TP plus bas    |
-| 08/09/2026 | 10h-13h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas    |
-| 08/09/2026 | 14h-17h | TP - Datavisualisation avec Plot + CM - Règles et conseils pour la conception de visualisation de données | [Slides](./CM-seance2.html) |
-| 09/09/2026 | 10h-13h | TP - Datavisualisation avec Plot                                                                          |                             |
-| 09/09/2026 | 14h-17h | TP - Datavisualisation avec Plot / TP - Géovisualisation avec Deck.gl                                     |                             |
-| 19/10/2026 | 10h-13h | TP - Visualisation de données géospatiales avec Leaflet                                                   |                             |
-| 19/10/2026 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)                                   |                             |
-| 20/10/2026 | 10h-13h | TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js), suite                                 |                             |
-| 20/10/2026 | 14h-17h | TP - Visualisation dans un document Quarto (R / Python / JavaScript)                                      |                             |
+| Date       | Heure   | Contenu                                                                                                   | Ressources                      |
+|------------|---------|-----------------------------------------------------------------------------------------------------------|---------------------------------|
+| 07/09/2026 | 10h-13h | CM - Cours d'introduction + Intro JavaScript                                                              | [Slides](./CM-seance1.html)     |
+| 07/09/2026 | 14h-17h | TP - Rappels JavaScript et manipulation de données                                                        | Voir URL des TP plus bas        |
+| 08/09/2026 | 10h-13h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas        |
+| 08/09/2026 | 14h-17h | TP - Datavisualisation avec Plot + CM - Règles et conseils pour la conception de visualisation de données | [Slides](./CM-seance2.html)     |
+| 09/09/2026 | 10h-13h | TP - Datavisualisation avec Plot                                                                          | Voir URL des TP plus bas        |
+| 09/09/2026 | 14h-17h | TP - Datavisualisation avec Plot / TP - Géovisualisation avec Deck.gl                                     | Voir URL des TP plus bas        |
+| 19/10/2026 | 10h-13h | TP - Visualisation de données géospatiales avec Leaflet                                                   | [Support TP](./TP-seance7.html) |
+| 19/10/2026 | 14h-17h | CM / TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js)                                   | Support TP                      |
+| 20/10/2026 | 10h-13h | TP - Vues synchronisées, dashboards, etc. (Plot / Leaflet / D3.js), suite                                 | *Voir URL support précédent*    |
+| 20/10/2026 | 14h-17h | TP - Visualisation dans un document Quarto (R / Python / JavaScript)                                      | Support TP                      |
 
 
 ## URL des TPs sur Observable
@@ -78,7 +78,7 @@ Pour aller plus loin :
 Ce cours est en contrôle continu intégral.
 La note sera constituée de :
 
-- [une note de projet](https://observablehq.com/@sd-progwebdataviz/tp-note-atp-tour) (50%) - ce projet sera réalisé seul ou en binôme (à rendre pour le 10/12/2026 à 20h00),
+- [une note de projet](https://observablehq.com/@sd-progwebdataviz/tp-note-2026-2027) (50%) - ce projet sera réalisé seul ou en binôme (à rendre pour le 10/12/2026 à 20h00),
 - un TP noté (50%) - ce TP individuel sera réalisé en salle (date à définir).
 
 ## Ressources utiles
