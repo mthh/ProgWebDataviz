@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>CM/TP Séance 9 - Vues synchronisées, dashboard, Leaflet, Plot et d3.js (suite)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="TP-seance9-full_files/libs/clipboard/clipboard.min.js"></script>
+<script src="TP-seance9-full_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="TP-seance9-full_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="TP-seance9-full_files/libs/quarto-html/popper.min.js"></script>
+<script src="TP-seance9-full_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="TP-seance9-full_files/libs/quarto-html/anchor.min.js"></script>
+<link href="TP-seance9-full_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="TP-seance9-full_files/libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="TP-seance9-full_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="TP-seance9-full_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="TP-seance9-full_files/libs/bootstrap/bootstrap-65bf3300b9bb66d394cd84a94c608efc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link rel="stylesheet" href="./css/tps.css">
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
+<script src="./js/tp-seance8.js"></script>
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#graphiques-animés-et-vues-synchronisées-avec-d3.js" id="toc-graphiques-animés-et-vues-synchronisées-avec-d3.js" class="nav-link active" data-scroll-target="#graphiques-animés-et-vues-synchronisées-avec-d3.js">Graphiques animés et vues synchronisées avec D3.js</a></li>
+  <li><a href="#objectifs-de-la-séance" id="toc-objectifs-de-la-séance" class="nav-link" data-scroll-target="#objectifs-de-la-séance">Objectifs de la séance</a></li>
+  <li><a href="#point-de-départ" id="toc-point-de-départ" class="nav-link" data-scroll-target="#point-de-départ">Point de départ</a></li>
+  <li><a href="#créer-une-fois-mettre-à-jour-ensuite" id="toc-créer-une-fois-mettre-à-jour-ensuite" class="nav-link" data-scroll-target="#créer-une-fois-mettre-à-jour-ensuite">Créer une fois, mettre à jour ensuite</a></li>
+  <li><a href="#les-données" id="toc-les-données" class="nav-link" data-scroll-target="#les-données">Les données</a></li>
+  <li><a href="#partie-1---factoriser-le-code-existant-si-nécessaire" id="toc-partie-1---factoriser-le-code-existant-si-nécessaire" class="nav-link" data-scroll-target="#partie-1---factoriser-le-code-existant-si-nécessaire">Partie 1 - Factoriser le code existant si nécessaire</a></li>
+  <li><a href="#partie-2---un-graphique-en-courbes-avec-d3.js" id="toc-partie-2---un-graphique-en-courbes-avec-d3.js" class="nav-link" data-scroll-target="#partie-2---un-graphique-en-courbes-avec-d3.js">Partie 2 - Un graphique en courbes avec D3.js</a>
+  <ul class="collapse">
+  <li><a href="#ajout-des-conteneurs-dans-la-page" id="toc-ajout-des-conteneurs-dans-la-page" class="nav-link" data-scroll-target="#ajout-des-conteneurs-dans-la-page">Ajout des conteneurs dans la page</a></li>
+  <li><a href="#structure-dun-graphique-d3" id="toc-structure-dun-graphique-d3" class="nav-link" data-scroll-target="#structure-dun-graphique-d3">Structure d’un graphique D3</a></li>
+  <li><a href="#le-graphique-en-courbes" id="toc-le-graphique-en-courbes" class="nav-link" data-scroll-target="#le-graphique-en-courbes">Le graphique en courbes</a></li>
+  <li><a href="#intégration-dans-la-page" id="toc-intégration-dans-la-page" class="nav-link" data-scroll-target="#intégration-dans-la-page">Intégration dans la page</a></li>
+  <li><a href="#une-infobulle-au-survol" id="toc-une-infobulle-au-survol" class="nav-link" data-scroll-target="#une-infobulle-au-survol">Une infobulle au survol</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
+  </ul></li>
+  <li><a href="#partie-3---un-diagramme-en-barres-animé" id="toc-partie-3---un-diagramme-en-barres-animé" class="nav-link" data-scroll-target="#partie-3---un-diagramme-en-barres-animé">Partie 3 - Un diagramme en barres animé</a>
+  <ul class="collapse">
+  <li><a href="#la-jointure-de-données" id="toc-la-jointure-de-données" class="nav-link" data-scroll-target="#la-jointure-de-données">La jointure de données</a></li>
+  <li><a href="#le-diagramme-en-barres" id="toc-le-diagramme-en-barres" class="nav-link" data-scroll-target="#le-diagramme-en-barres">Le diagramme en barres</a></li>
+  <li><a href="#intégration-dans-la-page-1" id="toc-intégration-dans-la-page-1" class="nav-link" data-scroll-target="#intégration-dans-la-page-1">Intégration dans la page</a></li>
+  <li><a href="#questions-1" id="toc-questions-1" class="nav-link" data-scroll-target="#questions-1">Questions</a></li>
+  </ul></li>
+  <li><a href="#partie-4---un-nuage-de-points-avec-sélection-par-rectangle" id="toc-partie-4---un-nuage-de-points-avec-sélection-par-rectangle" class="nav-link" data-scroll-target="#partie-4---un-nuage-de-points-avec-sélection-par-rectangle">Partie 4 - Un nuage de points avec sélection par rectangle</a>
+  <ul class="collapse">
+  <li><a href="#le-brush" id="toc-le-brush" class="nav-link" data-scroll-target="#le-brush">Le <code>brush</code></a></li>
+  <li><a href="#le-nuage-de-points" id="toc-le-nuage-de-points" class="nav-link" data-scroll-target="#le-nuage-de-points">Le nuage de points</a></li>
+  <li><a href="#intégration-dans-la-page-2" id="toc-intégration-dans-la-page-2" class="nav-link" data-scroll-target="#intégration-dans-la-page-2">Intégration dans la page</a></li>
+  <li><a href="#questions-2" id="toc-questions-2" class="nav-link" data-scroll-target="#questions-2">Questions</a></li>
+  </ul></li>
+  <li><a href="#partie-5---un-diagramme-en-anneau" id="toc-partie-5---un-diagramme-en-anneau" class="nav-link" data-scroll-target="#partie-5---un-diagramme-en-anneau">Partie 5 - Un diagramme en anneau</a></li>
+  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+  <li><a href="#aide-mémoire-d3" id="toc-aide-mémoire-d3" class="nav-link" data-scroll-target="#aide-mémoire-d3">Aide-mémoire D3</a></li>
+  <li><a href="#pour-finir" id="toc-pour-finir" class="nav-link" data-scroll-target="#pour-finir">Pour finir</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">CM/TP Séance 9 - Vues synchronisées, dashboard, Leaflet, Plot et d3.js (suite)</h1>
+<p class="subtitle lead">BUT Science des données - 3ème année - Université Grenoble Alpes</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="graphiques-animés-et-vues-synchronisées-avec-d3.js" class="level2">
+<h2 class="anchored" data-anchor-id="graphiques-animés-et-vues-synchronisées-avec-d3.js">Graphiques animés et vues synchronisées avec D3.js</h2>
+</section>
+<section id="objectifs-de-la-séance" class="level2">
+<h2 class="anchored" data-anchor-id="objectifs-de-la-séance">Objectifs de la séance</h2>
+<p>Cette séance fait suite à la séance 8. Vous allez enrichir votre tableau de bord avec des graphiques réalisés avec D3.js, pour faire des choses que Plot ne permet pas (ou mal) :</p>
+<ul>
+<li>animer un graphique quand les données changent,</li>
+<li>sélectionner plusieurs éléments avec un rectangle (un <em>brush</em>),</li>
+<li>synchroniser tout cela avec la carte et les graphiques déjà présents dans la page.</li>
+</ul>
+<p>Nous utilisons toujours les <a href="https://data.metropolegrenoble.fr/visualisation/information/?id=statistiques-des-bibliotheques-de-grenoble">statistiques des bibliothèques de Grenoble</a>.</p>
+</section>
+<section id="point-de-départ" class="level2">
+<h2 class="anchored" data-anchor-id="point-de-départ">Point de départ</h2>
+<p>Vous repartez de votre page de la séance 8 : la carte, le menu <code>&lt;select&gt;</code> et les 4 courbes Plot.</p>
+<p>Les nouveaux graphiques seront placés en dessous. Il y en a quatre :</p>
+<ol type="1">
+<li>une courbe avec une infobulle au survol,</li>
+<li>un diagramme en barres animé, piloté par un curseur d’année,</li>
+<li>un nuage de points dans lequel on sélectionne des bibliothèques avec un rectangle,</li>
+<li>un diagramme en anneau.</li>
+</ol>
+<p>Les deux premiers sont guidés. Pour les deux suivants, vous avez uniquement un cahier des charges.</p>
+<p>Ajoutez ce bloc à la fin du <code>&lt;body&gt;</code>. Il contient les menus dont nous aurons besoin et un conteneur par graphique :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"d3-container"</span><span class="dt">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Pour aller plus loin avec D3.js<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"select-indicator"</span><span class="dt">&gt;</span>Indicateur : <span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">select</span><span class="ot"> id</span><span class="op">=</span><span class="st">"select-indicator"</span><span class="dt">&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">select</span><span class="dt">&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"select-year"</span><span class="dt">&gt;</span>Année : <span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"range"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"select-year"</span><span class="ot"> min</span><span class="op">=</span><span class="st">"2008"</span><span class="ot"> max</span><span class="op">=</span><span class="st">"2016"</span><span class="ot"> step</span><span class="op">=</span><span class="st">"1"</span><span class="ot"> value</span><span class="op">=</span><span class="st">"2016"</span><span class="dt">&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">output</span><span class="ot"> id</span><span class="op">=</span><span class="st">"output-year"</span><span class="dt">&gt;</span>2016<span class="dt">&lt;/</span><span class="kw">output</span><span class="dt">&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> id</span><span class="op">=</span><span class="st">"button-play"</span><span class="dt">&gt;</span>▶ Lecture<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"select-x"</span><span class="dt">&gt;</span>Nuage de points - axe x : <span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">select</span><span class="ot"> id</span><span class="op">=</span><span class="st">"select-x"</span><span class="dt">&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">select</span><span class="dt">&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"select-y"</span><span class="dt">&gt;</span>axe y : <span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">select</span><span class="ot"> id</span><span class="op">=</span><span class="st">"select-y"</span><span class="dt">&gt;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">select</span><span class="dt">&gt;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!--</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">  Conteneurs pour les graphiques D3, adaptez les classes pour réutiliser le CSS existant</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">  ayant permis de créer votre grille de 4 graphiques Plot dans la séance 8.</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">  Vous pouvez aussi créer vos propres classes et styles dédiés pour cet exercice, mais</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">  c'est toujours mieux de réutiliser ce qui existe déjà !</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">  --&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex-container"</span><span class="dt">&gt;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"graph"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"graph5"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"graph"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"graph6"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex-container"</span><span class="dt">&gt;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"graph"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"graph7"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"graph"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"graph8"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Un petit rappel au passage. Dans votre code de la séance 8, la mise à jour de la page quand on sélectionne une bibliothèque est peut-être écrite à plusieurs endroits (clic sur un marqueur, changement du <code>&lt;select&gt;</code>). Si ce n’est pas déjà fait, c’est le moment de mutualiser : gardez ce que l’utilisateur a choisi dans quelques variables (bibliothèque, indicateur, année…) et écrivez une seule fonction qui met à jour tous les composants à partir de ces variables, appelée par tous vos écouteurs d’événements. Avec quatre graphiques de plus à tenir à jour, vous allez en avoir besoin.</p>
+</section>
+<section id="créer-une-fois-mettre-à-jour-ensuite" class="level2">
+<h2 class="anchored" data-anchor-id="créer-une-fois-mettre-à-jour-ensuite">Créer une fois, mettre à jour ensuite</h2>
+<p>Avec Plot, nous avons remplacé les graphiques à chaque changement. Avec D3, on crée un graphique <strong>une seule fois</strong>, puis on le <strong>met à jour</strong> : c’est ce qui permet de l’animer, puisque D3 sait quels éléments existent déjà, lesquels apparaissent et lesquels disparaissent. Chaque graphique sera donc créé par une fonction qui retourne de quoi le mettre à jour :</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> lineChart <span class="op">=</span> <span class="fu">makeLineChart</span>(<span class="st">'graph5'</span>)<span class="op">;</span> <span class="co">// une seule fois, au chargement de la page</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lineChart<span class="op">.</span><span class="fu">update</span>(serie<span class="op">,</span> indicator)<span class="op">;</span> <span class="co">// à chaque changement</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="les-données" class="level2">
+<h2 class="anchored" data-anchor-id="les-données">Les données</h2>
+<p>Regardez les propriétés d’une entité dans la console (<code>data.features[0].properties</code>). Le code de la bibliothèque est dans <code>CDL-Branch Code</code>, son nom dans <code>CDL-Libelle long Bib</code>, et les statistiques dans des propriétés de la forme <code>Prets_2008</code>, <code>Inscrits_2008</code>, <code>Emprunteurs_2008</code>, <code>Visiteurs_2008</code>, <code>Prets_2009</code>, etc.</p>
+<p>Attention aux valeurs manquantes : elles sont codées tantôt par <code>null</code>, tantôt par <code>0</code>. Quatre bibliothèques n’ont aucune donnée, la bibliothèque d’Etude et du Patrimoine n’a que des visiteurs, et Abbaye les Bains a bien des prêts en 2010, mais 0 emprunteur. Un <code>0</code> n’est donc pas forcément un vrai zéro. Dans cette séance, <code>0</code> et <code>null</code> signifient tous les deux “pas de donnée” (c’est d’ailleurs ce que fait votre code de la séance 8 pour afficher “Pas de données”), et il faudra y penser dans tous les graphiques.</p>
+<p>Ajoutez les fonctions suivantes dans votre fichier <code>index.js</code> (avant la ligne <code>document.addEventListener('DOMContentLoaded', ...)</code> si vous avez utilisé ce pattern). Elles sont fournies : elles préparent les données pour les différents graphiques, au format attendu par D3.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Les années pour lesquelles on dispose de données</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> years <span class="op">=</span> d3<span class="op">.</span><span class="fu">range</span>(<span class="dv">2008</span><span class="op">,</span> <span class="dv">2017</span>)<span class="op">;</span> <span class="co">// de 2008 à 2016 (la dernière valeur est exclue)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Les indicateurs. La clé correspond au début du nom des propriétés dans le GeoJSON (ex. "Prets_2008")</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> indicators <span class="op">=</span> {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Prets</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">'Prêts'</span><span class="op">,</span> <span class="dt">title</span><span class="op">:</span> <span class="st">'Évolution du nombre de prêts'</span><span class="op">,</span> <span class="dt">color</span><span class="op">:</span> <span class="st">'red'</span> }<span class="op">,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Inscrits</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">'Inscrits'</span><span class="op">,</span> <span class="dt">title</span><span class="op">:</span> <span class="st">'Évolution du nombre d</span><span class="sc">\'</span><span class="st">inscrits'</span><span class="op">,</span> <span class="dt">color</span><span class="op">:</span> <span class="st">'blue'</span> }<span class="op">,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Emprunteurs</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">'Emprunteurs'</span><span class="op">,</span> <span class="dt">title</span><span class="op">:</span> <span class="st">'Évolution du nombre d</span><span class="sc">\'</span><span class="st">emprunteurs'</span><span class="op">,</span> <span class="dt">color</span><span class="op">:</span> <span class="st">'green'</span> }<span class="op">,</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Visiteurs</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">'Visiteurs'</span><span class="op">,</span> <span class="dt">title</span><span class="op">:</span> <span class="st">'Évolution du nombre de visiteurs'</span><span class="op">,</span> <span class="dt">color</span><span class="op">:</span> <span class="st">'orange'</span> }<span class="op">,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">// Une fonction qui retourne la valeur d'un indicateur pour une bibliothèque et une année.</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">// Dans le jeu de données, les valeurs manquantes sont parfois `null` et parfois égales à 0</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">// (par exemple : 0 emprunteur en 2010 pour la bibliothèque Abbaye les Bains).</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">// Dans les deux cas on considère qu'il s'agit d'une donnée manquante et on retourne `null`.</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> getValue <span class="op">=</span> (point<span class="op">,</span> indicator<span class="op">,</span> year) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> value <span class="op">=</span> point<span class="op">.</span><span class="at">properties</span>[<span class="vs">`</span><span class="sc">${</span>indicator<span class="sc">}</span><span class="vs">_</span><span class="sc">${</span>year<span class="sc">}</span><span class="vs">`</span>]<span class="op">;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> value <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> value <span class="op">:</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">// Les variables qui peuvent être associées aux axes du nuage de points</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> variables <span class="op">=</span> {</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Emprunteurs</span><span class="op">:</span> {</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Nombre d</span><span class="sc">\'</span><span class="st">emprunteurs'</span><span class="op">,</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">format</span><span class="op">:</span> <span class="st">'~s'</span><span class="op">,</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">get</span><span class="op">:</span> (point<span class="op">,</span> year) <span class="kw">=&gt;</span> <span class="fu">getValue</span>(point<span class="op">,</span> <span class="st">'Emprunteurs'</span><span class="op">,</span> year)<span class="op">,</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Inscrits</span><span class="op">:</span> {</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Nombre d</span><span class="sc">\'</span><span class="st">inscrits'</span><span class="op">,</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="dt">format</span><span class="op">:</span> <span class="st">'~s'</span><span class="op">,</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">get</span><span class="op">:</span> (point<span class="op">,</span> year) <span class="kw">=&gt;</span> <span class="fu">getValue</span>(point<span class="op">,</span> <span class="st">'Inscrits'</span><span class="op">,</span> year)<span class="op">,</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Visiteurs</span><span class="op">:</span> {</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Nombre de visiteurs'</span><span class="op">,</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">format</span><span class="op">:</span> <span class="st">'~s'</span><span class="op">,</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">get</span><span class="op">:</span> (point<span class="op">,</span> year) <span class="kw">=&gt;</span> <span class="fu">getValue</span>(point<span class="op">,</span> <span class="st">'Visiteurs'</span><span class="op">,</span> year)<span class="op">,</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Prets</span><span class="op">:</span> {</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Nombre de prêts'</span><span class="op">,</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="dt">format</span><span class="op">:</span> <span class="st">'~s'</span><span class="op">,</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">get</span><span class="op">:</span> (point<span class="op">,</span> year) <span class="kw">=&gt;</span> <span class="fu">getValue</span>(point<span class="op">,</span> <span class="st">'Prets'</span><span class="op">,</span> year)<span class="op">,</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>  <span class="dt">PretsParEmprunteur</span><span class="op">:</span> {</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">'Prêts par emprunteur'</span><span class="op">,</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="dt">format</span><span class="op">:</span> <span class="st">'.1f'</span><span class="op">,</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">get</span><span class="op">:</span> (point<span class="op">,</span> year) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> prets <span class="op">=</span> <span class="fu">getValue</span>(point<span class="op">,</span> <span class="st">'Prets'</span><span class="op">,</span> year)<span class="op">;</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> emprunteurs <span class="op">=</span> <span class="fu">getValue</span>(point<span class="op">,</span> <span class="st">'Emprunteurs'</span><span class="op">,</span> year)<span class="op">;</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> prets <span class="op">&amp;&amp;</span> emprunteurs <span class="op">?</span> prets <span class="op">/</span> emprunteurs <span class="op">:</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="co">// Une fonction pour remplir un menu déroulant avec une liste d'options (des tableaux [valeur, texte])</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fillSelect <span class="op">=</span> (select<span class="op">,</span> options<span class="op">,</span> value) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  options<span class="op">.</span><span class="fu">forEach</span>(([optionValue<span class="op">,</span> text]) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> option <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">createElement</span>(<span class="st">'option'</span>)<span class="op">;</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    option<span class="op">.</span><span class="at">value</span> <span class="op">=</span> optionValue<span class="op">;</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    option<span class="op">.</span><span class="at">text</span> <span class="op">=</span> text<span class="op">;</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>    select<span class="op">.</span><span class="fu">appendChild</span>(option)<span class="op">;</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>  select<span class="op">.</span><span class="at">value</span> <span class="op">=</span> value<span class="op">;</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="co">// Une fonction qui retourne l'opacité d'un élément d'un graphique (barre, point, part...).</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="co">// Quand une bibliothèque est sélectionnée (ou quand des bibliothèques sont sélectionnées avec</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="co">// le "brush" du nuage de points), les éléments correspondants restent bien visibles</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="co">// et les autres sont atténués.</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> getOpacity <span class="op">=</span> (id<span class="op">,</span> selectedBib<span class="op">,</span> brushedBibs) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>selectedBib <span class="op">&amp;&amp;</span> brushedBibs<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> id <span class="op">===</span> selectedBib <span class="op">||</span> brushedBibs<span class="op">.</span><span class="fu">includes</span>(id) <span class="op">?</span> <span class="dv">1</span> <span class="op">:</span> <span class="fl">0.25</span><span class="op">;</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="co">// Une fonction qui prépare les données du graphique en courbes :</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="co">// un tableau [{ year, value }, ...] pour la bibliothèque sélectionnée</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="co">// (ou pour l'ensemble des bibliothèques si aucune n'est sélectionnée).</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> getSerie <span class="op">=</span> (data<span class="op">,</span> indicator<span class="op">,</span> selectedBib) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> years<span class="op">.</span><span class="fu">map</span>((year) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>selectedBib) {</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>      <span class="co">// d3.sum ignore les valeurs null</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> { year<span class="op">,</span> <span class="dt">value</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">sum</span>(data<span class="op">.</span><span class="at">features</span><span class="op">,</span> (point) <span class="kw">=&gt;</span> <span class="fu">getValue</span>(point<span class="op">,</span> indicator<span class="op">,</span> year)) }<span class="op">;</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> point <span class="op">=</span> data<span class="op">.</span><span class="at">features</span><span class="op">.</span><span class="fu">find</span>((p) <span class="kw">=&gt;</span> p<span class="op">.</span><span class="at">properties</span>[<span class="st">'CDL-Branch Code'</span>] <span class="op">===</span> selectedBib)<span class="op">;</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { year<span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fu">getValue</span>(point<span class="op">,</span> indicator<span class="op">,</span> year) }<span class="op">;</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="co">// Une fonction qui prépare les données du diagramme en barres et du diagramme en anneau :</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="co">// un tableau [{ id, name, value }, ...] (une entrée par bibliothèque, triées par ordre</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="co">// décroissant) pour un indicateur et une année. Les bibliothèques sans donnée sont exclues.</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> getRows <span class="op">=</span> (data<span class="op">,</span> indicator<span class="op">,</span> year) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data<span class="op">.</span><span class="at">features</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">map</span>((point) <span class="kw">=&gt;</span> ({</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>      <span class="dt">id</span><span class="op">:</span> point<span class="op">.</span><span class="at">properties</span>[<span class="st">'CDL-Branch Code'</span>]<span class="op">,</span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>      <span class="dt">name</span><span class="op">:</span> point<span class="op">.</span><span class="at">properties</span>[<span class="st">'CDL-Libelle long Bib'</span>]<span class="op">,</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>      <span class="dt">value</span><span class="op">:</span> <span class="fu">getValue</span>(point<span class="op">,</span> indicator<span class="op">,</span> year)<span class="op">,</span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>    }))</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">value</span> <span class="op">!==</span> <span class="kw">null</span>)</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> d3<span class="op">.</span><span class="fu">descending</span>(a<span class="op">.</span><span class="at">value</span><span class="op">,</span> b<span class="op">.</span><span class="at">value</span>))<span class="op">;</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="co">// Une fonction qui prépare les données du nuage de points :</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="co">// un tableau [{ id, name, x, y, size }, ...] pour une année et deux variables</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> getPoints <span class="op">=</span> (data<span class="op">,</span> year<span class="op">,</span> xVariable<span class="op">,</span> yVariable) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> data<span class="op">.</span><span class="at">features</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">map</span>((point) <span class="kw">=&gt;</span> ({</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>      <span class="dt">id</span><span class="op">:</span> point<span class="op">.</span><span class="at">properties</span>[<span class="st">'CDL-Branch Code'</span>]<span class="op">,</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>      <span class="dt">name</span><span class="op">:</span> point<span class="op">.</span><span class="at">properties</span>[<span class="st">'CDL-Libelle long Bib'</span>]<span class="op">,</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> variables[xVariable]<span class="op">.</span><span class="fu">get</span>(point<span class="op">,</span> year)<span class="op">,</span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y</span><span class="op">:</span> variables[yVariable]<span class="op">.</span><span class="fu">get</span>(point<span class="op">,</span> year)<span class="op">,</span></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>      <span class="dt">size</span><span class="op">:</span> <span class="fu">getValue</span>(point<span class="op">,</span> <span class="st">'Visiteurs'</span><span class="op">,</span> year)<span class="op">,</span> <span class="co">// la taille des cercles représente le nombre de visiteurs</span></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>    }))</span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">x</span> <span class="op">!==</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">y</span> <span class="op">!==</span> <span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Prenez le temps de les lire et de comprendre ce qu’elles retournent (vous pouvez par exemple afficher dans la console le résultat de <code>getRows(data, 'Prets', 2016)</code>).</p>
+</section>
+<section id="partie-1---factoriser-le-code-existant-si-nécessaire" class="level2">
+<h2 class="anchored" data-anchor-id="partie-1---factoriser-le-code-existant-si-nécessaire">Partie 1 - Factoriser le code existant si nécessaire</h2>
+<p>Si, dans votre code actuel, la mise à jour de la page lors de la sélection d’une bibliothèque est écrite deux fois (dans la fonction appelée lors du clic sur un marqueur, et dans celle appelée lors du changement de valeur du <code>&lt;select&gt;</code>), il convient de la mettre à jour.</p>
+<p>Avec 4 nouveaux graphiques à mettre à jour, il serait très pénible (et source d’erreurs) de répéter cela à chaque endroit où l’utilisateur peut sélectionner une bibliothèque : carte, menu déroulant, barres, anneau…</p>
+<p>Nous allons donc :</p>
+<ol type="1">
+<li>stocker ce que l’utilisateur a sélectionné dans des variables,</li>
+<li>écrire <strong>une seule fonction</strong> responsable de mettre à jour tous les composants de la page à partir de ces variables,</li>
+<li>appeler cette fonction à chaque fois que l’une de ces variables est modifiée.</li>
+</ol>
+<p>Dans la fonction exécutée au chargement de la page, déclarez les variables suivantes (si la variable <code>selectedBib</code> existe déjà : conservez-la) :</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Les variables qui stockent l'état de la page (ce que l'utilisateur a sélectionné)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">// La bibliothèque actuellement sélectionnée ('' si aucune)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> selectedBib <span class="op">=</span> <span class="st">''</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">// L'indicateur affiché par la courbe D3, le diagramme en barres et le diagramme en anneau</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> selectedIndicator <span class="op">=</span> <span class="st">'Prets'</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">// L'année affichée par le diagramme en barres, le diagramme en anneau et le nuage de points</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> selectedYear <span class="op">=</span> <span class="dv">2016</span><span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Les variables associées aux axes du nuage de points</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> selectedX <span class="op">=</span> <span class="st">'Emprunteurs'</span><span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> selectedY <span class="op">=</span> <span class="st">'Prets'</span><span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Les bibliothèques sélectionnées avec le rectangle de sélection (brush) du nuage de points</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> brushedBibs <span class="op">=</span> []<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Puis écrivez les deux fonctions suivantes. Le menu <code>select</code> est utilisé dans <code>updateAll</code> : il doit donc être récupéré avant. Il est déjà récupéré plus bas dans votre code (<code>const select = ...</code>) : <strong>déplacez</strong> cette ligne à cet endroit plutôt que de la dupliquer, sinon le navigateur affichera une erreur (<code>Identifier 'select' has already been declared</code>).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> select <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">'select-bib'</span>)<span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Mise à jour des marqueurs : un marqueur vert pour la bibliothèque sélectionnée</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> updateMarkers <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  markers<span class="op">.</span><span class="fu">forEach</span>((m) <span class="kw">=&gt;</span> {</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> markerId <span class="op">=</span> m<span class="op">.</span><span class="at">options</span><span class="op">.</span><span class="at">customAttributes</span><span class="op">.</span><span class="at">id</span><span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    m<span class="op">.</span><span class="fu">setIcon</span>(markerId <span class="op">===</span> selectedBib <span class="op">?</span> greenIcon <span class="op">:</span> defaultIcon)<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Mise à jour de tous les composants de la page à partir des variables qui stockent l'état de la page</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> updateAll <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  select<span class="op">.</span><span class="at">value</span> <span class="op">=</span> selectedBib<span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">makePlots</span>(data<span class="op">,</span> selectedBib)<span class="op">;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateMarkers</span>()<span class="op">;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Travail demandé</strong> : modifiez les fonctions appelées lors du clic sur un marqueur et lors du changement de valeur du <code>&lt;select&gt;</code> pour qu’elles se contentent de modifier <code>selectedBib</code> puis d’appeler <code>updateAll()</code>. N’oubliez pas d’appeler <code>updateAll()</code> une fois à la fin pour afficher les graphiques initiaux (à la place de <code>makePlots(data, selectedBib)</code>).</p>
+<p>Vérifiez que la page fonctionne comme à la fin de la séance 8. Cette étape est importante : tous les nouveaux composants seront ajoutés à <code>updateAll</code>.</p>
+</section>
+<section id="partie-2---un-graphique-en-courbes-avec-d3.js" class="level2">
+<h2 class="anchored" data-anchor-id="partie-2---un-graphique-en-courbes-avec-d3.js">Partie 2 - Un graphique en courbes avec D3.js</h2>
+<section id="ajout-des-conteneurs-dans-la-page" class="level3">
+<h3 class="anchored" data-anchor-id="ajout-des-conteneurs-dans-la-page">Ajout des conteneurs dans la page</h3>
+<p>Ajoutez le code HTML suivant à la fin du <code>&lt;body&gt;</code> de votre page. Il contient les menus et les 4 conteneurs des graphiques D3 (nous nous servirons de tous les menus au cours de la séance) et réutilise les classes CSS déjà définies dans votre page : <strong>vous n’avez pas besoin d’écrire de CSS supplémentaire</strong>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"d3-container"</span><span class="dt">&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h2</span><span class="dt">&gt;</span>Pour aller plus loin avec D3.js<span class="dt">&lt;/</span><span class="kw">h2</span><span class="dt">&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"select-indicator"</span><span class="dt">&gt;</span>Indicateur : <span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">select</span><span class="ot"> id</span><span class="op">=</span><span class="st">"select-indicator"</span><span class="dt">&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">select</span><span class="dt">&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"select-year"</span><span class="dt">&gt;</span>Année : <span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">"range"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"select-year"</span><span class="ot"> min</span><span class="op">=</span><span class="st">"2008"</span><span class="ot"> max</span><span class="op">=</span><span class="st">"2016"</span><span class="ot"> step</span><span class="op">=</span><span class="st">"1"</span><span class="ot"> value</span><span class="op">=</span><span class="st">"2016"</span><span class="dt">&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">output</span><span class="ot"> id</span><span class="op">=</span><span class="st">"output-year"</span><span class="dt">&gt;</span>2016<span class="dt">&lt;/</span><span class="kw">output</span><span class="dt">&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> id</span><span class="op">=</span><span class="st">"button-play"</span><span class="dt">&gt;</span>▶ Lecture<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"select-x"</span><span class="dt">&gt;</span>Nuage de points - axe x : <span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">select</span><span class="ot"> id</span><span class="op">=</span><span class="st">"select-x"</span><span class="dt">&gt;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">select</span><span class="dt">&gt;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">"select-y"</span><span class="dt">&gt;</span>axe y : <span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">select</span><span class="ot"> id</span><span class="op">=</span><span class="st">"select-y"</span><span class="dt">&gt;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;/</span><span class="kw">select</span><span class="dt">&gt;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex-container"</span><span class="dt">&gt;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"graph"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"graph5"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"graph"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"graph6"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"flex-container"</span><span class="dt">&gt;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"graph"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"graph7"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> class</span><span class="op">=</span><span class="st">"graph"</span><span class="ot"> id</span><span class="op">=</span><span class="st">"graph8"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="structure-dun-graphique-d3" class="level3">
+<h3 class="anchored" data-anchor-id="structure-dun-graphique-d3">Structure d’un graphique D3</h3>
+<p>Un graphique D3 est un élément <code>&lt;svg&gt;</code> dans lequel on ajoute des éléments graphiques (<code>&lt;path&gt;</code>, <code>&lt;rect&gt;</code>, <code>&lt;circle&gt;</code>, <code>&lt;text&gt;</code>, etc.) dont les attributs sont calculés à partir des données. Le passage des données aux positions à l’écran se fait grâce à des <strong>échelles</strong> :</p>
+<ul>
+<li><code>d3.scaleLinear</code> convertit une valeur numérique (le <em>domaine</em>, par exemple le nombre de prêts) en une position en pixels (l’<em>étendue</em> ou <em>range</em>),</li>
+<li>les <strong>axes</strong> (<code>d3.axisBottom</code>, <code>d3.axisLeft</code>) dessinent des graduations à partir d’une échelle,</li>
+<li>les <strong>générateurs</strong> (<code>d3.line</code>, <code>d3.area</code>, <code>d3.arc</code>, etc.) transforment des données en un attribut <code>d</code> d’un élément <code>&lt;path&gt;</code>.</li>
+</ul>
+<p>Si vous avez besoin de vous rafraîchir la mémoire, reportez-vous au notebook <a href="https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js">Faire des graphiques avec D3.js</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En SVG, l’origine du repère (0, 0) est située <strong>en haut à gauche</strong> et l’axe des y est orienté <strong>vers le bas</strong>. C’est pourquoi l’étendue de l’échelle en y est “inversée” dans le code ci-dessous : <code>[height - margin.bottom, margin.top]</code>.</p>
+</div>
+</div>
+</section>
+<section id="le-graphique-en-courbes" class="level3">
+<h3 class="anchored" data-anchor-id="le-graphique-en-courbes">Le graphique en courbes</h3>
+<p>Voici le squelette de la fonction qui crée le graphique (à ajouter dans <code>index.js</code>, à la suite des fonctions fournies). Tout ce qui concerne la création du graphique (le SVG, les échelles, les axes et le générateur de courbe) est fourni. Il vous reste à écrire la fonction <code>update</code> qui sera appelée à chaque changement de bibliothèque ou d’indicateur.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Une fonction responsable de créer un graphique en courbes avec D3 dans l'élément dont l'id est fourni.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Elle retourne un objet contenant la fonction `update` à appeler pour mettre à jour le graphique.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> makeLineChart <span class="op">=</span> (id) <span class="kw">=&gt;</span> {</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> width <span class="op">=</span> <span class="dv">600</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> height <span class="op">=</span> <span class="dv">340</span><span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> margin <span class="op">=</span> { <span class="dt">top</span><span class="op">:</span> <span class="dv">45</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">25</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">65</span> }<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Le SVG s'adapte à la taille de son conteneur grâce au viewBox</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> svg <span class="op">=</span> d3<span class="op">.</span><span class="fu">select</span>(<span class="vs">`#</span><span class="sc">${</span>id<span class="sc">}</span><span class="vs">`</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">append</span>(<span class="st">'svg'</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'viewBox'</span><span class="op">,</span> <span class="vs">`0 0 </span><span class="sc">${</span>width<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>height<span class="sc">}</span><span class="vs">`</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="st">'100%'</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'height'</span><span class="op">,</span> <span class="st">'100%'</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-family'</span><span class="op">,</span> <span class="st">'system-ui, sans-serif'</span>)<span class="op">;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> title <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'text'</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'x'</span><span class="op">,</span> <span class="dv">10</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="dv">25</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">17</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-weight'</span><span class="op">,</span> <span class="st">'bold'</span>)<span class="op">;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Un message affiché quand il n'y a pas de données</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> message <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'text'</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'x'</span><span class="op">,</span> width <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'y'</span><span class="op">,</span> height <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'text-anchor'</span><span class="op">,</span> <span class="st">'middle'</span>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">15</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-style'</span><span class="op">,</span> <span class="st">'italic'</span>)<span class="op">;</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Les échelles</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> x <span class="op">=</span> d3<span class="op">.</span><span class="fu">scaleLinear</span>()<span class="op">.</span><span class="fu">domain</span>(d3<span class="op">.</span><span class="fu">extent</span>(years))<span class="op">.</span><span class="fu">range</span>([margin<span class="op">.</span><span class="at">left</span><span class="op">,</span> width <span class="op">-</span> margin<span class="op">.</span><span class="at">right</span>])<span class="op">;</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> y <span class="op">=</span> d3<span class="op">.</span><span class="fu">scaleLinear</span>()<span class="op">.</span><span class="fu">range</span>([height <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span><span class="op">,</span> margin<span class="op">.</span><span class="at">top</span>])<span class="op">;</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Les axes (on règle la taille du texte après le premier appel de l'axe, qui définit lui-même une taille)</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'g'</span>)</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'transform'</span><span class="op">,</span> <span class="vs">`translate(0,</span><span class="sc">${</span>height <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span><span class="sc">}</span><span class="vs">)`</span>)</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisBottom</span>(x)<span class="op">.</span><span class="fu">ticks</span>(years<span class="op">.</span><span class="at">length</span>)<span class="op">.</span><span class="fu">tickFormat</span>(d3<span class="op">.</span><span class="fu">format</span>(<span class="st">'d'</span>)))</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">13</span>)<span class="op">;</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> gy <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'g'</span>)</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'transform'</span><span class="op">,</span> <span class="vs">`translate(</span><span class="sc">${</span>margin<span class="op">.</span><span class="at">left</span><span class="sc">}</span><span class="vs">,0)`</span>)</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisLeft</span>(y))</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">13</span>)<span class="op">;</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Le générateur de courbe : il transforme un tableau de points en attribut "d" d'un élément &lt;path&gt;</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>  <span class="co">// (avec `defined`, une valeur manquante crée un "trou" dans la courbe)</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> line <span class="op">=</span> d3<span class="op">.</span><span class="fu">line</span>()</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">defined</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">value</span> <span class="op">!==</span> <span class="kw">null</span>)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">x</span>((d) <span class="kw">=&gt;</span> <span class="fu">x</span>(d<span class="op">.</span><span class="at">year</span>))</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">y</span>((d) <span class="kw">=&gt;</span> <span class="fu">y</span>(d<span class="op">.</span><span class="at">value</span>))<span class="op">;</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> linePath <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'path'</span>)<span class="op">.</span><span class="fu">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'none'</span>)<span class="op">.</span><span class="fu">attr</span>(<span class="st">'stroke-width'</span><span class="op">,</span> <span class="fl">2.5</span>)<span class="op">;</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> update <span class="op">=</span> (data<span class="op">,</span> indicator) <span class="kw">=&gt;</span> {</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>    <span class="co">// À compléter</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { update }<span class="op">;</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>La fonction <code>update</code> reçoit les données au format <code>[{ year, value }, ...]</code> (c’est ce que retourne <code>getSerie</code>) et le nom de l’indicateur (<code>'Prets'</code>, <code>'Inscrits'</code>, etc.) qui permet de retrouver le titre et la couleur dans l’objet <code>indicators</code>. Elle doit :</p>
+<ol type="1">
+<li>mettre à jour le titre du graphique,</li>
+<li>afficher le message <code>Pas de données "Prêts" pour cette bibliothèque</code> s’il n’y a aucune donnée (et le vider dans le cas contraire),</li>
+<li>mettre à jour le domaine de l’échelle en y (de 0 à la valeur maximale),</li>
+<li>mettre à jour l’axe en y,</li>
+<li>mettre à jour le tracé de la courbe, en lui donnant la couleur de l’indicateur.</li>
+</ol>
+<p>Quelques indications :</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> info <span class="op">=</span> indicators[indicator]<span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">// d3.max ignore les valeurs null. nice() arrondit les bornes du domaine à des valeurs "rondes"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>y<span class="op">.</span><span class="fu">domain</span>([<span class="dv">0</span><span class="op">,</span> d3<span class="op">.</span><span class="fu">max</span>(data<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">value</span>) <span class="op">||</span> <span class="dv">1</span>])<span class="op">.</span><span class="fu">nice</span>()<span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Mise à jour de l'axe y. En ajoutant transition(), le changement est animé.</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">// (ticks(6) : environ 6 graduations, tickFormat(d3.format('~s')) : écriture compacte, par exemple 300k)</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>gy<span class="op">.</span><span class="fu">transition</span>()<span class="op">.</span><span class="fu">duration</span>(<span class="dv">750</span>)<span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisLeft</span>(y)<span class="op">.</span><span class="fu">ticks</span>(<span class="dv">6</span>)<span class="op">.</span><span class="fu">tickFormat</span>(d3<span class="op">.</span><span class="fu">format</span>(<span class="st">'~s'</span>)))<span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Mise à jour du tracé. On utilise datum() (et non data()) car on associe un seul tableau de</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">// points à un seul élément &lt;path&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>linePath<span class="op">.</span><span class="fu">datum</span>(data)<span class="op">.</span><span class="fu">transition</span>()<span class="op">.</span><span class="fu">duration</span>(<span class="dv">750</span>)<span class="op">.</span><span class="fu">attr</span>(<span class="st">'d'</span><span class="op">,</span> line)<span class="op">.</span><span class="fu">attr</span>(<span class="st">'stroke'</span><span class="op">,</span> info<span class="op">.</span><span class="at">color</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="intégration-dans-la-page" class="level3">
+<h3 class="anchored" data-anchor-id="intégration-dans-la-page">Intégration dans la page</h3>
+<ol type="1">
+<li>Dans la fonction exécutée au chargement de la page, créez le graphique : <code>const lineChart = makeLineChart('graph5');</code></li>
+<li>Dans <code>updateAll</code>, ajoutez la mise à jour du graphique : <code>lineChart.update(getSerie(data, selectedIndicator, selectedBib), selectedIndicator);</code></li>
+<li>Récupérez le menu déroulant des indicateurs (<code>const selectIndicator = document.getElementById('select-indicator');</code>), remplissez-le et écoutez ses changements, comme vous l’avez fait pour le menu des bibliothèques. La fonction <code>fillSelect</code> est fournie : <code>fillSelect(selectIndicator, Object.entries(indicators).map(([key, indicator]) =&gt; [key, indicator.label]), selectedIndicator);</code>. À chaque changement, modifiez <code>selectedIndicator</code> puis appelez <code>updateAll()</code>.</li>
+</ol>
+<p>Vérifiez que la courbe s’anime quand vous changez de bibliothèque ou d’indicateur.</p>
+</section>
+<section id="une-infobulle-au-survol" class="level3">
+<h3 class="anchored" data-anchor-id="une-infobulle-au-survol">Une infobulle au survol</h3>
+<p>Pour afficher la valeur de l’année la plus proche du curseur, nous allons ajouter à la fonction <code>makeLineChart</code> (avant la fonction <code>update</code>) :</p>
+<ul>
+<li>un groupe <code>focus</code> composé d’un cercle et d’un texte, masqué par défaut,</li>
+<li>un rectangle transparent qui recouvre la zone du graphique pour capter les mouvements du curseur.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Le cercle et le texte qui suivent le curseur</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> focus <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'g'</span>)<span class="op">.</span><span class="fu">attr</span>(<span class="st">'display'</span><span class="op">,</span> <span class="st">'none'</span>)<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> focusCircle <span class="op">=</span> focus<span class="op">.</span><span class="fu">append</span>(<span class="st">'circle'</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'r'</span><span class="op">,</span> <span class="dv">5</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'stroke'</span><span class="op">,</span> <span class="st">'white'</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'stroke-width'</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> focusText <span class="op">=</span> focus<span class="op">.</span><span class="fu">append</span>(<span class="st">'text'</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="op">-</span><span class="dv">12</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">14</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-weight'</span><span class="op">,</span> <span class="st">'bold'</span>)<span class="op">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> currentData <span class="op">=</span> []<span class="op">;</span> <span class="co">// à mettre à jour dans la fonction `update`</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">// d3.bisector permet de retrouver l'indice de la donnée la plus proche d'une valeur</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> bisect <span class="op">=</span> d3<span class="op">.</span><span class="fu">bisector</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">year</span>)<span class="op">.</span><span class="at">center</span><span class="op">;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">// Un rectangle transparent qui recouvre la zone du graphique pour capter les mouvements du curseur</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'rect'</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'x'</span><span class="op">,</span> margin<span class="op">.</span><span class="at">left</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'y'</span><span class="op">,</span> margin<span class="op">.</span><span class="at">top</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'width'</span><span class="op">,</span> width <span class="op">-</span> margin<span class="op">.</span><span class="at">left</span> <span class="op">-</span> margin<span class="op">.</span><span class="at">right</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'height'</span><span class="op">,</span> height <span class="op">-</span> margin<span class="op">.</span><span class="at">top</span> <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'none'</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'pointer-events'</span><span class="op">,</span> <span class="st">'all'</span>) <span class="co">// sans cela, un élément sans remplissage ne reçoit pas les événements</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">on</span>(<span class="st">'pointermove'</span><span class="op">,</span> (<span class="bu">event</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> [mouseX] <span class="op">=</span> d3<span class="op">.</span><span class="fu">pointer</span>(<span class="bu">event</span>)<span class="op">;</span> <span class="co">// la position du curseur dans le SVG</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// x.invert convertit une position (en pixels) en année</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> d <span class="op">=</span> currentData[<span class="fu">bisect</span>(currentData<span class="op">,</span> x<span class="op">.</span><span class="fu">invert</span>(mouseX))]<span class="op">;</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>d <span class="op">||</span> d<span class="op">.</span><span class="at">value</span> <span class="op">===</span> <span class="kw">null</span>) {</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>      focus<span class="op">.</span><span class="fu">attr</span>(<span class="st">'display'</span><span class="op">,</span> <span class="st">'none'</span>)<span class="op">;</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">// À compléter : afficher `focus` (attr('display', null)), le placer sur le point</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (avec un attribut transform en translate(x(d.year), y(d.value))) et afficher "année : valeur" dans le texte</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">on</span>(<span class="st">'pointerleave'</span><span class="op">,</span> () <span class="kw">=&gt;</span> focus<span class="op">.</span><span class="fu">attr</span>(<span class="st">'display'</span><span class="op">,</span> <span class="st">'none'</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>N’oubliez pas, dans la fonction <code>update</code>, de mettre à jour <code>currentData</code>, de donner à <code>focusCircle</code> la couleur de l’indicateur et de masquer <code>focus</code>.</p>
+</section>
+<section id="questions" class="level3">
+<h3 class="anchored" data-anchor-id="questions">Questions</h3>
+<ul>
+<li>Quelle différence observez-vous entre l’axe en y de ce graphique et celui du graphique Plot correspondant ? Quel effet cela a-t-il sur la perception de l’évolution du nombre d’inscrits ? Quel est l’intérêt de commencer à 0 ? Et celui de ne pas commencer à 0 ?</li>
+<li>Comment la courbe de l’indicateur “Emprunteurs” s’affiche-t-elle quand on sélectionne la bibliothèque Abbaye les Bains ? Pourquoi ?</li>
+<li><em>Pour habiller</em> : ajoutez une aire sous la courbe avec <code>d3.area()</code> (voir la <a href="https://d3js.org/d3-shape/area">documentation</a>). Elle prend des fonctions <code>x</code>, <code>y0</code> et <code>y1</code> et se met à jour comme la courbe.</li>
+</ul>
+</section>
+</section>
+<section id="partie-3---un-diagramme-en-barres-animé" class="level2">
+<h2 class="anchored" data-anchor-id="partie-3---un-diagramme-en-barres-animé">Partie 3 - Un diagramme en barres animé</h2>
+<p>Nous allons maintenant afficher, pour <strong>l’année sélectionnée</strong>, la valeur de l’indicateur choisi pour <strong>chaque bibliothèque</strong>. Contrairement aux courbes, ce graphique compare les bibliothèques entre elles : il est donc toujours affiché en entier, et la bibliothèque sélectionnée y est mise en évidence.</p>
+<section id="la-jointure-de-données" class="level3">
+<h3 class="anchored" data-anchor-id="la-jointure-de-données">La jointure de données</h3>
+<p>C’est le concept central de D3. Lorsqu’on écrit <code>selection.data(tableau).join(...)</code>, D3 compare les éléments qui existent déjà dans le SVG avec les données et distingue :</p>
+<ul>
+<li>les données qui n’ont pas encore d’élément (<strong>enter</strong>) : il faut créer l’élément,</li>
+<li>les données qui ont déjà un élément (<strong>update</strong>) : il faut le mettre à jour,</li>
+<li>les éléments dont la donnée a disparu (<strong>exit</strong>) : il faut les supprimer.</li>
+</ul>
+<p>Pour qu’une donnée soit associée au bon élément lorsque les données changent (ici, d’une année à l’autre), il faut fournir à D3 une <strong>clé</strong> : <code>data(tableau, (d) =&gt; d.id)</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>svg<span class="op">.</span><span class="fu">selectAll</span>(<span class="st">'rect.bar'</span>)              <span class="co">// tous les rectangles de la classe "bar" (il n'y en a pas encore)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">data</span>(rows<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">id</span>)             <span class="co">// on les associe aux données</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">join</span>((enter) <span class="kw">=&gt;</span> enter<span class="op">.</span><span class="fu">append</span>(<span class="st">'rect'</span>) <span class="co">// pour les nouvelles données, on crée un rectangle</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'class'</span><span class="op">,</span> <span class="st">'bar'</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... attributs initiaux (par exemple une largeur nulle, pour que les barres "poussent")</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span>                                   <span class="co">// les éléments en trop sont supprimés automatiquement</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="le-diagramme-en-barres" class="level3">
+<h3 class="anchored" data-anchor-id="le-diagramme-en-barres">Le diagramme en barres</h3>
+<p>Voici le squelette de la fonction qui crée le graphique (la fonction <code>highlight</code>, qui met en évidence la bibliothèque sélectionnée, est fournie : elle utilise la fonction <code>getOpacity</code>). Vous devez écrire le contenu de la fonction <code>update</code>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Une fonction responsable de créer un diagramme en barres horizontales (une barre par bibliothèque).</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">// `onClick` est la fonction appelée avec l'id de la bibliothèque quand on clique sur une barre.</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> makeBarChart <span class="op">=</span> (id<span class="op">,</span> onClick) <span class="kw">=&gt;</span> {</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> width <span class="op">=</span> <span class="dv">600</span><span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> height <span class="op">=</span> <span class="dv">340</span><span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> margin <span class="op">=</span> { <span class="dt">top</span><span class="op">:</span> <span class="dv">45</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">70</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">215</span> }<span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> svg <span class="op">=</span> d3<span class="op">.</span><span class="fu">select</span>(<span class="vs">`#</span><span class="sc">${</span>id<span class="sc">}</span><span class="vs">`</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">append</span>(<span class="st">'svg'</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'viewBox'</span><span class="op">,</span> <span class="vs">`0 0 </span><span class="sc">${</span>width<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>height<span class="sc">}</span><span class="vs">`</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="st">'100%'</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'height'</span><span class="op">,</span> <span class="st">'100%'</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-family'</span><span class="op">,</span> <span class="st">'system-ui, sans-serif'</span>)<span class="op">;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> title <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'text'</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'x'</span><span class="op">,</span> <span class="dv">10</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="dv">25</span>)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">17</span>)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-weight'</span><span class="op">,</span> <span class="st">'bold'</span>)<span class="op">;</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> x <span class="op">=</span> d3<span class="op">.</span><span class="fu">scaleLinear</span>()<span class="op">.</span><span class="fu">range</span>([margin<span class="op">.</span><span class="at">left</span><span class="op">,</span> width <span class="op">-</span> margin<span class="op">.</span><span class="at">right</span>])<span class="op">;</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">// scaleBand : une "bande" par catégorie (ici, par bibliothèque), avec un espace entre chaque bande</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> y <span class="op">=</span> d3<span class="op">.</span><span class="fu">scaleBand</span>()<span class="op">.</span><span class="fu">range</span>([margin<span class="op">.</span><span class="at">top</span><span class="op">,</span> height <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span>])<span class="op">.</span><span class="fu">padding</span>(<span class="fl">0.2</span>)<span class="op">;</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> gx <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'g'</span>)</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'transform'</span><span class="op">,</span> <span class="vs">`translate(0,</span><span class="sc">${</span>height <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span><span class="sc">}</span><span class="vs">)`</span>)</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisBottom</span>(x))</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">12</span>)<span class="op">;</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> gy <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'g'</span>)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'transform'</span><span class="op">,</span> <span class="vs">`translate(</span><span class="sc">${</span>margin<span class="op">.</span><span class="at">left</span><span class="sc">}</span><span class="vs">,0)`</span>)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisLeft</span>(y))</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">13</span>)<span class="op">;</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Une fonction qui met en valeur la bibliothèque sélectionnée et celles sélectionnées avec le brush</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> highlight <span class="op">=</span> (selectedBib<span class="op">,</span> brushedBibs) <span class="kw">=&gt;</span> {</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    svg<span class="op">.</span><span class="fu">selectAll</span>(<span class="st">'rect.bar'</span>)</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">'opacity'</span><span class="op">,</span> (d) <span class="kw">=&gt;</span> <span class="fu">getOpacity</span>(d<span class="op">.</span><span class="at">id</span><span class="op">,</span> selectedBib<span class="op">,</span> brushedBibs))</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">'stroke'</span><span class="op">,</span> (d) <span class="kw">=&gt;</span> (d<span class="op">.</span><span class="at">id</span> <span class="op">===</span> selectedBib <span class="op">?</span> <span class="st">'black'</span> <span class="op">:</span> <span class="st">'none'</span>))</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">'stroke-width'</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    svg<span class="op">.</span><span class="fu">selectAll</span>(<span class="st">'text.value'</span>)</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">attr</span>(<span class="st">'opacity'</span><span class="op">,</span> (d) <span class="kw">=&gt;</span> <span class="fu">getOpacity</span>(d<span class="op">.</span><span class="at">id</span><span class="op">,</span> selectedBib<span class="op">,</span> brushedBibs))<span class="op">;</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> update <span class="op">=</span> (rows<span class="op">,</span> indicator<span class="op">,</span> year<span class="op">,</span> selectedBib<span class="op">,</span> brushedBibs) <span class="kw">=&gt;</span> {</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> info <span class="op">=</span> indicators[indicator]<span class="op">;</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Une transition partagée : les axes et les barres s'animent en même temps</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> t <span class="op">=</span> svg<span class="op">.</span><span class="fu">transition</span>()<span class="op">.</span><span class="fu">duration</span>(<span class="dv">750</span>)<span class="op">;</span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>    title<span class="op">.</span><span class="fu">text</span>(<span class="vs">`</span><span class="sc">${</span>info<span class="op">.</span><span class="at">label</span><span class="sc">}</span><span class="vs"> par bibliothèque en </span><span class="sc">${</span>year<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>    <span class="co">// À compléter</span></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">highlight</span>(selectedBib<span class="op">,</span> brushedBibs)<span class="op">;</span></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { update<span class="op">,</span> highlight }<span class="op">;</span></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>La fonction <code>update</code> reçoit les données au format <code>[{ id, name, value }, ...]</code> triées par ordre décroissant (c’est ce que retourne <code>getRows</code>). Elle doit :</p>
+<ol type="1">
+<li>mettre à jour les domaines de <code>x</code> (de 0 à la valeur maximale) et de <code>y</code> (la liste des <code>id</code> des bibliothèques, dans l’ordre : c’est l’ordre d’affichage des barres),</li>
+<li>mettre à jour les deux axes,</li>
+<li>créer, mettre à jour et supprimer les barres avec une jointure de données, en animant leur position (<code>y</code>), leur longueur (<code>width</code>) et leur couleur (<code>fill</code>),</li>
+<li>appeler <code>onClick(d.id)</code> lors du clic sur une barre.</li>
+</ol>
+<p>Quelques indications :</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// L'axe en y affiche des identifiants (ceux du domaine de l'échelle) : on les remplace par les noms</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">// des bibliothèques (en abrégeant "Bibliothèque" pour gagner de la place)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> names <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>(rows<span class="op">.</span><span class="fu">map</span>((d) <span class="kw">=&gt;</span> [d<span class="op">.</span><span class="at">id</span><span class="op">,</span> d<span class="op">.</span><span class="at">name</span><span class="op">.</span><span class="fu">replace</span>(<span class="st">'Bibliothèque '</span><span class="op">,</span> <span class="st">'Bib. '</span>)]))<span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>gx<span class="op">.</span><span class="fu">transition</span>(t)<span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisBottom</span>(x)<span class="op">.</span><span class="fu">ticks</span>(<span class="dv">5</span>)<span class="op">.</span><span class="fu">tickFormat</span>(d3<span class="op">.</span><span class="fu">format</span>(<span class="st">'~s'</span>)))<span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>gy<span class="op">.</span><span class="fu">transition</span>(t)<span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisLeft</span>(y)<span class="op">.</span><span class="fu">tickSize</span>(<span class="dv">0</span>)<span class="op">.</span><span class="fu">tickFormat</span>((bibId) <span class="kw">=&gt;</span> names<span class="op">.</span><span class="fu">get</span>(bibId)))<span class="op">;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Pour animer les barres, on peut ensuite utiliser la transition partagée</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">// bars.transition(t).attr('y', ...).attr('height', ...).attr('width', ...).attr('fill', ...)</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">// (la longueur d'une barre est la différence x(d.value) - x(0))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="intégration-dans-la-page-1" class="level3">
+<h3 class="anchored" data-anchor-id="intégration-dans-la-page-1">Intégration dans la page</h3>
+<ol type="1">
+<li>Dans la fonction exécutée au chargement de la page, créez le graphique : une barre doit sélectionner la bibliothèque correspondante lors du clic. Pour cela, la fonction passée en second paramètre doit modifier <code>selectedBib</code> puis appeler <code>updateAll()</code>.</li>
+<li>Dans <code>updateAll</code>, ajoutez la mise à jour du graphique, après avoir récupéré les données : <code>const rows = getRows(data, selectedIndicator, selectedYear);</code></li>
+<li>Ajoutez un écouteur sur le curseur d’année (<code>select-year</code>). Utilisez l’événement <code>input</code> (et non <code>change</code>, qui n’est déclenché que lorsque l’utilisateur relâche le curseur) pour que le graphique se mette à jour pendant le déplacement du curseur. Dans <code>updateAll</code>, mettez aussi à jour la position du curseur (<code>selectYear.value</code>) et la valeur affichée dans l’élément <code>&lt;output&gt;</code> (<code>outputYear.textContent</code>) : cela sera nécessaire pour le bouton “Lecture”.</li>
+<li><strong>Bouton “Lecture”</strong> : faites défiler automatiquement les années de 2008 à 2016 (une année toutes les 1,5 seconde, par exemple avec <code>setInterval</code>). Le bouton doit permettre de mettre en pause (<code>clearInterval</code>) et l’animation doit s’arrêter à la dernière année.</li>
+</ol>
+</section>
+<section id="questions-1" class="level3">
+<h3 class="anchored" data-anchor-id="questions-1">Questions</h3>
+<ul>
+<li>Que se passe-t-il pour les barres lorsque l’ordre des bibliothèques change d’une année à l’autre ? Que se passerait-il si vous n’aviez pas fourni la fonction de clé à <code>.data()</code> ?</li>
+<li>Pourquoi n’y a-t-il pas le même nombre de barres en 2010 pour les prêts et pour les emprunteurs ?</li>
+<li><em>Pour habiller</em> : affichez la valeur à droite de chaque barre, avec une jointure sur des éléments <code>&lt;text&gt;</code>.</li>
+</ul>
+</section>
+</section>
+<section id="partie-4---un-nuage-de-points-avec-sélection-par-rectangle" class="level2">
+<h2 class="anchored" data-anchor-id="partie-4---un-nuage-de-points-avec-sélection-par-rectangle">Partie 4 - Un nuage de points avec sélection par rectangle</h2>
+<p>Cette dernière partie est la plus riche : vous allez réaliser un nuage de points dans lequel <strong>chaque point représente une bibliothèque</strong>, et permettre à l’utilisateur de <strong>sélectionner un groupe de points avec un rectangle</strong> (un <em>brush</em>). Les bibliothèques sélectionnées seront mises en évidence sur la carte et dans les autres graphiques, comme dans l’exemple de <a href="https://riatelab.github.io/regioviz/app/">Regioviz</a> présenté en début de séance 8.</p>
+<p>Pour l’année sélectionnée, la position de chaque point dépend de deux variables choisies par l’utilisateur (par exemple le nombre d’emprunteurs en x et le nombre de prêts en y), et sa taille représente le nombre de visiteurs. La fonction <code>getPoints</code> (fournie) prépare ces données et l’objet <code>variables</code> (fourni) contient la liste des variables disponibles (y compris une variable calculée : les prêts par emprunteur).</p>
+<section id="le-brush" class="level3">
+<h3 class="anchored" data-anchor-id="le-brush">Le <code>brush</code></h3>
+<p><code>d3.brush()</code> ajoute à un groupe <code>&lt;g&gt;</code> un rectangle de sélection que l’utilisateur peut dessiner, déplacer et redimensionner. À chaque changement, la fonction passée à <code>.on('brush end', ...)</code> reçoit un événement dont la propriété <code>selection</code> vaut <code>null</code> (pas de sélection) ou <code>[[x0, y0], [x1, y1]]</code> (les coins du rectangle, <strong>en pixels</strong>).</p>
+<p>Pour savoir quels points sont dans le rectangle, il suffit donc de comparer la position de chaque point en pixels (<code>x(d.x)</code> et <code>y(d.y)</code>) avec celle du rectangle.</p>
+</section>
+<section id="le-nuage-de-points" class="level3">
+<h3 class="anchored" data-anchor-id="le-nuage-de-points">Le nuage de points</h3>
+<p>Voici le squelette de la fonction qui crée le graphique. Vous devez écrire le gestionnaire du <code>brush</code> et la fonction <code>highlight</code>, ainsi que la partie de <code>update</code> qui concerne les points.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Une fonction responsable de créer un nuage de points dans lequel on peut sélectionner</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">// des points avec un rectangle de sélection (un "brush").</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">// `onBrush` est la fonction appelée avec la liste des id des bibliothèques sélectionnées.</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> makeScatterPlot <span class="op">=</span> (id<span class="op">,</span> onBrush) <span class="kw">=&gt;</span> {</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> width <span class="op">=</span> <span class="dv">600</span><span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> height <span class="op">=</span> <span class="dv">340</span><span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> margin <span class="op">=</span> { <span class="dt">top</span><span class="op">:</span> <span class="dv">62</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">55</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">70</span> }<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> svg <span class="op">=</span> d3<span class="op">.</span><span class="fu">select</span>(<span class="vs">`#</span><span class="sc">${</span>id<span class="sc">}</span><span class="vs">`</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">append</span>(<span class="st">'svg'</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'viewBox'</span><span class="op">,</span> <span class="vs">`0 0 </span><span class="sc">${</span>width<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>height<span class="sc">}</span><span class="vs">`</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="st">'100%'</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'height'</span><span class="op">,</span> <span class="st">'100%'</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-family'</span><span class="op">,</span> <span class="st">'system-ui, sans-serif'</span>)<span class="op">;</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> title <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'text'</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'x'</span><span class="op">,</span> <span class="dv">10</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="dv">25</span>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">17</span>)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-weight'</span><span class="op">,</span> <span class="st">'bold'</span>)<span class="op">;</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'text'</span>)</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'x'</span><span class="op">,</span> <span class="dv">10</span>)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="dv">44</span>)</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">12</span>)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'#555'</span>)</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">text</span>(<span class="st">'La taille des cercles représente le nombre de visiteurs'</span>)<span class="op">;</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> x <span class="op">=</span> d3<span class="op">.</span><span class="fu">scaleLinear</span>()<span class="op">.</span><span class="fu">range</span>([margin<span class="op">.</span><span class="at">left</span><span class="op">,</span> width <span class="op">-</span> margin<span class="op">.</span><span class="at">right</span>])<span class="op">;</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> y <span class="op">=</span> d3<span class="op">.</span><span class="fu">scaleLinear</span>()<span class="op">.</span><span class="fu">range</span>([height <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span><span class="op">,</span> margin<span class="op">.</span><span class="at">top</span>])<span class="op">;</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// scaleSqrt pour le rayon : c'est l'aire du cercle (et non son rayon) qui doit être</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">// proportionnelle à la valeur représentée</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> r <span class="op">=</span> d3<span class="op">.</span><span class="fu">scaleSqrt</span>()<span class="op">.</span><span class="fu">range</span>([<span class="dv">4</span><span class="op">,</span> <span class="dv">22</span>])<span class="op">;</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> gx <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'g'</span>)</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'transform'</span><span class="op">,</span> <span class="vs">`translate(0,</span><span class="sc">${</span>height <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span><span class="sc">}</span><span class="vs">)`</span>)</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisBottom</span>(x))</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">13</span>)<span class="op">;</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> gy <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'g'</span>)</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'transform'</span><span class="op">,</span> <span class="vs">`translate(</span><span class="sc">${</span>margin<span class="op">.</span><span class="at">left</span><span class="sc">}</span><span class="vs">,0)`</span>)</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisLeft</span>(y))</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">13</span>)<span class="op">;</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> labelX <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'text'</span>)</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'x'</span><span class="op">,</span> (margin<span class="op">.</span><span class="at">left</span> <span class="op">+</span> width <span class="op">-</span> margin<span class="op">.</span><span class="at">right</span>) <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'y'</span><span class="op">,</span> height <span class="op">-</span> <span class="dv">12</span>)</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'text-anchor'</span><span class="op">,</span> <span class="st">'middle'</span>)</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> labelY <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'text'</span>)</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'transform'</span><span class="op">,</span> <span class="st">'rotate(-90)'</span>)</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'x'</span><span class="op">,</span> <span class="op">-</span>(margin<span class="op">.</span><span class="at">top</span> <span class="op">+</span> height <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span>) <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="dv">18</span>)</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'text-anchor'</span><span class="op">,</span> <span class="st">'middle'</span>)</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">attr</span>(<span class="st">'font-size'</span><span class="op">,</span> <span class="dv">14</span>)<span class="op">;</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> points <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Le "brush" : l'événement est déclenché pendant le tracé du rectangle ("brush") et à la fin ("end")</span></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> brush <span class="op">=</span> d3<span class="op">.</span><span class="fu">brush</span>()</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">extent</span>([[margin<span class="op">.</span><span class="at">left</span><span class="op">,</span> margin<span class="op">.</span><span class="at">top</span>]<span class="op">,</span> [width <span class="op">-</span> margin<span class="op">.</span><span class="at">right</span><span class="op">,</span> height <span class="op">-</span> margin<span class="op">.</span><span class="at">bottom</span>]])</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">on</span>(<span class="st">'brush end'</span><span class="op">,</span> (<span class="bu">event</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>      <span class="co">// À compléter : si event.selection vaut null, appeler onBrush([]) ; sinon, retrouver les points</span></span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>      <span class="co">// situés dans le rectangle et appeler onBrush avec la liste de leurs id</span></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Le brush est ajouté avant les cercles : ceux-ci restent au-dessus et gardent leur infobulle.</span></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>  <span class="co">// (contrepartie : un glisser-déposer qui commence sur un cercle ne crée pas de rectangle de sélection)</span></span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> gBrush <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'g'</span>)<span class="op">.</span><span class="fu">call</span>(brush)<span class="op">;</span></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> gPoints <span class="op">=</span> svg<span class="op">.</span><span class="fu">append</span>(<span class="st">'g'</span>)<span class="op">;</span></span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> highlight <span class="op">=</span> (selectedBib<span class="op">,</span> brushedBibs) <span class="kw">=&gt;</span> {</span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>    <span class="co">// À compléter : mettre en valeur la bibliothèque sélectionnée et celles sélectionnées avec le brush</span></span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>    <span class="co">// (comme pour les barres, avec la fonction getOpacity)</span></span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> update <span class="op">=</span> (newPoints<span class="op">,</span> xVariable<span class="op">,</span> yVariable<span class="op">,</span> year<span class="op">,</span> selectedBib<span class="op">,</span> brushedBibs) <span class="kw">=&gt;</span> {</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>    points <span class="op">=</span> newPoints<span class="op">;</span></span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a>    title<span class="op">.</span><span class="fu">text</span>(<span class="vs">`Relations entre indicateurs en </span><span class="sc">${</span>year<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>    labelX<span class="op">.</span><span class="fu">text</span>(variables[xVariable]<span class="op">.</span><span class="at">label</span>)<span class="op">;</span></span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>    labelY<span class="op">.</span><span class="fu">text</span>(variables[yVariable]<span class="op">.</span><span class="at">label</span>)<span class="op">;</span></span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>    x<span class="op">.</span><span class="fu">domain</span>([<span class="dv">0</span><span class="op">,</span> d3<span class="op">.</span><span class="fu">max</span>(points<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">x</span>) <span class="op">||</span> <span class="dv">1</span>])<span class="op">.</span><span class="fu">nice</span>()<span class="op">;</span></span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a>    y<span class="op">.</span><span class="fu">domain</span>([<span class="dv">0</span><span class="op">,</span> d3<span class="op">.</span><span class="fu">max</span>(points<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">y</span>) <span class="op">||</span> <span class="dv">1</span>])<span class="op">.</span><span class="fu">nice</span>()<span class="op">;</span></span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>    r<span class="op">.</span><span class="fu">domain</span>([<span class="dv">0</span><span class="op">,</span> d3<span class="op">.</span><span class="fu">max</span>(points<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">size</span>) <span class="op">||</span> <span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a>    gx<span class="op">.</span><span class="fu">transition</span>()<span class="op">.</span><span class="fu">duration</span>(<span class="dv">750</span>)<span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisBottom</span>(x)<span class="op">.</span><span class="fu">ticks</span>(<span class="dv">5</span>)<span class="op">.</span><span class="fu">tickFormat</span>(d3<span class="op">.</span><span class="fu">format</span>(variables[xVariable]<span class="op">.</span><span class="at">format</span>)))<span class="op">;</span></span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>    gy<span class="op">.</span><span class="fu">transition</span>()<span class="op">.</span><span class="fu">duration</span>(<span class="dv">750</span>)<span class="op">.</span><span class="fu">call</span>(d3<span class="op">.</span><span class="fu">axisLeft</span>(y)<span class="op">.</span><span class="fu">ticks</span>(<span class="dv">5</span>)<span class="op">.</span><span class="fu">tickFormat</span>(d3<span class="op">.</span><span class="fu">format</span>(variables[yVariable]<span class="op">.</span><span class="at">format</span>)))<span class="op">;</span></span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>    <span class="co">// À compléter : créer, mettre à jour et supprimer les cercles (une jointure de données avec la clé d.id),</span></span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a>    <span class="co">// en animant leur position (cx, cy) et leur rayon (r(d.size ?? 0) : la taille peut être manquante)</span></span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">highlight</span>(selectedBib<span class="op">,</span> brushedBibs)<span class="op">;</span></span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Efface le rectangle de sélection (à utiliser quand la position des points change : le rectangle</span></span>
+<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a>  <span class="co">// n'aurait alors plus de sens). Cela déclenche l'événement "end" avec une sélection null.</span></span>
+<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> clearBrush <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a>    gBrush<span class="op">.</span><span class="fu">call</span>(brush<span class="op">.</span><span class="at">move</span><span class="op">,</span> <span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { update<span class="op">,</span> highlight<span class="op">,</span> clearBrush }<span class="op">;</span></span>
+<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un élément <code>&lt;title&gt;</code> placé à l’intérieur d’un élément SVG est affiché comme infobulle par le navigateur : ajoutez-en un à chaque cercle pour afficher le nom de la bibliothèque au survol.</p>
+</div>
+</div>
+</section>
+<section id="intégration-dans-la-page-2" class="level3">
+<h3 class="anchored" data-anchor-id="intégration-dans-la-page-2">Intégration dans la page</h3>
+<ol type="1">
+<li>Créez le graphique. La fonction passée en second paramètre reçoit la liste des id des bibliothèques sélectionnées avec le rectangle : elle doit mettre à jour <code>brushedBibs</code> puis appeler <code>updateHighlight()</code>.</li>
+<li>Écrivez la fonction <code>updateHighlight</code>. Elle sera appelée à chaque déplacement du rectangle de sélection (de nombreuses fois par seconde) : elle ne doit donc <strong>pas</strong> redessiner les graphiques (<code>updateAll</code> serait beaucoup trop lourde), mais uniquement mettre à jour la mise en évidence.</li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Mise à jour de la mise en valeur des bibliothèques dans tous les composants</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">// (sans les redessiner : c'est ce qui est appelé à chaque déplacement du brush)</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> updateHighlight <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateMarkers</span>()<span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  barChart<span class="op">.</span><span class="fu">highlight</span>(selectedBib<span class="op">,</span> brushedBibs)<span class="op">;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  scatterPlot<span class="op">.</span><span class="fu">highlight</span>(selectedBib<span class="op">,</span> brushedBibs)<span class="op">;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Dans <code>updateAll</code>, ajoutez la mise à jour du nuage de points :</li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> points <span class="op">=</span> <span class="fu">getPoints</span>(data<span class="op">,</span> selectedYear<span class="op">,</span> selectedX<span class="op">,</span> selectedY)<span class="op">;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>scatterPlot<span class="op">.</span><span class="fu">update</span>(points<span class="op">,</span> selectedX<span class="op">,</span> selectedY<span class="op">,</span> selectedYear<span class="op">,</span> selectedBib<span class="op">,</span> brushedBibs)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>Modifiez <code>updateMarkers</code> pour que les bibliothèques qui n’ont pas été sélectionnées avec le rectangle soient atténuées sur la carte (<code>marker.setOpacity(...)</code>, avec par exemple <code>0.3</code> pour les marqueurs atténués).</li>
+<li>Remplissez les menus déroulants des axes du nuage de points (avec <code>fillSelect</code> et l’objet <code>variables</code>) et écoutez leurs changements : modifiez <code>selectedX</code> ou <code>selectedY</code> puis appelez <code>updateAll()</code>.</li>
+<li><strong>Quand l’année ou l’une des variables change, la position des points change</strong>, et le rectangle de sélection n’a donc plus de sens : appelez <code>scatterPlot.clearBrush()</code> avant <code>updateAll()</code> dans les fonctions concernées.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si vous avez réalisé le diagramme en anneau, ajoutez-le à <code>updateHighlight</code> : la part “Autres” regroupe plusieurs bibliothèques (leurs id sont dans la propriété <code>ids</code>) et doit être mise en valeur si l’une d’entre elles l’est.</p>
+</div>
+</div>
+</section>
+<section id="questions-2" class="level3">
+<h3 class="anchored" data-anchor-id="questions-2">Questions</h3>
+<ul>
+<li>Pourquoi <code>updateHighlight</code> ne redessine-t-elle pas les graphiques ? Que se passerait-il si le gestionnaire du <code>brush</code> appelait <code>updateAll</code> ?</li>
+<li>Quelles bibliothèques sont absentes du nuage de points en 2016 ? Pourquoi ?</li>
+<li>Sélectionnez les 4 bibliothèques ayant le moins d’emprunteurs. Que remarquez-vous sur la carte ?</li>
+<li>Sélectionnez “Prêts par emprunteur” en y et “Nombre d’emprunteurs” en x. Quelles bibliothèques se distinguent des autres ?</li>
+</ul>
+</section>
+</section>
+<section id="partie-5---un-diagramme-en-anneau" class="level2">
+<h2 class="anchored" data-anchor-id="partie-5---un-diagramme-en-anneau">Partie 5 - Un diagramme en anneau</h2>
+<p>Le sujet de la séance 8 proposait de réaliser un diagramme circulaire. Réalisez-en un (en anneau) pour représenter la part de chaque bibliothèque dans l’indicateur choisi, pour l’année choisie, en vous appuyant sur les mêmes données (<code>rows</code>).</p>
+<p>Avec une dizaine de bibliothèques, un diagramme circulaire est difficile à lire. La fonction <code>groupRows</code> (fournie) regroupe donc les bibliothèques en dehors des 5 premières dans une part “Autres” (en conservant la bibliothèque sélectionnée, pour qu’elle reste visible) :</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Une fonction qui regroupe les bibliothèques en dehors des `n` premières dans une part "Autres"</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">// (on conserve aussi la bibliothèque sélectionnée, pour qu'elle reste visible).</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Les données (`rows`) doivent déjà être triées par ordre décroissant.</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> groupRows <span class="op">=</span> (rows<span class="op">,</span> selectedBib<span class="op">,</span> n <span class="op">=</span> <span class="dv">5</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> kept <span class="op">=</span> rows<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> n)<span class="op">;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> selected <span class="op">=</span> rows<span class="op">.</span><span class="fu">find</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">id</span> <span class="op">===</span> selectedBib)<span class="op">;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (selected <span class="op">&amp;&amp;</span> <span class="op">!</span>kept<span class="op">.</span><span class="fu">includes</span>(selected)) {</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    kept<span class="op">.</span><span class="fu">push</span>(selected)<span class="op">;</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> others <span class="op">=</span> rows<span class="op">.</span><span class="fu">filter</span>((d) <span class="kw">=&gt;</span> <span class="op">!</span>kept<span class="op">.</span><span class="fu">includes</span>(d))<span class="op">;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (others<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    kept<span class="op">.</span><span class="fu">push</span>({</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>      <span class="dt">id</span><span class="op">:</span> <span class="st">'others'</span><span class="op">,</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">name</span><span class="op">:</span> <span class="vs">`Autres (</span><span class="sc">${</span>others<span class="op">.</span><span class="at">length</span><span class="sc">}</span><span class="vs">)`</span><span class="op">,</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">value</span><span class="op">:</span> d3<span class="op">.</span><span class="fu">sum</span>(others<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">value</span>)<span class="op">,</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">ids</span><span class="op">:</span> others<span class="op">.</span><span class="fu">map</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">id</span>)<span class="op">,</span> <span class="co">// les id des bibliothèques regroupées</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> kept<span class="op">;</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Les deux fonctions qui permettent de dessiner un anneau sont <code>d3.pie</code> (qui calcule les angles de début et de fin de chaque part) et <code>d3.arc</code> (qui dessine une part à partir de ses angles) :</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> radius <span class="op">=</span> <span class="dv">115</span><span class="op">;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">// sort(null) pour conserver l'ordre des données</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> pie <span class="op">=</span> d3<span class="op">.</span><span class="fu">pie</span>()<span class="op">.</span><span class="fu">value</span>((d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">value</span>)<span class="op">.</span><span class="fu">sort</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> arc <span class="op">=</span> d3<span class="op">.</span><span class="fu">arc</span>()<span class="op">.</span><span class="fu">innerRadius</span>(radius <span class="op">*</span> <span class="fl">0.6</span>)<span class="op">.</span><span class="fu">outerRadius</span>(radius)<span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Les parts : un élément &lt;path&gt; par part. L'origine du groupe `g` est placée au centre de l'anneau</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>g<span class="op">.</span><span class="fu">selectAll</span>(<span class="st">'path.slice'</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">data</span>(<span class="fu">pie</span>(parts)<span class="op">,</span> (d) <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="at">id</span>) <span class="co">// les données de chaque part sont dans `d.data`</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">join</span>(<span class="st">'path'</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'class'</span><span class="op">,</span> <span class="st">'slice'</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'d'</span><span class="op">,</span> arc)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">attr</span>(<span class="st">'fill'</span><span class="op">,</span> (d) <span class="kw">=&gt;</span> <span class="fu">colors</span>(d<span class="op">.</span><span class="at">data</span><span class="op">.</span><span class="at">id</span>))<span class="op">;</span> <span class="co">// avec colors = d3.scaleOrdinal(d3.schemeTableau10)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Faites en sorte qu’un clic sur une part (sauf “Autres”) sélectionne la bibliothèque, comme pour les barres.</li>
+<li>Ajoutez une légende et affichez le total au centre de l’anneau.</li>
+<li>Comparez avec le diagramme en barres : lequel permet le mieux de comparer les valeurs ? Pourquoi ?</li>
+<li><em>Défi</em> : animer le changement de valeurs. On ne peut pas animer directement l’attribut <code>d</code> (c’est du texte) : il faut animer les angles avec <code>attrTween</code> et <code>d3.interpolate</code>, et redessiner la part à chaque étape de la transition avec <code>arc()</code>. Regardez la <a href="https://d3js.org/d3-transition/modifying#transition_attrTween">documentation de <code>transition.attrTween</code></a>.</li>
+</ul>
+</section>
+<section id="pour-aller-plus-loin" class="level2">
+<h2 class="anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<p>En fonction du temps restant, vous pouvez réaliser un ou plusieurs des graphiques suivants (par ordre de difficulté croissante) :</p>
+<ul>
+<li>Un <strong>graphique radar</strong> du profil d’une bibliothèque : les 4 indicateurs d’une année, divisés par leur valeur maximale parmi toutes les bibliothèques (pour être compris entre 0 et 1), comparés à la moyenne des bibliothèques. Il peut être réalisé avec <code>d3.lineRadial</code>.</li>
+<li>Un <strong>treemap</strong> des prêts par bibliothèque avec <code>d3.hierarchy</code> et <code>d3.treemap</code> (voir la <a href="https://d3js.org/d3-hierarchy/treemap">documentation</a>). La couleur peut représenter l’évolution entre 2008 et 2016.</li>
+<li>Des <strong>cercles proportionnels</strong> dessinés avec D3 directement sur la carte Leaflet : ajoutez une couche SVG à Leaflet (<code>L.svg().addTo(map)</code>) puis dessinez-y avec D3 un cercle par bibliothèque, dont le rayon est proportionnel à l’indicateur de l’année sélectionnée. Vous aurez besoin de <code>map.latLngToLayerPoint</code> pour convertir les coordonnées, et de redessiner les cercles lors d’un zoom (<code>map.on('zoomend', ...)</code>).</li>
+<li>Un <strong>bump chart</strong> du rang des bibliothèques au fil des années.</li>
+</ul>
+</section>
+<section id="aide-mémoire-d3" class="level2">
+<h2 class="anchored" data-anchor-id="aide-mémoire-d3">Aide-mémoire D3</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Besoin</th>
+<th>Fonction D3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sélectionner un ou plusieurs éléments</td>
+<td><code>d3.select</code>, <code>selection.selectAll</code></td>
+</tr>
+<tr class="even">
+<td>Associer des données à des éléments</td>
+<td><code>selection.data(tableau, cle).join(...)</code></td>
+</tr>
+<tr class="odd">
+<td>Modifier un élément</td>
+<td><code>.attr</code>, <code>.style</code>, <code>.text</code></td>
+</tr>
+<tr class="even">
+<td>Gérer un événement</td>
+<td><code>.on('click', (event, d) =&gt; ...)</code></td>
+</tr>
+<tr class="odd">
+<td>Convertir des données en positions</td>
+<td><code>d3.scaleLinear</code>, <code>d3.scaleSqrt</code>, <code>d3.scaleBand</code>, <code>d3.scaleOrdinal</code></td>
+</tr>
+<tr class="even">
+<td>Dessiner des axes</td>
+<td><code>d3.axisBottom(x)</code>, <code>d3.axisLeft(y)</code></td>
+</tr>
+<tr class="odd">
+<td>Courbes, anneaux</td>
+<td><code>d3.line</code>, <code>d3.area</code>, <code>d3.pie</code>, <code>d3.arc</code></td>
+</tr>
+<tr class="even">
+<td>Animer</td>
+<td><code>.transition().duration(ms)</code></td>
+</tr>
+<tr class="odd">
+<td>Position du curseur</td>
+<td><code>d3.pointer(event)</code></td>
+</tr>
+<tr class="even">
+<td>Rechercher dans un tableau trié</td>
+<td><code>d3.bisector</code></td>
+</tr>
+<tr class="odd">
+<td>Sélection avec un rectangle</td>
+<td><code>d3.brush</code></td>
+</tr>
+<tr class="even">
+<td>Calculs</td>
+<td><code>d3.sum</code>, <code>d3.max</code>, <code>d3.extent</code>, <code>d3.descending</code></td>
+</tr>
+<tr class="odd">
+<td>Formater un nombre</td>
+<td><code>d3.format('~s')</code>, <code>d3.format('.0%')</code></td>
+</tr>
+</tbody>
+</table>
+<p>Voir aussi :</p>
+<ul>
+<li>la <a href="https://d3js.org/">documentation de D3.js</a>,</li>
+<li>l’exemple <a href="https://observablehq.com/@d3/brushable-scatterplot">Brushable scatterplot</a>,</li>
+<li>l’exemple <a href="https://observablehq.com/@d3/bar-chart-race">Bar chart race</a>.</li>
+</ul>
+</section>
+<section id="pour-finir" class="level2">
+<h2 class="anchored" data-anchor-id="pour-finir">Pour finir</h2>
+<p>Votre page doit contenir au minimum :</p>
+<ul>
+<li>la carte, le menu déroulant et les 4 graphiques Plot de la séance 8, toujours synchronisés,</li>
+<li>le graphique en courbes D3 avec infobulle,</li>
+<li>le diagramme en barres animé, avec le curseur d’année,</li>
+<li>le nuage de points avec sélection par rectangle, dont la sélection est répercutée sur la carte,</li>
+<li>le diagramme en anneau.</li>
+</ul>
+<!-- À adapter : modalités de rendu et barème -->
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CM/TP Séance 8 et 9 - Vues synchronisées, dashboard, Leaflet, Plot et d3.js</title>
+<title>TP Séance 8 - Vues synchronisées, dashboard, Leaflet, Plot et d3.js</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,15 +77,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#objectifs-de-la-séance" id="toc-objectifs-de-la-séance" class="nav-link active" data-scroll-target="#objectifs-de-la-séance">Objectifs de la séance</a></li>
+  <li><a href="#vues-synchronisées" id="toc-vues-synchronisées" class="nav-link" data-scroll-target="#vues-synchronisées">Vues synchronisées</a></li>
+  <li><a href="#différences-avec-observable" id="toc-différences-avec-observable" class="nav-link" data-scroll-target="#différences-avec-observable">Différences avec Observable</a></li>
+  <li><a href="#exercice---création-dun-tableau-de-bord" id="toc-exercice---création-dun-tableau-de-bord" class="nav-link" data-scroll-target="#exercice---création-dun-tableau-de-bord">Exercice - Création d’un “tableau de bord”</a>
+  <ul class="collapse">
+  <li><a href="#structure-du-document-html" id="toc-structure-du-document-html" class="nav-link" data-scroll-target="#structure-du-document-html">Structure du document HTML</a></li>
+  <li><a href="#chargement-des-données" id="toc-chargement-des-données" class="nav-link" data-scroll-target="#chargement-des-données">Chargement des données</a></li>
+  <li><a href="#création-de-la-carte-leaflet" id="toc-création-de-la-carte-leaflet" class="nav-link" data-scroll-target="#création-de-la-carte-leaflet">Création de la carte Leaflet</a></li>
+  <li><a href="#création-dun-élément-select-pour-sélectionner-une-bibliothèque" id="toc-création-dun-élément-select-pour-sélectionner-une-bibliothèque" class="nav-link" data-scroll-target="#création-dun-élément-select-pour-sélectionner-une-bibliothèque">Création d’un élément <code>&lt;select&gt;</code> pour sélectionner une bibliothèque</a></li>
+  <li><a href="#création-des-graphiques" id="toc-création-des-graphiques" class="nav-link" data-scroll-target="#création-des-graphiques">Création des graphiques</a></li>
+  <li><a href="#agencement-des-éléments-dans-la-page" id="toc-agencement-des-éléments-dans-la-page" class="nav-link" data-scroll-target="#agencement-des-éléments-dans-la-page">Agencement des éléments dans la page</a></li>
+  <li><a href="#pour-info-création-remplacement-des-graphiques-vs.-mise-à-jour-des-graphiques" id="toc-pour-info-création-remplacement-des-graphiques-vs.-mise-à-jour-des-graphiques" class="nav-link" data-scroll-target="#pour-info-création-remplacement-des-graphiques-vs.-mise-à-jour-des-graphiques">Pour info : Création / remplacement des graphiques vs.&nbsp;mise à jour des graphiques</a></li>
+  </ul></li>
+  <li><a href="#pour-aller-plus-loin---d3.js" id="toc-pour-aller-plus-loin---d3.js" class="nav-link" data-scroll-target="#pour-aller-plus-loin---d3.js">Pour aller plus loin - D3.js</a></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">CM/TP Séance 8 et 9 - Vues synchronisées, dashboard, Leaflet, Plot et d3.js</h1>
+<h1 class="title">TP Séance 8 - Vues synchronisées, dashboard, Leaflet, Plot et d3.js</h1>
 <p class="subtitle lead">BUT Science des données - 3ème année - Université Grenoble Alpes</p>
 </div>
 
@@ -364,7 +385,7 @@ Tip
 <h2 class="anchored" data-anchor-id="pour-aller-plus-loin---d3.js">Pour aller plus loin - D3.js</h2>
 <p>Certains types de graphiques peuvent ne pas être réalisables avec Plot. Dans ce cas, il est possible de recourir à D3.js. Cette bibliothèque JavaScript permet de créer des graphiques complexes et personnalisés, mais elle est également plus complexe à prendre en main que Plot.</p>
 <p>Voir le notebook <a href="https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js">Faire des graphiques avec D3.js</a>.</p>
-<p>En fonction du temps restant, essayez d’intégrer un graphique réaliser avec D3.js dans la page HTML que vous avez créée pour cet exercice (par exemple un diagramme circulaire).</p>
+<p>En fonction du temps restant, essayez d’intégrer un graphique réalisé avec D3.js dans la page HTML que vous avez créée pour cet exercice (par exemple un diagramme circulaire).</p>
 <!--
 
 ::: {.callout-tip}
