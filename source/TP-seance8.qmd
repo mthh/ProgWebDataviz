@@ -1,8 +1,10 @@
 ---
-title: "CM/TP Séance 8 et 9 - Vues synchronisées, dashboard, Leaflet, Plot et d3.js"
+title: "TP Séance 8 - Vues synchronisées, dashboard, Leaflet, Plot et d3.js"
 subtitle: "BUT Science des données - 3ème année - Université Grenoble Alpes"
 format:
   html:
+    toc: true
+    toc-location: right
     code-fold: true
     include-in-header:
       - text: |
@@ -339,7 +341,7 @@ Cette bibliothèque JavaScript permet de créer des graphiques complexes et pers
 
 Voir le notebook [Faire des graphiques avec D3.js](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js).
 
-En fonction du temps restant, essayez d'intégrer un graphique réaliser avec D3.js dans la page HTML que vous avez créée pour cet exercice (par exemple un
+En fonction du temps restant, essayez d'intégrer un graphique réalisé avec D3.js dans la page HTML que vous avez créée pour cet exercice (par exemple un
 diagramme circulaire).
 
 <!--

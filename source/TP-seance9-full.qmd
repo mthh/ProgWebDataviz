@@ -1,0 +1,854 @@
+---
+title: "CM/TP Séance 9 - Vues synchronisées, dashboard, Leaflet, Plot et d3.js (suite)"
+subtitle: "BUT Science des données - 3ème année - Université Grenoble Alpes"
+format:
+  html:
+    toc: true
+    toc-location: right
+    code-fold: true
+    include-in-header:
+      - text: |
+          <link rel="stylesheet" href="./css/tps.css">
+          <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+          <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
+          <script src="./js/tp-seance8.js"></script>
+---
+
+
+##  Graphiques animés et vues synchronisées avec D3.js
+## Objectifs de la séance
+
+Cette séance fait suite à la séance 8. Vous allez enrichir votre tableau de bord avec des graphiques réalisés avec D3.js, pour faire des choses que Plot ne permet pas (ou mal) :
+
+- animer un graphique quand les données changent,
+- sélectionner plusieurs éléments avec un rectangle (un *brush*),
+- synchroniser tout cela avec la carte et les graphiques déjà présents dans la page.
+
+Nous utilisons toujours les [statistiques des bibliothèques de Grenoble](https://data.metropolegrenoble.fr/visualisation/information/?id=statistiques-des-bibliotheques-de-grenoble).
+
+## Point de départ
+
+Vous repartez de votre page de la séance 8 : la carte, le menu `<select>` et les 4 courbes Plot.
+
+Les nouveaux graphiques seront placés en dessous. Il y en a quatre :
+
+1. une courbe avec une infobulle au survol,
+2. un diagramme en barres animé, piloté par un curseur d'année,
+3. un nuage de points dans lequel on sélectionne des bibliothèques avec un rectangle,
+4. un diagramme en anneau.
+
+Les deux premiers sont guidés. Pour les deux suivants, vous avez uniquement un cahier des charges.
+
+Ajoutez ce bloc à la fin du `<body>`. Il contient les menus dont nous aurons besoin et un conteneur par graphique :
+
+```html
+<div id="d3-container">
+  <h2>Pour aller plus loin avec D3.js</h2>
+  <div>
+    <label for="select-indicator">Indicateur : </label>
+    <select id="select-indicator">
+    </select>
+    <label for="select-year">Année : </label>
+    <input type="range" id="select-year" min="2008" max="2016" step="1" value="2016">
+    <output id="output-year">2016</output>
+    <button id="button-play">▶ Lecture</button>
+  </div>
+  <div>
+    <label for="select-x">Nuage de points - axe x : </label>
+    <select id="select-x">
+    </select>
+    <label for="select-y">axe y : </label>
+    <select id="select-y">
+    </select>
+  </div>
+  <!--
+  Conteneurs pour les graphiques D3, adaptez les classes pour réutiliser le CSS existant
+  ayant permis de créer votre grille de 4 graphiques Plot dans la séance 8.
+  Vous pouvez aussi créer vos propres classes et styles dédiés pour cet exercice, mais
+  c'est toujours mieux de réutiliser ce qui existe déjà !
+  -->
+  <div class="flex-container">
+    <div class="graph" id="graph5"></div>
+    <div class="graph" id="graph6"></div>
+  </div>
+  <div class="flex-container">
+    <div class="graph" id="graph7"></div>
+    <div class="graph" id="graph8"></div>
+  </div>
+</div>
+```
+
+Un petit rappel au passage. Dans votre code de la séance 8, la mise à jour de la page quand on sélectionne une bibliothèque est peut-être écrite à plusieurs endroits (clic sur un marqueur, changement du `<select>`). Si ce n'est pas déjà fait, c'est le moment de mutualiser : gardez ce que l'utilisateur a choisi dans quelques variables (bibliothèque, indicateur, année...) et écrivez une seule fonction qui met à jour tous les composants à partir de ces variables, appelée par tous vos écouteurs d'événements. Avec quatre graphiques de plus à tenir à jour, vous allez en avoir besoin.
+
+## Créer une fois, mettre à jour ensuite
+
+Avec Plot, nous avons remplacé les graphiques à chaque changement. Avec D3, on crée un graphique **une seule fois**, puis on le **met à jour** : c'est ce qui permet de l'animer, puisque D3 sait quels éléments existent déjà, lesquels apparaissent et lesquels disparaissent. Chaque graphique sera donc créé par une fonction qui retourne de quoi le mettre à jour :
+
+```js
+const lineChart = makeLineChart('graph5'); // une seule fois, au chargement de la page
+lineChart.update(serie, indicator); // à chaque changement
+```
+
+## Les données
+
+Regardez les propriétés d'une entité dans la console (`data.features[0].properties`). Le code de la bibliothèque est dans `CDL-Branch Code`, son nom dans `CDL-Libelle long Bib`, et les statistiques dans des propriétés de la forme `Prets_2008`, `Inscrits_2008`, `Emprunteurs_2008`, `Visiteurs_2008`, `Prets_2009`, etc.
+
+Attention aux valeurs manquantes : elles sont codées tantôt par `null`, tantôt par `0`. Quatre bibliothèques n'ont aucune donnée, la bibliothèque d'Etude et du Patrimoine n'a que des visiteurs, et Abbaye les Bains a bien des prêts en 2010, mais 0 emprunteur. Un `0` n'est donc pas forcément un vrai zéro. Dans cette séance, `0` et `null` signifient tous les deux "pas de donnée" (c'est d'ailleurs ce que fait votre code de la séance 8 pour afficher "Pas de données"), et il faudra y penser dans tous les graphiques.
+
+Ajoutez les fonctions suivantes dans votre fichier `index.js` (avant la ligne `document.addEventListener('DOMContentLoaded', ...)` si vous avez utilisé ce pattern). Elles sont fournies : elles préparent les données pour les différents graphiques, au format attendu par D3.
+
+```js
+// Les années pour lesquelles on dispose de données
+const years = d3.range(2008, 2017); // de 2008 à 2016 (la dernière valeur est exclue)
+
+// Les indicateurs. La clé correspond au début du nom des propriétés dans le GeoJSON (ex. "Prets_2008")
+const indicators = {
+  Prets: { label: 'Prêts', title: 'Évolution du nombre de prêts', color: 'red' },
+  Inscrits: { label: 'Inscrits', title: 'Évolution du nombre d\'inscrits', color: 'blue' },
+  Emprunteurs: { label: 'Emprunteurs', title: 'Évolution du nombre d\'emprunteurs', color: 'green' },
+  Visiteurs: { label: 'Visiteurs', title: 'Évolution du nombre de visiteurs', color: 'orange' },
+};
+
+// Une fonction qui retourne la valeur d'un indicateur pour une bibliothèque et une année.
+// Dans le jeu de données, les valeurs manquantes sont parfois `null` et parfois égales à 0
+// (par exemple : 0 emprunteur en 2010 pour la bibliothèque Abbaye les Bains).
+// Dans les deux cas on considère qu'il s'agit d'une donnée manquante et on retourne `null`.
+const getValue = (point, indicator, year) => {
+  const value = point.properties[`${indicator}_${year}`];
+  return value > 0 ? value : null;
+};
+
+// Les variables qui peuvent être associées aux axes du nuage de points
+const variables = {
+  Emprunteurs: {
+    label: 'Nombre d\'emprunteurs',
+    format: '~s',
+    get: (point, year) => getValue(point, 'Emprunteurs', year),
+  },
+  Inscrits: {
+    label: 'Nombre d\'inscrits',
+    format: '~s',
+    get: (point, year) => getValue(point, 'Inscrits', year),
+  },
+  Visiteurs: {
+    label: 'Nombre de visiteurs',
+    format: '~s',
+    get: (point, year) => getValue(point, 'Visiteurs', year),
+  },
+  Prets: {
+    label: 'Nombre de prêts',
+    format: '~s',
+    get: (point, year) => getValue(point, 'Prets', year),
+  },
+  PretsParEmprunteur: {
+    label: 'Prêts par emprunteur',
+    format: '.1f',
+    get: (point, year) => {
+      const prets = getValue(point, 'Prets', year);
+      const emprunteurs = getValue(point, 'Emprunteurs', year);
+      return prets && emprunteurs ? prets / emprunteurs : null;
+    },
+  },
+};
+
+// Une fonction pour remplir un menu déroulant avec une liste d'options (des tableaux [valeur, texte])
+const fillSelect = (select, options, value) => {
+  options.forEach(([optionValue, text]) => {
+    const option = document.createElement('option');
+    option.value = optionValue;
+    option.text = text;
+    select.appendChild(option);
+  });
+  select.value = value;
+};
+
+// Une fonction qui retourne l'opacité d'un élément d'un graphique (barre, point, part...).
+// Quand une bibliothèque est sélectionnée (ou quand des bibliothèques sont sélectionnées avec
+// le "brush" du nuage de points), les éléments correspondants restent bien visibles
+// et les autres sont atténués.
+const getOpacity = (id, selectedBib, brushedBibs) => {
+  if (!selectedBib && brushedBibs.length === 0) {
+    return 1;
+  }
+  return id === selectedBib || brushedBibs.includes(id) ? 1 : 0.25;
+};
+
+// Une fonction qui prépare les données du graphique en courbes :
+// un tableau [{ year, value }, ...] pour la bibliothèque sélectionnée
+// (ou pour l'ensemble des bibliothèques si aucune n'est sélectionnée).
+const getSerie = (data, indicator, selectedBib) => {
+  return years.map((year) => {
+    if (!selectedBib) {
+      // d3.sum ignore les valeurs null
+      return { year, value: d3.sum(data.features, (point) => getValue(point, indicator, year)) };
+    }
+    const point = data.features.find((p) => p.properties['CDL-Branch Code'] === selectedBib);
+    return { year, value: getValue(point, indicator, year) };
+  });
+};
+
+// Une fonction qui prépare les données du diagramme en barres et du diagramme en anneau :
+// un tableau [{ id, name, value }, ...] (une entrée par bibliothèque, triées par ordre
+// décroissant) pour un indicateur et une année. Les bibliothèques sans donnée sont exclues.
+const getRows = (data, indicator, year) => {
+  return data.features
+    .map((point) => ({
+      id: point.properties['CDL-Branch Code'],
+      name: point.properties['CDL-Libelle long Bib'],
+      value: getValue(point, indicator, year),
+    }))
+    .filter((d) => d.value !== null)
+    .sort((a, b) => d3.descending(a.value, b.value));
+};
+
+// Une fonction qui prépare les données du nuage de points :
+// un tableau [{ id, name, x, y, size }, ...] pour une année et deux variables
+const getPoints = (data, year, xVariable, yVariable) => {
+  return data.features
+    .map((point) => ({
+      id: point.properties['CDL-Branch Code'],
+      name: point.properties['CDL-Libelle long Bib'],
+      x: variables[xVariable].get(point, year),
+      y: variables[yVariable].get(point, year),
+      size: getValue(point, 'Visiteurs', year), // la taille des cercles représente le nombre de visiteurs
+    }))
+    .filter((d) => d.x !== null && d.y !== null);
+};
+```
+
+Prenez le temps de les lire et de comprendre ce qu'elles retournent (vous pouvez par exemple afficher dans la console le résultat de `getRows(data, 'Prets', 2016)`).
+
+## Partie 1 - Factoriser le code existant si nécessaire
+
+Si, dans votre code actuel, la mise à jour de la page lors de la sélection d'une bibliothèque est écrite deux fois (dans la fonction appelée lors du clic sur un marqueur, et dans celle appelée lors du changement de valeur du `<select>`), il convient de la mettre à jour.
+
+Avec 4 nouveaux graphiques à mettre à jour, il serait très pénible (et source d'erreurs) de répéter cela à chaque endroit où l'utilisateur peut sélectionner une bibliothèque : carte, menu déroulant, barres, anneau...
+
+Nous allons donc :
+
+1. stocker ce que l'utilisateur a sélectionné dans des variables,
+2. écrire **une seule fonction** responsable de mettre à jour tous les composants de la page à partir de ces variables,
+3. appeler cette fonction à chaque fois que l'une de ces variables est modifiée.
+
+Dans la fonction exécutée au chargement de la page, déclarez les variables suivantes (si la variable `selectedBib` existe déjà : conservez-la) :
+
+```js
+// Les variables qui stockent l'état de la page (ce que l'utilisateur a sélectionné)
+// La bibliothèque actuellement sélectionnée ('' si aucune)
+let selectedBib = '';
+// L'indicateur affiché par la courbe D3, le diagramme en barres et le diagramme en anneau
+let selectedIndicator = 'Prets';
+// L'année affichée par le diagramme en barres, le diagramme en anneau et le nuage de points
+let selectedYear = 2016;
+// Les variables associées aux axes du nuage de points
+let selectedX = 'Emprunteurs';
+let selectedY = 'Prets';
+// Les bibliothèques sélectionnées avec le rectangle de sélection (brush) du nuage de points
+let brushedBibs = [];
+```
+
+Puis écrivez les deux fonctions suivantes. Le menu `select` est utilisé dans `updateAll` : il doit donc être récupéré avant. Il est déjà récupéré plus bas dans votre code (`const select = ...`) : **déplacez** cette ligne à cet endroit plutôt que de la dupliquer, sinon le navigateur affichera une erreur (`Identifier 'select' has already been declared`).
+
+```js
+const select = document.getElementById('select-bib');
+
+// Mise à jour des marqueurs : un marqueur vert pour la bibliothèque sélectionnée
+const updateMarkers = () => {
+  markers.forEach((m) => {
+    const markerId = m.options.customAttributes.id;
+    m.setIcon(markerId === selectedBib ? greenIcon : defaultIcon);
+  });
+};
+
+// Mise à jour de tous les composants de la page à partir des variables qui stockent l'état de la page
+const updateAll = () => {
+  select.value = selectedBib;
+  makePlots(data, selectedBib);
+  updateMarkers();
+};
+```
+
+**Travail demandé** : modifiez les fonctions appelées lors du clic sur un marqueur et lors du changement de valeur du `<select>` pour qu'elles se contentent de modifier `selectedBib` puis d'appeler `updateAll()`. N'oubliez pas d'appeler `updateAll()` une fois à la fin pour afficher les graphiques initiaux (à la place de `makePlots(data, selectedBib)`).
+
+Vérifiez que la page fonctionne comme à la fin de la séance 8. Cette étape est importante : tous les nouveaux composants seront ajoutés à `updateAll`.
+
+## Partie 2 - Un graphique en courbes avec D3.js
+
+### Ajout des conteneurs dans la page
+
+Ajoutez le code HTML suivant à la fin du `<body>` de votre page. Il contient les menus et les 4 conteneurs des graphiques D3 (nous nous servirons de tous les menus au cours de la séance) et réutilise les classes CSS déjà définies dans votre page : **vous n'avez pas besoin d'écrire de CSS supplémentaire**.
+
+```html
+<div id="d3-container">
+  <h2>Pour aller plus loin avec D3.js</h2>
+  <div>
+    <label for="select-indicator">Indicateur : </label>
+    <select id="select-indicator">
+    </select>
+    <label for="select-year">Année : </label>
+    <input type="range" id="select-year" min="2008" max="2016" step="1" value="2016">
+    <output id="output-year">2016</output>
+    <button id="button-play">▶ Lecture</button>
+  </div>
+  <div>
+    <label for="select-x">Nuage de points - axe x : </label>
+    <select id="select-x">
+    </select>
+    <label for="select-y">axe y : </label>
+    <select id="select-y">
+    </select>
+  </div>
+  <div class="flex-container">
+    <div class="graph" id="graph5"></div>
+    <div class="graph" id="graph6"></div>
+  </div>
+  <div class="flex-container">
+    <div class="graph" id="graph7"></div>
+    <div class="graph" id="graph8"></div>
+  </div>
+</div>
+```
+
+### Structure d'un graphique D3
+
+Un graphique D3 est un élément `<svg>` dans lequel on ajoute des éléments graphiques (`<path>`, `<rect>`, `<circle>`, `<text>`, etc.) dont les attributs sont calculés à partir des données. Le passage des données aux positions à l'écran se fait grâce à des **échelles** :
+
+- `d3.scaleLinear` convertit une valeur numérique (le *domaine*, par exemple le nombre de prêts) en une position en pixels (l'*étendue* ou *range*),
+- les **axes** (`d3.axisBottom`, `d3.axisLeft`) dessinent des graduations à partir d'une échelle,
+- les **générateurs** (`d3.line`, `d3.area`, `d3.arc`, etc.) transforment des données en un attribut `d` d'un élément `<path>`.
+
+Si vous avez besoin de vous rafraîchir la mémoire, reportez-vous au notebook [Faire des graphiques avec D3.js](https://observablehq.com/@sd-progwebdataviz/faire-des-graphiques-avec-d3-js).
+
+::: {.callout-tip}
+En SVG, l'origine du repère (0, 0) est située **en haut à gauche** et l'axe des y est orienté **vers le bas**. C'est pourquoi l'étendue de l'échelle en y est "inversée" dans le code ci-dessous : `[height - margin.bottom, margin.top]`.
+:::
+
+### Le graphique en courbes
+
+Voici le squelette de la fonction qui crée le graphique (à ajouter dans `index.js`, à la suite des fonctions fournies). Tout ce qui concerne la création du graphique (le SVG, les échelles, les axes et le générateur de courbe) est fourni. Il vous reste à écrire la fonction `update` qui sera appelée à chaque changement de bibliothèque ou d'indicateur.
+
+```js
+// Une fonction responsable de créer un graphique en courbes avec D3 dans l'élément dont l'id est fourni.
+// Elle retourne un objet contenant la fonction `update` à appeler pour mettre à jour le graphique.
+const makeLineChart = (id) => {
+  const width = 600;
+  const height = 340;
+  const margin = { top: 45, right: 25, bottom: 40, left: 65 };
+
+  // Le SVG s'adapte à la taille de son conteneur grâce au viewBox
+  const svg = d3.select(`#${id}`)
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('width', '100%')
+    .attr('height', '100%')
+    .attr('font-family', 'system-ui, sans-serif');
+
+  const title = svg.append('text')
+    .attr('x', 10)
+    .attr('y', 25)
+    .attr('font-size', 17)
+    .attr('font-weight', 'bold');
+
+  // Un message affiché quand il n'y a pas de données
+  const message = svg.append('text')
+    .attr('x', width / 2)
+    .attr('y', height / 2)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', 15)
+    .attr('font-style', 'italic');
+
+  // Les échelles
+  const x = d3.scaleLinear().domain(d3.extent(years)).range([margin.left, width - margin.right]);
+  const y = d3.scaleLinear().range([height - margin.bottom, margin.top]);
+
+  // Les axes (on règle la taille du texte après le premier appel de l'axe, qui définit lui-même une taille)
+  svg.append('g')
+    .attr('transform', `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).ticks(years.length).tickFormat(d3.format('d')))
+    .attr('font-size', 13);
+  const gy = svg.append('g')
+    .attr('transform', `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y))
+    .attr('font-size', 13);
+
+  // Le générateur de courbe : il transforme un tableau de points en attribut "d" d'un élément <path>
+  // (avec `defined`, une valeur manquante crée un "trou" dans la courbe)
+  const line = d3.line()
+    .defined((d) => d.value !== null)
+    .x((d) => x(d.year))
+    .y((d) => y(d.value));
+
+  const linePath = svg.append('path').attr('fill', 'none').attr('stroke-width', 2.5);
+
+  const update = (data, indicator) => {
+    // À compléter
+  };
+
+  return { update };
+};
+```
+
+La fonction `update` reçoit les données au format `[{ year, value }, ...]` (c'est ce que retourne `getSerie`) et le nom de l'indicateur (`'Prets'`, `'Inscrits'`, etc.) qui permet de retrouver le titre et la couleur dans l'objet `indicators`. Elle doit :
+
+1. mettre à jour le titre du graphique,
+2. afficher le message `Pas de données "Prêts" pour cette bibliothèque` s'il n'y a aucune donnée (et le vider dans le cas contraire),
+3. mettre à jour le domaine de l'échelle en y (de 0 à la valeur maximale),
+4. mettre à jour l'axe en y,
+5. mettre à jour le tracé de la courbe, en lui donnant la couleur de l'indicateur.
+
+Quelques indications :
+
+```js
+const info = indicators[indicator];
+
+// d3.max ignore les valeurs null. nice() arrondit les bornes du domaine à des valeurs "rondes"
+y.domain([0, d3.max(data, (d) => d.value) || 1]).nice();
+
+// Mise à jour de l'axe y. En ajoutant transition(), le changement est animé.
+// (ticks(6) : environ 6 graduations, tickFormat(d3.format('~s')) : écriture compacte, par exemple 300k)
+gy.transition().duration(750).call(d3.axisLeft(y).ticks(6).tickFormat(d3.format('~s')));
+
+// Mise à jour du tracé. On utilise datum() (et non data()) car on associe un seul tableau de
+// points à un seul élément <path>
+linePath.datum(data).transition().duration(750).attr('d', line).attr('stroke', info.color);
+```
+
+### Intégration dans la page
+
+1. Dans la fonction exécutée au chargement de la page, créez le graphique : `const lineChart = makeLineChart('graph5');`
+2. Dans `updateAll`, ajoutez la mise à jour du graphique : `lineChart.update(getSerie(data, selectedIndicator, selectedBib), selectedIndicator);`
+3. Récupérez le menu déroulant des indicateurs (`const selectIndicator = document.getElementById('select-indicator');`), remplissez-le et écoutez ses changements, comme vous l'avez fait pour le menu des bibliothèques. La fonction `fillSelect` est fournie : `fillSelect(selectIndicator, Object.entries(indicators).map(([key, indicator]) => [key, indicator.label]), selectedIndicator);`. À chaque changement, modifiez `selectedIndicator` puis appelez `updateAll()`.
+
+Vérifiez que la courbe s'anime quand vous changez de bibliothèque ou d'indicateur.
+
+### Une infobulle au survol
+
+Pour afficher la valeur de l'année la plus proche du curseur, nous allons ajouter à la fonction `makeLineChart` (avant la fonction `update`) :
+
+- un groupe `focus` composé d'un cercle et d'un texte, masqué par défaut,
+- un rectangle transparent qui recouvre la zone du graphique pour capter les mouvements du curseur.
+
+```js
+// Le cercle et le texte qui suivent le curseur
+const focus = svg.append('g').attr('display', 'none');
+const focusCircle = focus.append('circle')
+  .attr('r', 5)
+  .attr('stroke', 'white')
+  .attr('stroke-width', 2);
+const focusText = focus.append('text')
+  .attr('y', -12)
+  .attr('font-size', 14)
+  .attr('font-weight', 'bold');
+
+let currentData = []; // à mettre à jour dans la fonction `update`
+// d3.bisector permet de retrouver l'indice de la donnée la plus proche d'une valeur
+const bisect = d3.bisector((d) => d.year).center;
+
+// Un rectangle transparent qui recouvre la zone du graphique pour capter les mouvements du curseur
+svg.append('rect')
+  .attr('x', margin.left)
+  .attr('y', margin.top)
+  .attr('width', width - margin.left - margin.right)
+  .attr('height', height - margin.top - margin.bottom)
+  .attr('fill', 'none')
+  .attr('pointer-events', 'all') // sans cela, un élément sans remplissage ne reçoit pas les événements
+  .on('pointermove', (event) => {
+    const [mouseX] = d3.pointer(event); // la position du curseur dans le SVG
+    // x.invert convertit une position (en pixels) en année
+    const d = currentData[bisect(currentData, x.invert(mouseX))];
+    if (!d || d.value === null) {
+      focus.attr('display', 'none');
+      return;
+    }
+    // À compléter : afficher `focus` (attr('display', null)), le placer sur le point
+    // (avec un attribut transform en translate(x(d.year), y(d.value))) et afficher "année : valeur" dans le texte
+  })
+  .on('pointerleave', () => focus.attr('display', 'none'));
+```
+
+N'oubliez pas, dans la fonction `update`, de mettre à jour `currentData`, de donner à `focusCircle` la couleur de l'indicateur et de masquer `focus`.
+
+### Questions
+
+- Quelle différence observez-vous entre l'axe en y de ce graphique et celui du graphique Plot correspondant ? Quel effet cela a-t-il sur la perception de l'évolution du nombre d'inscrits ? Quel est l'intérêt de commencer à 0 ? Et celui de ne pas commencer à 0 ?
+- Comment la courbe de l'indicateur "Emprunteurs" s'affiche-t-elle quand on sélectionne la bibliothèque Abbaye les Bains ? Pourquoi ?
+- *Pour habiller* : ajoutez une aire sous la courbe avec `d3.area()` (voir la [documentation](https://d3js.org/d3-shape/area)). Elle prend des fonctions `x`, `y0` et `y1` et se met à jour comme la courbe.
+
+## Partie 3 - Un diagramme en barres animé
+
+Nous allons maintenant afficher, pour **l'année sélectionnée**, la valeur de l'indicateur choisi pour **chaque bibliothèque**. Contrairement aux courbes, ce graphique compare les bibliothèques entre elles : il est donc toujours affiché en entier, et la bibliothèque sélectionnée y est mise en évidence.
+
+### La jointure de données
+
+C'est le concept central de D3. Lorsqu'on écrit `selection.data(tableau).join(...)`, D3 compare les éléments qui existent déjà dans le SVG avec les données et distingue :
+
+- les données qui n'ont pas encore d'élément (**enter**) : il faut créer l'élément,
+- les données qui ont déjà un élément (**update**) : il faut le mettre à jour,
+- les éléments dont la donnée a disparu (**exit**) : il faut les supprimer.
+
+Pour qu'une donnée soit associée au bon élément lorsque les données changent (ici, d'une année à l'autre), il faut fournir à D3 une **clé** : `data(tableau, (d) => d.id)`.
+
+```js
+svg.selectAll('rect.bar')              // tous les rectangles de la classe "bar" (il n'y en a pas encore)
+  .data(rows, (d) => d.id)             // on les associe aux données
+  .join((enter) => enter.append('rect') // pour les nouvelles données, on crée un rectangle
+    .attr('class', 'bar')
+    // ... attributs initiaux (par exemple une largeur nulle, pour que les barres "poussent")
+  );                                   // les éléments en trop sont supprimés automatiquement
+```
+
+### Le diagramme en barres
+
+Voici le squelette de la fonction qui crée le graphique (la fonction `highlight`, qui met en évidence la bibliothèque sélectionnée, est fournie : elle utilise la fonction `getOpacity`). Vous devez écrire le contenu de la fonction `update`.
+
+```js
+// Une fonction responsable de créer un diagramme en barres horizontales (une barre par bibliothèque).
+// `onClick` est la fonction appelée avec l'id de la bibliothèque quand on clique sur une barre.
+const makeBarChart = (id, onClick) => {
+  const width = 600;
+  const height = 340;
+  const margin = { top: 45, right: 70, bottom: 30, left: 215 };
+
+  const svg = d3.select(`#${id}`)
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('width', '100%')
+    .attr('height', '100%')
+    .attr('font-family', 'system-ui, sans-serif');
+
+  const title = svg.append('text')
+    .attr('x', 10)
+    .attr('y', 25)
+    .attr('font-size', 17)
+    .attr('font-weight', 'bold');
+
+  const x = d3.scaleLinear().range([margin.left, width - margin.right]);
+  // scaleBand : une "bande" par catégorie (ici, par bibliothèque), avec un espace entre chaque bande
+  const y = d3.scaleBand().range([margin.top, height - margin.bottom]).padding(0.2);
+
+  const gx = svg.append('g')
+    .attr('transform', `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x))
+    .attr('font-size', 12);
+  const gy = svg.append('g')
+    .attr('transform', `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y))
+    .attr('font-size', 13);
+
+  // Une fonction qui met en valeur la bibliothèque sélectionnée et celles sélectionnées avec le brush
+  const highlight = (selectedBib, brushedBibs) => {
+    svg.selectAll('rect.bar')
+      .attr('opacity', (d) => getOpacity(d.id, selectedBib, brushedBibs))
+      .attr('stroke', (d) => (d.id === selectedBib ? 'black' : 'none'))
+      .attr('stroke-width', 2);
+    svg.selectAll('text.value')
+      .attr('opacity', (d) => getOpacity(d.id, selectedBib, brushedBibs));
+  };
+
+  const update = (rows, indicator, year, selectedBib, brushedBibs) => {
+    const info = indicators[indicator];
+    // Une transition partagée : les axes et les barres s'animent en même temps
+    const t = svg.transition().duration(750);
+
+    title.text(`${info.label} par bibliothèque en ${year}`);
+
+    // À compléter
+
+    highlight(selectedBib, brushedBibs);
+  };
+
+  return { update, highlight };
+};
+```
+
+La fonction `update` reçoit les données au format `[{ id, name, value }, ...]` triées par ordre décroissant (c'est ce que retourne `getRows`). Elle doit :
+
+1. mettre à jour les domaines de `x` (de 0 à la valeur maximale) et de `y` (la liste des `id` des bibliothèques, dans l'ordre : c'est l'ordre d'affichage des barres),
+2. mettre à jour les deux axes,
+3. créer, mettre à jour et supprimer les barres avec une jointure de données, en animant leur position (`y`), leur longueur (`width`) et leur couleur (`fill`),
+4. appeler `onClick(d.id)` lors du clic sur une barre.
+
+Quelques indications :
+
+```js
+// L'axe en y affiche des identifiants (ceux du domaine de l'échelle) : on les remplace par les noms
+// des bibliothèques (en abrégeant "Bibliothèque" pour gagner de la place)
+const names = new Map(rows.map((d) => [d.id, d.name.replace('Bibliothèque ', 'Bib. ')]));
+gx.transition(t).call(d3.axisBottom(x).ticks(5).tickFormat(d3.format('~s')));
+gy.transition(t).call(d3.axisLeft(y).tickSize(0).tickFormat((bibId) => names.get(bibId)));
+
+// Pour animer les barres, on peut ensuite utiliser la transition partagée
+// bars.transition(t).attr('y', ...).attr('height', ...).attr('width', ...).attr('fill', ...)
+// (la longueur d'une barre est la différence x(d.value) - x(0))
+```
+
+### Intégration dans la page
+
+1. Dans la fonction exécutée au chargement de la page, créez le graphique : une barre doit sélectionner la bibliothèque correspondante lors du clic. Pour cela, la fonction passée en second paramètre doit modifier `selectedBib` puis appeler `updateAll()`.
+2. Dans `updateAll`, ajoutez la mise à jour du graphique, après avoir récupéré les données : `const rows = getRows(data, selectedIndicator, selectedYear);`
+3. Ajoutez un écouteur sur le curseur d'année (`select-year`). Utilisez l'événement `input` (et non `change`, qui n'est déclenché que lorsque l'utilisateur relâche le curseur) pour que le graphique se mette à jour pendant le déplacement du curseur. Dans `updateAll`, mettez aussi à jour la position du curseur (`selectYear.value`) et la valeur affichée dans l'élément `<output>` (`outputYear.textContent`) : cela sera nécessaire pour le bouton "Lecture".
+4. **Bouton "Lecture"** : faites défiler automatiquement les années de 2008 à 2016 (une année toutes les 1,5 seconde, par exemple avec `setInterval`). Le bouton doit permettre de mettre en pause (`clearInterval`) et l'animation doit s'arrêter à la dernière année.
+
+### Questions
+
+- Que se passe-t-il pour les barres lorsque l'ordre des bibliothèques change d'une année à l'autre ? Que se passerait-il si vous n'aviez pas fourni la fonction de clé à `.data()` ?
+- Pourquoi n'y a-t-il pas le même nombre de barres en 2010 pour les prêts et pour les emprunteurs ?
+- *Pour habiller* : affichez la valeur à droite de chaque barre, avec une jointure sur des éléments `<text>`.
+
+## Partie 4 - Un nuage de points avec sélection par rectangle
+
+Cette dernière partie est la plus riche : vous allez réaliser un nuage de points dans lequel **chaque point représente une bibliothèque**, et permettre à l'utilisateur de **sélectionner un groupe de points avec un rectangle** (un *brush*). Les bibliothèques sélectionnées seront mises en évidence sur la carte et dans les autres graphiques, comme dans l'exemple de [Regioviz](https://riatelab.github.io/regioviz/app/) présenté en début de séance 8.
+
+Pour l'année sélectionnée, la position de chaque point dépend de deux variables choisies par l'utilisateur (par exemple le nombre d'emprunteurs en x et le nombre de prêts en y), et sa taille représente le nombre de visiteurs. La fonction `getPoints` (fournie) prépare ces données et l'objet `variables` (fourni) contient la liste des variables disponibles (y compris une variable calculée : les prêts par emprunteur).
+
+### Le `brush`
+
+`d3.brush()` ajoute à un groupe `<g>` un rectangle de sélection que l'utilisateur peut dessiner, déplacer et redimensionner. À chaque changement, la fonction passée à `.on('brush end', ...)` reçoit un événement dont la propriété `selection` vaut `null` (pas de sélection) ou `[[x0, y0], [x1, y1]]` (les coins du rectangle, **en pixels**).
+
+Pour savoir quels points sont dans le rectangle, il suffit donc de comparer la position de chaque point en pixels (`x(d.x)` et `y(d.y)`) avec celle du rectangle.
+
+### Le nuage de points
+
+Voici le squelette de la fonction qui crée le graphique. Vous devez écrire le gestionnaire du `brush` et la fonction `highlight`, ainsi que la partie de `update` qui concerne les points.
+
+```js
+// Une fonction responsable de créer un nuage de points dans lequel on peut sélectionner
+// des points avec un rectangle de sélection (un "brush").
+// `onBrush` est la fonction appelée avec la liste des id des bibliothèques sélectionnées.
+const makeScatterPlot = (id, onBrush) => {
+  const width = 600;
+  const height = 340;
+  const margin = { top: 62, right: 30, bottom: 55, left: 70 };
+
+  const svg = d3.select(`#${id}`)
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('width', '100%')
+    .attr('height', '100%')
+    .attr('font-family', 'system-ui, sans-serif');
+
+  const title = svg.append('text')
+    .attr('x', 10)
+    .attr('y', 25)
+    .attr('font-size', 17)
+    .attr('font-weight', 'bold');
+  svg.append('text')
+    .attr('x', 10)
+    .attr('y', 44)
+    .attr('font-size', 12)
+    .attr('fill', '#555')
+    .text('La taille des cercles représente le nombre de visiteurs');
+
+  const x = d3.scaleLinear().range([margin.left, width - margin.right]);
+  const y = d3.scaleLinear().range([height - margin.bottom, margin.top]);
+  // scaleSqrt pour le rayon : c'est l'aire du cercle (et non son rayon) qui doit être
+  // proportionnelle à la valeur représentée
+  const r = d3.scaleSqrt().range([4, 22]);
+
+  const gx = svg.append('g')
+    .attr('transform', `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x))
+    .attr('font-size', 13);
+  const gy = svg.append('g')
+    .attr('transform', `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y))
+    .attr('font-size', 13);
+  const labelX = svg.append('text')
+    .attr('x', (margin.left + width - margin.right) / 2)
+    .attr('y', height - 12)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', 14);
+  const labelY = svg.append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('x', -(margin.top + height - margin.bottom) / 2)
+    .attr('y', 18)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', 14);
+
+  let points = [];
+
+  // Le "brush" : l'événement est déclenché pendant le tracé du rectangle ("brush") et à la fin ("end")
+  const brush = d3.brush()
+    .extent([[margin.left, margin.top], [width - margin.right, height - margin.bottom]])
+    .on('brush end', (event) => {
+      // À compléter : si event.selection vaut null, appeler onBrush([]) ; sinon, retrouver les points
+      // situés dans le rectangle et appeler onBrush avec la liste de leurs id
+    });
+
+  // Le brush est ajouté avant les cercles : ceux-ci restent au-dessus et gardent leur infobulle.
+  // (contrepartie : un glisser-déposer qui commence sur un cercle ne crée pas de rectangle de sélection)
+  const gBrush = svg.append('g').call(brush);
+  const gPoints = svg.append('g');
+
+  const highlight = (selectedBib, brushedBibs) => {
+    // À compléter : mettre en valeur la bibliothèque sélectionnée et celles sélectionnées avec le brush
+    // (comme pour les barres, avec la fonction getOpacity)
+  };
+
+  const update = (newPoints, xVariable, yVariable, year, selectedBib, brushedBibs) => {
+    points = newPoints;
+
+    title.text(`Relations entre indicateurs en ${year}`);
+    labelX.text(variables[xVariable].label);
+    labelY.text(variables[yVariable].label);
+
+    x.domain([0, d3.max(points, (d) => d.x) || 1]).nice();
+    y.domain([0, d3.max(points, (d) => d.y) || 1]).nice();
+    r.domain([0, d3.max(points, (d) => d.size) || 1]);
+
+    gx.transition().duration(750).call(d3.axisBottom(x).ticks(5).tickFormat(d3.format(variables[xVariable].format)));
+    gy.transition().duration(750).call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(variables[yVariable].format)));
+
+    // À compléter : créer, mettre à jour et supprimer les cercles (une jointure de données avec la clé d.id),
+    // en animant leur position (cx, cy) et leur rayon (r(d.size ?? 0) : la taille peut être manquante)
+
+    highlight(selectedBib, brushedBibs);
+  };
+
+  // Efface le rectangle de sélection (à utiliser quand la position des points change : le rectangle
+  // n'aurait alors plus de sens). Cela déclenche l'événement "end" avec une sélection null.
+  const clearBrush = () => {
+    gBrush.call(brush.move, null);
+  };
+
+  return { update, highlight, clearBrush };
+};
+```
+
+::: {.callout-tip}
+Un élément `<title>` placé à l'intérieur d'un élément SVG est affiché comme infobulle par le navigateur : ajoutez-en un à chaque cercle pour afficher le nom de la bibliothèque au survol.
+:::
+
+### Intégration dans la page
+
+1. Créez le graphique. La fonction passée en second paramètre reçoit la liste des id des bibliothèques sélectionnées avec le rectangle : elle doit mettre à jour `brushedBibs` puis appeler `updateHighlight()`.
+2. Écrivez la fonction `updateHighlight`. Elle sera appelée à chaque déplacement du rectangle de sélection (de nombreuses fois par seconde) : elle ne doit donc **pas** redessiner les graphiques (`updateAll` serait beaucoup trop lourde), mais uniquement mettre à jour la mise en évidence.
+
+```js
+// Mise à jour de la mise en valeur des bibliothèques dans tous les composants
+// (sans les redessiner : c'est ce qui est appelé à chaque déplacement du brush)
+const updateHighlight = () => {
+  updateMarkers();
+  barChart.highlight(selectedBib, brushedBibs);
+  scatterPlot.highlight(selectedBib, brushedBibs);
+};
+```
+
+3. Dans `updateAll`, ajoutez la mise à jour du nuage de points :
+
+```js
+const points = getPoints(data, selectedYear, selectedX, selectedY);
+scatterPlot.update(points, selectedX, selectedY, selectedYear, selectedBib, brushedBibs);
+```
+
+4. Modifiez `updateMarkers` pour que les bibliothèques qui n'ont pas été sélectionnées avec le rectangle soient atténuées sur la carte (`marker.setOpacity(...)`, avec par exemple `0.3` pour les marqueurs atténués).
+5. Remplissez les menus déroulants des axes du nuage de points (avec `fillSelect` et l'objet `variables`) et écoutez leurs changements : modifiez `selectedX` ou `selectedY` puis appelez `updateAll()`.
+6. **Quand l'année ou l'une des variables change, la position des points change**, et le rectangle de sélection n'a donc plus de sens : appelez `scatterPlot.clearBrush()` avant `updateAll()` dans les fonctions concernées.
+
+::: {.callout-tip}
+Si vous avez réalisé le diagramme en anneau, ajoutez-le à `updateHighlight` : la part "Autres" regroupe plusieurs bibliothèques (leurs id sont dans la propriété `ids`) et doit être mise en valeur si l'une d'entre elles l'est.
+:::
+
+### Questions
+
+- Pourquoi `updateHighlight` ne redessine-t-elle pas les graphiques ? Que se passerait-il si le gestionnaire du `brush` appelait `updateAll` ?
+- Quelles bibliothèques sont absentes du nuage de points en 2016 ? Pourquoi ?
+- Sélectionnez les 4 bibliothèques ayant le moins d'emprunteurs. Que remarquez-vous sur la carte ?
+- Sélectionnez "Prêts par emprunteur" en y et "Nombre d'emprunteurs" en x. Quelles bibliothèques se distinguent des autres ?
+
+
+## Partie 5 - Un diagramme en anneau
+
+Le sujet de la séance 8 proposait de réaliser un diagramme circulaire. Réalisez-en un (en anneau) pour représenter la part de chaque bibliothèque dans l'indicateur choisi, pour l'année choisie, en vous appuyant sur les mêmes données (`rows`).
+
+Avec une dizaine de bibliothèques, un diagramme circulaire est difficile à lire. La fonction `groupRows` (fournie) regroupe donc les bibliothèques en dehors des 5 premières dans une part "Autres" (en conservant la bibliothèque sélectionnée, pour qu'elle reste visible) :
+
+```js
+// Une fonction qui regroupe les bibliothèques en dehors des `n` premières dans une part "Autres"
+// (on conserve aussi la bibliothèque sélectionnée, pour qu'elle reste visible).
+// Les données (`rows`) doivent déjà être triées par ordre décroissant.
+const groupRows = (rows, selectedBib, n = 5) => {
+  const kept = rows.slice(0, n);
+  const selected = rows.find((d) => d.id === selectedBib);
+  if (selected && !kept.includes(selected)) {
+    kept.push(selected);
+  }
+  const others = rows.filter((d) => !kept.includes(d));
+  if (others.length > 0) {
+    kept.push({
+      id: 'others',
+      name: `Autres (${others.length})`,
+      value: d3.sum(others, (d) => d.value),
+      ids: others.map((d) => d.id), // les id des bibliothèques regroupées
+    });
+  }
+  return kept;
+};
+```
+
+Les deux fonctions qui permettent de dessiner un anneau sont `d3.pie` (qui calcule les angles de début et de fin de chaque part) et `d3.arc` (qui dessine une part à partir de ses angles) :
+
+```js
+const radius = 115;
+// sort(null) pour conserver l'ordre des données
+const pie = d3.pie().value((d) => d.value).sort(null);
+const arc = d3.arc().innerRadius(radius * 0.6).outerRadius(radius);
+
+// Les parts : un élément <path> par part. L'origine du groupe `g` est placée au centre de l'anneau
+g.selectAll('path.slice')
+  .data(pie(parts), (d) => d.data.id) // les données de chaque part sont dans `d.data`
+  .join('path')
+  .attr('class', 'slice')
+  .attr('d', arc)
+  .attr('fill', (d) => colors(d.data.id)); // avec colors = d3.scaleOrdinal(d3.schemeTableau10)
+```
+
+- Faites en sorte qu'un clic sur une part (sauf "Autres") sélectionne la bibliothèque, comme pour les barres.
+- Ajoutez une légende et affichez le total au centre de l'anneau.
+- Comparez avec le diagramme en barres : lequel permet le mieux de comparer les valeurs ? Pourquoi ?
+- *Défi* : animer le changement de valeurs. On ne peut pas animer directement l'attribut `d` (c'est du texte) : il faut animer les angles avec `attrTween` et `d3.interpolate`, et redessiner la part à chaque étape de la transition avec `arc()`. Regardez la [documentation de `transition.attrTween`](https://d3js.org/d3-transition/modifying#transition_attrTween).
+
+## Pour aller plus loin
+
+En fonction du temps restant, vous pouvez réaliser un ou plusieurs des graphiques suivants (par ordre de difficulté croissante) :
+
+- Un **graphique radar** du profil d'une bibliothèque : les 4 indicateurs d'une année, divisés par leur valeur maximale parmi toutes les bibliothèques (pour être compris entre 0 et 1), comparés à la moyenne des bibliothèques. Il peut être réalisé avec `d3.lineRadial`.
+- Un **treemap** des prêts par bibliothèque avec `d3.hierarchy` et `d3.treemap` (voir la [documentation](https://d3js.org/d3-hierarchy/treemap)). La couleur peut représenter l'évolution entre 2008 et 2016.
+- Des **cercles proportionnels** dessinés avec D3 directement sur la carte Leaflet : ajoutez une couche SVG à Leaflet (`L.svg().addTo(map)`) puis dessinez-y avec D3 un cercle par bibliothèque, dont le rayon est proportionnel à l'indicateur de l'année sélectionnée. Vous aurez besoin de `map.latLngToLayerPoint` pour convertir les coordonnées, et de redessiner les cercles lors d'un zoom (`map.on('zoomend', ...)`).
+- Un **bump chart** du rang des bibliothèques au fil des années.
+
+## Aide-mémoire D3
+
+| Besoin | Fonction D3 |
+|---|---|
+| Sélectionner un ou plusieurs éléments | `d3.select`, `selection.selectAll` |
+| Associer des données à des éléments | `selection.data(tableau, cle).join(...)` |
+| Modifier un élément | `.attr`, `.style`, `.text` |
+| Gérer un événement | `.on('click', (event, d) => ...)` |
+| Convertir des données en positions | `d3.scaleLinear`, `d3.scaleSqrt`, `d3.scaleBand`, `d3.scaleOrdinal` |
+| Dessiner des axes | `d3.axisBottom(x)`, `d3.axisLeft(y)` |
+| Courbes, anneaux | `d3.line`, `d3.area`, `d3.pie`, `d3.arc` |
+| Animer | `.transition().duration(ms)` |
+| Position du curseur | `d3.pointer(event)` |
+| Rechercher dans un tableau trié | `d3.bisector` |
+| Sélection avec un rectangle | `d3.brush` |
+| Calculs | `d3.sum`, `d3.max`, `d3.extent`, `d3.descending` |
+| Formater un nombre | `d3.format('~s')`, `d3.format('.0%')` |
+
+Voir aussi :
+
+- la [documentation de D3.js](https://d3js.org/),
+- l'exemple [Brushable scatterplot](https://observablehq.com/@d3/brushable-scatterplot),
+- l'exemple [Bar chart race](https://observablehq.com/@d3/bar-chart-race).
+
+## Pour finir
+
+Votre page doit contenir au minimum :
+
+- la carte, le menu déroulant et les 4 graphiques Plot de la séance 8, toujours synchronisés,
+- le graphique en courbes D3 avec infobulle,
+- le diagramme en barres animé, avec le curseur d'année,
+- le nuage de points avec sélection par rectangle, dont la sélection est répercutée sur la carte,
+- le diagramme en anneau.
+
+<!-- À adapter : modalités de rendu et barème -->
